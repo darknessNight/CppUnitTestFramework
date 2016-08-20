@@ -24,10 +24,24 @@ namespace CppUnitTestsFramework {
 		}
 
 		bool runTest() {
+			bool result = true;
 			setUp();
-			testMethod();
+			result=runTestMethod();
 			tearDown();
-			return true;
+			return result;
+		}
+
+	private:
+		bool runTestMethod()
+		{
+			bool testRunResult = true;
+			try {
+				testMethod();
+			}
+			catch (std::exception) {
+				testRunResult = false;
+			}
+			return testRunResult;
 		}
 	};
 }
