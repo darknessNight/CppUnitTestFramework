@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include <CppUnitTestsFramework\TestCase.h>
+#include <memory>
 
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -10,34 +11,56 @@ namespace CppUnitTestsFramework
 {
 	namespace UnitTests {
 		void testFuncDoNothing() {
-			int e = 2 + 2;
 		}
 
 		void testFuncCrashed() {
 			throw exception();
 		}
 
+		class FakeTestCase : public TestCase {
+		public:
+			bool setUpRunned = false;
+			bool tearDownRunned = false;
+		public:
+			FakeTestCase(TestCase::TestMethod method) :TestCase(method) {
+			}
+
+			void setUp() override {
+				setUpRunned = true;
+				tearDownRunned = false;
+			}
+
+			void tearDown() override{
+				tearDownRunned = true;
+			}
+		};
+
 		TEST_CLASS(TestCaseTests)
 		{
-			private: TestCase getTestObject(TestCase::TestMethod method) {
-				TestCase testCase(method);
+		private:
+			std::unique_ptr<FakeTestCase> getTestObject(TestCase::TestMethod method) {
+				std::unique_ptr<FakeTestCase> testCase = std::make_unique<FakeTestCase>(method);
 				return testCase;
 			}
-			public:TEST_METHOD(RunTest_HasNothingDoFunc_CheckMethodReturnTrue) {
-				TestCase testCase = getTestObject(testFuncDoNothing);
-				bool testRunned = testCase.runTest();
+		public:
+			TEST_METHOD(RunTest_HasNothingDoFunc_CheckMethodReturnTrue) {
+				std::unique_ptr<TestCase> testCase = getTestObject(testFuncDoNothing);
+				bool testRunned = testCase->runTest();
 				Assert::IsTrue(testRunned);
 			}
 
-			public:TEST_METHOD(RunTest_HasMockFunc_CheckFuncIsInvoked) {
+		public:
+			TEST_METHOD(RunTest_HasMockFunc_CheckFuncIsInvoked) {
 				bool invoked = false;
-				TestCase testCase = NewFunction(invoked);
-				testCase.runTest();
+				std::unique_ptr<TestCase> testCase = getTestObjectWithMockTestFunc(invoked);
+
+				testCase->runTest();
 
 				Assert::IsTrue(invoked);
 			}
 
-			private: TestCase NewFunction(bool& invoked)
+		private:
+			std::unique_ptr<TestCase> getTestObjectWithMockTestFunc(bool& invoked)
 			{
 				TestCase::TestMethod mockFunc = [&]() {
 					invoked = true;
@@ -45,10 +68,18 @@ namespace CppUnitTestsFramework
 				return getTestObject(mockFunc);
 			}
 
-			public:TEST_METHOD(SetUp_HasDoNothingFunc_CheckFuncIsInvoked) {
-				TestCase testCase = getTestObject(testFuncDoNothing);
-				testCase.runTest();
-				Assert::IsTrue(testCase.setUpRunned);
+		public:
+			TEST_METHOD(SetUp_HasDoNothingFunc_CheckFuncIsInvoked) {
+				std::unique_ptr<FakeTestCase> testCase = getTestObject(testFuncDoNothing);
+				testCase->runTest();
+				Assert::IsTrue(testCase->setUpRunned);
+			}
+
+		public:
+			TEST_METHOD(TearDown_HasDoNothingFunc_CheckFuncIsInvoked) {
+				std::unique_ptr<FakeTestCase> testCase = getTestObject(testFuncDoNothing);
+				testCase->runTest();
+				Assert::IsTrue(testCase->tearDownRunned);
 			}
 		};
 	}

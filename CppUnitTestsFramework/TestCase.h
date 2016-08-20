@@ -2,11 +2,18 @@
 #include <functional>
 
 namespace CppUnitTestsFramework {
-	class TestCase
+	class ConfigurableTest {
+	protected:
+		virtual void setUp() {
+		}
+		virtual void tearDown() {
+		}
+	};
+
+	class TestCase:public ConfigurableTest
 	{
 	public:
 		typedef std::function<void()> TestMethod;
-		bool setUpRunned=false;
 	private:
 		TestMethod testMethod;
 
@@ -17,7 +24,9 @@ namespace CppUnitTestsFramework {
 		}
 
 		bool runTest() {
+			setUp();
 			testMethod();
+			tearDown();
 			return true;
 		}
 	};
