@@ -18,6 +18,12 @@
     <ClInclude Include="TestCase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurableTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestCase.cpp">

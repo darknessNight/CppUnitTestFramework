@@ -1,47 +1,39 @@
 #pragma once
 #include <functional>
-
-namespace CppUnitTestsFramework {
-	class ConfigurableTest {
-	protected:
-		virtual void setUp() {
-		}
-		virtual void tearDown() {
-		}
-	};
-
-	class TestCase:public ConfigurableTest
+#include "TestResult.h"
+#include "ConfigurableTest.h"
+using namespace std;
+namespace darknessNight::CppUnitTestFramework {
+	class TestCase :public ConfigurableTest
 	{
 	public:
 		typedef std::function<void()> TestMethod;
 	private:
 		TestMethod testMethod;
 
-
 	public:
 		TestCase(TestMethod test) {
 			testMethod = test;
 		}
 
-		bool runTest() {
-			bool result = true;
+		TestResult runTest() {
+			TestResult result(true);
 			setUp();
-			result=runTestMethod();
+			result = runTestMethod();
 			tearDown();
 			return result;
 		}
 
 	private:
-		bool runTestMethod()
+		TestResult runTestMethod()
 		{
-			bool testRunResult = true;
 			try {
 				testMethod();
 			}
-			catch (std::exception) {
-				testRunResult = false;
+			catch (std::exception ex) {
+				return TestResult(ex.what());
 			}
-			return testRunResult;
+			return TestResult(true);
 		}
 	};
 }

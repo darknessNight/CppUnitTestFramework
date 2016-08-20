@@ -127,7 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="TestCase.h" />
+    <ClInclude Include="TestResult.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestCase.cpp" />
