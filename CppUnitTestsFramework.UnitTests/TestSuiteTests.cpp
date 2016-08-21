@@ -3,8 +3,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramwork::UnitTest {
-{		
+namespace darknessNight::CppUnitTestFramwork::UnitTest {		
 	TEST_CLASS(TestSuiteTests)
 	{
 	public:
