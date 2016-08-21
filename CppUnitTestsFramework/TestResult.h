@@ -3,9 +3,10 @@
 using namespace std;
 namespace darknessNight::CppUnitTestFramework {
 	class TestResult {
-	private:
+	protected:
 		bool isTestSuccess;
 		string errorMessage;
+		string errorCause;
 	public:
 		TestResult(bool result) {
 			isTestSuccess = result;
@@ -17,11 +18,19 @@ namespace darknessNight::CppUnitTestFramework {
 
 		TestResult(string message) {
 			isTestSuccess = false;
-			errorMessage = "MethodFailed";
+			errorMessage = message;
 		}
 
-		string getMessage() {
+		string getFullMessage() {
+			return errorCause+": "+errorMessage;
+		}
+
+		string getErrorMessage() {
 			return errorMessage;
+		}
+
+		string getCause() {
+			return errorCause;
 		}
 
 		bool isSuccess() {
@@ -30,6 +39,41 @@ namespace darknessNight::CppUnitTestFramework {
 
 		bool isFailure() {
 			return isTestSuccess == false;
+		}
+	};
+
+	class AssertTestResult :public TestResult {
+	private:
+		const string assertMessage = "Assert failed";
+	public:
+		AssertTestResult(string message) :TestResult(message) {
+			errorCause = assertMessage;
+		}
+
+		AssertTestResult(const char* message) :TestResult(message) {
+			errorCause = assertMessage;
+		}
+	};
+
+	class ExceptionTestResult :public TestResult {
+	private:
+		const string exceptionMessage = "C++ exception";
+	public:
+		ExceptionTestResult(string message) :TestResult(message) {
+			errorCause = exceptionMessage;
+		}
+
+		ExceptionTestResult(const char* message) :TestResult(message) {
+			errorCause = exceptionMessage;
+		}
+	};
+
+	class SuccessTestResult :public TestResult {
+	private:
+		const string successMessage = "Success";
+	public:
+		SuccessTestResult() :TestResult(true) {
+			errorCause = successMessage;
 		}
 	};
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <CppUnitTestsFramework\TestCase.h>
+#include <CppUnitTestsFramework\AssertExceptions.h>
 #include <memory>
 
 using namespace std;
@@ -33,6 +34,10 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		throw exception(methodFailedString.c_str());
 	}
 
+	static void testThrowingAssertFunc() {
+		throw AssertException(methodFailedString);
+	}
+
 	TEST_CLASS(TestCaseTests)
 	{
 		typedef std::unique_ptr<TestCase> TestCasePointer;
@@ -60,7 +65,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTest_HasCollapseFunc_CheckResultHasExceptionMessage) {
 			TestCasePointer testCase = getTestObject(testCollapseFunc);
 			TestResult runResult = testCase->runTest();
-			StringAssert::Constains(methodFailedString, runResult.getMessage());
+			StringAssert::Constains(methodFailedString, runResult.getErrorMessage());
 		}
 
 	public:
@@ -80,6 +85,35 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 				invoked = true;
 			};
 			return getTestObject(mockFunc);
+		}
+
+	public:
+		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsRaported) {
+			TestCasePointer testCase = getTestObject(testThrowingAssertFunc);
+			TestResult runResult=testCase->runTest();
+			StringAssert::Constains(methodFailedString ,runResult.getFullMessage(), L"Not have message");
+			StringAssert::Constains("Assert failed: ", runResult.getFullMessage(), L"Not assert type message");
+		}
+
+	public:
+		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsCorrectRaportedCause) {
+			TestCasePointer testCase = getTestObject(testThrowingAssertFunc);
+			TestResult runResult = testCase->runTest();
+			StringAssert::Constains("Assert failed", runResult.getCause());
+		}
+
+	public:
+		TEST_METHOD(RunTest_HasThrowsCppException_CheckIsCorrectRaportedCause) {
+			TestCasePointer testCase = getTestObject(testCollapseFunc);
+			TestResult runResult = testCase->runTest();
+			StringAssert::Constains("C++ exception", runResult.getCause());
+		}
+
+	public:
+		TEST_METHOD(RunTest_HasNoThrowException_CheckIsCorrectRaportedCause) {
+			TestCasePointer testCase = getTestObject(testDoNothingFunc);
+			TestResult runResult = testCase->runTest();
+			StringAssert::Constains("Success", runResult.getCause());
 		}
 
 	public:

@@ -2,6 +2,7 @@
 #include <functional>
 #include "TestResult.h"
 #include "ConfigurableTest.h"
+#include "AssertExceptions.h"
 using namespace std;
 namespace darknessNight::CppUnitTestFramework {
 	class TestCase :public ConfigurableTest
@@ -30,10 +31,13 @@ namespace darknessNight::CppUnitTestFramework {
 			try {
 				testMethod();
 			}
-			catch (std::exception ex) {
-				return TestResult(ex.what());
+			catch (AssertException ex) {
+				return AssertTestResult(ex.what());
 			}
-			return TestResult(true);
+			catch (std::exception ex) {
+				return ExceptionTestResult(ex.what());
+			}
+			return SuccessTestResult();
 		}
 	};
 }
