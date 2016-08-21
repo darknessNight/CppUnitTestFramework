@@ -19,10 +19,11 @@ namespace darknessNight::CppUnitTestFramework {
 			testMethod = test;
 		}
 
-		TestResult runTest() {
+		virtual TestResult runTest() {
 			return tryRunTest();
 		}
 
+	protected:
 		TestResult tryRunTest()
 		{
 			runSetUpMethod();
@@ -31,8 +32,6 @@ namespace darknessNight::CppUnitTestFramework {
 			return result;
 		}
 
-
-	private:
 		void runSetUpMethod()
 		{
 			try {

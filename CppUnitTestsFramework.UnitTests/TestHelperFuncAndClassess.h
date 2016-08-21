@@ -15,12 +15,12 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		throw AssertException(methodFailedString);
 	}
 
-	class FakeFunctionTester : public FunctionTester {
+	class MockFunctionTester : public FunctionTester {
 	public:
 		bool setUpRunned = false;
 		bool tearDownRunned = false;
 	public:
-		FakeFunctionTester(FunctionTester::TestMethod method) :FunctionTester(method) {
+		MockFunctionTester(FunctionTester::TestMethod method) :FunctionTester(method) {
 		}
 
 		void setUp() override {
@@ -39,12 +39,18 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		SpecialException(string message) :exception(message.c_str()) {}
 	};
 
-	class FakeCollapseFunctionTester : public FunctionTester {
+	class FakeFunctionTester : public FunctionTester {
 	public:
 		bool collapseSetUp = false;
 		bool collapseTearDown = false;
+		TestResult returnResult;
 	public:
-		FakeCollapseFunctionTester() :FunctionTester(testDoNothingFunc) {
+		FakeFunctionTester() :FunctionTester(testDoNothingFunc), returnResult(true) {
+		}
+
+		TestResult runTest() override {
+			FunctionTester::runTest();
+			return returnResult;
 		}
 
 		void setUp() override {

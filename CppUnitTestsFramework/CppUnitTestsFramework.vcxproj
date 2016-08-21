@@ -134,6 +134,7 @@
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="TestCase.h" />
     <ClInclude Include="TestResult.h" />
   </ItemGroup>
   <ItemGroup>

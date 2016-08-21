@@ -168,6 +168,10 @@
     </ClCompile>
     <ClCompile Include="StringAssert.cpp" />
     <ClCompile Include="FunctionTesterTest.cpp" />
+    <ClCompile Include="TestCaseTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CppUnitTestsFramework\CppUnitTestsFramework.vcxproj">

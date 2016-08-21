@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include <memory>
 #include "TestHelperFuncAndClassess.h"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -9,9 +8,9 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPointer;
 
 	private:
-		std::unique_ptr<FakeFunctionTester> getTestObject(FunctionTester::TestMethod method) {
-			std::unique_ptr<FakeFunctionTester> testCase = std::make_unique<FakeFunctionTester>(method);
-			return testCase;
+		std::unique_ptr<MockFunctionTester> getTestObject(FunctionTester::TestMethod method) {
+			std::unique_ptr<MockFunctionTester> functionTester = std::make_unique<MockFunctionTester>(method);
+			return functionTester;
 		}
 
 	public:
@@ -34,31 +33,31 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	public:
 		TEST_METHOD(RunTest_HasNothingDoFunc_CheckMethodReturnSuccess) {
-			FunctionTesterPointer testCase = getTestObject(testDoNothingFunc);
-			TestResult testRunned = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testDoNothingFunc);
+			TestResult testRunned = functionTester->runTest();
 			Assert::IsTrue(testRunned.isSuccess());
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasCollapseFunc_CheckMethodReturnFailure) {
-			FunctionTesterPointer testCase = getTestObject(testCollapseFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testCollapseFunc);
+			TestResult runResult = functionTester->runTest();
 			Assert::IsTrue(runResult.isFailure());
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasCollapseFunc_CheckResultHasExceptionMessage) {
-			FunctionTesterPointer testCase = getTestObject(testCollapseFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testCollapseFunc);
+			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains(methodFailedString, runResult.getErrorMessage());
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasMockFunc_CheckFuncIsInvoked) {
 			bool invoked = false;
-			FunctionTesterPointer testCase = getTestObjectWithMockTestFunc(invoked);
+			FunctionTesterPointer functionTester = getTestObjectWithMockTestFunc(invoked);
 
-			testCase->runTest();
+			functionTester->runTest();
 
 			Assert::IsTrue(invoked);
 		}
@@ -74,65 +73,65 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	public:
 		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsRaported) {
-			FunctionTesterPointer testCase = getTestObject(testThrowingAssertFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testThrowingAssertFunc);
+			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains(methodFailedString, runResult.getFullMessage(), L"Not have message");
 			StringAssert::Constains("Assert failed: ", runResult.getFullMessage(), L"Not assert type message");
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsCorrectRaportedCause) {
-			FunctionTesterPointer testCase = getTestObject(testThrowingAssertFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testThrowingAssertFunc);
+			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("Assert failed", runResult.getCause());
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasThrowsCppException_CheckIsCorrectRaportedCause) {
-			FunctionTesterPointer testCase = getTestObject(testCollapseFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testCollapseFunc);
+			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("C++ exception", runResult.getCause());
 		}
 
 	public:
 		TEST_METHOD(RunTest_HasNoThrowException_CheckIsCorrectRaportedCause) {
-			FunctionTesterPointer testCase = getTestObject(testDoNothingFunc);
-			TestResult runResult = testCase->runTest();
+			FunctionTesterPointer functionTester = getTestObject(testDoNothingFunc);
+			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("Success", runResult.getCause());
 		}
 
 	public:
 		TEST_METHOD(SetUp_HasDoNothingFunc_CheckFuncIsInvoked) {
-			std::unique_ptr<FakeFunctionTester> testCase = getTestObject(testDoNothingFunc);
-			Assert::IsFalse(testCase->setUpRunned);
-			testCase->runTest();
-			Assert::IsTrue(testCase->setUpRunned);
+			std::unique_ptr<MockFunctionTester> functionTester = getTestObject(testDoNothingFunc);
+			Assert::IsFalse(functionTester->setUpRunned);
+			functionTester->runTest();
+			Assert::IsTrue(functionTester->setUpRunned);
 		}
 
 	public:
 		TEST_METHOD(TearDown_HasDoNothingFunc_CheckFuncIsInvoked) {
-			std::unique_ptr<FakeFunctionTester> testCase = getTestObject(testDoNothingFunc);
-			testCase->runTest();
-			Assert::IsTrue(testCase->tearDownRunned);
+			std::unique_ptr<MockFunctionTester> functionTester = getTestObject(testDoNothingFunc);
+			functionTester->runTest();
+			Assert::IsTrue(functionTester->tearDownRunned);
 		}
 
 	public:
 		TEST_METHOD(TearDown_HasCollapseFunc_CheckFuncIsInvoked) {
-			std::unique_ptr<FakeFunctionTester> testCase = getTestObject(testCollapseFunc);
-			testCase->runTest();
-			Assert::IsTrue(testCase->tearDownRunned);
+			std::unique_ptr<MockFunctionTester> functionTester = getTestObject(testCollapseFunc);
+			functionTester->runTest();
+			Assert::IsTrue(functionTester->tearDownRunned);
 		}
 
 	public:
 		TEST_METHOD(SetUp_HasFunctionTesterCollapsed_CheckExceptionIsThrowed) {
-			FunctionTesterPointer testCase = getFakeFunctionTesterWithSetUpCollapse();
-			auto testFunc = [&]() {testCase->runTest(); };
+			FunctionTesterPointer functionTester = getFakeFunctionTesterWithSetUpCollapse();
+			auto testFunc = [&]() {functionTester->runTest(); };
 			Assert::ExpectException<SetUpException>(testFunc);
 		}
 
 	private:
-		std::unique_ptr<FakeCollapseFunctionTester> getFakeFunctionTesterWithSetUpCollapse() {
-			std::unique_ptr<FakeCollapseFunctionTester> fake = std::make_unique<FakeCollapseFunctionTester>();
+		std::unique_ptr<FakeFunctionTester> getFakeFunctionTesterWithSetUpCollapse() {
+			std::unique_ptr<FakeFunctionTester> fake = std::make_unique<FakeFunctionTester>();
 			fake->collapseSetUp = true;
 			return fake;
 		}
@@ -140,9 +139,9 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	public:
 		TEST_METHOD(SetUp_HasFunctionTesterCollapsed_CheckExceptionHasInnerException) {
-			FunctionTesterPointer testCase = getFakeFunctionTesterWithSetUpCollapse();
+			FunctionTesterPointer functionTester = getFakeFunctionTesterWithSetUpCollapse();
 			try {
-				testCase->runTest();
+				functionTester->runTest();
 				Assert::Fail();
 			}
 			catch (SetUpException ex) {
@@ -152,13 +151,13 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	public:
 		TEST_METHOD(TearDown_HasFunctionTesterCollapsed_CheckExceptionIsThrowed) {
-			FunctionTesterPointer testCase = getFakeFunctionTesterWithTearDownCollapse();
-			Assert::ExpectException<TearDownException>([&]() {testCase->runTest(); });
+			FunctionTesterPointer functionTester = getFakeFunctionTesterWithTearDownCollapse();
+			Assert::ExpectException<TearDownException>([&]() {functionTester->runTest(); });
 		}
 
 	private:
-		std::unique_ptr<FakeCollapseFunctionTester> getFakeFunctionTesterWithTearDownCollapse() {
-			std::unique_ptr<FakeCollapseFunctionTester> fake = std::make_unique<FakeCollapseFunctionTester>();
+		std::unique_ptr<FakeFunctionTester> getFakeFunctionTesterWithTearDownCollapse() {
+			std::unique_ptr<FakeFunctionTester> fake = std::make_unique<FakeFunctionTester>();
 			fake->collapseTearDown = true;
 			return fake;
 		}
