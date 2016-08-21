@@ -46,11 +46,7 @@ namespace darknessNight::CppUnitTestFramework {
 	private:
 		const string assertMessage = "Assert failed";
 	public:
-		AssertTestResult(string message) :TestResult(message) {
-			errorCause = assertMessage;
-		}
-
-		AssertTestResult(const char* message) :TestResult(message) {
+		AssertTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = assertMessage;
 		}
 	};
@@ -59,11 +55,7 @@ namespace darknessNight::CppUnitTestFramework {
 	private:
 		const string exceptionMessage = "C++ exception";
 	public:
-		ExceptionTestResult(string message) :TestResult(message) {
-			errorCause = exceptionMessage;
-		}
-
-		ExceptionTestResult(const char* message) :TestResult(message) {
+		ExceptionTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = exceptionMessage;
 		}
 	};

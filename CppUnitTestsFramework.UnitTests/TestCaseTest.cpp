@@ -8,6 +8,18 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 
 namespace darknessNight::CppUnitTestFramework::UnitTests {
+	const string methodFailedString = "MethodFailed";
+	static void testDoNothingFunc() {
+	}
+
+	static void testCollapseFunc() {
+		throw exception(methodFailedString.c_str());
+	}
+
+	static void testThrowingAssertFunc() {
+		throw AssertException(methodFailedString);
+	}
+
 	class FakeTestCase : public TestCase {
 	public:
 		bool setUpRunned = false;
@@ -26,17 +38,29 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 	};
 
-	const string methodFailedString = "MethodFailed";
-	static void testDoNothingFunc() {
-	}
+	class SpecialException :public std::exception {
+	public:
+		SpecialException(string message) :exception(message.c_str()){}
+	};
 
-	static void testCollapseFunc() {
-		throw exception(methodFailedString.c_str());
-	}
+	class FakeCollapseTestCase : public TestCase {
+	public:
+		bool collapseSetUp = false;
+		bool collapseTearDown = false;
+	public:
+		FakeCollapseTestCase() :TestCase(testDoNothingFunc) {
+		}
 
-	static void testThrowingAssertFunc() {
-		throw AssertException(methodFailedString);
-	}
+		void setUp() override {
+			if (collapseSetUp)
+				throw SpecialException(methodFailedString);
+		}
+
+		void tearDown() override {
+			if (collapseTearDown)
+				throw SpecialException(methodFailedString);
+		}
+	};
 
 	TEST_CLASS(TestCaseTests)
 	{
@@ -90,8 +114,8 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsRaported) {
 			TestCasePointer testCase = getTestObject(testThrowingAssertFunc);
-			TestResult runResult=testCase->runTest();
-			StringAssert::Constains(methodFailedString ,runResult.getFullMessage(), L"Not have message");
+			TestResult runResult = testCase->runTest();
+			StringAssert::Constains(methodFailedString, runResult.getFullMessage(), L"Not have message");
 			StringAssert::Constains("Assert failed: ", runResult.getFullMessage(), L"Not assert type message");
 		}
 
@@ -136,6 +160,44 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			std::unique_ptr<FakeTestCase> testCase = getTestObject(testCollapseFunc);
 			testCase->runTest();
 			Assert::IsTrue(testCase->tearDownRunned);
+		}
+
+	public:
+		TEST_METHOD(SetUp_HasTestCaseCollapsed_CheckExceptionIsThrowed) {
+			TestCasePointer testCase = getFakeTestCaseWithSetUpCollapse();
+			Assert::ExpectException<SetUpException>([&]() {testCase->runTest(); });
+		}
+
+	private:
+		std::unique_ptr<FakeCollapseTestCase> getFakeTestCaseWithSetUpCollapse() {
+			std::unique_ptr<FakeCollapseTestCase> fake = std::make_unique<FakeCollapseTestCase>();
+			fake->collapseSetUp = true;
+			return fake;
+		}
+
+
+	public:
+		TEST_METHOD(SetUp_HasTestCaseCollapsed_CheckExceptionHasInnerException) {
+			TestCasePointer testCase = getFakeTestCaseWithSetUpCollapse();
+			try {
+				testCase->runTest();
+			}
+			catch (SetUpException ex) {
+				StringAssert::Constains(methodFailedString, ex.what());
+			}
+		}
+
+	public:
+		TEST_METHOD(TearDown_HasTestCaseCollapsed_CheckExceptionIsThrowed) {
+			TestCasePointer testCase = getFakeTestCaseWithTearDownCollapse();
+			Assert::ExpectException<TearDownException>([&]() {testCase->runTest(); });
+		}
+
+	private:
+		std::unique_ptr<FakeCollapseTestCase> getFakeTestCaseWithTearDownCollapse() {
+			std::unique_ptr<FakeCollapseTestCase> fake = std::make_unique<FakeCollapseTestCase>();
+			fake->collapseTearDown = true;
+			return fake;
 		}
 	};
 }

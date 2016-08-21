@@ -18,24 +18,55 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		TestResult runTest() {
-			TestResult result(true);
-			setUp();
-			result = runTestMethod();
-			tearDown();
+			return tryRunTest();
+		}
+
+		TestResult tryRunTest()
+		{
+			runSetUpMethod();
+			TestResult result = runTestMethod();
+			runTearDownMethod();
 			return result;
 		}
 
+
 	private:
+		void runSetUpMethod()
+		{
+			try {
+				setUp();
+			}
+			catch (exception ex) {
+				throw SetUpException(ex);
+			}
+			catch (exception *ex) {
+				throw SetUpException(*ex);
+			}
+		}
+
+		void runTearDownMethod()
+		{
+			try {
+				tearDown();
+			}
+			catch (exception ex) {
+				throw TearDownException(ex);
+			}
+			catch (exception *ex) {
+				throw TearDownException(*ex);
+			}
+		}
+
 		TestResult runTestMethod()
 		{
 			try {
 				testMethod();
 			}
 			catch (AssertException ex) {
-				return AssertTestResult(ex.what());
+				return AssertTestResult(ex);
 			}
 			catch (std::exception ex) {
-				return ExceptionTestResult(ex.what());
+				return ExceptionTestResult(ex);
 			}
 			return SuccessTestResult();
 		}
