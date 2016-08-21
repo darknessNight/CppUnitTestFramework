@@ -16,11 +16,11 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
-		TEST_METHOD(GetRaportFromTest_HasFakeFunctionTester_CheckGetResultFromTestReturnCorrectData)
+		TEST_METHOD(GetReportFromTest_HasFakeFunctionTester_CheckGetResultFromTestReturnCorrectData)
 		{
 			TestCasePointer testCase=getTestObjectWithFakeResult();
-			TestRaport testRaport = testCase->runTestAndGetRaport();
-			StringAssert::Constains("TestError", testRaport.getResult().getErrorMessage());
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TestError", testReport.getResult().getErrorMessage());
 		}
 
 	private:
@@ -33,40 +33,40 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
-		TEST_METHOD(GetRaportFromTest_HasFakeFunctionTester_CheckGetTestNameReturnCorrectData)
+		TEST_METHOD(GetReportFromTest_HasFakeFunctionTester_CheckGetTestNameReturnCorrectData)
 		{
 			TestCasePointer testCase = getTestObjectWithFakeResult();
-			TestRaport testRaport = testCase->runTestAndGetRaport();
-			StringAssert::Constains("TestName", testRaport.getTestName());
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TestName", testReport.getTestName());
 		}
 
 	public:
-		TEST_METHOD(GetRaportFromTest_SettedFileAndLine_CheckGetFileAndLineIsCorrect)
+		TEST_METHOD(GetReportFromTest_SettedFileAndLine_CheckGetFileAndLineIsCorrect)
 		{
 			TestCasePointer testCase = getTestObjectWithFakeResult();
 			testCase->setFileAndLine("TestFile", 4);
-			TestRaport testRaport = testCase->runTestAndGetRaport();
-			StringAssert::Constains("TestFile", testRaport.getFile(), L"File");
-			Assert::AreEqual(4U, testRaport.getLine(), L"Line");
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TestFile", testReport.getFile(), L"File");
+			Assert::AreEqual(4U, testReport.getLine(), L"Line");
 		}
 
 	public:
-		TEST_METHOD(GetRaportFromTest_SettedSuite_CheckSuiteIsCorrect)
+		TEST_METHOD(GetReportFromTest_SettedSuite_CheckSuiteIsCorrect)
 		{
 			TestCasePointer testCase = getTestObjectWithFakeResult();
 			testCase->setSuite("TestSuite");
-			TestRaport testRaport = testCase->runTestAndGetRaport();
-			StringAssert::Constains("TestSuite", testRaport.getSuite());
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TestSuite", testReport.getSuite());
 		}
 
 	public:
-		TEST_METHOD(GetRaportFromTest_SettedCategory_CheckGetCategoryIsCorrect)
+		TEST_METHOD(GetReportFromTest_SettedCategory_CheckGetCategoryIsCorrect)
 		{
 			TestCasePointer testCase = getTestObjectWithFakeResult();
 			TestCategory category("TestCategory");
 			testCase->setCategory(category);
-			TestRaport testRaport = testCase->runTestAndGetRaport();
-			StringAssert::Constains("TestCategory", testRaport.getCategory().getName());
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TestCategory", testReport.getCategory().getName());
 		}
 	};
 }

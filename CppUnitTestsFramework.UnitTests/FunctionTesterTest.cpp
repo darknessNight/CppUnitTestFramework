@@ -72,7 +72,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
-		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsRaported) {
+		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsReported) {
 			FunctionTesterPointer functionTester = getTestObject(testThrowingAssertFunc);
 			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains(methodFailedString, runResult.getFullMessage(), L"Not have message");
@@ -80,21 +80,21 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
-		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsCorrectRaportedCause) {
+		TEST_METHOD(RunTest_HasThrowsAssertException_CheckIsCorrectReportedCause) {
 			FunctionTesterPointer functionTester = getTestObject(testThrowingAssertFunc);
 			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("Assert failed", runResult.getCause());
 		}
 
 	public:
-		TEST_METHOD(RunTest_HasThrowsCppException_CheckIsCorrectRaportedCause) {
+		TEST_METHOD(RunTest_HasThrowsCppException_CheckIsCorrectReportedCause) {
 			FunctionTesterPointer functionTester = getTestObject(testCollapseFunc);
 			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("C++ exception", runResult.getCause());
 		}
 
 	public:
-		TEST_METHOD(RunTest_HasNoThrowException_CheckIsCorrectRaportedCause) {
+		TEST_METHOD(RunTest_HasNoThrowException_CheckIsCorrectReportedCause) {
 			FunctionTesterPointer functionTester = getTestObject(testDoNothingFunc);
 			TestResult runResult = functionTester->runTest();
 			StringAssert::Constains("Success", runResult.getCause());

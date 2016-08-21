@@ -1,97 +1,45 @@
 #pragma once
 #include "FunctionTester.h"
+#include "TestReport.h"
 #include <memory>
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
-	class TestCategory {
-	private:
-		string name;
-	public:
-		TestCategory(){}
-
-		TestCategory(string myName) {
-			name = myName;
-		}
-
-		string getName() {
-			return name;
-		}
-	};
-
-	class TestRaport {
-	private:
-		TestResult testResult;
-		string testName;
-		string testFile;
-		unsigned testLine;
-		string testSuite;
-		TestCategory testCategory;
-		friend class TestCase;
-	private:
-		TestRaport():testResult(false){}
-	public:
-		TestResult getResult() {			
-			return testResult;
-		}
-
-		string getTestName() {
-			return "TestName";
-		}
-
-		string getFile() {
-			return testFile;
-		}
-
-		unsigned getLine() {
-			return testLine;
-		}
-
-		string getSuite() {
-			return testSuite;
-		}
-
-		TestCategory getCategory() {
-			return testCategory;
-		}
-	};
-
-	class TestCase {
+namespace darknessNight::CppUnitTestFramework::UnitTests {class TestCase {
 	public:
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPtr;
 	protected:
 		FunctionTesterPtr test;
-		TestRaport raport;
+		TestReport report;
 	protected:
 		TestCase(){}
 	public:
 		TestCase(FunctionTesterPtr& tester, string name){
 			test.swap(tester);
-			raport.testName = name;
+			report.testName = name;
 		}
 
 		void setFileAndLine(string file, unsigned int line) {
-			raport.testFile = file;
-			raport.testLine = line;
+			report.testFile = file;
+			report.testLine = line;
 		}
 
 		void setSuite(string suite) {
-			raport.testSuite = suite;
+			report.testSuite = suite;
 		}
 
 		void setCategory(TestCategory cat) {
-			raport.testCategory = cat;
+			report.testCategory = cat;
 		}
 
-		TestRaport runTestAndGetRaport() {
+		TestReport runTestAndGetReport() {
 			TestResult result = runTest();
 			return getReport(result);
 		}
 
-		TestRaport getReport(TestResult result)
+		TestReport getReport(TestResult result)
 		{
-			TestRaport returnRaport = raport;
-			returnRaport.testResult = result;
-			return returnRaport;
+			TestReport returnReport = report;
+			returnReport.testResult = result;
+			return returnReport;
 		}
 
 		virtual TestResult runTest() {

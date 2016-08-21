@@ -30,6 +30,12 @@
     <ClInclude Include="TestCase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestCategory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestCase.cpp">
