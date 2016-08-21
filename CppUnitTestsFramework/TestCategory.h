@@ -1,7 +1,7 @@
 #pragma once
 #include<string>
 using namespace std;
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight::CppUnitTestFramework {
 	class TestCategory {
 	private:
 		string name;

@@ -11,8 +11,8 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		typedef std::unique_ptr<TestCase> TestCasePointer;
 
 	private:
-		TestCasePointer getTestObject(TestCase::FunctionTesterPtr& fakeTester, string testName) {
-			return std::unique_ptr<TestCase>(new TestCase(fakeTester, testName));
+		TestCasePointer getTestObject(TestCaseFuncTester::FunctionTesterPtr& fakeTester, string testName) {
+			return std::unique_ptr<TestCase>(new TestCaseFuncTester(fakeTester, testName));
 		}
 
 	public:
@@ -28,7 +28,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		{
 			FakeFunctionTester* fakeTester = new FakeFunctionTester;
 			fakeTester->returnResult = TestResult("TestError");			
-			TestCasePointer testCase = getTestObject(TestCase::FunctionTesterPtr(fakeTester), "TestName");
+			TestCasePointer testCase = getTestObject(TestCaseFuncTester::FunctionTesterPtr(fakeTester), "TestName");
 			return testCase;
 		}
 
