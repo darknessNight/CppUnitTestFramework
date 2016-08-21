@@ -45,6 +45,7 @@ namespace darknessNight::CppUnitTestFramework {
 			return result;
 		}
 	};
+	typedef std::shared_ptr<TestCase> TestCasePtr;
 
 	class TestCaseFuncTester:public TestCase {
 	protected:
