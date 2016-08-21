@@ -5,7 +5,7 @@
 #include "AssertExceptions.h"
 using namespace std;
 namespace darknessNight::CppUnitTestFramework {
-	class TestCase :public ConfigurableTest
+	class FunctionTester :public ConfigurableTest
 	{
 	public:
 		typedef std::function<void()> TestMethod;
@@ -13,7 +13,9 @@ namespace darknessNight::CppUnitTestFramework {
 		TestMethod testMethod;
 
 	public:
-		TestCase(TestMethod test) {
+		FunctionTester(TestMethod test) {
+			if (test == nullptr)
+				throw NullPointerException(string("Argument cannot be nullptr in ") + __FILE__ " " + std::to_string(__LINE__));
 			testMethod = test;
 		}
 

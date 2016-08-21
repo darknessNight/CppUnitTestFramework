@@ -157,6 +157,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringAssert.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -166,7 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StringAssert.cpp" />
-    <ClCompile Include="TestCaseTest.cpp" />
+    <ClCompile Include="FunctionTesterTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CppUnitTestsFramework\CppUnitTestsFramework.vcxproj">

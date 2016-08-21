@@ -34,4 +34,10 @@ namespace darknessNight::CppUnitTestFramework {
 		TearDownException(std::exception& inner) :ExceptionWithInnerException(inner){
 		}
 	};
+
+	class NullPointerException :public std::exception {
+	public:
+		NullPointerException(string message) :exception(message.c_str()) {
+		}
+	};
 }

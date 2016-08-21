@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="ConfigurableTest.h" />
-    <ClInclude Include="TestCase.h" />
+    <ClInclude Include="FunctionTester.h" />
     <ClInclude Include="TestResult.h" />
   </ItemGroup>
   <ItemGroup>

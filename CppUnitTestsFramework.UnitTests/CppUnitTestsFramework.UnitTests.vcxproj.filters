@@ -24,15 +24,18 @@
     <ClInclude Include="StringAssert.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestHelperFuncAndClassess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestCaseTest.cpp">
+    <ClCompile Include="StringAssert.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StringAssert.cpp">
+    <ClCompile Include="FunctionTesterTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
