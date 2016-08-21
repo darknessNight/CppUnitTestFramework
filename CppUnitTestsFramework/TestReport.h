@@ -1,7 +1,7 @@
 #pragma once
 #include "TestCategory.h"
 #include "TestResult.h"
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight::CppUnitTestFramework {
 	class TestReport {
 	private:
 		TestResult testResult;

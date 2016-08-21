@@ -168,7 +168,15 @@
     </ClCompile>
     <ClCompile Include="StringAssert.cpp" />
     <ClCompile Include="FunctionTesterTest.cpp" />
+    <ClCompile Include="TestCaseMethodTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TestCaseTest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TestSuiteTests.cpp">
       <SubType>
       </SubType>
     </ClCompile>
