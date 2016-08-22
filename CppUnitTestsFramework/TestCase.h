@@ -4,7 +4,7 @@
 #include <memory>
 
 namespace darknessNight::CppUnitTestFramework {
-	class TestCase {
+	class TestCase: public ConfigurableTest {
 	public:
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPtr;
 	protected:
@@ -41,6 +41,8 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		virtual TestResult runTest() {
+			test->setSetUpMethod(setUpMethod);
+			test->setTearDownMethod(tearDownMethod);
 			TestResult result = test->runTest();
 			return result;
 		}

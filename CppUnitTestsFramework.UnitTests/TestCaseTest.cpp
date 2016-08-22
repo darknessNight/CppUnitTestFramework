@@ -8,35 +8,38 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	TEST_CLASS(TestCaseTest)
 	{
 	private:
-		typedef std::unique_ptr<TestCase> TestCasePointer;
-
-	private:
-		TestCasePointer getTestObject(TestCaseFuncTester::FunctionTesterPtr& fakeTester, string testName) {
+		TestCasePtr getTestObject(TestCaseFuncTester::FunctionTesterPtr& fakeTester, string testName) {
 			return std::unique_ptr<TestCase>(new TestCaseFuncTester(fakeTester, testName));
 		}
 
 	public:
 		TEST_METHOD(GetReportFromTest_HasFakeFunctionTester_CheckGetResultFromTestReturnCorrectData)
 		{
-			TestCasePointer testCase=getTestObjectWithFakeResult();
+			TestCasePtr testCase=getTestObjectWithPredefinedTestResult();
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("TestError", testReport.getResult().getErrorMessage());
 		}
 
 	private:
-		TestCasePointer getTestObjectWithFakeResult()
+		TestCasePtr getTestObjectWithPredefinedTestResult()
 		{
+			TestCaseFuncTester::FunctionTesterPtr tester = getFakeTesterWithPredefinedResult();
+			TestCasePtr testCase = getTestObject(tester, "TestName");
+			return testCase;
+		}
+	private:
+		TestCaseFuncTester::FunctionTesterPtr getFakeTesterWithPredefinedResult() {
 			FakeFunctionTester* fakeTester = new FakeFunctionTester;
 			fakeTester->returnFakeResult = true;
-			fakeTester->returnResult = TestResult("TestError");			
-			TestCasePointer testCase = getTestObject(TestCaseFuncTester::FunctionTesterPtr(fakeTester), "TestName");
-			return testCase;
+			fakeTester->returnResult = TestResult("TestError");
+			TestCaseFuncTester::FunctionTesterPtr tester(fakeTester);
+			return tester;
 		}
 
 	public:
 		TEST_METHOD(GetReportFromTest_HasFakeFunctionTester_CheckGetTestNameReturnCorrectData)
 		{
-			TestCasePointer testCase = getTestObjectWithFakeResult();
+			TestCasePtr testCase = getTestObjectWithPredefinedTestResult();
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("TestName", testReport.getTestName());
 		}
@@ -44,7 +47,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(GetReportFromTest_SettedFileAndLine_CheckGetFileAndLineIsCorrect)
 		{
-			TestCasePointer testCase = getTestObjectWithFakeResult();
+			TestCasePtr testCase = getTestObjectWithPredefinedTestResult();
 			testCase->setFileAndLine("TestFile", 4);
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("TestFile", testReport.getFile(), L"File");
@@ -54,20 +57,45 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(GetReportFromTest_SettedSuite_CheckSuiteIsCorrect)
 		{
-			TestCasePointer testCase = getTestObjectWithFakeResult();
+			TestCasePtr testCase = getTestObjectWithPredefinedTestResult();
 			testCase->setSuite("TestSuite");
 			TestReport testReport = testCase->runTestAndGetReport();
-			StringAssert::Constains("TestSuite", testReport.getSuite());
+			StringAssert::Constains("TestSuite", testReport.getSuiteName());
 		}
 
 	public:
 		TEST_METHOD(GetReportFromTest_SettedCategory_CheckGetCategoryIsCorrect)
 		{
-			TestCasePointer testCase = getTestObjectWithFakeResult();
+			TestCasePtr testCase = getTestObjectWithPredefinedTestResult();
 			TestCategory category("TestCategory");
 			testCase->setCategory(category);
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("TestCategory", testReport.getCategory().getName());
+		}
+
+	public:
+		TEST_METHOD(SetSetUpMethod_SetThrowError_CheckReturnRaportWithSetUpFailedCause)
+		{
+			TestCasePtr testCase = getTestObjectWithDoNothingTest();
+			testCase->setSetUpMethod([]() {throw std::exception(); });
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("SetUp failed", testReport.getResult().getCause());
+		}
+
+	public:
+		TEST_METHOD(SetTearDownMethod_SetThrowError_CheckReturnRaportWithTearDownFailedCause)
+		{
+			TestCasePtr testCase = getTestObjectWithDoNothingTest();
+			testCase->setTearDownMethod([]() {throw std::exception(); });
+			TestReport testReport = testCase->runTestAndGetReport();
+			StringAssert::Constains("TearDown failed", testReport.getResult().getCause());
+		}
+
+	private:
+		TestCasePtr getTestObjectWithDoNothingTest() {
+			TestCaseFuncTester::FunctionTesterPtr tester(new FunctionTester(testDoNothingFunc));
+			TestCasePtr testCase = getTestObject(tester, "TestName");
+			return testCase;
 		}
 	};
 }

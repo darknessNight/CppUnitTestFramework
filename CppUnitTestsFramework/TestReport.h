@@ -30,7 +30,7 @@ namespace darknessNight::CppUnitTestFramework {
 			return testLine;
 		}
 
-		string getSuite() {
+		string getSuiteName() {
 			return testSuite;
 		}
 
