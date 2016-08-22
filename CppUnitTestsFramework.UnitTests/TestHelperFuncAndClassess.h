@@ -43,14 +43,19 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		bool collapseSetUp = false;
 		bool collapseTearDown = false;
+		bool returnFakeResult = false;
 		TestResult returnResult;
 	public:
 		FakeFunctionTester() :FunctionTester(testDoNothingFunc), returnResult(true) {
 		}
 
 		TestResult runTest() override {
-			FunctionTester::runTest();
-			return returnResult;
+			if(!returnFakeResult)
+				return FunctionTester::runTest();
+			else {
+				FunctionTester::runTest();
+				return returnResult;
+			}
 		}
 
 		void setUp() override {

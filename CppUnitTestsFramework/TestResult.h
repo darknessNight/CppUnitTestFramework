@@ -60,6 +60,24 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 	};
 
+	class TearDownFailedTestResult :public TestResult {
+	private:
+		const string exceptionMessage = "TearDown failed";
+	public:
+		TearDownFailedTestResult(exception ex) :TestResult(ex.what()) {
+			errorCause = exceptionMessage;
+		}
+	};
+
+	class SetUpFailedTestResult :public TestResult {
+	private:
+		const string exceptionMessage = "SetUp failed";
+	public:
+		SetUpFailedTestResult(exception ex) :TestResult(ex.what()) {
+			errorCause = exceptionMessage;
+		}
+	};
+
 	class SuccessTestResult :public TestResult {
 	private:
 		const string successMessage = "Success";

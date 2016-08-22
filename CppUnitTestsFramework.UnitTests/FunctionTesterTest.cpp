@@ -125,8 +125,8 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(SetUp_HasFunctionTesterCollapsed_CheckExceptionIsThrowed) {
 			FunctionTesterPointer functionTester = getFakeFunctionTesterWithSetUpCollapse();
-			auto testFunc = [&]() {functionTester->runTest(); };
-			Assert::ExpectException<SetUpException>(testFunc);
+			TestResult runResult = functionTester->runTest();
+			StringAssert::Constains("SetUp failed", runResult.getCause());
 		}
 
 	private:
@@ -136,23 +136,19 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			return fake;
 		}
 
-
 	public:
-		TEST_METHOD(SetUp_HasFunctionTesterCollapsed_CheckExceptionHasInnerException) {
-			FunctionTesterPointer functionTester = getFakeFunctionTesterWithSetUpCollapse();
-			try {
-				functionTester->runTest();
-				Assert::Fail();
-			}
-			catch (SetUpException ex) {
-				StringAssert::Constains(methodFailedString, ex.what());
-			}
+		TEST_METHOD(TearDown_HasFunctionTesterCollapsed_CheckResultCauseTearDown) {
+			FunctionTesterPointer functionTester = getFakeFunctionTesterWithTearDownCollapse();
+			TestResult runResult= functionTester->runTest();
+			StringAssert::Constains("TearDown failed", runResult.getCause());
 		}
 
+
 	public:
-		TEST_METHOD(TearDown_HasFunctionTesterCollapsed_CheckExceptionIsThrowed) {
-			FunctionTesterPointer functionTester = getFakeFunctionTesterWithTearDownCollapse();
-			Assert::ExpectException<TearDownException>([&]() {functionTester->runTest(); });
+		TEST_METHOD(TearDown_HasFunctionTesterCollapsed_CheckResultHasExceptionMessage) {
+			FunctionTesterPointer functionTester = getFakeFunctionTesterWithSetUpCollapse();
+			TestResult runResult = functionTester->runTest();
+			StringAssert::Constains(methodFailedString, runResult.getErrorMessage());
 		}
 
 	private:

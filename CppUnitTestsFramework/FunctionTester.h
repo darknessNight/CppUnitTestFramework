@@ -20,7 +20,15 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		virtual TestResult runTest() {
-			return tryRunTest();
+			try {
+				return tryRunTest();
+			}
+			catch (SetUpException ex) {
+				return SetUpFailedTestResult(ex);
+			}
+			catch (TearDownException ex) {
+				return TearDownFailedTestResult(ex);
+			}
 		}
 
 	protected:

@@ -27,6 +27,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TestCasePointer getTestObjectWithFakeResult()
 		{
 			FakeFunctionTester* fakeTester = new FakeFunctionTester;
+			fakeTester->returnFakeResult = true;
 			fakeTester->returnResult = TestResult("TestError");			
 			TestCasePointer testCase = getTestObject(TestCaseFuncTester::FunctionTesterPtr(fakeTester), "TestName");
 			return testCase;
