@@ -69,4 +69,5 @@ namespace darknessNight::CppUnitTestFramework {
 			}
 		}
 	};
+	typedef std::shared_ptr<TestSuite> TestSuitePtr;
 }

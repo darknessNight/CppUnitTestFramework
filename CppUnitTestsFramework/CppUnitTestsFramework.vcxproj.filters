@@ -34,6 +34,12 @@
     <ClInclude Include="TestCaseFunc.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TestSuiteInstanceCreator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

@@ -25,6 +25,9 @@
     <ClCompile Include="TestSuiteClassTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TestSuiteInstanceCreatorTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">
