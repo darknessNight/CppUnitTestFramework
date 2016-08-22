@@ -1,10 +1,12 @@
 #pragma once
 #include "TestCase.h"
 #include <vector>
+#include <map>
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestSuite:public ConfigurableTest {
 		std::vector<TestCasePtr> testArray;
+		std::map<std::string, TestCasePtr> testMap;
 		TestCategory testCategory;
 		std::string myName;
 	public:
@@ -18,6 +20,7 @@ namespace darknessNight::CppUnitTestFramework {
 	public:
 		void addTestCase(TestCasePtr testCase) {
 			testArray.push_back(testCase);
+			testMap[testCase->getName()]= testCase;
 		}
 
 		void setCategory(TestCategory cat) {
@@ -33,7 +36,19 @@ namespace darknessNight::CppUnitTestFramework {
 			return returnTab;
 		}
 
+		TestReport runTestAndGetReport(std::string name) {
+			TestCasePtr test=findTestFromName(name);
+			return prepareAndRunTest(test);
+		}
+
 	protected:
+		TestCasePtr findTestFromName(string name) {
+			TestCasePtr test = testMap[name];
+			if(test==nullptr)
+				throw NotFoundException("Not found TestCase in TestSuite");
+			return test;
+		}
+
 		TestReport prepareAndRunTest(TestCasePtr test) {
 			prepareTestCase(test);
 			return test->runTestAndGetReport();

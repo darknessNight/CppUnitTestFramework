@@ -15,6 +15,10 @@ namespace darknessNight::CppUnitTestFramework {
 			report.testName = name;
 		}
 	public:
+		string getName() {
+			return report.testName;
+		}
+
 		void setFileAndLine(string file, unsigned int line) {
 			report.testFile = file;
 			report.testLine = line;

@@ -40,4 +40,10 @@ namespace darknessNight::CppUnitTestFramework {
 		NullPointerException(string message) :exception(message.c_str()) {
 		}
 	};
+
+	class NotFoundException :public std::exception {
+	public:
+		NotFoundException(string message) :exception(message.c_str()) {
+		}
+	};
 }

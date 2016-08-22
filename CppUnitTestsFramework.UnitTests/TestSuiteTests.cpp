@@ -63,15 +63,24 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	private:
 		TestSuite getTestSuiteWithTwoTestCaseWithDoNothingFunc() {
 			TestSuite testSuite;
-			addDoNothingTestToTestSuite(testSuite);
-			addDoNothingTestToTestSuite(testSuite);
+			addDoNothingTestToTestSuite(testSuite,0);
+			addDoNothingTestToTestSuite(testSuite,1);
 			return testSuite;
 		}
 
-		void addDoNothingTestToTestSuite(TestSuite &testSuite) {
+		void addDoNothingTestToTestSuite(TestSuite &testSuite, int number) {
 			TestCase::FunctionTesterPtr tester(new FunctionTester(testDoNothingFunc));
-			TestCasePtr testCase(new TestCaseFuncTester(tester, "Test"));
+			TestCasePtr testCase(new TestCaseFuncTester(tester, "Test"+std::to_string(number)));
 			testSuite.addTestCase(testCase);
+		}
+
+	public:
+		TEST_METHOD(RunTestOneTest_HasTwoTestCase_CheckReturnResult)
+		{
+			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
+
+			TestReport report= testSuite.runTestAndGetReport("Test1");
+			Assert::IsTrue( report.getResult().isSuccess());
 		}
 
 	public:
@@ -81,6 +90,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			StringAssert::Constains("TestSuite", testReports[0].getSuiteName());
 		}
+
 	public:
 		TEST_METHOD(getName_HasChildClass_CheckReturnChildClassName) {
 			TestSuiteTest test;
