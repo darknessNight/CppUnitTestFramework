@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <CppUnitTestsFramework\TestSuite.h>
+#include <CppUnitTestsFramework\TestCaseFunc.h>
 #include "TestHelperFuncAndClassess.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -14,7 +15,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTests_HasNoTests_CheckReturnEmptyArray)
 		{
 			TestSuite testSuite;
-			std::vector<TestReport> testReports = testSuite.getReports();
+			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			Assert::AreEqual(0U, testReports.size());
 		}
 
@@ -22,7 +23,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTests_HasTwoTestCases_CheckReturnTwoElementArray)
 		{
 			TestSuite testSuite = getTestSuiteWithTwoFakeTestCase();
-			std::vector<TestReport> testReports = testSuite.getReports();
+			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			Assert::AreEqual(2U, testReports.size());
 		}
 
@@ -44,7 +45,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTests_HasOneTestCase_CheckReturnCorrectRaport)
 		{
 			TestSuite testSuite = getTestSuiteWithTwoFakeTestCase();
-			std::vector<TestReport> testReports = testSuite.getReports();
+			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			StringAssert::Constains("Test", testReports[0].getTestName());
 		}
 
@@ -54,7 +55,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
 			testSuite.setSetUpMethod([]() {throw std::exception(); });
 
-			std::vector<TestReport> testReports = testSuite.getReports();
+			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			for each(TestReport report in testReports)
 				StringAssert::Constains("SetUp failed", report.getResult().getCause());
 		}
@@ -77,7 +78,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTests_HasTwoTest_CheckReturnCorrectSuiteName)
 		{
 			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
-			std::vector<TestReport> testReports = testSuite.getReports();
+			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			StringAssert::Constains("TestSuite", testReports[0].getSuiteName());
 		}
 	public:

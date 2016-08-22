@@ -28,6 +28,12 @@
     <ClInclude Include="TestSuite.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TestSuiteClass.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseFunc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestHelperFuncAndClassess.h"
 #include <CppUnitTestsFramework\TestCase.h>
+#include <CppUnitTestsFramework\TestCaseFunc.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

@@ -5,20 +5,21 @@ namespace darknessNight::CppUnitTestFramework {
 	class TestCaseMethod :public TestCase{
 	private:
 		ConfigurableTest::TestMethod testMethod=nullptr;
-		std::shared_ptr<ConfigurableTest> object=nullptr;
+		ConfigurableTest* object=nullptr;
 	public:
-		TestCaseMethod(ConfigurableTest::TestMethod method) {
+		TestCaseMethod(ConfigurableTest::TestMethod method, std::string name="") {
 			testMethod = method;
+			setName(name);
 		}
 
-		void setTestObj(std::shared_ptr<ConfigurableTest> obj) {
+		void setTestObj(ConfigurableTest* obj) {
 			object = obj;
-			test = FunctionTesterPtr(new FunctionTester(std::bind(testMethod,obj)));
+			functionTester = FunctionTesterPtr(new FunctionTester(std::bind(testMethod,obj)));
 		}
 
 		TestResult runTest()override {
 			if(object==nullptr || testMethod==nullptr)
-				throw std::exception();
+				throw std::exception("TestCaseMethod not have test object or testMethod in " __FILE__);
 			return TestCase::runTest();
 		}
 	};

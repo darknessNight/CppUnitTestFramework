@@ -28,9 +28,8 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(RunTest_HasDoNothingFuncAndObject_CheckReturnRunResult)
 		{
-			ConfigurableTestPtr obj = ConfigurableTestPtr(new TestMethodClass);
 			TestCaseMethod testCase = getTestObject(static_cast<ConfigurableTest::TestMethod>(&TestMethodClass::doNothingMethod));
-			testCase.setTestObj(obj);
+			testCase.setTestObj(&testCase);
 			TestResult result=testCase.runTest();
 			Assert::IsTrue(result.isSuccess());
 		}

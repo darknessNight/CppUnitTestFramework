@@ -8,6 +8,7 @@ namespace darknessNight::CppUnitTestFramework {
 		TestCategory testCategory;
 		std::string myName;
 	public:
+		typedef std::vector<TestReport> TestReportArray;
 
 		virtual std::string getName() {
 			setSuiteNameIfNotSetted();
@@ -23,16 +24,21 @@ namespace darknessNight::CppUnitTestFramework {
 			testCategory = cat;
 		}
 
-		std::vector<TestReport> getReports() {
-			std::vector<TestReport> returnTab;
+		TestReportArray runTestsAndGetReports() {
+			TestReportArray returnTab;
 			for each(TestCasePtr test in testArray) {
-				prepareTestCase(test);
-				returnTab.push_back(test->runTestAndGetReport());
+				TestReport report = prepareAndRunTest(test);
+				returnTab.push_back(report);
 			}
 			return returnTab;
 		}
 
 	protected:
+		TestReport prepareAndRunTest(TestCasePtr test) {
+			prepareTestCase(test);
+			return test->runTestAndGetReport();
+		}
+
 		virtual void prepareTestCase(TestCasePtr test) {
 			test->setSetUpMethod(setUpMethod);
 			test->setTearDownMethod(tearDownMethod);
@@ -43,7 +49,7 @@ namespace darknessNight::CppUnitTestFramework {
 		void setSuiteNameIfNotSetted()
 		{
 			if (myName.size() <= 0) {
-				std::string myName = typeid(*this).name();
+				myName = typeid(*this).name();
 				myName = myName.substr(strlen("class "));
 			}
 		}

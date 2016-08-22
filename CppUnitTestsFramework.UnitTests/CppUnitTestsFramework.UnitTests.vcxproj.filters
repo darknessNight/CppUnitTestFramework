@@ -19,6 +19,12 @@
     <ClCompile Include="TestCaseMethodTest.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LearingTestAutoAddMethod.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuiteClassTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">

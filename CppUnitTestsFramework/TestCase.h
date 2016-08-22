@@ -8,7 +8,7 @@ namespace darknessNight::CppUnitTestFramework {
 	public:
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPtr;
 	protected:
-		FunctionTesterPtr test;
+		FunctionTesterPtr functionTester;
 		TestReport report;
 	protected:
 		void setName(string name) {
@@ -41,21 +41,11 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		virtual TestResult runTest() {
-			test->setSetUpMethod(setUpMethod);
-			test->setTearDownMethod(tearDownMethod);
-			TestResult result = test->runTest();
+			functionTester->setSetUpMethod(setUpMethod);
+			functionTester->setTearDownMethod(tearDownMethod);
+			TestResult result = functionTester->runTest();
 			return result;
 		}
 	};
 	typedef std::shared_ptr<TestCase> TestCasePtr;
-
-	class TestCaseFuncTester:public TestCase {
-	protected:
-		TestCaseFuncTester() {}
-	public:
-		TestCaseFuncTester(FunctionTesterPtr& tester, string name) {
-			test.swap(tester);
-			setName(name);
-		}
-	};
 }

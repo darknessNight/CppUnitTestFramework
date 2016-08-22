@@ -176,6 +176,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LearingTestAutoAddMethod.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TestSuiteClassTests.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TestSuiteTests.cpp">
       <SubType>
       </SubType>
