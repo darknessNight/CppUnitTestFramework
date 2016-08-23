@@ -160,6 +160,10 @@
     <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TestContainerTests.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TestSuiteInstanceCreatorTests.cpp">
       <SubType>
       </SubType>

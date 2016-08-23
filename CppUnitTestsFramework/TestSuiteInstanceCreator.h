@@ -2,7 +2,13 @@
 #include "TestSuite.h"
 
 namespace darknessNight::CppUnitTestFramework {
-	template <typename TestSuiteType> class TestSuiteInstanceCreator {
+	class TestSuiteCreator {
+	public:
+		virtual std::string getSuiteName() = 0;
+		virtual TestSuitePtr createInstance() = 0;
+	};
+
+	template <typename TestSuiteType> class TestSuiteInstanceCreator:public TestSuiteCreator {
 	private:
 		std::string suiteName;
 		TestSuitePtr testSuite=nullptr;

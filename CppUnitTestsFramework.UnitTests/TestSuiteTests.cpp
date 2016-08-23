@@ -92,6 +92,16 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
+		TEST_METHOD(getTestCaseArrayLists_HasTwoTest_CheckReturnAllNames)
+		{
+			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
+			std::vector<string> keys = testSuite.getTestCaseList();
+			Assert::AreEqual(2U, keys.size());
+			for each(auto key in keys)
+				StringAssert::Constains("Test", key);
+		}
+
+	public:
 		TEST_METHOD(getName_HasChildClass_CheckReturnChildClassName) {
 			TestSuiteTest test;
 			std::string name= test.getName();

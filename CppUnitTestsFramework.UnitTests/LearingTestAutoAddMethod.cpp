@@ -4,55 +4,80 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace darknessNight::CppUnitTestFramework::UnitTests {
-	class MasterTest {
+
+	class MethodProvider {
 	public:
-		typedef void(MasterTest::* Func)();
+		typedef void(MethodProvider::* Func)();
 	};
 
-	class TestStaticMaster {
+	class StaticVarsContainer {
 	public:
 		static bool enabled;
-		static MasterTest::Func func;
+		static MethodProvider::Func func;
 	};
-	bool TestStaticMaster::enabled = false;
-	MasterTest::Func TestStaticMaster::func;
+	bool StaticVarsContainer::enabled = false;
+	MethodProvider::Func StaticVarsContainer::func;
 
-	template <MasterTest::Func test> class TestStatic {
+	template <MethodProvider::Func test> class TestGetMethodFromClassTemplate {
 	public:
-		TestStatic() {
-			TestStaticMaster::func = test;
+		TestGetMethodFromClassTemplate() {
+			StaticVarsContainer::func = test;
 		}
 	};
 
-	class Test3 {
+	class TestGetMethodFromClass {
 	public:
-		Test3(MasterTest::Func func) {
-			TestStaticMaster::func = func;
+		TestGetMethodFromClass(MethodProvider::Func func) {
+			StaticVarsContainer::func = func;
 		}
 	};
 
-	class Test2 :public MasterTest {
+	class TestSendOwnMethodToOtherClass :public MethodProvider {
 	public:
 		void reg() {
-			TestStaticMaster::enabled = true;
+			StaticVarsContainer::enabled = true;
 		}
-
 #if (defined(_MSC_VER) && _MSC_VER>=1800)
-		TestStatic<(MasterTest::Func)&reg> test2;
+		TestGetMethodFromClassTemplate<(MethodProvider::Func)&reg> test2;
 #elif (defined (__GNUG__))
-		Test3 test = Test3((MasterTest::Func)&reg);
+		TestGetMethodFromClass test = TestGetMethodFromClass((MethodProvider::Func)&reg);
 #else
 #error Not supported compiler
 #endif
 	};
 
+	class TestGetName {
+	public:
+		const char* testName=nullptr;
+
+		TestGetName(const char* name) {
+			testName = name;
+		}
+	};
+
+	class NoDefClass;
+	TestGetName testOverLimits(typeid(NoDefClass).name());
+	class NoDefClass {
+	public:
+		const char* secondNameTest = typeid(NoDefClass).name();
+		TestGetName secondTest = TestGetName(secondNameTest);
+	};
+
 	TEST_CLASS(LearingAutoAddMethodTest)
 	{
 	public:
-		TEST_METHOD(Test) {
-			Test2 test;
-			std::bind(TestStaticMaster::func, test)();
-			Assert::IsTrue(TestStaticMaster::enabled);
+		TEST_METHOD(TestGetMethodFromCreatedObject) {
+			TestSendOwnMethodToOtherClass test;
+			std::bind(StaticVarsContainer::func, test)();//Mo¿e siê nie kompilowaæ pod GNU GCC
+			Assert::IsTrue(StaticVarsContainer::enabled);
+		}
+
+		TEST_METHOD(TestGetClassNameFromNotDefClass) {
+			StringAssert::Constains("CppUnitTestFramework::UnitTests::NoDefClass", testOverLimits.testName);
+		}
+
+		TEST_METHOD(TestGetClassNameInnerThisClass) {
+			StringAssert::Constains("CppUnitTestFramework::UnitTests::NoDefClass", testOverLimits.testName);
 		}
 	};
 }

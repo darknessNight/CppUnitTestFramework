@@ -41,6 +41,13 @@ namespace darknessNight::CppUnitTestFramework {
 			return prepareAndRunTest(test);
 		}
 
+		std::vector<std::string> getTestCaseList() {
+			std::vector<string> array;
+			for each(auto el in testMap)
+				array.push_back(el.first);
+			return array;
+		}
+
 	protected:
 		TestCasePtr findTestFromName(string name) {
 			TestCasePtr test = testMap[name];

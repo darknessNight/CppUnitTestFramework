@@ -40,6 +40,9 @@
     <ClInclude Include="Framework.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TestContainer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

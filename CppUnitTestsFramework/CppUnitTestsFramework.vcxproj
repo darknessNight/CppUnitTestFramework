@@ -135,6 +135,7 @@
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="TestContainer.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />
     <ClInclude Include="TestCase.h" />
     <ClInclude Include="TestCaseFunc.h" />
