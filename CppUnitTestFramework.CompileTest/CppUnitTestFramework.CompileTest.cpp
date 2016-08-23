@@ -57,7 +57,7 @@ int main()
 
 void testClassAndMethodMacro()
 {
-	TestSuitePtr testSuite = TestExportCollection::getTestContainer().getTestSuiteByName("TestSuiteTestMacro");
+	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("TestSuiteTestMacro");
 	std::vector<string> testCases = testSuite->getTestCaseList();
 	if (testCases.size() != 1)
 		throw SpecialException("No have method in testSuite");
@@ -68,7 +68,7 @@ void testClassAndMethodMacro()
 
 void testFunctionMacro()
 {
-	TestSuitePtr testSuite = TestExportCollection::getTestContainer().getTestSuiteByName("Unnamed");
+	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("Unnamed");
 	std::vector<string> testCases = testSuite->getTestCaseList();
 	if (testCases.size() != 1)
 		throw SpecialException("No have func in unnamed TestSuite");

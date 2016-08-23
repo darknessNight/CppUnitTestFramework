@@ -163,7 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="TestClassRegisterer.cpp">
+    <ClCompile Include="TestRegistersTests.cpp">
       <SubType>
       </SubType>
     </ClCompile>

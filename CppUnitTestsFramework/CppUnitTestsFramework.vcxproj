@@ -136,6 +136,11 @@
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="TestCaseRegister.h" />
+    <ClInclude Include="TestClassRegister.h" />
+    <ClInclude Include="TestFuncRegister.h" />
+    <ClInclude Include="TestMethodRegister.h" />
+    <ClInclude Include="TestsCollectionExport.h" />
     <ClInclude Include="TestRegisterer.h" />
     <ClInclude Include="TestContainer.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />

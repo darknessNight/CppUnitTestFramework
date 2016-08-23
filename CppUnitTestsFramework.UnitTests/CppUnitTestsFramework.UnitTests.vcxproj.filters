@@ -28,10 +28,10 @@
     <ClCompile Include="TestContainerTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TestClassRegisterer.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="TestRegistersTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

@@ -46,6 +46,21 @@
     <ClInclude Include="TestRegisterer.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TestClassRegister.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsCollectionExport.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseRegister.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFuncRegister.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMethodRegister.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

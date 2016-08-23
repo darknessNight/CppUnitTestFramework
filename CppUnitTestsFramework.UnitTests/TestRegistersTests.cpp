@@ -16,7 +16,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	private:
 		void assertRegisterClass()
 		{
-			TestSuitePtr resultSuite = TestExportCollection::getTestContainer().getTestSuiteByName("MySuite");
+			TestSuitePtr resultSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("MySuite");
 			bool notConstainsSuite = resultSuite == nullptr;
 			Assert::IsFalse(notConstainsSuite);
 		}
@@ -42,7 +42,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 		std::vector<string> getRegisterFuncsList() {
-			TestSuitePtr resultSuite = TestExportCollection::getTestContainer().getTestSuiteByName("MySuite");
+			TestSuitePtr resultSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("MySuite");
 			std::vector<string> resultList = resultSuite->getTestCaseList();
 			return resultList;
 		}
@@ -56,8 +56,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(RegisterMethod_HasCorrectFunc_CheckHasTestCaseInSuite)
 		{
-			actRegisterFunc();
-			assertRegisterFunc();
+			throw exception();
 		}
 	};
 }
