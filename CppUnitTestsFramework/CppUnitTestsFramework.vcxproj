@@ -135,6 +135,7 @@
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="TestRegisterer.h" />
     <ClInclude Include="TestContainer.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />
     <ClInclude Include="TestCase.h" />
@@ -145,6 +146,9 @@
     <ClInclude Include="TestResult.h" />
     <ClInclude Include="TestSuite.h" />
     <ClInclude Include="TestSuiteClass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestRegisterer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

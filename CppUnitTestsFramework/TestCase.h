@@ -14,7 +14,10 @@ namespace darknessNight::CppUnitTestFramework {
 		void setName(string name) {
 			report.testName = name;
 		}
+
+		TestCase() {}
 	public:
+
 		string getName() {
 			return report.testName;
 		}

@@ -11,7 +11,8 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		void addTestSuite(TestSuiteCreator* creator) {
-			mapArray[creator->getSuiteName()] = creator;
+			string name = creator->getSuiteName();
+			mapArray[name] = creator;
 		}
 
 		TestSuitePtr getTestSuiteByName(std::string name) {

@@ -43,6 +43,9 @@
     <ClInclude Include="TestContainer.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="TestRegisterer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -53,5 +56,10 @@
       <UniqueIdentifier>{cb755c66-a4d2-4629-a721-e15f62fbfea8}</UniqueIdentifier>
       <Extensions>*.cpp</Extensions>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestRegisterer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

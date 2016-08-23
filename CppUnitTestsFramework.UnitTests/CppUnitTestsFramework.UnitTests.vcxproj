@@ -154,12 +154,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="LearningTestAutoAddMethod.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringAssert.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TestClassRegisterer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TestContainerTests.cpp">
       <SubType>
       </SubType>

@@ -89,7 +89,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(registerTestCase_HasTestCaseWithNoExistsSuiteName_CheckThrowException) {
 			TestContainer container;
 			TestCasePtr testCase = getFakeTestCase("TestCase");
-			auto testFunc = [&]() {container.registerTestCase("", testCase); };
+			auto testFunc = [&]() {container.registerTestCase("NoExists", testCase); };
 			Assert::ExpectException<NotFoundException>(testFunc);
 		}
 	};

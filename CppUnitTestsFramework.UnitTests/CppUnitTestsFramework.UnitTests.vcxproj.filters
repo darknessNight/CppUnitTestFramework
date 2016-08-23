@@ -31,6 +31,9 @@
     <ClCompile Include="TestContainerTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TestClassRegisterer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">
@@ -43,6 +46,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LearningTestAutoAddMethod.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
