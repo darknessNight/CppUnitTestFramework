@@ -16,6 +16,7 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		TestSuitePtr getTestSuiteByName(std::string name) {
+			name = setUnnamedIfNotHaveName(name);
 			if (keyExistsInArray(name))
 				return mapArray[name]->createInstance();
 			else throw NotFoundException("Suite not exists throwed in: " __FILE__);

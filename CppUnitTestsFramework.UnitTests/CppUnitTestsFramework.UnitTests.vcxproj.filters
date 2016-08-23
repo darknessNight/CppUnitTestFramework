@@ -31,7 +31,7 @@
     <ClCompile Include="TestClassRegisterer.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TestFrameworkMacros.cpp">
+    <ClCompile Include="stdafx.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

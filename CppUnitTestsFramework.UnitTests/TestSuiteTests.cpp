@@ -9,8 +9,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	class TestSuiteTest:public TestSuite{
 	};
 
-	TEST_CLASS(TestSuiteTests)
-	{
+	TEST_CLASS(TestSuiteTests){
 	public:
 		TEST_METHOD(RunTests_HasNoTests_CheckReturnEmptyArray)
 		{

@@ -18,6 +18,14 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			StringAssert::Constains("TestSuiteClass", testSuite->getName());
 		}
 
+	public:
+		TEST_METHOD(getTestSuiteByName_GetUnnamedSuite_CheckReturnSuite)
+		{
+			TestContainer container;
+			TestSuitePtr testSuite = container.getTestSuiteByName("");
+			Assert::IsFalse(testSuite == nullptr);
+		}
+
 	private:
 		TestContainer getTestObjectWithTwoTestSuites() {
 			TestContainer container;
