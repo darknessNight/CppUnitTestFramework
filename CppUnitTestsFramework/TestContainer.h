@@ -2,15 +2,15 @@
 #include "TestSuiteInstanceCreator.h"
 namespace darknessNight::CppUnitTestFramework {
 	class TestContainer {
-		std::map<string, TestSuiteCreator*> mapArray;
-		std::unique_ptr<TestSuiteCreator> unnamedSuite;
+		std::map<string, std::shared_ptr<TestSuiteCreator>> mapArray;
+		std::shared_ptr<TestSuiteCreator> unnamedSuite;
 	public:
 		TestContainer() {
-			unnamedSuite = std::unique_ptr<TestSuiteCreator>(new TestSuiteInstanceCreator<TestSuite>("Unnamed"));
-			addTestSuite(unnamedSuite.get());
+			unnamedSuite = std::shared_ptr<TestSuiteCreator>(new TestSuiteInstanceCreator<TestSuite>("Unnamed"));
+			addTestSuite(unnamedSuite);
 		}
 
-		void addTestSuite(TestSuiteCreator* creator) {
+		void addTestSuite(std::shared_ptr<TestSuiteCreator> creator) {
 			string name = creator->getSuiteName();
 			mapArray[name] = creator;
 		}
@@ -18,7 +18,7 @@ namespace darknessNight::CppUnitTestFramework {
 		TestSuitePtr getTestSuiteByName(std::string name) {
 			if (keyExistsInArray(name))
 				return mapArray[name]->createInstance();
-			else return nullptr;
+			else throw NotFoundException("Suite not exists throwed in: " __FILE__);
 		}
 
 		void registerTestCaseToUnnamedSuite(TestCasePtr testCase) {

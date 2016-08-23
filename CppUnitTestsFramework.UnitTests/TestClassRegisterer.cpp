@@ -49,7 +49,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 		void actRegisterFunc()
 		{
-			TestClassRegister<TestSuite> addSuite("class MySuite");
+			TestClassRegister<TestSuite> addTest("class MySuite");
 			TestFuncRegister addFunc([]() {}, "DoNothingFunc", "MySuite");
 		}
 

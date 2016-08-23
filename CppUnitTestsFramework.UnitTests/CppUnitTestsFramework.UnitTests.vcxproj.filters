@@ -10,9 +10,6 @@
     <ClCompile Include="StringAssert.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="FunctionTesterTest.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -32,6 +29,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestClassRegisterer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFrameworkMacros.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

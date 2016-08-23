@@ -4,6 +4,11 @@
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestSuiteClass :public TestSuite {
+	public:
+		TestSuiteClass() {
+			setSuiteNameIfNotSetted();
+		}
+
 	protected:
 		bool isMethodTestCase(TestCasePtr testCase) {
 			TestCaseMethod* castResult = dynamic_cast<TestCaseMethod*>(testCase.get());

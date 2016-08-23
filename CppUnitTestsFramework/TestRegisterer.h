@@ -27,16 +27,15 @@ namespace darknessNight::CppUnitTestFramework {
 		TestSuitePtr getTestSuite(std::string &testSuite)
 		{
 			auto suite = TestExportCollection::getTestContainer().getTestSuiteByName(testSuite);
-			if (suite == nullptr)
-				throw NotFoundException("Suite not exists throwed in: " __FILE__);
 			return suite;
 		}
 	};
 
-	template<typename TestSuiteType> class TestClassRegister:public TestSuiteInstanceCreator<TestSuiteType>, TestRegister {
+	template<typename TestSuiteType> class TestClassRegister{
 	public:
-		TestClassRegister(std::string name):TestSuiteInstanceCreator(name.substr(strlen("class "))) {
-			getTestSuite.addTestSuite(this);
+		TestClassRegister(std::string name){
+			std::shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name.substr(strlen("class "))));
+			TestExportCollection::getTestContainer().addTestSuite(testSuite);
 		}
 	};
 

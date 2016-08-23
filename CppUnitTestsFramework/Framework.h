@@ -8,11 +8,6 @@ namespace darknessNight::CppUnitTestFramework {
 
 #define TEST_CLASS(CLASS_NAME) \
 class CLASS_NAME;\
-TestClassRegister<CLASS_NAME> CLASS_NAME##Register(typeid(CLASS_NAME).name());\
-class CLASS_NAME: public TestSuiteClass
-
-
-	TEST_CLASS(TestSuiteTestMacro) {
-
-	};
+::darknessNight::CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register(typeid(CLASS_NAME).name());\
+class CLASS_NAME: public ::darknessNight::CppUnitTestFramework::TestSuiteClass
 }

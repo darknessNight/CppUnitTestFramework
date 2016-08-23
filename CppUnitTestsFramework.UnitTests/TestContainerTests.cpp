@@ -21,16 +21,18 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	private:
 		TestContainer getTestObjectWithTwoTestSuites() {
 			TestContainer container;
-			container.addTestSuite(new TestSuiteInstanceCreator<TestSuite>("TestSuite1"));
-			container.addTestSuite(new TestSuiteInstanceCreator<TestSuiteClass>("TestSuite2"));
+			std::shared_ptr<TestSuiteCreator> testSuite1(new TestSuiteInstanceCreator<TestSuite>("TestSuite1"));
+			container.addTestSuite(testSuite1);
+			std::shared_ptr<TestSuiteCreator> testSuite2(new TestSuiteInstanceCreator<TestSuiteClass>("TestSuite2"));
+			container.addTestSuite(testSuite2);
 			return container;
 		}
 	public:
 		TEST_METHOD(getTestSuiteByName_HasTwoNamedTestSuitesTryGetEmpty_CheckReturnNullptr)
 		{
 			TestContainer container = getTestObjectWithTwoTestSuites();
-			TestSuitePtr testSuite = container.getTestSuiteByName("TestSuiteNoExists");
-			Assert::IsTrue(testSuite == nullptr);
+			auto testDelegate = [&]() { container.getTestSuiteByName("TestSuiteNoExists"); };
+			Assert::ExpectException<NotFoundException>(testDelegate);
 		}
 
 		TEST_METHOD(registerTestCase_HasCorrectName_CheckIsAddedToHimSuite) {
