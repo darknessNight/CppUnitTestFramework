@@ -8,8 +8,8 @@ namespace darknessNight::CppUnitTestFramework {
 	public:
 		TestCategory() {}
 
-		TestCategory(string myName) {
-			name = myName;
+		TestCategory(string suiteName) {
+			name = suiteName;
 		}
 
 		string getName() {

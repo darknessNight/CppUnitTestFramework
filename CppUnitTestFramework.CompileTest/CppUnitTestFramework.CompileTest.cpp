@@ -12,8 +12,14 @@ using namespace std;
 
 int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
-	TEST_METHOD(FirstTestMethod) {
+	/*TEST_METHOD(FirstTestMethod) {
 		throw exception();
+	}*/
+public:
+	TestMethodRegister addFunc 
+		= TestMethodRegister((ConfigurableTest::TestMethod)&TestSuiteTestMacro::FirstTestMethod, "FirstTestMethod", suiteName, __FILE__, __LINE__); \
+		void FirstTestMethod() {
+
 	}
 };
 
@@ -58,7 +64,9 @@ int main()
 
 void testClassAndMethodMacro()
 {
-	testTestCaseMacro("TestSuiteTestMacro", "FirstTestMethod", testMethodLine);
+	string name = typeid(TestSuiteTestMacro).name();
+	name = name.substr(strlen("class "));
+	testTestCaseMacro(name, "FirstTestMethod", testMethodLine);
 }
 
 void testFunctionMacro() {
@@ -67,6 +75,7 @@ void testFunctionMacro() {
 
 void testTestCaseMacro(string suite, string funcName, int funcLine)
 {
+	TestContainer& container = TestsCollectionExport::getTestContainer();
 	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
 	std::vector<string> testCases = testSuite->getTestCaseList();
 	if (testCases.size() != 1)

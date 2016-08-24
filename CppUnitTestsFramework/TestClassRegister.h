@@ -5,8 +5,24 @@
 namespace darknessNight::CppUnitTestFramework {
 	template<typename TestSuiteType> class TestClassRegister {
 	public:
-		TestClassRegister(std::string name) {
-			std::shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name.substr(strlen("class "))));
+		TestClassRegister(string name) {
+			saveTestSuite(name);
+		}
+
+		TestClassRegister() {
+			string name=detectClassName();
+			saveTestSuite(name);
+		}
+	private:
+		string detectClassName()
+		{
+			string name = typeid(TestSuiteType).name();
+			name = name.substr(strlen("class "));
+			return name;
+		}
+
+		void saveTestSuite(string name) {
+			shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name));
 			TestsCollectionExport::getTestContainer().addTestSuite(testSuite);
 		}
 	};

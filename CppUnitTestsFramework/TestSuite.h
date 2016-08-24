@@ -5,16 +5,17 @@
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestSuite:public ConfigurableTest {
+	protected:
 		std::vector<TestCasePtr> testArray;
 		std::map<std::string, TestCasePtr> testMap;
 		TestCategory testCategory;
-		std::string myName;
+		std::string suiteName;
 	public:
 		typedef std::vector<TestReport> TestReportArray;
 
 		virtual std::string getName() {
 			setSuiteNameIfNotSetted();
-			return myName;
+			return suiteName;
 		}
 
 	public:
@@ -70,9 +71,9 @@ namespace darknessNight::CppUnitTestFramework {
 
 		void setSuiteNameIfNotSetted()
 		{
-			if (myName.size() <= 0) {
-				myName = typeid(*this).name();
-				myName = myName.substr(strlen("class "));
+			if (suiteName.size() <= 0) {
+				suiteName = typeid(*this).name();
+				suiteName = suiteName.substr(strlen("class "));
 			}
 		}
 	};

@@ -6,7 +6,7 @@
 
 #define TEST_CLASS(CLASS_NAME) \
 class CLASS_NAME;\
-::darknessNight::CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register(typeid(CLASS_NAME).name());\
+::darknessNight::CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register;\
 class CLASS_NAME: public ::darknessNight::CppUnitTestFramework::TestSuiteClass
 
 
@@ -19,6 +19,8 @@ void FUNC_NAME()
 
 
 #define TEST_METHOD(METHOD_NAME) \
+TestMethodRegister METHOD_NAME##MethodRegister \
+= TestMethodRegister((ConfigurableTest::TestMethod)&METHOD_NAME, #METHOD_NAME, suiteName, __FILE__, __LINE__);\
 void METHOD_NAME()
 
 

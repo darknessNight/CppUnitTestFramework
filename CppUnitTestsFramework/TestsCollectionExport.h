@@ -13,6 +13,10 @@ namespace darknessNight::CppUnitTestFramework {
 			return *suiteContainer;
 		}
 
+		static void clear() {
+			suiteContainer = nullptr;
+		}
+
 		static void discoverTest() {
 			throw exception();
 		}
