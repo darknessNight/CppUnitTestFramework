@@ -47,6 +47,11 @@ namespace darknessNight::CppUnitTestFramework {
 			return returnReport;
 		}
 
+		TestReport getReportWithoutResult()
+		{
+			return getReport(TestResult(false));
+		}
+
 		virtual TestResult runTest() {
 			functionTester->setSetUpMethod(setUpMethod);
 			functionTester->setTearDownMethod(tearDownMethod);

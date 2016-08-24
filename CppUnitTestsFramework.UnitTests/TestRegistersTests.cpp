@@ -7,6 +7,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	TEST_CLASS(TestClassRegistererTests)
 	{
 	public:
+
 		TEST_METHOD(RegisterClass_HasCorrectClass_CheckHasSuite)
 		{
 			actRegisterClass();
@@ -36,27 +37,40 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	private:
 		void assertRegisterFunc()
 		{
-			std::vector<string> resultList = getRegisterFuncsList();
-			Assert::AreEqual(1U, resultList.size());
-			StringAssert::Constains("DoNothingFunc", resultList[0]);
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("MySuite");
+			AssertHasFuncInSuite(testSuite, "DoNothingFunc");
+			AssertHasCorrectFile(testSuite, "DoNothingFunc");
 		}
 
-		std::vector<string> getRegisterFuncsList() {
-			TestSuitePtr resultSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("MySuite");
-			std::vector<string> resultList = resultSuite->getTestCaseList();
+		void AssertHasCorrectFile(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
+		{
+			TestReport resultSuite = testSuite->runTestAndGetReport(name);
+			Assert::IsTrue(resultSuite.getFile() == __FILE__);
+		}
+
+		void AssertHasFuncInSuite(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
+		{
+			std::vector<string> resultList = getRegisterFuncsList(testSuite);
+			Assert::AreEqual(1U, resultList.size());
+			StringAssert::Constains(name, resultList[0]);
+		}
+
+		std::vector<string> getRegisterFuncsList(TestSuitePtr testSuite) {
+			std::vector<string> resultList = testSuite->getTestCaseList();
 			return resultList;
 		}
 
 		void actRegisterFunc()
 		{
 			TestClassRegister<TestSuite> addTest("class MySuite");
-			TestFuncRegister addFunc([]() {}, "DoNothingFunc", "MySuite");
+			TestFuncRegister addFunc([]() {}, "DoNothingFunc", "MySuite", __FILE__, __LINE__);
 		}
 
-	public:
+	public:/*
 		TEST_METHOD(RegisterMethod_HasCorrectFunc_CheckHasTestCaseInSuite)
 		{
+			
 			throw exception();
-		}
+		}*/
 	};
 }

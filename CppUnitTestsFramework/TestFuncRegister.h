@@ -5,15 +5,17 @@
 namespace darknessNight::CppUnitTestFramework {
 	class TestFuncRegister :TestCaseRegister {
 	public:
-		TestFuncRegister(std::function<void()> func, string testCaseName, string testSuite) {
+		TestFuncRegister(std::function<void()> func, string testCaseName, string testSuite, string file, int line) {
 			auto suite = getTestSuite(testSuite);
-			addTestCase(func, testCaseName, suite);
+			TestCasePtr testCase=addTestCase(func, testCaseName, file, line);
+			suite->addTestCase(testCase);
 		}
 	protected:
-		void addTestCase(std::function<void()> func, std::string &name, darknessNight::CppUnitTestFramework::TestSuitePtr &suite)
+		TestCasePtr addTestCase(std::function<void()> func, string &name, string file, int line)
 		{
 			TestCasePtr testCase(new TestCaseFunc(func, name));
-			suite->addTestCase(testCase);
+			testCase->setFileAndLine(file, line);
+			return testCase;
 		}
 	};
 }

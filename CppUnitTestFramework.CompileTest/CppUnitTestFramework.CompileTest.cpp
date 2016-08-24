@@ -10,13 +10,14 @@
 using namespace darknessNight::CppUnitTestFramework;
 using namespace std;
 
+int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
 	TEST_METHOD(FirstTestMethod) {
 		throw exception();
 	}
 };
 
-
+int testFuncLine = __LINE__ + 1;
 TEST_FUNCTION(TestFunctionTest) {
 
 }
@@ -57,23 +58,26 @@ int main()
 
 void testClassAndMethodMacro()
 {
-	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("TestSuiteTestMacro");
-	std::vector<string> testCases = testSuite->getTestCaseList();
-	if (testCases.size() != 1)
-		throw SpecialException("No have method in testSuite");
-	if (testCases[0] != "FirstTestMethod")
-		throw SpecialException("No have method with correct name in testSuite");
-	cout << "Success" << "\n";
+	testTestCaseMacro("TestSuiteTestMacro", "FirstTestMethod", testMethodLine);
 }
 
-void testFunctionMacro()
+void testFunctionMacro() {
+	testTestCaseMacro("Unnamed", "TestFunctionTest", testFuncLine);
+}
+
+void testTestCaseMacro(string suite, string funcName, int funcLine)
 {
-	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("Unnamed");
+	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
 	std::vector<string> testCases = testSuite->getTestCaseList();
 	if (testCases.size() != 1)
-		throw SpecialException("No have func in unnamed TestSuite");
-	if (testCases[0] != "TestFunctionTest")
-		throw SpecialException("No have func with correct name");
+		throw SpecialException("No have func in \""+suite+"\" TestSuite");
+	if (testCases[0] != funcName)
+		throw SpecialException("No have \""+funcName+"\" in testSuite");
+	TestReport report = testSuite->runTestAndGetReport(funcName);
+	if (report.getFile() != __FILE__)
+		throw SpecialException("No saved correct test file. Current saved file: " + report.getFile());
+	if (report.getLine() != funcLine)
+		throw SpecialException("No saved correct test file. Current saved file: " + to_string(report.getLine()));
 	cout << "Success" << "\n";
 }
 
