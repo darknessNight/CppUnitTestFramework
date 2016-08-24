@@ -9,7 +9,7 @@ namespace darknessNight::CppUnitTestFramework {
 		std::vector<TestCasePtr> testArray;
 		std::map<std::string, TestCasePtr> testMap;
 		TestCategory testCategory;
-		std::string suiteName;
+		std::string suiteName="";
 	public:
 		typedef std::vector<TestReport> TestReportArray;
 

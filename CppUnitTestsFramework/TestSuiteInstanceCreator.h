@@ -3,19 +3,11 @@
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestSuiteCreator {
-	public:
-		virtual std::string getSuiteName() = 0;
-		virtual TestSuitePtr createInstance() = 0;
-	};
-
-	template <typename TestSuiteType> class TestSuiteInstanceCreator:public TestSuiteCreator {
-	private:
+	protected:
 		std::string suiteName;
-		TestSuitePtr testSuite=nullptr;
+		TestSuitePtr testSuite = nullptr;
+		std::vector<TestCasePtr> testCasesArray;
 	public:
-		TestSuiteInstanceCreator(std::string name) {
-			suiteName = name;
-		}
 
 		std::string getSuiteName() {
 			return suiteName;
@@ -25,10 +17,33 @@ namespace darknessNight::CppUnitTestFramework {
 			createIfNeeded();
 			return testSuite;
 		}
-	private:
-		void createIfNeeded() {
-			if (testSuite == nullptr)
+
+		void registerTestCase(TestCasePtr testCase) {
+			testCasesArray.push_back(testCase);
+		}
+
+	protected:
+		virtual void createIfNeeded() = 0;
+
+		void registerTestToSuite() {
+			for each(auto testCase in testCasesArray)
+				testSuite->addTestCase(testCase);
+			testCasesArray.clear();
+		}
+	};
+
+	template <typename TestSuiteType> class TestSuiteInstanceCreator:public TestSuiteCreator {
+	public:
+		TestSuiteInstanceCreator(std::string name) {
+			suiteName = name;
+		}
+
+	protected:
+		void createIfNeeded() override {
+			if (testSuite == nullptr) {
 				testSuite = TestSuitePtr(static_cast<TestSuite*>(new TestSuiteType));
+				registerTestToSuite();
+			}
 		}
 	};
 }

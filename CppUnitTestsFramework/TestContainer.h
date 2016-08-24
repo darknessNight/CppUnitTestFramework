@@ -19,7 +19,7 @@ namespace darknessNight::CppUnitTestFramework {
 			name = setUnnamedIfNotHaveName(name);
 			if (keyExistsInArray(name))
 				return mapArray[name]->createInstance();
-			else throw NotFoundException("Suite not exists throwed in: " __FILE__);
+			else throw NotFoundException("Suite \"+"+name+"+\" not exists throwed in: " __FILE__);
 		}
 
 		void registerTestCaseToUnnamedSuite(TestCasePtr testCase) {
@@ -38,8 +38,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 		void saveTestCase(std::string & name, darknessNight::CppUnitTestFramework::TestCasePtr & testCase)
 		{
-			TestSuitePtr testSuite=mapArray[name]->createInstance();
-			testSuite->addTestCase(testCase);
+			mapArray[name]->registerTestCase(testCase);
 		}
 
 		void throwExceptionIfNotExistsSuite(std::string & testSuite)

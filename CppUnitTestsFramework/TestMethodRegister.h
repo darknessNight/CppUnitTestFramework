@@ -6,9 +6,9 @@ namespace darknessNight::CppUnitTestFramework {
 	class TestMethodRegister :TestRegisterContainerAccess {
 	public:
 		TestMethodRegister(ConfigurableTest::TestMethod method, string methodName, string suiteName, string file, int line) {
-			auto testSuite = getTestSuite(suiteName);
+			suiteName = suiteName.substr(strlen("class "));
 			TestCasePtr testCase = addTestCase(method, methodName, file, line);
-			testSuite->addTestCase(testCase);
+			getTestContainer().registerTestCase(suiteName, testCase);
 		}
 	protected:
 		TestCasePtr addTestCase(ConfigurableTest::TestMethod method, string &name, string file, int line)
@@ -19,9 +19,21 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 	};
 
-	template <ConfigurableTest::TestMethod method> class TestMethodRegister_VS :TestMethodRegister {
+	class BasicTestMethodRegisterHandler_VS {
 	public:
-		TestMethodRegister_VS(string methodName, string suiteName, string file,int line):
-			TestMethodRegister(method,methodName,suiteName,file,line){}
+		virtual ConfigurableTest::TestMethod returnMethod() = 0;
+	};
+
+	template <ConfigurableTest::TestMethod method> class TestMethodRegisterHandler_VS: public BasicTestMethodRegisterHandler_VS {
+	public:
+		ConfigurableTest::TestMethod returnMethod() {
+			return method;
+		}
+	};
+	
+	class TestMethodRegister_VS :TestMethodRegister {
+	public:
+		TestMethodRegister_VS(BasicTestMethodRegisterHandler_VS& method,string methodName, string suiteName, string file,int line):
+			TestMethodRegister(method.returnMethod(),methodName,suiteName,file,line){}
 	};
 }

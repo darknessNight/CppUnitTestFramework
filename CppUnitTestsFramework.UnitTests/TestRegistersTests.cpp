@@ -12,12 +12,51 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	};
 	string TestClassForRegisterTests::myName = string(typeid(TestClassForRegisterTests).name()).substr(strlen("class "));
 
+	class FakeTestRegisterContainerAccess :public TestRegisterContainerAccess {
+	public:
+		using TestRegisterContainerAccess::getTestContainer;
+		using TestRegisterContainerAccess::getTestSuite;
+	};
+
 	TEST_CLASS(TestClassRegistererTests)
 	{
 	public:
 
 		TEST_METHOD_CLEANUP(tearDown) {
 			TestsCollectionExport::clear();
+		}
+
+		TEST_METHOD_INITIALIZE(setUp) {
+			tearDown();
+		}
+
+		TEST_METHOD(getTestContainer_CheckNoThrow)
+		{
+			FakeTestRegisterContainerAccess testRegister;
+			try {
+				testRegister.getTestContainer();
+			}
+			catch (...) {
+				Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(getTestSuite_HasCorrectName_CheckNoThrow)
+		{
+			FakeTestRegisterContainerAccess testRegister;
+			try {
+				testRegister.getTestSuite("Unnamed");
+			}
+			catch (...) {
+				Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(getTestSuite_HasCorrectName_CheckThrowingTestRegisterException)
+		{
+			FakeTestRegisterContainerAccess testRegister;
+			auto testFunc = [&]() {testRegister.getTestSuite("NoExists testSuite"); };
+			Assert::ExpectException<TestRegisterException>(testFunc);
 		}
 
 		TEST_METHOD(RegisterClass_HasCorrectClassAndName_CheckHasSuite)
@@ -97,20 +136,13 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		void actRegisterMethod() {
 			TestClassRegister<TestClassForRegisterTests> addTest;
 			TestMethodRegister addFunc((ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod,
-									   "DoNothingMethod", TestClassForRegisterTests::myName, __FILE__, __LINE__);
+									   "DoNothingMethod", typeid(TestClassForRegisterTests).name(), __FILE__, __LINE__);
 		}
 
 	public:
-		TEST_METHOD(VisualStudioVersion_RegisterMethod_HasCorrectMethod_CheckHasTestCaseInSuite)
-		{
-			actRegisterMethod_VS();
-			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
-		}
-
-		void actRegisterMethod_VS() {
-			TestClassRegister<TestClassForRegisterTests> addTest;
-			TestMethodRegister_VS<(ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod>
-			addFunc("DoNothingMethod", TestClassForRegisterTests::myName, __FILE__, __LINE__);
+		TEST_METHOD(RegisterSetUpMethod_HasCorrectMethod_CheckHasTestCaseInSuite){
+			TestSuiteClass classe;
+			classe.s
 		}
 	};
 }

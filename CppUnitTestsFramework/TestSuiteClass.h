@@ -4,18 +4,13 @@
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestSuiteClass :public TestSuite {
-	public:
-		TestSuiteClass() {
-			setSuiteNameIfNotSetted();
-		}
-
 	protected:
 		bool isMethodTestCase(TestCasePtr testCase) {
 			TestCaseMethod* castResult = dynamic_cast<TestCaseMethod*>(testCase.get());
 			return castResult != nullptr;
 		}
 
-		void prepareTestCase(TestCasePtr test) {
+		void prepareTestCase(TestCasePtr test) override {
 			TestSuite::prepareTestCase(test);
 			setTestObjectIfNeeded(test);
 		}

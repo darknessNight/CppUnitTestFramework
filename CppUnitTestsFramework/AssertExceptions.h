@@ -46,4 +46,12 @@ namespace darknessNight::CppUnitTestFramework {
 		NotFoundException(string message) :exception(message.c_str()) {
 		}
 	};
+
+	class TestRegisterException :public std::exception {
+	public:
+		TestRegisterException(string message) :exception(message.c_str()) {
+		}
+	};
+
+	
 }

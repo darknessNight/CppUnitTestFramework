@@ -12,14 +12,8 @@ using namespace std;
 
 int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
-	/*TEST_METHOD(FirstTestMethod) {
+	TEST_METHOD(FirstTestMethod) {
 		throw exception();
-	}*/
-public:
-	TestMethodRegister addFunc 
-		= TestMethodRegister((ConfigurableTest::TestMethod)&TestSuiteTestMacro::FirstTestMethod, "FirstTestMethod", suiteName, __FILE__, __LINE__); \
-		void FirstTestMethod() {
-
 	}
 };
 
@@ -86,7 +80,7 @@ void testTestCaseMacro(string suite, string funcName, int funcLine)
 	if (report.getFile() != __FILE__)
 		throw SpecialException("No saved correct test file. Current saved file: " + report.getFile());
 	if (report.getLine() != funcLine)
-		throw SpecialException("No saved correct test file. Current saved file: " + to_string(report.getLine()));
+		throw SpecialException("No saved correct test line. Current saved line: " + to_string(report.getLine()));
 	cout << "Success" << "\n";
 }
 
@@ -100,6 +94,10 @@ void showError(void(*func)()) {
 	catch (NotFoundException ex) {
 		cout << "Not register test class\n";
 		cout << "Exception message: " << ex.what()<<"\n";
+	}
+	catch (TestRegisterException ex) {
+		cout << "Register method exception\n";
+		cout << "Exception message: " << ex.what() << "\n";
 	}
 	catch (exception ex) {
 		cout << "Catched exception: " << ex.what() << "\n";

@@ -6,9 +6,8 @@ namespace darknessNight::CppUnitTestFramework {
 	class TestFuncRegister :TestRegisterContainerAccess {
 	public:
 		TestFuncRegister(std::function<void()> func, string funcName, string suiteName, string file, int line) {
-			auto testSuite = getTestSuite(suiteName);
 			TestCasePtr testCase=addTestCase(func, funcName, file, line);
-			testSuite->addTestCase(testCase);
+			getTestContainer().registerTestCase(suiteName, testCase);
 		}
 	protected:
 		TestCasePtr addTestCase(std::function<void()> func, string &name, string file, int line)
