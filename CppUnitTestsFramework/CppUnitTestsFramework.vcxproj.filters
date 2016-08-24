@@ -52,13 +52,13 @@
     <ClInclude Include="TestsCollectionExport.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TestCaseRegister.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="TestFuncRegister.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="TestMethodRegister.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRegisterContainerAccess.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

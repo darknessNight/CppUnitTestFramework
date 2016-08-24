@@ -1,9 +1,9 @@
 #pragma once
-#include "TestCaseRegister.h"
+#include "TestRegisterContainerAccess.h"
 #include "TestCaseFunc.h"
 
 namespace darknessNight::CppUnitTestFramework {
-	class TestFuncRegister :TestCaseRegister {
+	class TestFuncRegister :TestRegisterContainerAccess {
 	public:
 		TestFuncRegister(std::function<void()> func, string funcName, string suiteName, string file, int line) {
 			auto testSuite = getTestSuite(suiteName);

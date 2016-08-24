@@ -1,9 +1,9 @@
 #pragma once
-#include "TestCaseRegister.h"
+#include "TestRegisterContainerAccess.h"
 #include "TestCaseMethod.h"
 
 namespace darknessNight::CppUnitTestFramework {
-	class TestMethodRegister :TestCaseRegister {
+	class TestMethodRegister :TestRegisterContainerAccess {
 	public:
 		TestMethodRegister(ConfigurableTest::TestMethod method, string methodName, string suiteName, string file, int line) {
 			auto testSuite = getTestSuite(suiteName);
@@ -17,5 +17,11 @@ namespace darknessNight::CppUnitTestFramework {
 			testCase->setFileAndLine(file, line);
 			return testCase;
 		}
+	};
+
+	template <ConfigurableTest::TestMethod method> class TestMethodRegister_VS :TestMethodRegister {
+	public:
+		TestMethodRegister_VS(string methodName, string suiteName, string file,int line):
+			TestMethodRegister(method,methodName,suiteName,file,line){}
 	};
 }

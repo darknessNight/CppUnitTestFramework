@@ -3,7 +3,7 @@
 #include "TestsCollectionExport.h"
 
 namespace darknessNight::CppUnitTestFramework {
-	template<typename TestSuiteType> class TestClassRegister {
+	template<typename TestSuiteType> class TestClassRegister:TestRegisterContainerAccess {
 	public:
 		TestClassRegister(string name) {
 			saveTestSuite(name);
@@ -23,7 +23,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 		void saveTestSuite(string name) {
 			shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name));
-			TestsCollectionExport::getTestContainer().addTestSuite(testSuite);
+			getTestContainer().addTestSuite(testSuite);
 		}
 	};
 }

@@ -109,8 +109,8 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 		void actRegisterMethod_VS() {
 			TestClassRegister<TestClassForRegisterTests> addTest;
-			/*TestMethodRegister_VS<(ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod>
-			addFunc("DoNothingMethod", TestClassForRegisterTests::myName, __FILE__, __LINE__);*/
+			TestMethodRegister_VS<(ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod>
+			addFunc("DoNothingMethod", TestClassForRegisterTests::myName, __FILE__, __LINE__);
 		}
 	};
 }
