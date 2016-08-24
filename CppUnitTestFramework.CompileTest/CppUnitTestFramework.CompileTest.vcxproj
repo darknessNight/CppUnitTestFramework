@@ -156,7 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppUnitTestFramework.CompileTest.cpp" />
+    <ClCompile Include="DrawingFunc.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TestCasesTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CppUnitTestsFramework\CppUnitTestsFramework.vcxproj">

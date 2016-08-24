@@ -7,6 +7,8 @@ namespace darknessNight::CppUnitTestFramework {
 		std::string suiteName;
 		TestSuitePtr testSuite = nullptr;
 		std::vector<TestCasePtr> testCasesArray;
+		std::function<void()> setUp;
+		std::function<void()> tearDown;
 	public:
 
 		std::string getSuiteName() {
@@ -19,11 +21,33 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		void registerTestCase(TestCasePtr testCase) {
-			testCasesArray.push_back(testCase);
+			if (testSuite == nullptr)
+				testCasesArray.push_back(testCase);
+			else
+				testSuite->addTestCase(testCase);
+		}
+
+		void registerSetUp(std::function<void()> func) {
+			setUp = func;
+		}
+
+		void registerTearDown(std::function<void()> func) {
+			tearDown = func;
 		}
 
 	protected:
 		virtual void createIfNeeded() = 0;
+
+		void prepareTestSuite() {
+			registerTestToSuite();
+			registerConfigurationFuncs();
+		}
+
+		void registerConfigurationFuncs()
+		{
+			testSuite->setSetUpMethod(setUp);
+			testSuite->setTearDownMethod(tearDown);
+		}
 
 		void registerTestToSuite() {
 			for each(auto testCase in testCasesArray)
@@ -31,6 +55,10 @@ namespace darknessNight::CppUnitTestFramework {
 			testCasesArray.clear();
 		}
 	};
+
+
+
+
 
 	template <typename TestSuiteType> class TestSuiteInstanceCreator:public TestSuiteCreator {
 	public:
@@ -42,7 +70,7 @@ namespace darknessNight::CppUnitTestFramework {
 		void createIfNeeded() override {
 			if (testSuite == nullptr) {
 				testSuite = TestSuitePtr(static_cast<TestSuite*>(new TestSuiteType));
-				registerTestToSuite();
+				prepareTestSuite();
 			}
 		}
 	};

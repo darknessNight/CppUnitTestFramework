@@ -2,6 +2,7 @@
 #include "TestSuiteInstanceCreator.h"
 #include "TestSuiteClass.h"
 #include "TestRegisterer.h"
+#include "VS/TestRegisters.h"
 
 
 #define TEST_CLASS(CLASS_NAME) \
@@ -20,14 +21,18 @@ void FUNC_NAME()
 
 
 #if (defined(_MSC_VER) && _MSC_VER>=1800)
+
 #define TEST_REGISTER(METHOD_NAME) \
 void METHOD_NAME##MethodCaller() {METHOD_NAME();}\
 TestMethodRegisterHandler_VS<(ConfigurableTest::TestMethod)&METHOD_NAME##MethodCaller> handler;\
 TestMethodRegister_VS addFunc = TestMethodRegister_VS(handler, #METHOD_NAME, typeid(*this).name(), __FILE__, __LINE__);
+
 #elif (defined (__GNUG__))
+
 #define TEST_REGISTER(METHOD_NAME) \
 TestMethodRegister METHOD_NAME##MethodRegister \
 = TestMethodRegister((ConfigurableTest::TestMethod)&METHOD_NAME, #METHOD_NAME, typeid(*this).name(), __FILE__, __LINE__);
+
 #else
 #error Not supported compiler
 #endif
@@ -36,6 +41,20 @@ TestMethodRegister METHOD_NAME##MethodRegister \
 #define TEST_METHOD(METHOD_NAME) \
 TEST_REGISTER(METHOD_NAME)\
 void METHOD_NAME()
+
+
+
+#define SETUP_METHOD(NAME) \
+void NAME()
+
+#define TEARDOWN_METHOD(NAME) \
+void NAME()
+
+#define SETUP_FUNCTION(NAME,SUITE) \
+void NAME()
+
+#define TEARDOWN_FUNCTION(NAME, SUITE) \
+void NAME()
 
 
 

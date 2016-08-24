@@ -27,18 +27,25 @@ namespace darknessNight::CppUnitTestFramework {
 		}
 
 		void registerTestCase(string testSuite, TestCasePtr testCase) {
-			testSuite = setUnnamedIfNotHaveName(testSuite);
-			addTestCaseToSuite(testSuite, testCase);
-		}
-	private:
-		void addTestCaseToSuite(std::string &testSuite, darknessNight::CppUnitTestFramework::TestCasePtr &testCase){
-			throwExceptionIfNotExistsSuite(testSuite);
-			saveTestCase(testSuite, testCase);
+			checkTestSuiteName(testSuite);
+			mapArray[testSuite]->registerTestCase(testCase);
 		}
 
-		void saveTestCase(std::string & name, darknessNight::CppUnitTestFramework::TestCasePtr & testCase)
+		void registerSetUp(string testSuite, std::function<void()> setUp) {
+			checkTestSuiteName(testSuite);
+			mapArray[testSuite]->registerSetUp(setUp);
+		}
+
+		void registerTearDown(string testSuite, std::function<void()> tearDown) {
+			checkTestSuiteName(testSuite);
+			mapArray[testSuite]->registerTearDown(tearDown);
+		}
+	private:
+
+		void checkTestSuiteName(std::string &testSuite)
 		{
-			mapArray[name]->registerTestCase(testCase);
+			testSuite = setUnnamedIfNotHaveName(testSuite);
+			throwExceptionIfNotExistsSuite(testSuite);
 		}
 
 		void throwExceptionIfNotExistsSuite(std::string & testSuite)

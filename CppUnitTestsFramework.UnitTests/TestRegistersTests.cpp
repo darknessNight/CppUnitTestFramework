@@ -140,9 +140,23 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	public:
-		TEST_METHOD(RegisterSetUpMethod_HasCorrectMethod_CheckHasTestCaseInSuite){
-			TestSuiteClass classe;
-			classe.s
+		TEST_METHOD(RegisterSetUpFunc_HasCorrectMethod_CheckHasTestCaseInSuite){
+			actRegisterMethod();
+			string name = TestClassForRegisterTests::myName;
+			SetUpRegister setUpReg([]() {throw exception(); }, name);
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
+			TestReport report=testSuite->runTestsAndGetReports()[0];
+			StringAssert::Constains("SetUp failed", report.getResult().getCause());
+		}
+
+	public:
+		TEST_METHOD(RegisterTearDownFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
+			actRegisterMethod();
+			string name = TestClassForRegisterTests::myName;
+			TearDownRegister setUpReg([]() {throw exception(); }, name);
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
+			TestReport report = testSuite->runTestsAndGetReports()[0];
+			StringAssert::Constains("TearDown failed", report.getResult().getCause());
 		}
 	};
 }

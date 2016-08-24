@@ -136,6 +136,7 @@
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="SetUpRegister.h" />
     <ClInclude Include="TestRegisterContainerAccess.h" />
     <ClInclude Include="TestClassRegister.h" />
     <ClInclude Include="TestFuncRegister.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="TestResult.h" />
     <ClInclude Include="TestSuite.h" />
     <ClInclude Include="TestSuiteClass.h" />
+    <ClInclude Include="VS\TestRegisters.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestRegisterer.cpp" />

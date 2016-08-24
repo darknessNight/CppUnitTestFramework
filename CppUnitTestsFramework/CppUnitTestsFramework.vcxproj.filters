@@ -1,65 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="AssertExceptions.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ConfigurableTest.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="FunctionTester.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCase.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCaseMethod.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCategory.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestReport.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestResult.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSuite.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSuiteClass.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestCaseFunc.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSuiteInstanceCreator.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TestContainer.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="AssertExceptions.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="VS\TestRegisters.h">
+      <Filter>Headers\Registers</Filter>
     </ClInclude>
     <ClInclude Include="TestRegisterer.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestClassRegister.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestsCollectionExport.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestFuncRegister.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Registers</Filter>
     </ClInclude>
     <ClInclude Include="TestMethodRegister.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFuncRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestContainer.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsCollectionExport.h">
+      <Filter>Headers\Registers</Filter>
     </ClInclude>
     <ClInclude Include="TestRegisterContainerAccess.h">
-      <Filter>Headers</Filter>
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurableTest.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTester.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCase.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseFunc.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseMethod.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCategory.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestReport.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestResult.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuite.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteClass.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteInstanceCreator.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClassRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpRegister.h">
+      <Filter>Headers\Registers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,15 @@
     <Filter Include="Sources">
       <UniqueIdentifier>{cb755c66-a4d2-4629-a721-e15f62fbfea8}</UniqueIdentifier>
       <Extensions>*.cpp</Extensions>
+    </Filter>
+    <Filter Include="Headers\Asserts">
+      <UniqueIdentifier>{6cf6e294-d27b-4bf7-9016-1cdc1c03a864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Registers">
+      <UniqueIdentifier>{ab26a707-54da-4d05-a387-a563feb2ca1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Tests">
+      <UniqueIdentifier>{b1f7c979-0be8-4831-bc13-f758d1e1ea6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
