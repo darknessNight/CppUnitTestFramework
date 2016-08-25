@@ -14,13 +14,13 @@ namespace darknessNight::CppUnitTestFramework {
 		void setName(string name);
 		TestCase();
 	public:
-		string getName();
+		string getName() const;
 		void setFileAndLine(string file, unsigned int line);
 		void setSuite(string suite);
 		void setCategory(TestCategory cat);
 		TestReport runTestAndGetReport();
-		TestReport getReport(TestResult result);
-		TestReport getReportWithoutResult();
+		TestReport getReport(TestResult result) const;
+		TestReport getReportWithoutResult() const;
 		virtual TestResult runTest();
 		void prepareFunctionTester();
 	};

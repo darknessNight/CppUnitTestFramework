@@ -1,5 +1,7 @@
 #pragma once
 #include "TestSuiteInstanceCreator.h"
+#include "Exceptions.h"
+
 namespace darknessNight::CppUnitTestFramework {
 	class TestContainer {
 		std::map<string, std::shared_ptr<TestSuiteCreator>> mapArray;

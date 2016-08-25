@@ -1,5 +1,6 @@
 #pragma once
 #include "TestsCollectionExport.h"
+#include "Exceptions.h"
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestRegisterContainerAccess {
@@ -7,8 +8,7 @@ namespace darknessNight::CppUnitTestFramework {
 		TestRegisterContainerAccess() {}
 		TestSuitePtr getTestSuite(std::string testSuite) {
 			try {
-				auto suite = TestsCollectionExport::getTestContainer().getTestSuiteByName(testSuite);
-				return suite;
+				return TestsCollectionExport::getTestContainer().getTestSuiteByName(testSuite); 
 			}
 			catch (NotFoundException ex) {
 				throw TestRegisterException(ex.what());

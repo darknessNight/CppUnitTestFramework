@@ -79,6 +79,9 @@
     <ClInclude Include="TestClassWithCategoryRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

@@ -1,5 +1,7 @@
 #include "FunctionTester.h"
 #include "PredefinedTestResults.h"
+#include "Exceptions.h"
+
 using namespace darknessNight::CppUnitTestFramework;
 
 darknessNight::CppUnitTestFramework::FunctionTester::FunctionTester(TestMethod test) {

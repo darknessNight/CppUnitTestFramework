@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include "Exceptions.h"
 #include "TestResult.h"
 #include "ConfigurableTest.h"
 #include "AssertExceptions.h"

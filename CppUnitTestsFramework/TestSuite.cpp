@@ -1,4 +1,5 @@
 #include "TestSuite.h"
+#include "Exceptions.h"
 
 using namespace darknessNight::CppUnitTestFramework;
 
@@ -33,6 +34,10 @@ TestSuite::TestReportArray darknessNight::CppUnitTestFramework::TestSuite::runTe
 TestReport darknessNight::CppUnitTestFramework::TestSuite::runTestAndGetReport(std::string name) {
 	TestCasePtr test = findTestFromName(name);
 	return prepareAndRunTest(test);
+}
+
+const std::shared_ptr<const TestCase> darknessNight::CppUnitTestFramework::TestSuite::getTestCase(std::string name){
+	return findTestFromName(name);
 }
 
 std::vector<std::string> darknessNight::CppUnitTestFramework::TestSuite::getTestCaseList() {

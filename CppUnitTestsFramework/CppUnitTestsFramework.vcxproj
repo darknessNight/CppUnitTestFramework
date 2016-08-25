@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="ConfigurableTest.h" />
+    <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
     <ClInclude Include="HelperFuncs.h" />

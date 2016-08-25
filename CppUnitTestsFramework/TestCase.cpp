@@ -8,7 +8,7 @@ void darknessNight::CppUnitTestFramework::TestCase::setName(string name) {
 
 darknessNight::CppUnitTestFramework::TestCase::TestCase() {}
 
-string darknessNight::CppUnitTestFramework::TestCase::getName() {
+string darknessNight::CppUnitTestFramework::TestCase::getName() const {
 	return report.testName;
 }
 
@@ -30,15 +30,14 @@ TestReport darknessNight::CppUnitTestFramework::TestCase::runTestAndGetReport() 
 	return getReport(result);
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestCase::getReport(TestResult result)
+TestReport darknessNight::CppUnitTestFramework::TestCase::getReport(TestResult result) const
 {
 	TestReport returnReport = report;
 	returnReport.testResult = result;
 	return returnReport;
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestCase::getReportWithoutResult()
-{
+TestReport darknessNight::CppUnitTestFramework::TestCase::getReportWithoutResult() const{
 	return getReport(TestResult(false));
 }
 
