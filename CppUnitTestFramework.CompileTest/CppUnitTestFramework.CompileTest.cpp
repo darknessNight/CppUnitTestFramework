@@ -13,13 +13,13 @@ using namespace darknessNight::CppUnitTestFramework;
 
 int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
+	TEST_METHOD(FirstTestMethod) {
+		//throw exception();
+	}
+
 public:
 	static bool collapseSetup;
 	static bool collapseTearDown;
-
-	TEST_METHOD(FirstTestMethod) {
-		throw exception();
-	}
 
 	SETUP_METHOD(SetUp) {
 		if (collapseSetup)
@@ -72,14 +72,16 @@ void testClassSetUpAndTearDown() {
 	TestSuiteTestMacro::collapseSetup = true;
 	results = testSuite->runTestsAndGetReports();
 	TestSuiteTestMacro::collapseSetup = false;
-	if (results[0].getResult().getCause().find("SetUp")<0)
+	int textPos = results[0].getResult().getCause().find("SetUp");
+	if (textPos<0)
 		throw SpecialException("Test not have setted SetUp");
 
 	
 	TestSuiteTestMacro::collapseTearDown = true;
 	results = testSuite->runTestsAndGetReports();
 	TestSuiteTestMacro::collapseTearDown = false;
-	if (results[0].getResult().getCause().find("TearDown")<0)
+	textPos = results[0].getResult().getCause().find("TearDown");
+	if (textPos<0)
 		throw SpecialException("Test not have setted TearDown");
 	
 	cout << "Success";

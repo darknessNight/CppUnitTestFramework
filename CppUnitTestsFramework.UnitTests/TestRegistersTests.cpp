@@ -8,9 +8,11 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	class TestClassForRegisterTests :public TestSuiteClass {
 	public:
 		static string myName;
+		static string myTypeName;
 		void DoNothingMethod() {}
 	};
-	string TestClassForRegisterTests::myName = string(typeid(TestClassForRegisterTests).name()).substr(strlen("class "));
+	string TestClassForRegisterTests::myName = string(typeid(TestClassForRegisterTests).name()).substr(strlen("Class "));
+	string TestClassForRegisterTests::myTypeName = typeid(TestClassForRegisterTests).name();
 
 	class FakeTestRegisterContainerAccess :public TestRegisterContainerAccess {
 	public:
@@ -20,6 +22,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	TEST_CLASS(TestClassRegistererTests)
 	{
+		TestClassForRegisterTests* testClass;
 	public:
 
 		TEST_METHOD_CLEANUP(tearDown) {
@@ -65,7 +68,6 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			assertRegisterClass("MySuite");
 		}
 
-	private:
 		void assertRegisterClass(string name)
 		{
 			try {
@@ -73,7 +75,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			}
 			catch (NotFoundException ex) {
 				Assert::Fail();
-			}			
+			}
 		}
 
 		void actRegisterClass()
@@ -87,14 +89,12 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			assertRegisterClass(TestClassForRegisterTests::myName);
 		}
 
-	public:
 		TEST_METHOD(RegisterFunc_HasCorrectFunc_CheckHasTestCaseInSuite)
 		{
 			actRegisterFunc();
 			assertRegisterFunc("MySuite", "DoNothingFunc");
 		}
 
-	private:
 		void actRegisterFunc()
 		{
 			TestClassRegister<TestSuite> addTest("MySuite");
@@ -103,9 +103,14 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 		void assertRegisterFunc(string suite, string func)
 		{
-			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
-			AssertHasFuncInSuite(testSuite, func);
-			AssertHasCorrectFile(testSuite, func);
+			try {
+				TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
+				AssertHasFuncInSuite(testSuite, func);
+				AssertHasCorrectFile(testSuite, func);
+			}
+			catch (exception ex) {
+				Assert::Fail();
+			}
 		}
 
 		void AssertHasCorrectFile(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
@@ -126,32 +131,55 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			return resultList;
 		}
 
-	public:
-		TEST_METHOD(RegisterMethod_HasCorrectMethod_CheckHasTestCaseInSuite)
+		TEST_METHOD(RegisterMethod_HasCorrectMethodRegisterBySuiteName_CheckHasTestCaseInSuite)
 		{
-			actRegisterMethod();
+			actRegisterMethodBySuiteName();
 			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
 		}
 
-		void actRegisterMethod() {
+		void actRegisterMethodBySuiteName() {
 			TestClassRegister<TestClassForRegisterTests> addTest;
 			TestMethodRegister addFunc((ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod,
-									   "DoNothingMethod", typeid(TestClassForRegisterTests).name(), __FILE__, __LINE__);
+									   "DoNothingMethod", TestClassForRegisterTests::myTypeName, __FILE__, __LINE__);
 		}
 
-	public:
-		TEST_METHOD(RegisterSetUpFunc_HasCorrectMethod_CheckHasTestCaseInSuite){
-			actRegisterMethod();
+		TEST_METHOD(RegisterMethod_HasCorrectMethodBySuiteInstance_CheckHasTestCaseInSuite)
+		{
+			TestClassForRegisterTests instance;
+			actRegisterMethodBySuiteInstance(instance);
+			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
+		}
+
+		void actRegisterMethodBySuiteInstance(TestClassForRegisterTests& instance) {
+			TestClassRegister<TestClassForRegisterTests> addTest;
+			TestMethodRegister addFunc((ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod,
+									   "DoNothingMethod", &instance, __FILE__, __LINE__);
+		}
+
+		TEST_METHOD(RegisterMethod_HasCorrectMethodByLambda_CheckHasTestCaseInSuite)
+		{
+			TestClassForRegisterTests instance;
+			actRegisterMethodByLambda(&instance);
+			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
+		}
+
+		void actRegisterMethodByLambda(TestClassForRegisterTests* instance) {
+			TestClassRegister<TestClassForRegisterTests> addTest;
+			TestMethodRegister addFunc([=]() {instance->DoNothingMethod(); },
+									   "DoNothingMethod", TestClassForRegisterTests::myTypeName, __FILE__, __LINE__);
+		}
+
+		TEST_METHOD(RegisterSetUpFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
+			actRegisterMethodBySuiteName();
 			string name = TestClassForRegisterTests::myName;
 			SetUpRegister setUpReg([]() {throw exception(); }, name);
 			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
-			TestReport report=testSuite->runTestsAndGetReports()[0];
+			TestReport report = testSuite->runTestsAndGetReports()[0];
 			StringAssert::Constains("SetUp failed", report.getResult().getCause());
 		}
 
-	public:
 		TEST_METHOD(RegisterTearDownFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
-			actRegisterMethod();
+			actRegisterMethodBySuiteName();
 			string name = TestClassForRegisterTests::myName;
 			TearDownRegister setUpReg([]() {throw exception(); }, name);
 			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);

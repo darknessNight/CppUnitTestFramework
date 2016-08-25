@@ -7,9 +7,6 @@
     <ClInclude Include="AssertExceptions.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
-    <ClInclude Include="VS\TestRegisters.h">
-      <Filter>Headers\Registers</Filter>
-    </ClInclude>
     <ClInclude Include="TestRegisterer.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
