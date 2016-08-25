@@ -11,7 +11,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 		static std::string myTypeName;
 		void DoNothingMethod() {}
 	};
-	std::string TestClassForRegisterTests::myName = std::string(typeid(TestClassForRegisterTests).name()).substr(strlen("Class "));
+	std::string TestClassForRegisterTests::myName = getClassName<TestClassForRegisterTests>();
 	std::string TestClassForRegisterTests::myTypeName = typeid(TestClassForRegisterTests).name();
 
 	class FakeTestRegisterContainerAccess :public TestRegisterContainerAccess {

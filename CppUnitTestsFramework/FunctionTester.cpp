@@ -47,6 +47,10 @@ void darknessNight_CppUnitTestFramework::FunctionTester::runSetUpMethod(){
 	catch (exception *ex) {
 		throw SetUpException(*ex);
 	}
+	catch (...) {
+		exception exception("Unknow exception type");
+		throw SetUpException(exception);
+	}
 }
 
 TestResult darknessNight_CppUnitTestFramework::FunctionTester::runTestMethod(){
@@ -61,6 +65,10 @@ TestResult darknessNight_CppUnitTestFramework::FunctionTester::runTestMethod(){
 	}
 	catch (std::exception ex) {
 		return ExceptionTestResult(ex);
+	}
+	catch (...) {
+		exception exception("Unknow exception type");
+		return ExceptionTestResult(exception);
 	}
 	return SuccessTestResult();
 }
@@ -78,5 +86,9 @@ void darknessNight_CppUnitTestFramework::FunctionTester::runTearDownMethod(){
 	}
 	catch (exception *ex) {
 		throw TearDownException(*ex);
+	}
+	catch (...) {
+		exception exception("Unknow exception type");
+		throw SetUpException(exception);
 	}
 }
