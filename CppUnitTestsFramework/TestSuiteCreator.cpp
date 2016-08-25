@@ -29,6 +29,11 @@ void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerTearDown(std
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::prepareTestSuite() {
 	registerTestToSuite();
 	registerConfigurationFuncs();
+	saveCategory();
+}
+
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::saveCategory() {
+	testSuite->setCategory(category);
 }
 
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerConfigurationFuncs()

@@ -5,6 +5,7 @@ namespace darknessNight::CppUnitTestFramework {
 	class TestSuiteCreator {
 	protected:
 		std::string suiteName;
+		TestCategory category;
 		TestSuitePtr testSuite = nullptr;
 		std::vector<TestCasePtr> testCasesArray;
 		std::function<void()> setUp;
@@ -18,6 +19,7 @@ namespace darknessNight::CppUnitTestFramework {
 	protected:
 		virtual void createIfNeeded() = 0;
 		void prepareTestSuite();
+		void saveCategory();
 		void registerConfigurationFuncs();
 		void registerTestToSuite();
 	};

@@ -16,6 +16,11 @@ void darknessNight::CppUnitTestFramework::TestSuite::setCategory(TestCategory ca
 	testCategory = cat;
 }
 
+const TestCategory & darknessNight::CppUnitTestFramework::TestSuite::getCategory()
+{
+	return testCategory;
+}
+
 TestSuite::TestReportArray darknessNight::CppUnitTestFramework::TestSuite::runTestsAndGetReports() {
 	TestReportArray returnTab;
 	for each(TestCasePtr test in testArray) {

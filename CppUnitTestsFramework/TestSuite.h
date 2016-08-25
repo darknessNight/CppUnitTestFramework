@@ -16,9 +16,11 @@ namespace darknessNight::CppUnitTestFramework {
 	public:
 		void addTestCase(TestCasePtr testCase);
 		void setCategory(TestCategory cat);
+		const TestCategory& getCategory();
 		TestReportArray runTestsAndGetReports();
 		TestReport runTestAndGetReport(std::string name);
 		std::vector<std::string> getTestCaseList();
+		
 	protected:
 		TestCasePtr findTestFromName(string name);
 		TestReport prepareAndRunTest(TestCasePtr test);

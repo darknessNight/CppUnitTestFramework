@@ -11,6 +11,14 @@
 using namespace std;
 using namespace darknessNight::CppUnitTestFramework;
 
+
+TEST_SUITE(SAME_SUITE)
+TEST_SUITE_WITH_CATEGORY(SecondSuite, "Category")
+
+
+TEST_CLASS_WITH_CATEGORY(TestSuiteClassOne, "Category") {
+};
+
 int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
 	TEST_METHOD(FirstTestMethod) {
