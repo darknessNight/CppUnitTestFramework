@@ -2,12 +2,12 @@
 #include "TestCaseMethod.h"
 #include "TestSuite.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestSuiteClass :public TestSuite {
 	protected:
 		bool isMethodTestCase(TestCasePtr testCase);
 		void prepareTestCase(TestCasePtr test) override;
-		void setTestObjectIfNeeded(darknessNight::CppUnitTestFramework::TestCasePtr &test);
+		void setTestObjectIfNeeded(darknessNight_CppUnitTestFramework::TestCasePtr &test);
 	};
 
 }

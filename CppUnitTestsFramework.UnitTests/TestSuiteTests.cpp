@@ -5,7 +5,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 	class TestSuiteTest:public TestSuite{
 	};
 
@@ -52,7 +52,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(RunTests_HasTwoTestCaseWithCollapsingSetUp_CheckReturnCorrectErrorCause)
 		{
 			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
-			testSuite.setSetUpMethod([]() {throw std::exception(); });
+			testSuite.setSetUpMethod([]() {throw exception(); });
 
 			TestSuite::TestReportArray testReports = testSuite.runTestsAndGetReports();
 			for each(TestReport report in testReports)
@@ -94,7 +94,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(getTestCaseArrayLists_HasTwoTest_CheckReturnAllNames)
 		{
 			TestSuite testSuite = getTestSuiteWithTwoTestCaseWithDoNothingFunc();
-			std::vector<string> keys = testSuite.getTestCaseList();
+			std::vector<std::string> keys = testSuite.getTestCaseList();
 			Assert::AreEqual(2U, keys.size());
 			for each(auto key in keys)
 				StringAssert::Constains("Test", key);

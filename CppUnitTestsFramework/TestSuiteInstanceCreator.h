@@ -1,7 +1,7 @@
 #pragma once
 #include "TestSuiteCreator.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	template <typename TestSuiteType> class TestSuiteInstanceCreator :public TestSuiteCreator {
 	public:
 		TestSuiteInstanceCreator(std::string name) {

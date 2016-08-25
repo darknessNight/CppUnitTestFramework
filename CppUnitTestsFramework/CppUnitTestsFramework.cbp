@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="CppUnitTestsFramework" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="CppUnitTestsFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Debug x64">
+				<Option output="CppUnitTestsFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="CppUnitTestsFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="CppUnitTestsFramework" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="AssertExceptions.h" />
+		<Unit filename="ConfigurableTest.h" />
+		<Unit filename="Exceptions.h" />
+		<Unit filename="Framework.h" />
+		<Unit filename="FunctionTester.cpp" />
+		<Unit filename="FunctionTester.h" />
+		<Unit filename="HelperFuncs.cpp" />
+		<Unit filename="HelperFuncs.h" />
+		<Unit filename="PredefinedTestResults.h" />
+		<Unit filename="SetUpRegister.h" />
+		<Unit filename="TearDownRegister.h" />
+		<Unit filename="TestCase.cpp" />
+		<Unit filename="TestCase.h" />
+		<Unit filename="TestCaseFunc.h" />
+		<Unit filename="TestCaseMethod.cpp" />
+		<Unit filename="TestCaseMethod.h" />
+		<Unit filename="TestCategory.cpp" />
+		<Unit filename="TestCategory.h" />
+		<Unit filename="TestClassRegister.h" />
+		<Unit filename="TestClassWithCategoryRegister.h" />
+		<Unit filename="TestContainer.h" />
+		<Unit filename="TestFuncRegister.h" />
+		<Unit filename="TestMethodRegister.h" />
+		<Unit filename="TestRegisterContainerAccess.h" />
+		<Unit filename="TestRegisterer.cpp" />
+		<Unit filename="TestRegisters.h" />
+		<Unit filename="TestReport.cpp" />
+		<Unit filename="TestReport.h" />
+		<Unit filename="TestResult.cpp" />
+		<Unit filename="TestResult.h" />
+		<Unit filename="TestSuite.cpp" />
+		<Unit filename="TestSuite.h" />
+		<Unit filename="TestSuiteClass.cpp" />
+		<Unit filename="TestSuiteClass.h" />
+		<Unit filename="TestSuiteCreator.cpp" />
+		<Unit filename="TestSuiteCreator.h" />
+		<Unit filename="TestSuiteInstanceCreator.h" />
+		<Unit filename="TestsCollectionExport.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

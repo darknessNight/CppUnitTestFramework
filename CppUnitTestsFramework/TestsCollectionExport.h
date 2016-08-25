@@ -1,8 +1,9 @@
 #pragma once
 #include "TestContainer.h"
 #include "TestSuiteInstanceCreator.h"
+#include "HelperFuncs.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestsCollectionExport {
 	private:
 		static std::unique_ptr<TestContainer> suiteContainer;

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-namespace darknessNight::CppUnitTestFramework {
-	class AssertException :public std::exception {
+namespace darknessNight_CppUnitTestFramework {
+	class AssertException :public exception {
 	public:
 		AssertException(const char* message) :exception(message) {
 		}

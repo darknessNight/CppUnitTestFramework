@@ -1,16 +1,16 @@
 #include "TestSuiteClass.h"
 
-bool darknessNight::CppUnitTestFramework::TestSuiteClass::isMethodTestCase(TestCasePtr testCase) {
+bool darknessNight_CppUnitTestFramework::TestSuiteClass::isMethodTestCase(TestCasePtr testCase) {
 	TestCaseMethod* castResult = dynamic_cast<TestCaseMethod*>(testCase.get());
 	return castResult != nullptr;
 }
 
-void darknessNight::CppUnitTestFramework::TestSuiteClass::prepareTestCase(TestCasePtr test) {
+void darknessNight_CppUnitTestFramework::TestSuiteClass::prepareTestCase(TestCasePtr test) {
 	TestSuite::prepareTestCase(test);
 	setTestObjectIfNeeded(test);
 }
 
-void darknessNight::CppUnitTestFramework::TestSuiteClass::setTestObjectIfNeeded(darknessNight::CppUnitTestFramework::TestCasePtr & test) {
+void darknessNight_CppUnitTestFramework::TestSuiteClass::setTestObjectIfNeeded(darknessNight_CppUnitTestFramework::TestCasePtr & test) {
 	if (isMethodTestCase(test))
 		((TestCaseMethod*)test.get())->setTestObj(this);
 }

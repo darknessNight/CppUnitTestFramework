@@ -1,7 +1,7 @@
 #pragma once
 #include "TestSuite.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestSuiteCreator {
 	protected:
 		std::string suiteName;

@@ -1,11 +1,11 @@
 #pragma once
 #include "TestResult.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 
 	class AssertTestResult :public TestResult {
 	private:
-		const string assertMessage = "Assert failed";
+		const std::string assertMessage = "Assert failed";
 	public:
 		AssertTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = assertMessage;
@@ -14,7 +14,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 	class ExceptionTestResult :public TestResult {
 	private:
-		const string exceptionMessage = "C++ exception";
+		const std::string exceptionMessage = "C++ exception";
 	public:
 		ExceptionTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = exceptionMessage;
@@ -23,7 +23,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 	class TearDownFailedTestResult :public TestResult {
 	private:
-		const string exceptionMessage = "TearDown failed";
+		const std::string exceptionMessage = "TearDown failed";
 	public:
 		TearDownFailedTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = exceptionMessage;
@@ -32,7 +32,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 	class SetUpFailedTestResult :public TestResult {
 	private:
-		const string exceptionMessage = "SetUp failed";
+		const std::string exceptionMessage = "SetUp failed";
 	public:
 		SetUpFailedTestResult(exception ex) :TestResult(ex.what()) {
 			errorCause = exceptionMessage;
@@ -41,7 +41,7 @@ namespace darknessNight::CppUnitTestFramework {
 
 	class SuccessTestResult :public TestResult {
 	private:
-		const string successMessage = "Success";
+		const std::string successMessage = "Success";
 	public:
 		SuccessTestResult() :TestResult(true) {
 			errorCause = successMessage;

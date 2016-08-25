@@ -3,7 +3,7 @@
 #include "TestReport.h"
 #include <memory>
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestCase: public ConfigurableTest {
 	public:
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPtr;
@@ -11,12 +11,12 @@ namespace darknessNight::CppUnitTestFramework {
 		FunctionTesterPtr functionTester;
 		TestReport report;
 	protected:
-		void setName(string name);
+		void setName(std::string name);
 		TestCase();
 	public:
-		string getName() const;
-		void setFileAndLine(string file, unsigned int line);
-		void setSuite(string suite);
+		std::string getName() const;
+		void setFileAndLine(std::string file, unsigned int line);
+		void setSuite(std::string suite);
 		void setCategory(TestCategory cat);
 		TestReport runTestAndGetReport();
 		TestReport getReport(TestResult result) const;

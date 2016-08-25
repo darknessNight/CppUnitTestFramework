@@ -3,7 +3,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {		
+namespace darknessNight_CppUnitTestFramework::UnitTests {		
 	class TestMethodClass:public ConfigurableTest {
 	public:
 		void doNothingMethod() {
@@ -22,7 +22,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		{
 			TestCaseMethod testCase = getTestObject(static_cast<ConfigurableTest::TestMethod>(&TestMethodClass::doNothingMethod));
 			auto func = [&]() { testCase.runTest(); };
-			Assert::ExpectException<std::exception>(func);
+			Assert::ExpectException<exception>(func);
 		}
 
 	public:

@@ -4,8 +4,8 @@
 #include "TestResult.h"
 #include "ConfigurableTest.h"
 #include "AssertExceptions.h"
-using namespace std;
-namespace darknessNight::CppUnitTestFramework {
+
+namespace darknessNight_CppUnitTestFramework {
 	class FunctionTester :public ConfigurableTest{
 	public:
 		typedef std::function<void()> TestMethod;

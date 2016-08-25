@@ -154,7 +154,6 @@
     <ClInclude Include="CppUnitTestFramework.CompileTest.h" />
     <ClInclude Include="MacrosClassess.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="TestCasesTests.h" />
   </ItemGroup>
   <ItemGroup>

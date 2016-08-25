@@ -1,19 +1,19 @@
 #pragma once
 #include <string>
-using namespace std;
-namespace darknessNight::CppUnitTestFramework {
+
+namespace darknessNight_CppUnitTestFramework {
 	class TestResult {
 	protected:
 		bool isTestSuccess;
-		string errorMessage;
-		string errorCause;
+		std::string errorMessage;
+		std::string errorCause;
 	public:
 		TestResult(bool result);
 		TestResult(const char* message);
-		TestResult(string message);
-		string getFullMessage();
-		string getErrorMessage();
-		string getCause();
+		TestResult(std::string message);
+		std::string getFullMessage();
+		std::string getErrorMessage();
+		std::string getCause();
 		bool isSuccess();
 		bool isFailure();
 	};

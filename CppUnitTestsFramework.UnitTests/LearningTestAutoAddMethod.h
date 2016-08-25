@@ -2,7 +2,7 @@
 #include <functional>
 #include <string>
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 	class MethodProvider {
 	public:
@@ -64,9 +64,9 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 	class TestGetName {
 	public:
-		string testName = "";
+		std::string testName = "";
 
-		TestGetName(string name) {
+		TestGetName(std::string name) {
 			testName = name;
 		}
 	};
@@ -78,7 +78,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	TestGetName testOverLimits(typeid(NoDefClass).name());
 	class NoDefClass {
 	public:
-		string secondNameTest = typeid(NoDefClass).name();
+		std::string secondNameTest = typeid(NoDefClass).name();
 		TestGetName secondTest = TestGetName(secondNameTest);
 	};
 

@@ -1,53 +1,53 @@
 #include "TestCase.h"
 
-using namespace darknessNight::CppUnitTestFramework;
+using namespace darknessNight_CppUnitTestFramework;
 
-void darknessNight::CppUnitTestFramework::TestCase::setName(string name) {
+void darknessNight_CppUnitTestFramework::TestCase::setName(std::string name) {
 	report.testName = name;
 }
 
-darknessNight::CppUnitTestFramework::TestCase::TestCase() {}
+darknessNight_CppUnitTestFramework::TestCase::TestCase() {}
 
-string darknessNight::CppUnitTestFramework::TestCase::getName() const {
+std::string darknessNight_CppUnitTestFramework::TestCase::getName() const {
 	return report.testName;
 }
 
-void darknessNight::CppUnitTestFramework::TestCase::setFileAndLine(string file, unsigned int line) {
+void darknessNight_CppUnitTestFramework::TestCase::setFileAndLine(std::string file, unsigned int line) {
 	report.testFile = file;
 	report.testLine = line;
 }
 
-void darknessNight::CppUnitTestFramework::TestCase::setSuite(string suite) {
+void darknessNight_CppUnitTestFramework::TestCase::setSuite(std::string suite) {
 	report.testSuite = suite;
 }
 
-void darknessNight::CppUnitTestFramework::TestCase::setCategory(TestCategory cat) {
+void darknessNight_CppUnitTestFramework::TestCase::setCategory(TestCategory cat) {
 	report.testCategory = cat;
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestCase::runTestAndGetReport() {
+TestReport darknessNight_CppUnitTestFramework::TestCase::runTestAndGetReport() {
 	TestResult result = runTest();
 	return getReport(result);
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestCase::getReport(TestResult result) const
+TestReport darknessNight_CppUnitTestFramework::TestCase::getReport(TestResult result) const
 {
 	TestReport returnReport = report;
 	returnReport.testResult = result;
 	return returnReport;
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestCase::getReportWithoutResult() const{
+TestReport darknessNight_CppUnitTestFramework::TestCase::getReportWithoutResult() const{
 	return getReport(TestResult(false));
 }
 
-TestResult darknessNight::CppUnitTestFramework::TestCase::runTest() {
+TestResult darknessNight_CppUnitTestFramework::TestCase::runTest() {
 	prepareFunctionTester();
 	TestResult result = functionTester->runTest();
 	return result;
 }
 
-void darknessNight::CppUnitTestFramework::TestCase::prepareFunctionTester() {
+void darknessNight_CppUnitTestFramework::TestCase::prepareFunctionTester() {
 	functionTester->setSetUpMethod(setUpMethod);
 	functionTester->setTearDownMethod(tearDownMethod);
 }

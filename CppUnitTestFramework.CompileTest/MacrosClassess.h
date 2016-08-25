@@ -10,7 +10,7 @@ TEST_SUITE_WITH_CATEGORY(SecondSuite, "Category")
 TEST_CLASS_WITH_CATEGORY(TestSuiteClassOne, "Category") {
 };
 
-static string macrosFile = __FILE__;
+static std::string macrosFile = __FILE__;
 static int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
 	TEST_METHOD(FirstTestMethod) {
@@ -23,12 +23,12 @@ public:
 
 	SETUP_METHOD(SetUp) {
 		if (collapseSetup)
-			throw exception();
+			throw std::exception();
 	}
 
 	TEARDOWN_METHOD(TearDown) {
 		if (collapseTearDown)
-			throw exception();
+			throw std::exception();
 	}
 };
 

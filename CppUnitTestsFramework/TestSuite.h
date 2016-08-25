@@ -3,7 +3,7 @@
 #include <vector>
 #include <map>
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestSuite:public ConfigurableTest {
 	protected:
 		std::vector<TestCasePtr> testArray;
@@ -23,7 +23,7 @@ namespace darknessNight::CppUnitTestFramework {
 		std::vector<std::string> getTestCaseList();
 		
 	protected:
-		TestCasePtr findTestFromName(string name);
+		TestCasePtr findTestFromName(std::string name);
 		TestReport prepareAndRunTest(TestCasePtr test);
 		virtual void prepareTestCase(TestCasePtr test);
 		void setSuiteNameIfNotSetted();

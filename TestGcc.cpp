@@ -1,4 +1,5 @@
 #include <iostream>
+#include<functional>
 	class MasterTest {
 	public:
 		typedef void(MasterTest::*Func)();
@@ -28,25 +29,24 @@
 
 	class Test2 :public MasterTest {
 	public:
+
+        std::function<void()> func=[=](){this->reg();};
+
 		void reg() {
 			TestStaticMaster::enabled = true;
 		}
-
-#if (defined(_MSC_VER) && _MSC_VER>=1800)
-		TestStatic<(MasterTest::Func)&reg> test2;
-#elif (defined (__GNUG__))
-		Test3 test = Test3((MasterTest::Func)&reg);
-#else
-#error Not supported compiler
-#endif
 	};
+
+#if (!defined(_MSC_VER) && __cplusplus<201103L) || (defined(_MSC_VER) && _MSC_VER<=1700)
+#error Required C++11 copability compiler
+#endif
 
 	int main(){
 
 			Test2 test;
 			//std::bind(TestStaticMaster::func, test)();
 			std::cout<<__cplusplus<<std::endl;
-			((&test)->*TestStaticMaster::func)();
+            test.func();
 			std::cout<<(TestStaticMaster::enabled?"Success":"Failed");
 			return 0;
     }

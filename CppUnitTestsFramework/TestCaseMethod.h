@@ -1,7 +1,7 @@
 #pragma once
 #include "TestCase.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestCaseMethod :public TestCase{
 	private:
 		ConfigurableTest::TestMethod testMethod=nullptr;

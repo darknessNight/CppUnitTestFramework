@@ -2,8 +2,8 @@
 #include <CppUnitTestsFramework\FunctionTester.h>
 #include <CppUnitTestsFramework\AssertExceptions.h>
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
-	const string methodFailedString = "MethodFailed";
+namespace darknessNight_CppUnitTestFramework::UnitTests {
+	const std::string methodFailedString = "MethodFailed";
 	static void testDoNothingFunc() {
 	}
 
@@ -34,9 +34,9 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	};
 
 
-	class SpecialException :public std::exception {
+	class SpecialException :public exception {
 	public:
-		SpecialException(string message) :exception(message.c_str()) {}
+		SpecialException(std::string message) :exception(message.c_str()) {}
 	};
 
 	class FakeFunctionTester : public FunctionTester {

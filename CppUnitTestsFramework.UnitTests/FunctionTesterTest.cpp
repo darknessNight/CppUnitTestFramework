@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "TestHelperFuncAndClassess.h"
-using namespace std;
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 	TEST_CLASS(FunctionTesterTests)
 	{
 		typedef std::unique_ptr<FunctionTester> FunctionTesterPointer;

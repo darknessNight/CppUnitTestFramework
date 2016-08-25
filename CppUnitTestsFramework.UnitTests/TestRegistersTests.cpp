@@ -4,15 +4,15 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 	class TestClassForRegisterTests :public TestSuiteClass {
 	public:
-		static string myName;
-		static string myTypeName;
+		static std::string myName;
+		static std::string myTypeName;
 		void DoNothingMethod() {}
 	};
-	string TestClassForRegisterTests::myName = string(typeid(TestClassForRegisterTests).name()).substr(strlen("Class "));
-	string TestClassForRegisterTests::myTypeName = typeid(TestClassForRegisterTests).name();
+	std::string TestClassForRegisterTests::myName = std::string(typeid(TestClassForRegisterTests).name()).substr(strlen("Class "));
+	std::string TestClassForRegisterTests::myTypeName = typeid(TestClassForRegisterTests).name();
 
 	class FakeTestRegisterContainerAccess :public TestRegisterContainerAccess {
 	public:
@@ -68,7 +68,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			assertRegisterClass("MySuite");
 		}
 
-		void assertRegisterClass(string name)
+		void assertRegisterClass(std::string name)
 		{
 			try {
 				TestSuitePtr resultSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
@@ -101,7 +101,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			TestFuncRegister addFunc([]() {}, "DoNothingFunc", "MySuite", __FILE__, __LINE__);
 		}
 
-		void assertRegisterFunc(string suite, string func)
+		void assertRegisterFunc(std::string suite, std::string func)
 		{
 			try {
 				tryAssertRegisterFunc(suite, func);
@@ -118,21 +118,21 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			AssertHasCorrectFile(testSuite, func);
 		}
 
-		void AssertHasCorrectFile(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
+		void AssertHasCorrectFile(darknessNight_CppUnitTestFramework::TestSuitePtr &testSuite, std::string name)
 		{
 			TestReport resultSuite = testSuite->runTestAndGetReport(name);
 			Assert::IsTrue(resultSuite.getFile() == __FILE__);
 		}
 
-		void AssertHasFuncInSuite(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
+		void AssertHasFuncInSuite(darknessNight_CppUnitTestFramework::TestSuitePtr &testSuite, std::string name)
 		{
-			std::vector<string> resultList = getRegisterFuncsList(testSuite);
+			std::vector<std::string> resultList = getRegisterFuncsList(testSuite);
 			Assert::AreEqual(1U, resultList.size());
 			StringAssert::Constains(name, resultList[0]);
 		}
 
-		std::vector<string> getRegisterFuncsList(TestSuitePtr testSuite) {
-			std::vector<string> resultList = testSuite->getTestCaseList();
+		std::vector<std::string> getRegisterFuncsList(TestSuitePtr testSuite) {
+			std::vector<std::string> resultList = testSuite->getTestCaseList();
 			return resultList;
 		}
 

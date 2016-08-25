@@ -2,7 +2,7 @@
 #include "TestsCollectionExport.h"
 #include "Exceptions.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestRegisterContainerAccess {
 	protected:
 		TestRegisterContainerAccess() {}

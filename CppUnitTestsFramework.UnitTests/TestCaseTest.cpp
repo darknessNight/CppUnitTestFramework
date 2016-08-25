@@ -5,11 +5,11 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 	TEST_CLASS(TestCaseTest)
 	{
 	private:
-		TestCasePtr getTestObject(TestCaseFuncTester::FunctionTesterPtr& fakeTester, string testName) {
+		TestCasePtr getTestObject(TestCaseFuncTester::FunctionTesterPtr& fakeTester, std::string testName) {
 			return std::unique_ptr<TestCase>(new TestCaseFuncTester(fakeTester, testName));
 		}
 
@@ -78,7 +78,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(SetSetUpMethod_SetThrowError_CheckReturnRaportWithSetUpFailedCause)
 		{
 			TestCasePtr testCase = getTestObjectWithDoNothingTest();
-			testCase->setSetUpMethod([]() {throw std::exception(); });
+			testCase->setSetUpMethod([]() {throw exception(); });
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("SetUp failed", testReport.getResult().getCause());
 		}
@@ -87,7 +87,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		TEST_METHOD(SetTearDownMethod_SetThrowError_CheckReturnRaportWithTearDownFailedCause)
 		{
 			TestCasePtr testCase = getTestObjectWithDoNothingTest();
-			testCase->setTearDownMethod([]() {throw std::exception(); });
+			testCase->setTearDownMethod([]() {throw exception(); });
 			TestReport testReport = testCase->runTestAndGetReport();
 			StringAssert::Constains("TearDown failed", testReport.getResult().getCause());
 		}

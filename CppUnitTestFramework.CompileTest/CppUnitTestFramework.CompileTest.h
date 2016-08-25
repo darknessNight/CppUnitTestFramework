@@ -3,25 +3,25 @@
 #include <iostream>
 #include "MacrosClassess.h"
 
-using namespace std;
 
-void testTestCaseMacro(string suite, string funcName, string file, int funcLine);
+
+void testTestCaseMacro(std::string suite, std::string funcName, std::string file, int funcLine);
 void testFunctionMacro();
 void showError(void(*)());
 void testClassAndMethodMacro();
 void testClassSetUpAndTearDown();
 
-void writeTestResult(string,void(*)());
+void writeTestResult(std::string,void(*)());
 
 class SpecialException {
 private:
-	string message;
+	std::string message;
 public:
-	SpecialException(string mess) {
+	SpecialException(std::string mess) {
 		message = mess;
 	}
 
-	string what() {
+	std::string what() {
 		return message;
 	}
 };

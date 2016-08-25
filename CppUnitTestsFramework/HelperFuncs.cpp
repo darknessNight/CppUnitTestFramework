@@ -1,5 +1,5 @@
 #include "HelperFuncs.h"
 
-string darknessNight::CppUnitTestFramework::extractClassName(string name) {
-	return name.substr(strlen("class "));
+std::string darknessNight_CppUnitTestFramework::extractClassName(std::string name) {
+	return name.substr(strlen());
 }

@@ -1,5 +1,5 @@
 #include "TestRegisters.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	std::unique_ptr<TestContainer> TestsCollectionExport::suiteContainer;
 }

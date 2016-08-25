@@ -2,19 +2,19 @@
 #include "PredefinedTestResults.h"
 #include "Exceptions.h"
 
-using namespace darknessNight::CppUnitTestFramework;
+using namespace darknessNight_CppUnitTestFramework;
 
-darknessNight::CppUnitTestFramework::FunctionTester::FunctionTester(TestMethod test) {
+darknessNight_CppUnitTestFramework::FunctionTester::FunctionTester(TestMethod test) {
 	throwExceptionIfTestIsNullptr(test);
 	testMethod = test;
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
+void darknessNight_CppUnitTestFramework::FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
 		if (test == nullptr)
-			throw NullPointerException(string("Argument cannot be nullptr in ") + __FILE__ " " + std::to_string(__LINE__));
+			throw NullPointerException(std::string("Argument cannot be nullptr in ") + __FILE__ " " + std::to_string(__LINE__));
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTest() {
+TestResult darknessNight_CppUnitTestFramework::FunctionTester::runTest() {
 	try {
 		return tryRunTest();
 	}
@@ -26,31 +26,38 @@ TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTest() {
 	}
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::tryRunTest(){
+TestResult darknessNight_CppUnitTestFramework::FunctionTester::tryRunTest(){
 	runSetUpMethod();
 	TestResult result = runTestMethod();
 	runTearDownMethod();
 	return result;
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::runSetUpMethod(){
+void darknessNight_CppUnitTestFramework::FunctionTester::runSetUpMethod(){
 	try {
 		setUp();
 	}
 	catch (exception ex) {
 		throw SetUpException(ex);
 	}
+	catch (std::exception ex) {
+		exception exception = ex;
+		throw SetUpException(exception);
+	}
 	catch (exception *ex) {
 		throw SetUpException(*ex);
 	}
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTestMethod(){
+TestResult darknessNight_CppUnitTestFramework::FunctionTester::runTestMethod(){
 	try {
 		testMethod();
 	}
 	catch (AssertException ex) {
 		return AssertTestResult(ex);
+	}
+	catch (exception ex) {
+		return ExceptionTestResult(ex);
 	}
 	catch (std::exception ex) {
 		return ExceptionTestResult(ex);
@@ -58,12 +65,16 @@ TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTestMethod(){
 	return SuccessTestResult();
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::runTearDownMethod(){
+void darknessNight_CppUnitTestFramework::FunctionTester::runTearDownMethod(){
 	try {
 		tearDown();
 	}
 	catch (exception ex) {
 		throw TearDownException(ex);
+	}
+	catch (std::exception ex) {
+		exception exception = ex;
+		throw TearDownException(exception);
 	}
 	catch (exception *ex) {
 		throw TearDownException(*ex);

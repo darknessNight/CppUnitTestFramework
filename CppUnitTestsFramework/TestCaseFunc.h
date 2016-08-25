@@ -1,12 +1,12 @@
 #pragma once
 #include "TestCase.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestCaseFuncTester :public TestCase {
 	protected:
 		TestCaseFuncTester() {}
 	public:
-		TestCaseFuncTester(FunctionTesterPtr& tester, string name) {
+		TestCaseFuncTester(FunctionTesterPtr& tester, std::string name) {
 			functionTester.swap(tester);
 			setName(name);
 		}

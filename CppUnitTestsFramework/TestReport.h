@@ -1,24 +1,24 @@
 #pragma once
 #include "TestCategory.h"
 #include "TestResult.h"
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 	class TestReport {
 	private:
 		TestResult testResult;
-		string testName;
-		string testFile;
+		std::string testName;
+		std::string testFile;
 		unsigned testLine;
-		string testSuite;
+		std::string testSuite;
 		TestCategory testCategory;
 		friend class TestCase;
 	private:
 		TestReport();
 	public:
 		TestResult getResult();
-		string getTestName();
-		string getFile();
+		std::string getTestName();
+		std::string getFile();
 		unsigned getLine();
-		string getSuiteName();
+		std::string getSuiteName();
 		TestCategory getCategory();
 	};
 }

@@ -1,19 +1,29 @@
 #pragma once
 #include <string>
-using namespace std;
+#include <typeinfo>
 
-namespace darknessNight::CppUnitTestFramework {
-	template <class T> string getClassName(T* obj) {
-		return string(typeid(*obj).name()).substr(strlen("class "));
+
+namespace darknessNight_CppUnitTestFramework {
+    inline int strlen(){
+		std::string name;
+#ifdef _MSC_VER
+		 name = "class ";
+#endif 
+        return name.size();
+		
+    }
+
+	template <class T> std::string getClassName(T* obj) {
+		return std::string(typeid(*obj).name()).substr(strlen());
 	}
 
-	template <class T> string getClassName(T& obj) {
-		return string(typeid(obj).name()).substr(strlen("class "));
+	template <class T> std::string getClassName(T& obj) {
+		return std::string(typeid(obj).name()).substr(strlen());
 	}
 
-	template <class T> string getClassName() {
-		return string(typeid(T).name()).substr(strlen("class "));
+	template <class T> std::string getClassName() {
+		return std::string(typeid(T).name()).substr(strlen());
 	}
 
-	string extractClassName(string name);
+	std::string extractClassName(std::string name);
 }

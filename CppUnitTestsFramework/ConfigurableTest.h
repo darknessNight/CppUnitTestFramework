@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-namespace darknessNight::CppUnitTestFramework {
-	class ConfigurableTest abstract {
+namespace darknessNight_CppUnitTestFramework {
+	class ConfigurableTest{
 	public:
 		typedef void (ConfigurableTest::*TestMethod)();
 	protected:

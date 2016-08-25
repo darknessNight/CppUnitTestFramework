@@ -1,13 +1,13 @@
 #include "TestCasesTests.h"
 
-using namespace darknessNight::CppUnitTestFramework;
-using namespace std;
+using namespace darknessNight_CppUnitTestFramework;
 
-void testTestCaseMacro(string suite, string funcName, string file, int funcLine)
+
+void testTestCaseMacro(std::string suite, std::string funcName, std::string file, int funcLine)
 {
 	checkTestSuiteHasMethod(suite, funcName);
 	checkCorrectRemeberFileAndLine(suite, funcName, file, funcLine);
-	cout << "Success" << "\n";
+	std::cout << "Success" << "\n";
 }
 
 void checkCorrectRemeberFileAndLine(std::string &suite, std::string &funcName, std::string &file, int funcLine)
@@ -17,19 +17,19 @@ void checkCorrectRemeberFileAndLine(std::string &suite, std::string &funcName, s
 	checkCorrectRememberLine(report, funcLine);
 }
 
-const darknessNight::CppUnitTestFramework::TestReport getTestRaport(std::string & suite, std::string & funcName)
+const darknessNight_CppUnitTestFramework::TestReport getTestRaport(std::string & suite, std::string & funcName)
 {
 	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
 	return testSuite->runTestAndGetReport(funcName);
 }
 
-void checkCorrectRememberLine(darknessNight::CppUnitTestFramework::TestReport report, int funcLine)
+void checkCorrectRememberLine(darknessNight_CppUnitTestFramework::TestReport report, int funcLine)
 {
 	if (report.getLine() != funcLine)
-		throw SpecialException("No saved correct test line. Current saved line: " + to_string(report.getLine()));
+		throw SpecialException("No saved correct test line. Current saved line: " + std::to_string(report.getLine()));
 }
 
-void checkCorrectRemeberFile(darknessNight::CppUnitTestFramework::TestReport report, std::string & file)
+void checkCorrectRemeberFile(darknessNight_CppUnitTestFramework::TestReport report, std::string & file)
 {
 	if (report.getFile() != file)
 		throw SpecialException("No saved correct test file. Current saved file: " + report.getFile());
@@ -38,14 +38,14 @@ void checkCorrectRemeberFile(darknessNight::CppUnitTestFramework::TestReport rep
 void checkTestSuiteHasMethod(std::string &suite, std::string &funcName)
 {
 	int testCaseCount = 1;
-	std::vector<string> testCases = getTestCaseListFromSuite(suite);
+	std::vector<std::string> testCases = getTestCaseListFromSuite(suite);
 	if (testCases.size() != testCaseCount)
 		throw SpecialException("No have func in \"" + suite + "\" TestSuite");
 	if (testCases[0] != funcName)
 		throw SpecialException("No have \"" + funcName + "\" in testSuite");
 }
 
-std::vector<string> getTestCaseListFromSuite(std::string &suite)
+std::vector<std::string> getTestCaseListFromSuite(std::string &suite)
 {
 	TestContainer& container = TestsCollectionExport::getTestContainer();
 	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);

@@ -1,29 +1,29 @@
 #include "TestReport.h"
 
-using namespace darknessNight::CppUnitTestFramework;
+using namespace darknessNight_CppUnitTestFramework;
 
-darknessNight::CppUnitTestFramework::TestReport::TestReport() :testResult(false) {}
+darknessNight_CppUnitTestFramework::TestReport::TestReport() :testResult(false) {}
 
-TestResult darknessNight::CppUnitTestFramework::TestReport::getResult() {
+TestResult darknessNight_CppUnitTestFramework::TestReport::getResult() {
 	return testResult;
 }
 
-string darknessNight::CppUnitTestFramework::TestReport::getTestName() {
+std::string darknessNight_CppUnitTestFramework::TestReport::getTestName() {
 	return "TestName";
 }
 
-string darknessNight::CppUnitTestFramework::TestReport::getFile() {
+std::string darknessNight_CppUnitTestFramework::TestReport::getFile() {
 	return testFile;
 }
 
-unsigned darknessNight::CppUnitTestFramework::TestReport::getLine() {
+unsigned darknessNight_CppUnitTestFramework::TestReport::getLine() {
 	return testLine;
 }
 
-string darknessNight::CppUnitTestFramework::TestReport::getSuiteName() {
+std::string darknessNight_CppUnitTestFramework::TestReport::getSuiteName() {
 	return testSuite;
 }
 
-TestCategory darknessNight::CppUnitTestFramework::TestReport::getCategory() {
+TestCategory darknessNight_CppUnitTestFramework::TestReport::getCategory() {
 	return testCategory;
 }

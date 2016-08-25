@@ -2,11 +2,11 @@
 #include "TestRegisterContainerAccess.h"
 #include "HelperFuncs.h"
 
-namespace darknessNight::CppUnitTestFramework {
+namespace darknessNight_CppUnitTestFramework {
 
 	class SetUpRegister: TestRegisterContainerAccess {
 	public:
-		SetUpRegister(std::function<void()> func, string suiteName) {
+		SetUpRegister(std::function<void()> func, std::string suiteName) {
 			getTestContainer().registerSetUp(suiteName, func);
 		}
 

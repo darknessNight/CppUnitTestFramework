@@ -8,8 +8,8 @@
 #include "CppUnitTestFramework.CompileTest.h"
 
 
-using namespace std;
-using namespace darknessNight::CppUnitTestFramework;
+
+using namespace darknessNight_CppUnitTestFramework;
 
 int main()
 {
@@ -23,8 +23,7 @@ int main()
 
 void testClassAndMethodMacro()
 {
-	string name = typeid(TestSuiteTestMacro).name();
-	name = name.substr(strlen("class "));
+	std::string name=getClassName<TestSuiteTestMacro>();
 	testTestCaseMacro(name, "FirstTestMethod", macrosFile, testMethodLine);
 }
 

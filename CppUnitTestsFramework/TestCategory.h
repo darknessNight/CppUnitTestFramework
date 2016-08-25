@@ -1,20 +1,20 @@
 #pragma once
-#include<string>
+#include <string>
 #include <memory>
-using namespace std;
-namespace darknessNight::CppUnitTestFramework {
+
+namespace darknessNight_CppUnitTestFramework {
 	class TestCategory {
 	private:
-		string name;
-		shared_ptr<TestCategory> subCategory=nullptr;
+		std::string name;
+		std::shared_ptr<TestCategory> subCategory=nullptr;
 		static TestCategory emptyCategory;
 	public:
 		TestCategory();
-		TestCategory(string suiteName);
-		string getFullName() const;
+		TestCategory(std::string suiteName);
+		std::string getFullName() const;
 		void addNextLevelFullName(std::string &name) const;
 		const TestCategory& getSubCategory() const;
-		string getName() const;
+		std::string getName() const;
 		bool operator==(const TestCategory& category) const;
 	private:
 		void splitCategoryStringIfNeeded(std::string &suiteName);

@@ -6,7 +6,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight::CppUnitTestFramework::UnitTests {
+namespace darknessNight_CppUnitTestFramework::UnitTests {
 	TEST_CLASS(TestContainerTests)
 	{
 	public:
@@ -55,7 +55,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			return container;
 		}
 
-		TestCasePtr getFakeTestCase(string name) {
+		TestCasePtr getFakeTestCase(std::string name) {
 			TestCase::FunctionTesterPtr fakeTester(new FakeFunctionTester);
 			TestCasePtr testCase(new TestCaseFuncTester(fakeTester, name));
 			return testCase;
@@ -63,7 +63,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 
 		void AssertAddTestCaseIsInCorrectSuite(TestContainer &container) {
 			TestSuitePtr testSuite2 = container.getTestSuiteByName("TestSuite2");
-			std::vector<string>testCaseList2 = testSuite2->getTestCaseList();
+			std::vector<std::string>testCaseList2 = testSuite2->getTestCaseList();
 			Assert::AreEqual(1U, testCaseList2.size());
 		}
 	public:
@@ -75,7 +75,7 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 	private:
 		void AssertAddTestCaseIsNotInInCorrectSuite(TestContainer& container) {
 			TestSuitePtr testSuite1 = container.getTestSuiteByName("TestSuite1");
-			std::vector<string>testCaseList1 = testSuite1->getTestCaseList();
+			std::vector<std::string>testCaseList1 = testSuite1->getTestCaseList();
 			Assert::AreEqual(0U, testCaseList1.size());
 		}
 
@@ -88,9 +88,9 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 	private:
-		void AssertRegisterdTestCaseToUnnamedSuite(darknessNight::CppUnitTestFramework::TestContainer &container)
+		void AssertRegisterdTestCaseToUnnamedSuite(darknessNight_CppUnitTestFramework::TestContainer &container)
 		{
-			std::vector<string> listOfTestCase = container.getTestSuiteByName("Unnamed")->getTestCaseList();
+			std::vector<std::string> listOfTestCase = container.getTestSuiteByName("Unnamed")->getTestCaseList();
 			Assert::AreEqual(1U, listOfTestCase.size());
 			StringAssert::Constains("TestCase", listOfTestCase[0]);
 		}
