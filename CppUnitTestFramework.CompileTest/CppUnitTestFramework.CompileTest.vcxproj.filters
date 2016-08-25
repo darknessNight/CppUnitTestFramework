@@ -24,6 +24,15 @@
     <ClInclude Include="CppUnitTestFramework.CompileTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestCasesTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MacrosClassess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigureMethodTests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DrawingFunc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigureMethodTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MacrosClassess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

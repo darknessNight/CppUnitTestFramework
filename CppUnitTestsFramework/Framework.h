@@ -5,25 +5,25 @@
 
 
 #define TEST_SUITE(NAME)\
-::darknessNight::CppUnitTestFramework::TestClassRegister<::darknessNight::CppUnitTestFramework::TestSuite> NAME##ClearSuiteRegister(#NAME);
+static ::darknessNight::CppUnitTestFramework::TestClassRegister<::darknessNight::CppUnitTestFramework::TestSuite> NAME##ClearSuiteRegister(#NAME);
 
 #define TEST_SUITE_WITH_CATEGORY(NAME, CATEGORY)\
-::darknessNight::CppUnitTestFramework::TestClassWithCategoryRegister<::darknessNight::CppUnitTestFramework::TestSuite> NAME##ClearSuiteRegister(#NAME, ::darknessNight::CppUnitTestFramework::TestCategory(CATEGORY));
+static ::darknessNight::CppUnitTestFramework::TestClassWithCategoryRegister<::darknessNight::CppUnitTestFramework::TestSuite> NAME##ClearSuiteRegister(#NAME, ::darknessNight::CppUnitTestFramework::TestCategory(CATEGORY));
 
 #define TEST_CLASS(CLASS_NAME) \
 class CLASS_NAME;\
-::darknessNight::CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register;\
+static ::darknessNight::CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register;\
 class CLASS_NAME: public ::darknessNight::CppUnitTestFramework::TestSuiteClass
 
 #define TEST_CLASS_WITH_CATEGORY(CLASS_NAME, CATEGORY) \
 class CLASS_NAME;\
-::darknessNight::CppUnitTestFramework::TestClassWithCategoryRegister<CLASS_NAME> CLASS_NAME##Register(::darknessNight::CppUnitTestFramework::TestCategory(CATEGORY));\
+static ::darknessNight::CppUnitTestFramework::TestClassWithCategoryRegister<CLASS_NAME> CLASS_NAME##Register(::darknessNight::CppUnitTestFramework::TestCategory(CATEGORY));\
 class CLASS_NAME: public ::darknessNight::CppUnitTestFramework::TestSuiteClass
 
 
 #define TEST_FUNCTION_IN_SUITE_CASE(FUNC_NAME, SUITE) \
 void FUNC_NAME();\
-::darknessNight::CppUnitTestFramework::TestFuncRegister FUNC_NAME##Register(FUNC_NAME,#FUNC_NAME, SUITE, __FILE__, __LINE__);\
+static ::darknessNight::CppUnitTestFramework::TestFuncRegister FUNC_NAME##Register(FUNC_NAME,#FUNC_NAME, SUITE, __FILE__, __LINE__);\
 void FUNC_NAME()
 
 #define TEST_FUNCTION(FUNC_NAME) TEST_FUNCTION_IN_SUITE_CASE(FUNC_NAME,"")

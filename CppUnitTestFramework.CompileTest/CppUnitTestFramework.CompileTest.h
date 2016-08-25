@@ -1,4 +1,7 @@
 #include <string>
+#include <vector>
+#include <iostream>
+#include "MacrosClassess.h"
 
 using namespace std;
 
