@@ -1,23 +1,24 @@
 # depslib dependency file v1.0
-1472149960 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\configuremethodtests.cpp
+1472151363 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\configuremethodtests.cpp
 	"ConfigureMethodTests.h"
 
 1472143065 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\configuremethodtests.h
 	"CppUnitTestFramework.CompileTest.h"
 
-1472143268 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\cppunittestframework.compiletest.h
+1472151275 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\cppunittestframework.compiletest.h
 	<string>
 	<vector>
 	<iostream>
 	"MacrosClassess.h"
 
-1472143462 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\macrosclassess.h
+1472153306 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\macrosclassess.h
 	<CppUnitTestsFramework\Framework.h>
 
-1472147966 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\framework.h
-	"TestSuiteInstanceCreator.h"
-	"TestSuiteClass.h"
-	"TestRegisters.h"
+1472152107 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\framework.h
+	"SuiteMacros.h"
+	"FuncMacros.h"
+	"MethodMacros.h"
+	"ConfMacros.h"
 
 1472143245 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\testsuiteinstancecreator.h
 	"TestSuiteCreator.h"
@@ -90,7 +91,7 @@
 	"TestSuiteInstanceCreator.h"
 	"HelperFuncs.h"
 
-1472150411 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\testcontainer.h
+1472150916 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\testcontainer.h
 	"TestSuiteInstanceCreator.h"
 	"Exceptions.h"
 
@@ -122,7 +123,7 @@
 	"TestRegisterContainerAccess.h"
 	"HelperFuncs.h"
 
-1472149749 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\cppunittestframework.compiletest.cpp
+1472151374 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\cppunittestframework.compiletest.cpp
 	"stdafx.h"
 	<cstdlib>
 	<CppUnitTestsFramework\Framework.h>
@@ -133,21 +134,33 @@
 	<stdio.h>
 	<tchar.h>
 
-1472143849 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\drawingfunc.cpp
+1472151332 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\drawingfunc.cpp
 	"CppUnitTestFramework.CompileTest.h"
 	<CppUnitTestsFramework\Framework.h>
 	<iostream>
 	<string>
 
-1472148099 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\macrosclassess.cpp
+1472151378 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\macrosclassess.cpp
 	"MacrosClassess.h"
 
 1471973117 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\stdafx.cpp
 	"stdafx.h"
 
-1472143429 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\testcasestests.cpp
+1472151313 source:d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\testcasestests.cpp
 	"TestCasesTests.h"
 
 1472143246 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestframework.compiletest\testcasestests.h
 	"CppUnitTestFramework.CompileTest.h"
+
+1472151631 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\suitemacros.h
+	"TestSuiteInstanceCreator.h"
+	"TestSuiteClass.h"
+	"TestRegisters.h"
+
+1472153399 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\funcmacros.h
+	"TestRegisters.h"
+
+1472153158 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\methodmacros.h
+
+1472153719 d:\desktop\projekty\learn\tdd\cppunittestsframework\cppunittestsframework\confmacros.h
 

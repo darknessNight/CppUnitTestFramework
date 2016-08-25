@@ -2,12 +2,20 @@
 
 using namespace darknessNight_CppUnitTestFramework;
 
+void testClassAndMethodMacro()
+{
+	std::string name = getClassName<TestSuiteTestMacro>();
+	testTestCaseMacro(name, "FirstTestMethod", macrosFile, testMethodLine);
+}
+
+void testFunctionMacro() {
+	testTestCaseMacro("Unnamed", "TestFunctionTest", macrosFile, testFuncLine);
+}
 
 void testTestCaseMacro(std::string suite, std::string funcName, std::string file, int funcLine)
 {
 	checkTestSuiteHasMethod(suite, funcName);
 	checkCorrectRemeberFileAndLine(suite, funcName, file, funcLine);
-	std::cout << "Success" << "\n";
 }
 
 void checkCorrectRemeberFileAndLine(std::string &suite, std::string &funcName, std::string &file, int funcLine)

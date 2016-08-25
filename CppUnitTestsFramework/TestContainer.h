@@ -10,6 +10,7 @@ namespace darknessNight_CppUnitTestFramework {
 		TestContainer();
 		void addTestSuite(std::shared_ptr<TestSuiteCreator> creator);
 		TestSuitePtr getTestSuiteByName(std::string name);
+		std::vector<std::string> getTestSuiteList();
 		void registerTestCaseToUnnamedSuite(TestCasePtr testCase);
 		void registerTestCase(std::string testSuite, TestCasePtr testCase);
 		void registerSetUp(std::string testSuite, std::function<void()> setUp);

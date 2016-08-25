@@ -58,9 +58,6 @@
     <ClInclude Include="SetUpRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
-    <ClInclude Include="HelperFuncs.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="TearDownRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
@@ -82,6 +79,21 @@
     <ClInclude Include="Exceptions.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="ConfMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="HelperFuncs.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="SuiteMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -100,6 +112,9 @@
     </Filter>
     <Filter Include="Headers\Tests">
       <UniqueIdentifier>{b1f7c979-0be8-4831-bc13-f758d1e1ea6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Macros">
+      <UniqueIdentifier>{b5569a57-c63c-4f29-923c-6d214ca63af6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

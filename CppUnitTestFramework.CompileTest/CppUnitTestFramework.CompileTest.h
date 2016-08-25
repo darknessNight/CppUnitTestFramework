@@ -10,6 +10,7 @@ void testFunctionMacro();
 void showError(void(*)());
 void testClassAndMethodMacro();
 void testClassSetUpAndTearDown();
+void testArgMethodAndFunc();
 
 void writeTestResult(std::string,void(*)());
 

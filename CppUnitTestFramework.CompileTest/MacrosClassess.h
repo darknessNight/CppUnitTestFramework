@@ -17,6 +17,12 @@ TEST_CLASS(TestSuiteTestMacro) {
 		//throw exception();
 	}
 
+	ARG_TEST_METHOD(ArgMethod, 2, 4);
+	ARG_TEST_METHOD(ArgMethod, 4, 4);
+	ARG_TEST_METHOD(ArgMethod, 8, 4);
+	void ArgMethod(int f, int s) {
+	}
+
 public:
 	static bool collapseSetup;
 	static bool collapseTearDown;
@@ -36,8 +42,8 @@ static bool collapseSetup = false;
 static bool collapseTearDown = false;
 
 static int testFuncLine = __LINE__ + 1;
-TEST_FUNCTION(TestFunctionTest);
+TEST_FUNCTION_DECLARE(TestFunctionTest);
 
-SETUP_FUNCTION(SetUp, "Unnamed");
+SETUP_FUNCTION_DECLARE(SetUp, "Unnamed");
 
-TEARDOWN_FUNCTION(TearDown, "Unnamed");
+TEARDOWN_FUNCTION_DECLARE(TearDown, "Unnamed");

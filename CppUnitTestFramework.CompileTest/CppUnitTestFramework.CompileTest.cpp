@@ -16,18 +16,13 @@ int main()
 	writeTestResult("TestClass tests:",testClassAndMethodMacro);
 	writeTestResult("TestFunction tests:", testFunctionMacro);
 	writeTestResult("TestClass SetUpAndTearDown:", testClassSetUpAndTearDown);
+	writeTestResult("TestClass ArgTestMethodAndFunc:", testArgMethodAndFunc);
 	
 	system("pause");
 	return 0;
 }
 
-void testClassAndMethodMacro()
-{
-	std::string name=getClassName<TestSuiteTestMacro>();
-	testTestCaseMacro(name, "FirstTestMethod", macrosFile, testMethodLine);
-}
+void testArgMethodAndFunc() {
 
-void testFunctionMacro() {
-	testTestCaseMacro("Unnamed", "TestFunctionTest", macrosFile, testFuncLine);
 }
 

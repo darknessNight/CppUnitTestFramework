@@ -18,6 +18,14 @@ TestSuitePtr darknessNight_CppUnitTestFramework::TestContainer::getTestSuiteByNa
 	return mapArray[name]->createInstance();
 }
 
+std::vector<std::string> darknessNight_CppUnitTestFramework::TestContainer::getTestSuiteList()
+{
+	std::vector<std::string> list;
+	for (auto suite = mapArray.begin(); suite != mapArray.end(); suite++)
+		list.push_back(suite->first);
+	return list;
+}
+
 void darknessNight_CppUnitTestFramework::TestContainer::registerTestCaseToUnnamedSuite(TestCasePtr testCase) {
 	registerTestCase("", testCase);
 }

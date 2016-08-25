@@ -7,7 +7,6 @@ void testClassSetUpAndTearDown() {
 	checkTestFuncNotFalling(testSuite);
 	checkRegisterSetUp(testSuite);
 	checkRegisterTearDown(testSuite);
-	std::cout << "Success";
 }
 
 void checkRegisterTearDown(darknessNight_CppUnitTestFramework::TestSuitePtr &testSuite)

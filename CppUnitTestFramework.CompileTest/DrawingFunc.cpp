@@ -24,6 +24,7 @@ void writeTestResult(std::string text, void(*func)())
 void showError(void(*func)()) {
 	try {
 		func();
+		std::cout << "Success" << "\n";
 	}
 	catch (SpecialException ex) {
 		std::cout << ex.what() << "\n";

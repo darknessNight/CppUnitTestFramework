@@ -134,12 +134,16 @@
   <ItemGroup>
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="ConfigurableTest.h" />
+    <ClInclude Include="ConfMacros.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="FuncMacros.h" />
     <ClInclude Include="FunctionTester.h" />
     <ClInclude Include="HelperFuncs.h" />
+    <ClInclude Include="MethodMacros.h" />
     <ClInclude Include="PredefinedTestResults.h" />
     <ClInclude Include="SetUpRegister.h" />
+    <ClInclude Include="SuiteMacros.h" />
     <ClInclude Include="TearDownRegister.h" />
     <ClInclude Include="TestClassWithCategoryRegister.h" />
     <ClInclude Include="TestRegisterContainerAccess.h" />
