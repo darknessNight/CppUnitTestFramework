@@ -140,6 +140,7 @@
     <ClInclude Include="PredefinedTestResults.h" />
     <ClInclude Include="SetUpRegister.h" />
     <ClInclude Include="TearDownRegister.h" />
+    <ClInclude Include="TestClassWithCategoryRegister.h" />
     <ClInclude Include="TestRegisterContainerAccess.h" />
     <ClInclude Include="TestClassRegister.h" />
     <ClInclude Include="TestFuncRegister.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="HelperFuncs.cpp" />
     <ClCompile Include="TestCase.cpp" />
     <ClCompile Include="TestCaseMethod.cpp" />
+    <ClCompile Include="TestCategory.cpp" />
     <ClCompile Include="TestRegisterer.cpp" />
     <ClCompile Include="TestReport.cpp" />
     <ClCompile Include="TestResult.cpp" />

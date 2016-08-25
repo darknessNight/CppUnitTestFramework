@@ -76,6 +76,9 @@
     <ClInclude Include="TestSuiteInstanceCreator.h">
       <Filter>Headers\Tests</Filter>
     </ClInclude>
+    <ClInclude Include="TestClassWithCategoryRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -125,6 +128,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestSuiteCreator.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCategory.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

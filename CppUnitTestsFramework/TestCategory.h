@@ -1,29 +1,24 @@
 #pragma once
 #include<string>
+#include <memory>
 using namespace std;
 namespace darknessNight::CppUnitTestFramework {
 	class TestCategory {
 	private:
 		string name;
 		shared_ptr<TestCategory> subCategory=nullptr;
+		static TestCategory emptyCategory;
 	public:
-		TestCategory() {}
-
-		TestCategory(string suiteName) {
-			int splitPos=suiteName.find(".");
-			name = suiteName.substr(0, splitPos);
-			subCategory = shared_ptr<TestCategory>(new TestCategory(suiteName.substr(splitPos + 1)));
-		}
-
-		string getFullName() {
-			string name = getName();
-			if (subCategory != nullptr)
-				name += "." + subCategory->getName();
-			return name;
-		}
-
-		string getName() {
-			return name;
-		}
+		TestCategory();
+		TestCategory(string suiteName);
+		string getFullName() const;
+		void addNextLevelFullName(std::string &name) const;
+		const TestCategory& getSubCategory() const;
+		string getName() const;
+		bool operator==(const TestCategory& category) const;
+	private:
+		void splitCategoryStringIfNeeded(std::string &suiteName);
+		void saveSimpleCategoryString(std::string &suiteName);
+		void saveMultiLevelCategoryString(std::string &suiteName, int splitPos);
 	};
 }

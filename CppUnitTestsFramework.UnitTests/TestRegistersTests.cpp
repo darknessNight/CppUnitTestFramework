@@ -202,5 +202,11 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 			TestReport report = testSuite->runTestsAndGetReports()[0];
 			StringAssert::Constains(causeString, report.getResult().getCause());
 		}
+		/*
+		TEST_METHOD(RegisterClassWithCategory_CheckRemberCategory) {
+			TestClassWithCategoryRegister<TestClassForRegisterTests> reg("TestName", TestCategory("FullCategory.NameCat.LastCat"));
+
+		}*/
+
 	};
 }
