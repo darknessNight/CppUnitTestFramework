@@ -11,53 +11,18 @@ namespace darknessNight::CppUnitTestFramework {
 		FunctionTesterPtr functionTester;
 		TestReport report;
 	protected:
-		void setName(string name) {
-			report.testName = name;
-		}
-
-		TestCase() {}
+		void setName(string name);
+		TestCase();
 	public:
-
-		string getName() {
-			return report.testName;
-		}
-
-		void setFileAndLine(string file, unsigned int line) {
-			report.testFile = file;
-			report.testLine = line;
-		}
-
-		void setSuite(string suite) {
-			report.testSuite = suite;
-		}
-
-		void setCategory(TestCategory cat) {
-			report.testCategory = cat;
-		}
-
-		TestReport runTestAndGetReport() {
-			TestResult result = runTest();
-			return getReport(result);
-		}
-
-		TestReport getReport(TestResult result)
-		{
-			TestReport returnReport = report;
-			returnReport.testResult = result;
-			return returnReport;
-		}
-
-		TestReport getReportWithoutResult()
-		{
-			return getReport(TestResult(false));
-		}
-
-		virtual TestResult runTest() {
-			functionTester->setSetUpMethod(setUpMethod);
-			functionTester->setTearDownMethod(tearDownMethod);
-			TestResult result = functionTester->runTest();
-			return result;
-		}
+		string getName();
+		void setFileAndLine(string file, unsigned int line);
+		void setSuite(string suite);
+		void setCategory(TestCategory cat);
+		TestReport runTestAndGetReport();
+		TestReport getReport(TestResult result);
+		TestReport getReportWithoutResult();
+		virtual TestResult runTest();
+		void prepareFunctionTester();
 	};
 	typedef std::shared_ptr<TestCase> TestCasePtr;
 }

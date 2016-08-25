@@ -136,15 +136,18 @@
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="HelperFuncs.h" />
+    <ClInclude Include="PredefinedTestResults.h" />
     <ClInclude Include="SetUpRegister.h" />
+    <ClInclude Include="TearDownRegister.h" />
     <ClInclude Include="TestRegisterContainerAccess.h" />
     <ClInclude Include="TestClassRegister.h" />
     <ClInclude Include="TestFuncRegister.h" />
     <ClInclude Include="TestMethodRegister.h" />
     <ClInclude Include="TestsCollectionExport.h" />
-    <ClInclude Include="TestRegisterer.h" />
+    <ClInclude Include="TestRegisters.h" />
     <ClInclude Include="TestContainer.h" />
-    <ClInclude Include="TestSuiteInstanceCreator.h" />
+    <ClInclude Include="TestSuiteCreator.h" />
     <ClInclude Include="TestCase.h" />
     <ClInclude Include="TestCaseFunc.h" />
     <ClInclude Include="TestCaseMethod.h" />
@@ -153,9 +156,19 @@
     <ClInclude Include="TestResult.h" />
     <ClInclude Include="TestSuite.h" />
     <ClInclude Include="TestSuiteClass.h" />
+    <ClInclude Include="TestSuiteInstanceCreator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FunctionTester.cpp" />
+    <ClCompile Include="HelperFuncs.cpp" />
+    <ClCompile Include="TestCase.cpp" />
+    <ClCompile Include="TestCaseMethod.cpp" />
     <ClCompile Include="TestRegisterer.cpp" />
+    <ClCompile Include="TestReport.cpp" />
+    <ClCompile Include="TestResult.cpp" />
+    <ClCompile Include="TestSuite.cpp" />
+    <ClCompile Include="TestSuiteClass.cpp" />
+    <ClCompile Include="TestSuiteCreator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

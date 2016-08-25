@@ -12,70 +12,18 @@ namespace darknessNight::CppUnitTestFramework {
 		std::string suiteName="";
 	public:
 		typedef std::vector<TestReport> TestReportArray;
-
-		virtual std::string getName() {
-			setSuiteNameIfNotSetted();
-			return suiteName;
-		}
-
+		virtual std::string getName();
 	public:
-		void addTestCase(TestCasePtr testCase) {
-			testArray.push_back(testCase);
-			testMap[testCase->getName()]= testCase;
-		}
-
-		void setCategory(TestCategory cat) {
-			testCategory = cat;
-		}
-
-		TestReportArray runTestsAndGetReports() {
-			TestReportArray returnTab;
-			for each(TestCasePtr test in testArray) {
-				TestReport report = prepareAndRunTest(test);
-				returnTab.push_back(report);
-			}
-			return returnTab;
-		}
-
-		TestReport runTestAndGetReport(std::string name) {
-			TestCasePtr test=findTestFromName(name);
-			return prepareAndRunTest(test);
-		}
-
-		std::vector<std::string> getTestCaseList() {
-			std::vector<string> array;
-			for each(auto el in testMap)
-				array.push_back(el.first);
-			return array;
-		}
-
+		void addTestCase(TestCasePtr testCase);
+		void setCategory(TestCategory cat);
+		TestReportArray runTestsAndGetReports();
+		TestReport runTestAndGetReport(std::string name);
+		std::vector<std::string> getTestCaseList();
 	protected:
-		TestCasePtr findTestFromName(string name) {
-			TestCasePtr test = testMap[name];
-			if(test==nullptr)
-				throw NotFoundException("Not found TestCase in TestSuite");
-			return test;
-		}
-
-		TestReport prepareAndRunTest(TestCasePtr test) {
-			prepareTestCase(test);
-			return test->runTestAndGetReport();
-		}
-
-		virtual void prepareTestCase(TestCasePtr test) {
-			test->setSetUpMethod(setUpMethod);
-			test->setTearDownMethod(tearDownMethod);
-			test->setCategory(testCategory);
-			test->setSuite(getName());
-		}
-
-		void setSuiteNameIfNotSetted()
-		{
-			if (suiteName.size() <= 0) {
-				suiteName = typeid(*this).name();
-				suiteName = suiteName.substr(strlen("class "));
-			}
-		}
+		TestCasePtr findTestFromName(string name);
+		TestReport prepareAndRunTest(TestCasePtr test);
+		virtual void prepareTestCase(TestCasePtr test);
+		void setSuiteNameIfNotSetted();
 	};
 	typedef std::shared_ptr<TestSuite> TestSuitePtr;
 }

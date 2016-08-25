@@ -13,6 +13,7 @@ namespace darknessNight::CppUnitTestFramework {
 			if(setUpMethod!=nullptr)
 				setUpMethod();
 		}
+
 		virtual void tearDown() {
 			if (tearDownMethod != nullptr)
 				tearDownMethod();

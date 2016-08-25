@@ -1,7 +1,7 @@
 #pragma once
 #include "TestSuiteInstanceCreator.h"
 #include "TestSuiteClass.h"
-#include "TestRegisterer.h"
+#include "TestRegisters.h"
 
 
 #define TEST_CLASS(CLASS_NAME) \

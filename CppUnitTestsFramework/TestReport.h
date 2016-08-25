@@ -12,30 +12,13 @@ namespace darknessNight::CppUnitTestFramework {
 		TestCategory testCategory;
 		friend class TestCase;
 	private:
-		TestReport() :testResult(false) {}
+		TestReport();
 	public:
-		TestResult getResult() {
-			return testResult;
-		}
-
-		string getTestName() {
-			return "TestName";
-		}
-
-		string getFile() {
-			return testFile;
-		}
-
-		unsigned getLine() {
-			return testLine;
-		}
-
-		string getSuiteName() {
-			return testSuite;
-		}
-
-		TestCategory getCategory() {
-			return testCategory;
-		}
+		TestResult getResult();
+		string getTestName();
+		string getFile();
+		unsigned getLine();
+		string getSuiteName();
+		TestCategory getCategory();
 	};
 }

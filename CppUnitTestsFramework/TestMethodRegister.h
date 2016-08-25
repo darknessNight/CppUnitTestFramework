@@ -1,14 +1,14 @@
 #pragma once
 #include "TestRegisterContainerAccess.h"
 #include "TestCaseMethod.h"
+#include "HelperFuncs.h"
 
 namespace darknessNight::CppUnitTestFramework {
 	class TestMethodRegister :TestRegisterContainerAccess {
 	public:
 		TestMethodRegister(std::function<void()> method , string methodName, string suiteName, string file, int line) {
-			suiteName = suiteName.substr(strlen("class "));
 			TestCasePtr testCase = addTestCase(method, methodName, file, line);
-			getTestContainer().registerTestCase(suiteName, testCase);
+			registerTestCase(suiteName, testCase);
 		}
 
 	public:
@@ -18,12 +18,17 @@ namespace darknessNight::CppUnitTestFramework {
 
 	public:
 		TestMethodRegister(ConfigurableTest::TestMethod method, string methodName,string suiteName, string file, int line){
-			suiteName = suiteName.substr(strlen("class "));
 			TestCasePtr testCase = addTestCaseMethod(method, methodName, file, line);
-			getTestContainer().registerTestCase(suiteName, testCase);
+			registerTestCase(suiteName, testCase);
 		}
 
 	protected:
+		void registerTestCase(std::string &suiteName, darknessNight::CppUnitTestFramework::TestCasePtr &testCase)
+		{
+			suiteName = extractClassName(suiteName);
+			getTestContainer().registerTestCase(suiteName, testCase);
+		}
+
 		TestCasePtr addTestCase(std::function<void()> method, string &name, string file, int line)
 		{
 			TestCasePtr testCase(new TestCaseFunc(method, name));

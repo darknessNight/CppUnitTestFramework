@@ -8,8 +8,7 @@ namespace darknessNight::CppUnitTestFramework {
 		static std::unique_ptr<TestContainer> suiteContainer;
 	public:
 		static TestContainer& getTestContainer() {
-			if (suiteContainer == nullptr)
-				suiteContainer = std::unique_ptr<TestContainer>(new TestContainer);
+			createContainerIfNeeded();
 			return *suiteContainer;
 		}
 
@@ -19,6 +18,13 @@ namespace darknessNight::CppUnitTestFramework {
 
 		static void discoverTest() {
 			throw exception();
+		}
+
+	private:
+		static void createContainerIfNeeded()
+		{
+			if (suiteContainer == nullptr)
+				suiteContainer = std::unique_ptr<TestContainer>(new TestContainer);
 		}
 	};
 }

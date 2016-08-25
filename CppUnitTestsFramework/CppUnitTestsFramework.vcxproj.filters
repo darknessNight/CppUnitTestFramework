@@ -7,9 +7,6 @@
     <ClInclude Include="AssertExceptions.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
-    <ClInclude Include="TestRegisterer.h">
-      <Filter>Headers\Registers</Filter>
-    </ClInclude>
     <ClInclude Include="TestMethodRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
@@ -55,14 +52,29 @@
     <ClInclude Include="TestSuiteClass.h">
       <Filter>Headers\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="TestSuiteInstanceCreator.h">
-      <Filter>Headers\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="TestClassRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
     <ClInclude Include="SetUpRegister.h">
       <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="HelperFuncs.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TearDownRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRegisters.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefinedTestResults.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteCreator.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteInstanceCreator.h">
+      <Filter>Headers\Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +98,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TestRegisterer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionTester.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCase.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestResult.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCaseMethod.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestReport.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="HelperFuncs.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuite.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuiteClass.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuiteCreator.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

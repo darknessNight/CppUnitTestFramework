@@ -3,3 +3,4 @@
 #include "TestClassRegister.h"
 #include "TestMethodRegister.h"
 #include "SetUpRegister.h"
+#include "TearDownRegister.h"

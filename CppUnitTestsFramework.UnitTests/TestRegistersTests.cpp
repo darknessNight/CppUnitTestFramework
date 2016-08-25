@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <CppUnitTestsFramework\TestRegisterer.h>
+#include <CppUnitTestsFramework\TestRegisters.h>
 #include <CppUnitTestsFramework\TestSuiteClass.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -104,13 +104,18 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		void assertRegisterFunc(string suite, string func)
 		{
 			try {
-				TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
-				AssertHasFuncInSuite(testSuite, func);
-				AssertHasCorrectFile(testSuite, func);
+				tryAssertRegisterFunc(suite, func);
 			}
 			catch (exception ex) {
 				Assert::Fail();
 			}
+		}
+
+		void tryAssertRegisterFunc(std::string &suite, std::string &func)
+		{
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
+			AssertHasFuncInSuite(testSuite, func);
+			AssertHasCorrectFile(testSuite, func);
 		}
 
 		void AssertHasCorrectFile(darknessNight::CppUnitTestFramework::TestSuitePtr &testSuite, string name)
@@ -170,21 +175,32 @@ namespace darknessNight::CppUnitTestFramework::UnitTests {
 		}
 
 		TEST_METHOD(RegisterSetUpFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
+			actRegisterSetUpMethod();
+			assertHasRegisteredConfMethod("SetUp failed");
+		}
+
+		void actRegisterSetUpMethod()
+		{
 			actRegisterMethodBySuiteName();
-			string name = TestClassForRegisterTests::myName;
-			SetUpRegister setUpReg([]() {throw exception(); }, name);
-			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
-			TestReport report = testSuite->runTestsAndGetReports()[0];
-			StringAssert::Constains("SetUp failed", report.getResult().getCause());
+			SetUpRegister setUpReg([]() {throw exception(); }, TestClassForRegisterTests::myName);
 		}
 
 		TEST_METHOD(RegisterTearDownFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
+			actRegisterTearDownMethod();
+			assertHasRegisteredConfMethod("TearDown failed");
+		}
+
+		void actRegisterTearDownMethod()
+		{
 			actRegisterMethodBySuiteName();
-			string name = TestClassForRegisterTests::myName;
-			TearDownRegister setUpReg([]() {throw exception(); }, name);
-			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(name);
+			TearDownRegister setUpReg([]() {throw exception(); }, TestClassForRegisterTests::myName);
+		}
+
+		void assertHasRegisteredConfMethod(std::string causeString)
+		{
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(TestClassForRegisterTests::myName);
 			TestReport report = testSuite->runTestsAndGetReports()[0];
-			StringAssert::Constains("TearDown failed", report.getResult().getCause());
+			StringAssert::Constains(causeString, report.getResult().getCause());
 		}
 	};
 }

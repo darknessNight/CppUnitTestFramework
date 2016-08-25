@@ -34,6 +34,9 @@
     <ClCompile Include="TestRegistersTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TestCategoryTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">
