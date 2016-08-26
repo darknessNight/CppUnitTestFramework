@@ -165,6 +165,7 @@
     <ClInclude Include="TestSuite.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />
     <ClInclude Include="ToStringConverter.h" />
+    <ClInclude Include="ToStringConverterImplem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FunctionTester.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="TestResult.cpp" />
     <ClCompile Include="TestSuite.cpp" />
     <ClCompile Include="TestSuiteCreator.cpp" />
+    <ClCompile Include="ToStringConverter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

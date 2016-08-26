@@ -37,6 +37,9 @@
     <ClCompile Include="AssertTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ToStringConverterTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">

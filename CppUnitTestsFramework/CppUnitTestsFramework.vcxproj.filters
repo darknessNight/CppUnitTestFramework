@@ -100,6 +100,9 @@
     <ClInclude Include="ToStringConverter.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="ToStringConverterImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -152,5 +155,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestContainer.cpp" />
+    <ClCompile Include="ToStringConverter.cpp" />
   </ItemGroup>
 </Project>
