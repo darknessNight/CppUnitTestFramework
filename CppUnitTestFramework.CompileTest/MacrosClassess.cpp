@@ -28,3 +28,7 @@ void SetUp() {
  if (collapseTearDown)
 	 throw exception("TearDown not catched exception");
 }
+
+ void TestFunctionTest2(int, int)
+ {
+ }

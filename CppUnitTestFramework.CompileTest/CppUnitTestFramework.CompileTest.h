@@ -5,7 +5,7 @@
 
 
 
-void testTestCaseMacro(std::string suite, std::string funcName, std::string file, int funcLine);
+void testTestCaseMacro(int testCaseCount, std::string suite, std::string funcName, std::string file, int funcLine);
 void testFunctionMacro();
 void showError(void(*)());
 void testClassAndMethodMacro();

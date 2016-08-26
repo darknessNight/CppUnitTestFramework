@@ -154,6 +154,7 @@
     <ClInclude Include="CppUnitTestFramework.CompileTest.h" />
     <ClInclude Include="MacrosClassess.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TestArgMethod.h" />
     <ClInclude Include="TestCasesTests.h" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +163,7 @@
     <ClCompile Include="DrawingFunc.cpp" />
     <ClCompile Include="MacrosClassess.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TestArgMethod.cpp" />
     <ClCompile Include="TestCasesTests.cpp" />
   </ItemGroup>
   <ItemGroup>

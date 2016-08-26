@@ -85,14 +85,14 @@
     <ClInclude Include="FuncMacros.h">
       <Filter>Headers\Macros</Filter>
     </ClInclude>
-    <ClInclude Include="HelperFuncs.h">
-      <Filter>Headers\Macros</Filter>
-    </ClInclude>
     <ClInclude Include="MethodMacros.h">
       <Filter>Headers\Macros</Filter>
     </ClInclude>
     <ClInclude Include="SuiteMacros.h">
       <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="HelperFuncs.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

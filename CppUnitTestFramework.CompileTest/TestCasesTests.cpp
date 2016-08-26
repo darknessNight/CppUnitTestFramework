@@ -5,16 +5,16 @@ using namespace darknessNight_CppUnitTestFramework;
 void testClassAndMethodMacro()
 {
 	std::string name = getClassName<TestSuiteTestMacro>();
-	testTestCaseMacro(name, "FirstTestMethod", macrosFile, testMethodLine);
+	testTestCaseMacro(testCaseCount, name, "FirstTestMethod", macrosFile, testMethodLine);
 }
 
 void testFunctionMacro() {
-	testTestCaseMacro("Unnamed", "TestFunctionTest", macrosFile, testFuncLine);
+	testTestCaseMacro(1, "Unnamed", "TestFunctionTest", macrosFile, testFuncLine);
 }
 
-void testTestCaseMacro(std::string suite, std::string funcName, std::string file, int funcLine)
+void testTestCaseMacro(int testCaseCount, std::string suite, std::string funcName, std::string file, int funcLine)
 {
-	checkTestSuiteHasMethod(suite, funcName);
+	checkTestSuiteHasMethod(testCaseCount, suite, funcName);
 	checkCorrectRemeberFileAndLine(suite, funcName, file, funcLine);
 }
 
@@ -43,14 +43,22 @@ void checkCorrectRemeberFile(darknessNight_CppUnitTestFramework::TestReport repo
 		throw SpecialException("No saved correct test file. Current saved file: " + report.getFile());
 }
 
-void checkTestSuiteHasMethod(std::string &suite, std::string &funcName)
+void checkTestSuiteHasMethod(int testCaseCount, std::string &suite, std::string &funcName)
 {
-	int testCaseCount = 1;
 	std::vector<std::string> testCases = getTestCaseListFromSuite(suite);
-	if (testCases.size() != testCaseCount)
+	if (testCases.size() < testCaseCount)
 		throw SpecialException("No have func in \"" + suite + "\" TestSuite");
-	if (testCases[0] != funcName)
+	if (!findMethod(testCases, funcName))
 		throw SpecialException("No have \"" + funcName + "\" in testSuite");
+}
+
+bool findMethod(std::vector<std::string> &testCases, std::string &funcName)
+{
+	bool found = false;
+	for (auto test = testCases.begin(); test != testCases.end(); test++)
+		if (*test == funcName)
+			found = true;
+	return found;
 }
 
 std::vector<std::string> getTestCaseListFromSuite(std::string &suite)

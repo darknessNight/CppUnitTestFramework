@@ -10,6 +10,8 @@ TEST_SUITE_WITH_CATEGORY(SecondSuite, "Category")
 TEST_CLASS_WITH_CATEGORY(TestSuiteClassOne, "Category") {
 };
 
+static int countOfArgMethods = 3;
+static int testCaseCount = 4;
 static std::string macrosFile = __FILE__;
 static int testMethodLine = __LINE__ + 2;
 TEST_CLASS(TestSuiteTestMacro) {
@@ -43,6 +45,13 @@ static bool collapseTearDown = false;
 
 static int testFuncLine = __LINE__ + 1;
 TEST_FUNCTION_DECLARE(TestFunctionTest);
+
+
+void TestFunctionTest2(int, int);
+ARG_TEST_FUNCTION_IN_SUITE(TestFunctionTest2, "Unnamed", 2,2);
+ARG_TEST_FUNCTION_IN_SUITE(TestFunctionTest2, "Unnamed", 2, 4);
+ARG_TEST_FUNCTION(TestFunctionTest2, 2, 4);
+
 
 SETUP_FUNCTION_DECLARE(SetUp, "Unnamed");
 

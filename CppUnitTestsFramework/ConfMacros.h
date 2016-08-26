@@ -12,6 +12,7 @@ void NAME()
 void NAME()
 
 
+
 #define SETUP_FUNCTION_DECLARE(NAME,SUITE) \
 void NAME();\
 static ::darknessNight_CppUnitTestFramework::SetUpRegister NAME##SetUpRegister =\
@@ -20,6 +21,7 @@ static ::darknessNight_CppUnitTestFramework::SetUpRegister NAME##SetUpRegister =
 #define SETUP_FUNCTION(NAME,SUITE) \
 SETUP_FUNCTION_DECLARE(NAME,SUITE) \
 void NAME()
+
 
 
 #define TEARDOWN_FUNCTION_DECLARE(NAME, SUITE) \
