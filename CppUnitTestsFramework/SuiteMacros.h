@@ -1,6 +1,5 @@
 #pragma once
 #include "TestSuiteInstanceCreator.h"
-#include "TestSuiteClass.h"
 #include "TestRegisters.h"
 
 #pragma region Test suites without classess
@@ -18,11 +17,11 @@ static ::darknessNight_CppUnitTestFramework::TestClassWithCategoryRegister<::dar
 #define TEST_CLASS(CLASS_NAME) \
 class CLASS_NAME;\
 static ::darknessNight_CppUnitTestFramework::TestClassRegister<CLASS_NAME> CLASS_NAME##Register;\
-class CLASS_NAME: public ::darknessNight_CppUnitTestFramework::TestSuiteClass
+class CLASS_NAME: public ::darknessNight_CppUnitTestFramework::TestSuite
 
 #define TEST_CLASS_WITH_CATEGORY(CLASS_NAME, CATEGORY) \
 class CLASS_NAME;\
 static ::darknessNight_CppUnitTestFramework::TestClassWithCategoryRegister<CLASS_NAME> CLASS_NAME##Register(::darknessNight_CppUnitTestFramework::TestCategory(CATEGORY));\
-class CLASS_NAME: public ::darknessNight_CppUnitTestFramework::TestSuiteClass
+class CLASS_NAME: public ::darknessNight_CppUnitTestFramework::TestSuite
 
 #pragma endregion

@@ -34,9 +34,6 @@
     <ClInclude Include="TestCaseFunc.h">
       <Filter>Headers\Tests</Filter>
     </ClInclude>
-    <ClInclude Include="TestCaseMethod.h">
-      <Filter>Headers\Tests</Filter>
-    </ClInclude>
     <ClInclude Include="TestCategory.h">
       <Filter>Headers\Tests</Filter>
     </ClInclude>
@@ -47,9 +44,6 @@
       <Filter>Headers\Tests</Filter>
     </ClInclude>
     <ClInclude Include="TestSuite.h">
-      <Filter>Headers\Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="TestSuiteClass.h">
       <Filter>Headers\Tests</Filter>
     </ClInclude>
     <ClInclude Include="TestClassRegister.h">
@@ -130,9 +124,6 @@
     <ClCompile Include="TestResult.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TestCaseMethod.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="TestReport.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -140,9 +131,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestSuite.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="TestSuiteClass.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestSuiteCreator.cpp">

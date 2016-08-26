@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <CppUnitTestsFramework\TestSuiteClass.h>
+#include <CppUnitTestsFramework\TestSuite.h>
 #include <CppUnitTestsFramework\TestContainer.h>
 #include <CppUnitTestsFramework\TestCaseFunc.h>
 #include "TestHelperFuncAndClassess.h"
@@ -15,7 +15,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			TestContainer container = getTestObjectWithTwoTestSuites();
 			TestSuitePtr testSuite = container.getTestSuiteByName("TestSuite2");
 			Assert::IsFalse(testSuite==nullptr);
-			StringAssert::Constains("TestSuiteClass", testSuite->getName());
+			StringAssert::Constains("TestSuite", testSuite->getName());
 		}
 
 	public:
@@ -31,7 +31,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			TestContainer container;
 			std::shared_ptr<TestSuiteCreator> testSuite1(new TestSuiteInstanceCreator<TestSuite>("TestSuite1"));
 			container.addTestSuite(testSuite1);
-			std::shared_ptr<TestSuiteCreator> testSuite2(new TestSuiteInstanceCreator<TestSuiteClass>("TestSuite2"));
+			std::shared_ptr<TestSuiteCreator> testSuite2(new TestSuiteInstanceCreator<TestSuite>("TestSuite2"));
 			container.addTestSuite(testSuite2);
 			return container;
 		}

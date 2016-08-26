@@ -13,13 +13,7 @@
     <ClCompile Include="FunctionTesterTest.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TestCaseMethodTest.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="LearingTestAutoAddMethod.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="TestSuiteClassTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestSuiteInstanceCreatorTests.cpp">

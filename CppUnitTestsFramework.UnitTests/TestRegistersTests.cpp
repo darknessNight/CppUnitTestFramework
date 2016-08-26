@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include <CppUnitTestsFramework\TestRegisters.h>
-#include <CppUnitTestsFramework\TestSuiteClass.h>
+#include <CppUnitTestsFramework\TestSuite.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace darknessNight_CppUnitTestFramework::UnitTests {
-	class TestClassForRegisterTests :public TestSuiteClass {
+	class TestClassForRegisterTests :public TestSuite {
 	public:
 		static std::string myName;
 		static std::string myTypeName;
@@ -136,31 +136,6 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			return resultList;
 		}
 
-		TEST_METHOD(RegisterMethod_HasCorrectMethodRegisterBySuiteName_CheckHasTestCaseInSuite)
-		{
-			actRegisterMethodBySuiteName();
-			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
-		}
-
-		void actRegisterMethodBySuiteName() {
-			TestClassRegister<TestClassForRegisterTests> addTest;
-			TestMethodRegister addFunc((ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod,
-									   "DoNothingMethod", TestClassForRegisterTests::myTypeName, __FILE__, __LINE__);
-		}
-
-		TEST_METHOD(RegisterMethod_HasCorrectMethodBySuiteInstance_CheckHasTestCaseInSuite)
-		{
-			TestClassForRegisterTests instance;
-			actRegisterMethodBySuiteInstance(instance);
-			assertRegisterFunc(TestClassForRegisterTests::myName, "DoNothingMethod");
-		}
-
-		void actRegisterMethodBySuiteInstance(TestClassForRegisterTests& instance) {
-			TestClassRegister<TestClassForRegisterTests> addTest;
-			TestMethodRegister addFunc((ConfigurableTest::TestMethod)&TestClassForRegisterTests::DoNothingMethod,
-									   "DoNothingMethod", &instance, __FILE__, __LINE__);
-		}
-
 		TEST_METHOD(RegisterMethod_HasCorrectMethodByLambda_CheckHasTestCaseInSuite)
 		{
 			TestClassForRegisterTests instance;
@@ -181,7 +156,8 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		void actRegisterSetUpMethod()
 		{
-			actRegisterMethodBySuiteName();
+			TestClassForRegisterTests instance;
+			actRegisterMethodByLambda(&instance);
 			SetUpRegister setUpReg([]() {throw exception(); }, TestClassForRegisterTests::myName);
 		}
 
@@ -192,7 +168,8 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		void actRegisterTearDownMethod()
 		{
-			actRegisterMethodBySuiteName();
+			TestClassForRegisterTests instance;
+			actRegisterMethodByLambda(&instance);
 			TearDownRegister setUpReg([]() {throw exception(); }, TestClassForRegisterTests::myName);
 		}
 

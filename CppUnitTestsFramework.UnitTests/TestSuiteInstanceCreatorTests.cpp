@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <CppUnitTestsFramework\TestSuiteInstanceCreator.h>
-#include <CppUnitTestsFramework\TestSuiteClass.h>
+#include <CppUnitTestsFramework\TestSuite.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -10,22 +10,22 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 	public:
 		TEST_METHOD(CreateSuiteTestInstance_HasTestSuiteClassType_CheckReturnInstance)
 		{
-			TestSuiteInstanceCreator<TestSuiteClass> creator("SuiteName");
+			TestSuiteInstanceCreator<TestSuite> creator("SuiteName");
 			TestSuitePtr testSuite=creator.createInstance();
-			StringAssert::Constains("TestSuiteClass", testSuite->getName());
+			StringAssert::Constains("TestSuite", testSuite->getName());
 		}
 
 	public:
 		TEST_METHOD(getSuiteName_HasTestSuiteClassType_CheckReturnCorrectName)
 		{
-			TestSuiteInstanceCreator<TestSuiteClass> creator("SuiteName");
+			TestSuiteInstanceCreator<TestSuite> creator("SuiteName");
 			StringAssert::Constains("SuiteName", creator.getSuiteName());
 		}
 
 	public:
 		TEST_METHOD(CreateInstance_HasTestSuiteClassType_CheckReturnOnlyOneInstance)
 		{
-			TestSuiteInstanceCreator<TestSuiteClass> creator("SuiteName");
+			TestSuiteInstanceCreator<TestSuite> creator("SuiteName");
 			TestSuitePtr result1 = creator.createInstance();
 			TestSuitePtr result2 = creator.createInstance();
 			bool areEqual=result1 == result2;

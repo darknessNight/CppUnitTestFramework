@@ -156,26 +156,22 @@
     <ClInclude Include="TestSuiteCreator.h" />
     <ClInclude Include="TestCase.h" />
     <ClInclude Include="TestCaseFunc.h" />
-    <ClInclude Include="TestCaseMethod.h" />
     <ClInclude Include="TestCategory.h" />
     <ClInclude Include="TestReport.h" />
     <ClInclude Include="TestResult.h" />
     <ClInclude Include="TestSuite.h" />
-    <ClInclude Include="TestSuiteClass.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FunctionTester.cpp" />
     <ClCompile Include="HelperFuncs.cpp" />
     <ClCompile Include="TestCase.cpp" />
-    <ClCompile Include="TestCaseMethod.cpp" />
     <ClCompile Include="TestCategory.cpp" />
     <ClCompile Include="TestContainer.cpp" />
     <ClCompile Include="TestRegisterer.cpp" />
     <ClCompile Include="TestReport.cpp" />
     <ClCompile Include="TestResult.cpp" />
     <ClCompile Include="TestSuite.cpp" />
-    <ClCompile Include="TestSuiteClass.cpp" />
     <ClCompile Include="TestSuiteCreator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
