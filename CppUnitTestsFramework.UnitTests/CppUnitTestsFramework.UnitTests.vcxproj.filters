@@ -34,6 +34,9 @@
     <ClCompile Include="IgnoreCaseTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="AssertTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">

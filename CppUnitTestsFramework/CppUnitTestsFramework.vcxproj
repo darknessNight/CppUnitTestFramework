@@ -132,7 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assert.h" />
     <ClInclude Include="AssertExceptions.h" />
+    <ClInclude Include="Asserts.h" />
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="ConfMacros.h" />
     <ClInclude Include="Exceptions.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="TestResult.h" />
     <ClInclude Include="TestSuite.h" />
     <ClInclude Include="TestSuiteInstanceCreator.h" />
+    <ClInclude Include="ToStringConverter.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FunctionTester.cpp" />

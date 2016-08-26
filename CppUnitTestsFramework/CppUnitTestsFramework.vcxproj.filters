@@ -91,6 +91,15 @@
     <ClInclude Include="TestIgnoredRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
+    <ClInclude Include="Asserts.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="ToStringConverter.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

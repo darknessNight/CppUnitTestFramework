@@ -1,4 +1,5 @@
 #pragma once
+#include "Exceptions.h"
 #include <string>
 namespace darknessNight_CppUnitTestFramework {
 	class AssertException :public exception {
@@ -7,6 +8,10 @@ namespace darknessNight_CppUnitTestFramework {
 		}
 
 		AssertException(std::string message) :exception(message.c_str()) {
+		}
+
+		std::string getMessage() {
+			return std::string(what());
 		}
 	};
 }

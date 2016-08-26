@@ -162,6 +162,10 @@
     <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssertTests.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IgnoreCaseTests.cpp">
       <SubType>
       </SubType>
