@@ -10,9 +10,6 @@ namespace darknessNight_CppUnitTestFramework {
 	protected:
 		FunctionTesterPtr functionTester;
 		TestReport report;
-	protected:
-		void setName(std::string name);
-		TestCase();
 	public:
 		std::string getName() const;
 		void setFileAndLine(std::string file, unsigned int line);
@@ -22,6 +19,9 @@ namespace darknessNight_CppUnitTestFramework {
 		TestReport getReport(TestResult result) const;
 		TestReport getReportWithoutResult() const;
 		virtual TestResult runTest();
+	protected:
+		TestCase();
+		void setName(std::string name);
 		void prepareFunctionTester();
 	};
 	typedef std::shared_ptr<TestCase> TestCasePtr;

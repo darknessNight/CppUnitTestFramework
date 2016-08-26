@@ -1,0 +1,20 @@
+#include "stdafx.h"
+#include <CppUnitTestsFramework\TestCase.h>
+#include <CppUnitTestsFramework\TestCaseIgnored.h>
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+
+namespace darknessNight_CppUnitTestFramework::UnitTests {
+	TEST_CLASS(IgnoredCaseTests)
+	{
+	public:
+		TEST_METHOD(IgnoredCase_ConstructorHasIgnoreCauseAndName_CheckCorrectRemeberData)
+		{
+			TestCasePtr testCase=TestCasePtr(new TestCaseIgnored("name", "IgnoredTest"));
+			TestReport report = testCase->runTestAndGetReport();
+			StringAssert::AreEqual("Ignored", report.getResult().getCause());
+			StringAssert::AreEqual("name", report.getTestName());
+			StringAssert::AreEqual("IgnoredTest", report.getResult().getErrorMessage());
+		}
+	};
+}

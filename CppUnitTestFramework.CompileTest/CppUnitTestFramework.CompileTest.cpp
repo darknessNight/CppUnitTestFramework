@@ -17,8 +17,8 @@ int main()
 	writeTestResult("TestFunction tests:", testFunctionMacro);
 	writeTestResult("TestClass SetUpAndTearDown:", testClassSetUpAndTearDown);
 	writeTestResult("TestClass ArgTestMethodAndFunc:", testArgMethodAndFunc);
+	writeTestResult("IgnoreTest:", testIgnoreMethod);
 	
 	system("pause");
 	return 0;
 }
-

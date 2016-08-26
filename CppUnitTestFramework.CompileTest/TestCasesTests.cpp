@@ -2,10 +2,24 @@
 
 using namespace darknessNight_CppUnitTestFramework;
 
+void testIgnoreMethod() {
+	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(getClassName<TestSuiteTestMacro>());
+	auto result = testSuite->runTestAndGetReport("IgnoredTest");
+	if (result.getResult().getErrorMessage() != "\"IgnoreCause\"")
+		throw SpecialException("No have correct ignored cause");
+}
+
 void testClassAndMethodMacro()
 {
+	checkIsCorrectSuitesCount();
 	std::string name = getClassName<TestSuiteTestMacro>();
 	testTestCaseMacro(testCaseCount, name, "FirstTestMethod", macrosFile, testMethodLine);
+}
+
+void checkIsCorrectSuitesCount()
+{
+	if (TestsCollectionExport::getTestContainer().getTestSuiteList().size()-1 != testSuiteCount)
+		throw SpecialException("Count of suites is incorrect");
 }
 
 void testFunctionMacro() {

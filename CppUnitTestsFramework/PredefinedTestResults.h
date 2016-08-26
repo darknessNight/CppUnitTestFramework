@@ -4,47 +4,45 @@
 namespace darknessNight_CppUnitTestFramework {
 
 	class AssertTestResult :public TestResult {
-	private:
-		const std::string assertMessage = "Assert failed";
 	public:
 		AssertTestResult(exception ex) :TestResult(ex.what()) {
-			errorCause = assertMessage;
+			errorCause = "Assert failed";
 		}
 	};
 
 	class ExceptionTestResult :public TestResult {
-	private:
-		const std::string exceptionMessage = "C++ exception";
 	public:
 		ExceptionTestResult(exception ex) :TestResult(ex.what()) {
-			errorCause = exceptionMessage;
+			errorCause = "C++ exception";
 		}
 	};
 
 	class TearDownFailedTestResult :public TestResult {
-	private:
-		const std::string exceptionMessage = "TearDown failed";
 	public:
 		TearDownFailedTestResult(exception ex) :TestResult(ex.what()) {
-			errorCause = exceptionMessage;
+			errorCause = "TearDown failed";
 		}
 	};
 
 	class SetUpFailedTestResult :public TestResult {
-	private:
-		const std::string exceptionMessage = "SetUp failed";
 	public:
 		SetUpFailedTestResult(exception ex) :TestResult(ex.what()) {
-			errorCause = exceptionMessage;
+			errorCause = "SetUp failed";
 		}
 	};
 
 	class SuccessTestResult :public TestResult {
-	private:
-		const std::string successMessage = "Success";
 	public:
 		SuccessTestResult() :TestResult(true) {
-			errorCause = successMessage;
+			errorCause = "Success";
+		}
+	};
+
+	class IgnoredTestResult :public TestResult {
+	public:
+		IgnoredTestResult(std::string ignoredCause) :TestResult(false) {
+			errorCause = "Ignored";
+			TestResult::errorMessage = ignoredCause;
 		}
 	};
 }

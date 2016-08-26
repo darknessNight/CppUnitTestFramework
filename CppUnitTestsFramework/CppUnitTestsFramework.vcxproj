@@ -145,11 +145,12 @@
     <ClInclude Include="SetUpRegister.h" />
     <ClInclude Include="SuiteMacros.h" />
     <ClInclude Include="TearDownRegister.h" />
+    <ClInclude Include="TestCaseIgnored.h" />
     <ClInclude Include="TestClassWithCategoryRegister.h" />
+    <ClInclude Include="TestIgnoredRegister.h" />
     <ClInclude Include="TestRegisterContainerAccess.h" />
     <ClInclude Include="TestClassRegister.h" />
     <ClInclude Include="TestFuncRegister.h" />
-    <ClInclude Include="TestMethodRegister.h" />
     <ClInclude Include="TestsCollectionExport.h" />
     <ClInclude Include="TestRegisters.h" />
     <ClInclude Include="TestContainer.h" />

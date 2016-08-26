@@ -9,7 +9,7 @@ TestResult darknessNight_CppUnitTestFramework::TestReport::getResult() {
 }
 
 std::string darknessNight_CppUnitTestFramework::TestReport::getTestName() {
-	return "TestName";
+	return testName;
 }
 
 std::string darknessNight_CppUnitTestFramework::TestReport::getFile() {

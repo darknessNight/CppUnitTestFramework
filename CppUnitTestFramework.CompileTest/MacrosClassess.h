@@ -3,6 +3,8 @@
 
 
 
+static int testSuiteCount = 4;
+
 TEST_SUITE(SAME_SUITE)
 TEST_SUITE_WITH_CATEGORY(SecondSuite, "Category")
 
@@ -10,13 +12,19 @@ TEST_SUITE_WITH_CATEGORY(SecondSuite, "Category")
 TEST_CLASS_WITH_CATEGORY(TestSuiteClassOne, "Category") {
 };
 
+
+#pragma region additional for testData
 static int countOfArgMethods = 3;
-static int testCaseCount = 4;
+static int testCaseCount = 5;
 static std::string macrosFile = __FILE__;
-static int testMethodLine = __LINE__ + 2;
+static int testMethodLine = __LINE__ + 3;
+#pragma endregion
 TEST_CLASS(TestSuiteTestMacro) {
 	TEST_METHOD(FirstTestMethod) {
 		//throw exception();
+	}
+
+	IGNORE_TEST_METHOD(IgnoredTest, "IgnoreCause") {
 	}
 
 	ARG_TEST_METHOD(ArgMethod, 2, 4);
@@ -45,6 +53,8 @@ static bool collapseTearDown = false;
 
 static int testFuncLine = __LINE__ + 1;
 TEST_FUNCTION_DECLARE(TestFunctionTest);
+
+IGNORE_TEST_FUNCTION_DECLARE(TestFunctionTestIgnored, "IgnoreCause");
 
 
 void TestFunctionTest2(int, int);

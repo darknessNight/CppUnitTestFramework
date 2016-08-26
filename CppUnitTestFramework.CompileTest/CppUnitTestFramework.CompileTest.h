@@ -9,10 +9,13 @@ void testTestCaseMacro(int testCaseCount, std::string suite, std::string funcNam
 void testFunctionMacro();
 void showError(void(*)());
 void testClassAndMethodMacro();
+void checkIsCorrectSuitesCount();
 void testClassSetUpAndTearDown();
 void testArgMethodAndFunc();
-
+void testIgnoreMethod();
 void writeTestResult(std::string,void(*)());
+
+
 
 class SpecialException {
 private:

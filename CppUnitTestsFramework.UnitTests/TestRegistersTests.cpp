@@ -136,7 +136,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			return resultList;
 		}
 
-		TEST_METHOD(RegisterMethod_HasCorrectMethodByLambda_CheckHasTestCaseInSuite)
+		TEST_METHOD(RegisterMethod_HasCorrectMethodAndSuiteObj_CheckHasTestCaseInSuite)
 		{
 			TestClassForRegisterTests instance;
 			actRegisterMethodByLambda(&instance);
@@ -145,8 +145,8 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		void actRegisterMethodByLambda(TestClassForRegisterTests* instance) {
 			TestClassRegister<TestClassForRegisterTests> addTest;
-			TestMethodRegister addFunc([=]() {instance->DoNothingMethod(); },
-									   "DoNothingMethod", TestClassForRegisterTests::myTypeName, __FILE__, __LINE__);
+			TestFuncRegister addFunc([=]() {instance->DoNothingMethod(); },
+									   "DoNothingMethod", instance, __FILE__, __LINE__);
 		}
 
 		TEST_METHOD(RegisterSetUpFunc_HasCorrectMethod_CheckHasTestCaseInSuite) {
@@ -185,6 +185,42 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("TestName");
 			bool result=testSuite->getCategory()==TestCategory("FullCategory.NameCat.LastCat");
 			Assert::IsTrue(result);
+		}
+
+		TEST_METHOD(RegisterIgnoredTestCase_CheckCorrectAddToSuite) {
+			actRegisterIgnoredTest();
+			assertRegisterIgnoredTest();
+		}
+
+		void assertRegisterIgnoredTest()
+		{
+			TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName("TestSuite");
+			assertIgnoredTestCaseIsRegisteredToSuite(testSuite);
+			assertIgnoredTestCaseHasMessage(testSuite);
+		}
+
+		void assertIgnoredTestCaseHasMessage(darknessNight_CppUnitTestFramework::TestSuitePtr &testSuite)
+		{
+			auto result = testSuite->runTestAndGetReport("IgnoredTestName").getResult();
+			auto errorMessage = result.getErrorMessage();
+			StringAssert::AreEqual("IgnoreCause", errorMessage);
+			Assert::IsTrue(result.isFailure());
+		}
+
+		void assertIgnoredTestCaseIsRegisteredToSuite(darknessNight_CppUnitTestFramework::TestSuitePtr &testSuite)
+		{
+			bool isInArray = false;
+			for each(auto el in testSuite->getTestCaseList()) {
+				if (el == "IgnoredTestName")
+					isInArray = true;
+			}
+			Assert::IsTrue(isInArray);
+		}
+
+		void actRegisterIgnoredTest()
+		{
+			TestClassRegister<TestClassForRegisterTests> reg("TestSuite");
+			TestIgnoredRegister ign("IgnoredTestName", "IgnoreCause", "TestSuite", __FILE__, __LINE__);
 		}
 
 	};

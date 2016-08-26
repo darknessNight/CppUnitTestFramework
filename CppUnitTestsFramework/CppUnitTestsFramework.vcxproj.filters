@@ -7,9 +7,6 @@
     <ClInclude Include="AssertExceptions.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
-    <ClInclude Include="TestMethodRegister.h">
-      <Filter>Headers\Registers</Filter>
-    </ClInclude>
     <ClInclude Include="TestFuncRegister.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
@@ -87,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="HelperFuncs.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseIgnored.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestIgnoredRegister.h">
+      <Filter>Headers\Registers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
