@@ -53,6 +53,26 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			}
 		}
 
+		TEST_METHOD(AreEqual_HasPointersToDiffObj_CheckThrow) {
+			try {
+				HelperClass f(3), s(2);
+				darknessNight_CppUnitTestFramework::Assert::AreEqualPtrValue(&f, &s);
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail(L"No throw");
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+			}
+		}
+
+		TEST_METHOD(AreEqual_HasPointersToEqualObj_CheckNoThrow) {
+			try {
+				HelperClass f(2), s(2);
+				darknessNight_CppUnitTestFramework::Assert::AreEqualPtrValue(&f, &s);
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+		}
+
 		TEST_METHOD(AreEqual_HasDiffInt_CheckThrowExceptionWithValue) {
 			try {
 				darknessNight_CppUnitTestFramework::Assert::AreEqual(2, 3);
@@ -61,17 +81,6 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
 				StringAssert::Constains("expected <2>", ex.getMessage(), L"No has correct expected part");
 				StringAssert::Constains("received <3>", ex.getMessage(), L"No has correct result part");
-			}
-		}
-
-		TEST_METHOD(AreEqual_HasDiffString_CheckThrowExceptionWithValue) {
-			try {
-				darknessNight_CppUnitTestFramework::Assert::AreEqual(std::string("2"), std::string("3"));
-				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail(L"No throw");
-			}
-			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
-				StringAssert::Constains("expected <\"2\">", ex.getMessage(), L"No has correct expected part");
-				StringAssert::Constains("received <\"3\">", ex.getMessage(), L"No has correct result part");
 			}
 		}
 
@@ -86,6 +95,72 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			}
 		}
 
+		TEST_METHOD(AreEqual_HasDiffIntAndMessage_CheckConstainsOwnMessage) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreEqual(HelperClass(2), HelperClass(3), "TestFailedMessage");
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail(L"No throw");
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				StringAssert::Constains(std::string("Message: <") + "TestFailedMessage>", ex.getMessage(), L"No has own message");
+			}
+		}
+
+		TEST_METHOD(AreEqual_HasDoubleAndTolerance_CheckNoThrow) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreEqual(2.001, 2.0013,0.001, "TestFailedMessage");
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(AreEqual_HasDoubleAndTolerance_CheckThrow) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreEqual(2.001, 2.0021, 0.001, "TestFailedMessage");
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+			}
+		}
+
+		TEST_METHOD(AreNotEqual_HasDoubleAndTolerance_CheckNoThrow) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreNotEqual(2.001, 2.0021, 0.001, "TestFailedMessage");
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(AreNotEqual_HasPointersToEqualObj_CheckThrow) {
+			try {
+				HelperClass f(2), s(2);
+				darknessNight_CppUnitTestFramework::Assert::AreNotEqualPtrValue(&f, &s);
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+			}
+		}
+
+		TEST_METHOD(AreNotEqual_HasDiffInt_CheckNoThrow) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreNotEqual(2, 3);
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(AreNotEqual_HasSameInt_CheckThrowAndHasMessage) {
+			try {
+				darknessNight_CppUnitTestFramework::Assert::AreNotEqual(2, 2, "Mess");
+				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
+			}
+			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
+				StringAssert::Constains("Object is same", ex.getMessage());
+				StringAssert::Constains(std::string("Message: <"), ex.getMessage(), L"No has own message");
+			}
+		}
 
 	};
 }
