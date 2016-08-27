@@ -57,8 +57,11 @@ TestResult darknessNight_CppUnitTestFramework::FunctionTester::runTestMethod(){
 	try {
 		testMethod();
 	}
-	catch (AssertException ex) {
+	catch (AssertFailException ex) {
 		return AssertTestResult(ex);
+	}
+	catch (AssertPassException ex) {
+		return SuccessTestResult();
 	}
 	catch (exception ex) {
 		return ExceptionTestResult(ex);

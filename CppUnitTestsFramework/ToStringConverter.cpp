@@ -17,6 +17,7 @@ darknessNight_CppUnitTestFramework::ToStringConverter::ToStringConverter() {
 	registerConverter<float>(std::to_string);
 	registerConverter<std::string>(&ToStringConverter::StringToString);
 	registerConverter<std::wstring>(&ToStringConverter::WStringToString);
+	registerConverter<bool>([](bool cond)->std::string {return cond ? "True" : "False"; });
 }
 
 std::string darknessNight_CppUnitTestFramework::ToStringConverter::ToString(const char * obj) {

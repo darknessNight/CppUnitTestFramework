@@ -4,14 +4,22 @@
 namespace darknessNight_CppUnitTestFramework {
 	class AssertException :public exception {
 	public:
-		AssertException(const char* message) :exception(message) {
-		}
-
-		AssertException(std::string message) :exception(message.c_str()) {
-		}
+		AssertException(std::string message):exception(message.c_str()){}
 
 		std::string getMessage() {
 			return std::string(what());
+		}
+	};
+
+	class AssertFailException :public AssertException {
+	public:
+		AssertFailException(std::string message) :AssertException(message){
+		}
+	};
+
+	class AssertPassException :public AssertException {
+	public:
+		AssertPassException(std::string message) :AssertException(message) {
 		}
 	};
 }

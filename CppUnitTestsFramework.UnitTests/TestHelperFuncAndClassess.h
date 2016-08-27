@@ -12,7 +12,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 	}
 
 	static void testThrowingAssertFunc() {
-		throw AssertException(methodFailedString);
+		throw AssertFailException(methodFailedString);
 	}
 
 	class MockFunctionTester : public FunctionTester {

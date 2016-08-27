@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssertHelperClass.h" />
     <ClInclude Include="LearningTestAutoAddMethod.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StringAssert.h" />
@@ -162,11 +163,15 @@
     <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AssertTests.cpp">
+    <ClCompile Include="EqualAssertTests.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="IgnoreCaseTests.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MoreLessAssert.cpp">
       <SubType>
       </SubType>
     </ClCompile>

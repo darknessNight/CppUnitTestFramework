@@ -133,14 +133,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assert.h" />
+    <ClInclude Include="AssertBoolean.h" />
+    <ClInclude Include="AssertExceptionCatcher.h" />
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="Asserts.h" />
+    <ClInclude Include="BasicAssert.h" />
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="ConfMacros.h" />
+    <ClInclude Include="EqualAssert.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="FuncMacros.h" />
     <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="GreaterLessAssert.h" />
     <ClInclude Include="HelperFuncs.h" />
     <ClInclude Include="MethodMacros.h" />
     <ClInclude Include="PredefinedTestResults.h" />

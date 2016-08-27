@@ -34,10 +34,13 @@
     <ClCompile Include="IgnoreCaseTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="AssertTests.cpp">
+    <ClCompile Include="ToStringConverterTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ToStringConverterTests.cpp">
+    <ClCompile Include="EqualAssertTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MoreLessAssert.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -55,6 +58,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="LearningTestAutoAddMethod.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertHelperClass.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

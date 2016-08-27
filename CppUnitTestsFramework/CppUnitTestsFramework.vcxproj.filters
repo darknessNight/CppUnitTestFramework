@@ -103,6 +103,21 @@
     <ClInclude Include="ToStringConverterImplem.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="EqualAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="GreaterLessAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertBoolean.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertExceptionCatcher.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
