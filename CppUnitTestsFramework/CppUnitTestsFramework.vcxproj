@@ -173,6 +173,7 @@
     <ClInclude Include="ToStringConverterImplem.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssertExceptionCatcher.cpp" />
     <ClCompile Include="FunctionTester.cpp" />
     <ClCompile Include="HelperFuncs.cpp" />
     <ClCompile Include="TestCase.cpp" />

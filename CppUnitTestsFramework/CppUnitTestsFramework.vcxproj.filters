@@ -171,5 +171,6 @@
     </ClCompile>
     <ClCompile Include="TestContainer.cpp" />
     <ClCompile Include="ToStringConverter.cpp" />
+    <ClCompile Include="AssertExceptionCatcher.cpp" />
   </ItemGroup>
 </Project>

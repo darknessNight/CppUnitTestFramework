@@ -43,6 +43,9 @@
     <ClCompile Include="MoreLessAssert.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="AssertExceptionCatcherTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">

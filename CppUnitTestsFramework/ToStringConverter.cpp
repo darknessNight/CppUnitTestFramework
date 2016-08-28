@@ -1,4 +1,5 @@
 #include "ToStringConverter.h"
+#include <memory>
 
 using namespace darknessNight_CppUnitTestFramework;
 std::unique_ptr<ToStringConverter> ToStringConverter::instance=std::make_unique<ToStringConverter>();

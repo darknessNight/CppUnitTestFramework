@@ -5,22 +5,26 @@
 namespace darknessNight_CppUnitTestFramework {
 	class BasicAssert {
 	public:
-		static void Fail(std::string message) {
+		static void Fail(std::string message="") {
 			throw AssertFailException(message);
 		}
 
-		static void Pass(std::string message) {
+		static void Pass(std::string message="") {
 			throw AssertPassException(message);
 		}
 
-		template <typename T> static void IsNull(T val) {
-			if (val != nullptr)
-				Fail("Expected nullptr, but was <"+ToStringConverter::ToString(val)+">");
+		template <typename T> static void IsNull(T val, std::string message = "") {
+			if (val != nullptr) {
+				std::string mess = getAddOwnMessageIfExists(message, "Expected nullptr, but was <" + ToStringConverter::ToString(val) + ">");
+				Fail(mess);
+			}
 		}
 
-		template <typename T> static void IsNotNull(T val) {
-			if (val == nullptr)
-				Fail("Expected non null value");
+		template <typename T> static void IsNotNull(T val, std::string message = "") {
+			if (val == nullptr) {
+				std::string mess = getAddOwnMessageIfExists(message, "Expected non null value");
+				Fail(mess);
+			}
 		}
 
 	protected:
@@ -54,11 +58,11 @@ namespace darknessNight_CppUnitTestFramework {
 			return getAddOwnMessageIfExists(userMessage, notEqualMess);
 		}
 
-		static const std::string getAddOwnMessageIfExists(std::string userMessage, std::string notEqualMess) {
+		static const std::string getAddOwnMessageIfExists(std::string userMessage, std::string assertMessage) {
 			if (userMessage.size() <= 0)
-				return notEqualMess;
+				return assertMessage;
 			else
-				return notEqualMess + ". Message: <" + userMessage + ">";
+				return assertMessage + ". Message: <" + userMessage + ">";
 		}
 
 		template<typename T> static const std::string getCompareErrorMessage(const T& expected, const T& result) {
