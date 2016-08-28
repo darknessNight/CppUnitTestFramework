@@ -1,7 +1,3 @@
-# Create a library called "Hello" which includes the source file "hello.cxx".
-# The extension is already found. Any number of sources could be listed here.
-add_library (CppUnitTestsFramework FunctionTester.cpp HelperFuncs.cpp TestCase.cpp TestCategory.cpp TestContainer.cpp TestRegisterer.cpp TestReport.cpp TestSuite.cpp TestSuiteCreator.cpp ToStringConverter.cpp)
-
-# Make sure the compiler can find include files for our Hello library
-# when other libraries or executables link to Hello
-target_include_directories (CppUnitTestsFramework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+cmake_minimum_required (VERSION 2.6)
+project (CppUnitTestFramework)
+	add_library(CppUnitTestFramework AssertExceptionCatcher.cpp AssertHelper.cpp BasicAssert.cpp FunctionTester.cpp HelperFuncs.cpp TestCase.cpp TestCategory.cpp TestContainer.cpp TestRegisterer.cpp TestReport.cpp TestResult.cpp TestSuite.cpp TestSuiteCreator.cpp ToStringConverter.cpp)

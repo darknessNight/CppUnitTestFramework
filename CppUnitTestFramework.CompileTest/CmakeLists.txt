@@ -1,10 +1,5 @@
-# Add executable called "helloDemo" that is built from the source files
-# "demo.cxx" and "demo_b.cxx". The extensions are automatically found.
-add_executable (CppUnitTestFramework_CompileTest ConfigureMethodTests.cpp CppUnitTestFramework.CompileTest.cpp DrawingFunc.cpp MacrosClassess.cpp stdafx.cpp TestArgMethod.cpp TestCasesTests.cpp)
-
-
-
-# Link the executable to the Hello library. Since the Hello library has
-# public include directories we will use those link directories when building
-# helloDemo
-target_link_libraries (CppUnitTestFramework_CompileTest LINK_PUBLIC CppUnitTestFramework)
+cmake_minimum_required (VERSION 2.6)
+project (CppUnitTestFramework.CompileTest)
+	add_executable(CppUnitTestFramework.CompileTest ConfigureMethodTests.cpp CppUnitTestFramework.CompileTest.cpp DrawingFunc.cpp MacrosClassess.cpp stdafx.cpp TestArgMethod.cpp TestCasesTests.cpp)
+include_directories(" ${PROJECT_SOURCE_DIR}/..")
+target_link_libraries (CppUnitTestFramework.CompileTest CppUnitTestFramework)
