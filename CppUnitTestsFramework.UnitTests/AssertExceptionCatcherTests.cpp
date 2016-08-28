@@ -75,7 +75,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("Wrong exception throwed. Unknow exception", ex.getMessage());
+				StringAssert::Constains("Catched unexpected exception <Unknow-Type>", ex.getMessage());
 			}
 		}
 
@@ -115,9 +115,9 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			}
 			catch (AssertFailException ex) {
 				StringAssert::Constains("Catched unexpected exception", ex.getMessage());
-				StringAssert::Constains("<Unknow-type>", ex.getMessage());
+				StringAssert::Constains("<Unknow-Type>", ex.getMessage());
 			}
-			catch (std::exception) {
+			catch (std::exception ex) {
 				Assert::Fail();
 			}
 		}

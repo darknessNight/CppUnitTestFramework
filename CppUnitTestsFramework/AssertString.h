@@ -28,32 +28,42 @@ namespace darknessNight_CppUnitTestFramework {
 
 		static void Contains(string expected, string result, string message = "") {
 			if (!constains(expected, result)) 
-				throwFailedExceptionFromPattern<string>("Not found <%expected> in <%result>", expected, result, message);
+				helper.throwFailedExceptionFromPattern("Not found <%expected> in <%result>", expected, result, message);
 		}
 
 		static void NotContains(string expected, string result, string message = "") {
 			if (constains(expected, result)) 
-				throwFailedExceptionFromPattern("Found <%expected> in <%result>", expected,result,  message);
+				helper.throwFailedExceptionFromPattern("Found <%expected> in <%result>", expected,result,  message);
 		}
 
 		static void EndsWith(string expected, string result, string message = "") {
 			if (!endsWith(expected, result)) 
-				throwFailedExceptionFromPattern("<%result> does not end with <%expected>", expected,result,  message);
+				helper.throwFailedExceptionFromPattern("<%result> does not end with <%expected>", expected,result,  message);
 		}
 
 		static void DoesNotEndWith(string expected, string result, string message = "") {
 			if (endsWith(expected, result)) 
-				throwFailedExceptionFromPattern("<%result> ends with <%expected>", expected,result,  message);
+				helper.throwFailedExceptionFromPattern("<%result> ends with <%expected>", expected,result,  message);
 		}
 
 		static void StartsWith(string expected, string result, string message = "") {
 			if (!startsWith(expected, result)) 
-				throwFailedExceptionFromPattern("<%result> does not start with <%expected>", expected,result,  message);
+				helper.throwFailedExceptionFromPattern("<%result> does not start with <%expected>", expected,result,  message);
 		}
 
 		static void DoesNotStartWith(string expected, string result, string message = "") {
 			if (startsWith(expected, result))
-				throwFailedExceptionFromPattern("<%result> starts with <%expected>", expected,result,  message);
+				helper.throwFailedExceptionFromPattern("<%result> starts with <%expected>", expected,result,  message);
+		}
+
+		static void StartsWith(string expected, string result, string message = "") {
+			if (!match(expected, result))
+				helper.throwFailedExceptionFromPattern("<%result> does not match <%expected>", expected, result, message);
+		}
+
+		static void DoesNotStartWith(string expected, string result, string message = "") {
+			if (match(expected, result))
+				helper.throwFailedExceptionFromPattern("<%result> match <%expected>", expected, result, message);
 		}
 
 

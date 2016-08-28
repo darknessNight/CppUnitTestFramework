@@ -44,11 +44,11 @@ namespace darknessNight_CppUnitTestFramework {
 		}
 
 		template<typename T> static void throwNotEqualFailureMessage(const T &expected, const T &result, std::string &message) {
-			throwFailedExceptionFromPattern("Objects are equal. expected <%expected>, but has <%result>", expected, result, message);
+			helper.throwFailedExceptionFromPattern("Objects are equal. expected <%expected>, but was <%result>", expected, result, message);
 		}
 
 		template<typename T> static void throwEqualFailureMessage(const T &expected, const T &result, std::string &message) {
-			throwFailedExceptionFromPattern("Objects are difference. expected <%expected>, but has <%result>", expected, result, message);
+			helper.throwFailedExceptionFromPattern("Objects are difference. expected <%expected>, but was <%result>", expected, result, message);
 		}
 	};
 }

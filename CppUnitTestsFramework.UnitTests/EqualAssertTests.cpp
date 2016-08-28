@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AssertHelperClass.h"
-#include <CppUnitTestsFramework\Asserts.h>
+#include <CppUnitTestsFramework\Assert.h>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -70,7 +70,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			}
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
 				StringAssert::Constains("expected <2>", ex.getMessage(), L"No has correct expected part");
-				StringAssert::Constains("received <3>", ex.getMessage(), L"No has correct result part");
+				StringAssert::Constains("was <3>", ex.getMessage(), L"No has correct result part");
 			}
 		}
 
@@ -81,7 +81,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 			}
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
 				StringAssert::Constains(std::string("expected <")+typeid(AssertHelperClass).name(), ex.getMessage(), L"No has correct expected part");
-				StringAssert::Constains(std::string("received <")+typeid(AssertHelperClass).name(), ex.getMessage(), L"No has correct result part");
+				StringAssert::Constains(std::string("was <")+typeid(AssertHelperClass).name(), ex.getMessage(), L"No has correct result part");
 			}
 		}
 

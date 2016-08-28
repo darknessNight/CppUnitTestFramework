@@ -26,11 +26,11 @@ namespace darknessNight_CppUnitTestFramework {
 
 	private:
 		template<typename T> static void throwLessFailureMessage(const T &expected, const T &result, std::string &message) {
-			throwFailedExceptionFromPattern<T>("Result is to big. Expected <%expected>, but was <%result>", expected, result, message);
+			helper.throwFailedExceptionFromPattern<T>("Result is to big. Expected <%expected>, but was <%result>", expected, result, message);
 		}
 
 		template<typename T> static void throwGreaterFailureMessage(const T &expected, const T &result, std::string &message) {
-			throwFailedExceptionFromPattern<T>("Result is to small. Expected <%expected>, but was <%result>", expected, result, message);
+			helper.throwFailedExceptionFromPattern<T>("Result is to small. Expected <%expected>, but was <%result>", expected, result, message);
 		}
 	};
 }

@@ -55,7 +55,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("Not found <\"Test1\"> in <\"TestForEvery\">", ex.getMessage());
+				StringAssert::Constains("Not found <Test1> in <TestForEvery>", ex.getMessage());
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("Found <\"Test\"> in <\"TestForEvery\">", ex.getMessage());
+				StringAssert::Constains("Found <Test> in <TestForEvery>", ex.getMessage());
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<\"TestForEvery\"> does not end with <\"Test1\">", ex.getMessage());
+				StringAssert::Constains("<TestForEvery> does not end with <Test1>", ex.getMessage());
 			}
 		}
 
@@ -98,7 +98,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<\"TestForEvery\"> ends with <\"Every\">", ex.getMessage());
+				StringAssert::Constains("<TestForEvery> ends with <Every>", ex.getMessage());
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<\"TestForEvery\"> does not start with <\"Test1\">", ex.getMessage());
+				StringAssert::Constains("<TestForEvery> does not start with <Test1>", ex.getMessage());
 			}
 		}
 
@@ -130,7 +130,39 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<\"TestForEvery\"> starts with <\"Test\">", ex.getMessage());
+				StringAssert::Constains("<TestForEvery> starts with <Test>", ex.getMessage());
+			}
+		}
+
+		TEST_METHOD(Match_HasMatchStrings_CheckNoThrow)
+		{
+			try {
+				AssertString::Match("Test", "TestForEvery");
+			}
+			catch (...) {
+				Assert::Fail();
+			}
+		}
+
+		TEST_METHOD(Match_HasNotMatchStrings_CheckThrow)
+		{
+			try {
+				AssertString::Match("Test1", "TestForEvery");
+				Assert::Fail();
+			}
+			catch (AssertFailException ex) {
+				StringAssert::Constains("<TestForEvery> does not start with <Test1>", ex.getMessage());
+			}
+		}
+
+		TEST_METHOD(NotMatch_HasMatchStrings_CheckThrow)
+		{
+			try {
+				AssertString::DoesNotMatch("Test", "TestForEvery");
+				Assert::Fail();
+			}
+			catch (AssertFailException ex) {
+				StringAssert::Constains("<TestForEvery> starts with <Test>", ex.getMessage());
 			}
 		}
 	};

@@ -135,10 +135,12 @@
     <ClInclude Include="Assert.h" />
     <ClInclude Include="AssertBoolean.h" />
     <ClInclude Include="AssertExceptionCatcher.h" />
+    <ClInclude Include="AssertExceptionCatcherImplem.h" />
     <ClInclude Include="AssertExceptions.h" />
-    <ClInclude Include="Asserts.h" />
+    <ClInclude Include="AssertHelper.h" />
     <ClInclude Include="AssertString.h" />
     <ClInclude Include="BasicAssert.h" />
+    <ClInclude Include="BasicAssertImplem.h" />
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="ConfMacros.h" />
     <ClInclude Include="EqualAssert.h" />
@@ -175,6 +177,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssertExceptionCatcher.cpp" />
+    <ClCompile Include="AssertHelper.cpp" />
+    <ClCompile Include="BasicAssert.cpp" />
     <ClCompile Include="FunctionTester.cpp" />
     <ClCompile Include="HelperFuncs.cpp" />
     <ClCompile Include="TestCase.cpp" />
