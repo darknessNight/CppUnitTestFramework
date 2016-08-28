@@ -137,6 +137,7 @@
     <ClInclude Include="AssertExceptionCatcher.h" />
     <ClInclude Include="AssertExceptions.h" />
     <ClInclude Include="Asserts.h" />
+    <ClInclude Include="AssertString.h" />
     <ClInclude Include="BasicAssert.h" />
     <ClInclude Include="ConfigurableTest.h" />
     <ClInclude Include="ConfMacros.h" />

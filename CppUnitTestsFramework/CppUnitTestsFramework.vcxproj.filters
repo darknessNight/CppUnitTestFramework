@@ -118,6 +118,9 @@
     <ClInclude Include="AssertExceptionCatcher.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="AssertString.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

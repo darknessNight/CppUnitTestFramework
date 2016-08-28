@@ -1,15 +1,16 @@
 #pragma once
 #include "AssertExceptions.h"
 #include "ToStringConverter.h"
+#include <cstring>
 
 namespace darknessNight_CppUnitTestFramework {
 	class BasicAssert {
 	public:
-		static void Fail(std::string message="") {
+		static void Fail(std::string message = "") {
 			throw AssertFailException(message);
 		}
 
-		static void Pass(std::string message="") {
+		static void Pass(std::string message = "") {
 			throw AssertPassException(message);
 		}
 
@@ -53,11 +54,6 @@ namespace darknessNight_CppUnitTestFramework {
 			return(wcscmp(expected, result));
 		}
 
-		template<typename T> static std::string getFailureMessageString(const T& expected, const T& result, std::string userMessage) {
-			std::string notEqualMess = getCompareErrorMessage(expected, result);
-			return getAddOwnMessageIfExists(userMessage, notEqualMess);
-		}
-
 		static const std::string getAddOwnMessageIfExists(std::string userMessage, std::string assertMessage) {
 			if (userMessage.size() <= 0)
 				return assertMessage;
@@ -65,8 +61,36 @@ namespace darknessNight_CppUnitTestFramework {
 				return assertMessage + ". Message: <" + userMessage + ">";
 		}
 
-		template<typename T> static const std::string getCompareErrorMessage(const T& expected, const T& result) {
-			return "expected <" + ToStringConverter::ToString(expected) + "> but received <" + ToStringConverter::ToString(result) + ">";
+		template <typename T> static void throwFailedExceptionFromPattern(std::string pattern, const T& expected, const T& result, std::string &message)
+		{
+			std::string resultStr, expectedStr;
+			resultStr = ToStringConverter::ToString(result);
+			expectedStr = ToStringConverter::ToString(expected);
+
+			std::string assertMessage = getFullAssertMessage(pattern, resultStr, expectedStr, message);
+			BasicAssert::Fail(assertMessage);
+		}
+
+		static std::string getFullAssertMessage(std::string pattern, std::string &result, std::string &expected, std::string &message)
+		{
+			replaceVars(pattern, result, expected);
+			return getAddOwnMessageIfExists(message, pattern);
+		}
+
+		static void replaceVars(std::string &pattern, std::string & result, std::string & expected)
+		{
+			std::string resultExp = "%result", expectedExp = "%expected";
+			int posResult = getStringPos(resultExp, pattern);
+			int posExpected = getStringPos(expectedExp, pattern);
+			if (posResult < posExpected)
+				posExpected += (result.size() - resultExp.size());
+
+			pattern = pattern.replace(posResult, resultExp.size(), result);
+			pattern = pattern.replace(posExpected, expectedExp.size(), expected);
+		}
+
+		static int getStringPos(std::string& expected, std::string& result) {
+			return result.find(expected);
 		}
 	};
 }

@@ -5,7 +5,7 @@ namespace darknessNight_CppUnitTestFramework {
 	public:
 		template <typename Exception>static Exception Throws(void(*func)(), std::string message = "");
 
-		template<> static std::exception Throws(void(*func)(), std::string message);
+		//template<> static std::exception Throws(void(*func)(), std::string message);
 
 		static void DoesNotThrow(void(*func)()) {
 			try {

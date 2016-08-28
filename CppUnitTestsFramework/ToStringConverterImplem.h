@@ -21,7 +21,8 @@ namespace darknessNight_CppUnitTestFramework {
 	inline void ToStringConverter::registerConverter(std::string(*convFunc)(const T)) {
 		std::string name = typeid(T).name();
 		std::string staticName = typeid(const T).name();
-		void* func = static_cast<void*>(convFunc);
+		//void* func = static_cast<void*>(convFunc);
+		void* func = (void*)(convFunc);
 		saveFuncs<T>(name, func, staticName);
 	}
 	template<typename T>

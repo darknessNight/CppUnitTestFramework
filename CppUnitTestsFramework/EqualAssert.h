@@ -12,11 +12,11 @@ namespace darknessNight_CppUnitTestFramework {
 			if (comparer(expected, result) == 0) throwNotEqualFailureMessage<T>(expected, result, message);
 		}
 
-		template <typename T> static void AreEqual(T expected, T result, T tolerance, std::string message = "", int(*comparer)(const T&, const T&, const T&) = &BasicAssert::defaultComparerWithTolerance) {
+		template <typename T> static void AreEqualWithTolerance(T expected, T result, T tolerance, std::string message = "", int(*comparer)(const T&, const T&, const T&) = &BasicAssert::defaultComparerWithTolerance) {
 			if (comparer(expected, result, tolerance) != 0) throwEqualFailureMessage<T>(expected, result, message);
 		}
 
-		template <typename T> static void AreNotEqual(T expected, T result, T tolerance, std::string message = "", int(*comparer)(const T&, const T&, const T&) = &BasicAssert::defaultComparerWithTolerance) {
+		template <typename T> static void AreNotEqualWithTolerance(T expected, T result, T tolerance, std::string message = "", int(*comparer)(const T&, const T&, const T&) = &BasicAssert::defaultComparerWithTolerance) {
 			if (comparer(expected, result, tolerance) == 0) throwNotEqualFailureMessage<T>(expected, result, message);
 		}
 
@@ -44,13 +44,11 @@ namespace darknessNight_CppUnitTestFramework {
 		}
 
 		template<typename T> static void throwNotEqualFailureMessage(const T &expected, const T &result, std::string &message) {
-			std::string mess = "Objects are equal." + getFailureMessageString(expected, result, message);
-			BasicAssert::Fail(mess);
+			throwFailedExceptionFromPattern("Objects are equal. expected <%expected>, but has <%result>", expected, result, message);
 		}
 
 		template<typename T> static void throwEqualFailureMessage(const T &expected, const T &result, std::string &message) {
-			std::string mess = "Objects are difference. " + getFailureMessageString(expected, result, message);
-			BasicAssert::Fail(mess);
+			throwFailedExceptionFromPattern("Objects are difference. expected <%expected>, but has <%result>", expected, result, message);
 		}
 	};
 }

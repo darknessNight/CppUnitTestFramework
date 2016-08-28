@@ -97,7 +97,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		TEST_METHOD(AreEqual_HasDoubleAndTolerance_CheckNoThrow) {
 			try {
-				darknessNight_CppUnitTestFramework::Assert::AreEqual(2.001, 2.0013,0.001, "TestFailedMessage");
+				darknessNight_CppUnitTestFramework::Assert::AreEqualWithTolerance(2.001, 2.0013,0.001, "TestFailedMessage");
 			}
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
 				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
@@ -106,7 +106,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		TEST_METHOD(AreEqual_HasDoubleAndTolerance_CheckThrow) {
 			try {
-				darknessNight_CppUnitTestFramework::Assert::AreEqual(2.001, 2.0021, 0.001, "TestFailedMessage");
+				darknessNight_CppUnitTestFramework::Assert::AreEqualWithTolerance(2.001, 2.0021, 0.001, "TestFailedMessage");
 				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
 			}
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
@@ -115,7 +115,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 
 		TEST_METHOD(AreNotEqual_HasDoubleAndTolerance_CheckNoThrow) {
 			try {
-				darknessNight_CppUnitTestFramework::Assert::AreNotEqual(2.001, 2.0021, 0.001, "TestFailedMessage");
+				darknessNight_CppUnitTestFramework::Assert::AreNotEqualWithTolerance(2.001, 2.0021, 0.001, "TestFailedMessage");
 			}
 			catch (darknessNight_CppUnitTestFramework::AssertException ex) {
 				Microsoft::VisualStudio::CppUnitTestFramework::Assert::Fail();
