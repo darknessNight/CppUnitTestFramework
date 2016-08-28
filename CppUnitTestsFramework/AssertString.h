@@ -1,6 +1,7 @@
 #pragma once
 #include "EqualAssert.h"
 #include <algorithm>
+#include <regex>
 
 namespace darknessNight_CppUnitTestFramework {
 	using std::string;
@@ -56,12 +57,12 @@ namespace darknessNight_CppUnitTestFramework {
 				helper.throwFailedExceptionFromPattern("<%result> starts with <%expected>", expected,result,  message);
 		}
 
-		static void StartsWith(string expected, string result, string message = "") {
+		static void Match(string expected, string result, string message = "") {
 			if (!match(expected, result))
 				helper.throwFailedExceptionFromPattern("<%result> does not match <%expected>", expected, result, message);
 		}
 
-		static void DoesNotStartWith(string expected, string result, string message = "") {
+		static void DoesNotMatch(string expected, string result, string message = "") {
 			if (match(expected, result))
 				helper.throwFailedExceptionFromPattern("<%result> match <%expected>", expected, result, message);
 		}
@@ -85,6 +86,11 @@ namespace darknessNight_CppUnitTestFramework {
 
 		static int getStringPos(std::string& expected, std::string& result) {
 			return result.find(expected);
+		}
+
+		static bool match(std::string &expected, std::string &result) {
+			std::regex regex(expected);
+			return std::regex_match(result, regex);
 		}
 
 		static string stringToUpper(string str) {

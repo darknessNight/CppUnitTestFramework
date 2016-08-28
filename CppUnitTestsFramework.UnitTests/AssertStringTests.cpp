@@ -137,7 +137,7 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 		TEST_METHOD(Match_HasMatchStrings_CheckNoThrow)
 		{
 			try {
-				AssertString::Match("Test", "TestForEvery");
+				AssertString::Match("Test...[0-9]{1,2}Ev[eE]ry", "TestFor12Every");
 			}
 			catch (...) {
 				Assert::Fail();
@@ -147,22 +147,22 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 		TEST_METHOD(Match_HasNotMatchStrings_CheckThrow)
 		{
 			try {
-				AssertString::Match("Test1", "TestForEvery");
+				AssertString::Match("Test...[0-9]{1,2}Ev[eE]ry", "TestForASAvery");
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<TestForEvery> does not start with <Test1>", ex.getMessage());
+				StringAssert::Constains("<TestForASAvery> does not match <Test...[0-9]{1,2}Ev[eE]ry>", ex.getMessage());
 			}
 		}
 
 		TEST_METHOD(NotMatch_HasMatchStrings_CheckThrow)
 		{
 			try {
-				AssertString::DoesNotMatch("Test", "TestForEvery");
+				AssertString::DoesNotMatch("Test...[0-9]{1,2}Ev[eE]ry", "TestFor12Every");
 				Assert::Fail();
 			}
 			catch (AssertFailException ex) {
-				StringAssert::Constains("<TestForEvery> starts with <Test>", ex.getMessage());
+				StringAssert::Constains("<TestFor12Every> match <Test...[0-9]{1,2}Ev[eE]ry>", ex.getMessage());
 			}
 		}
 	};
