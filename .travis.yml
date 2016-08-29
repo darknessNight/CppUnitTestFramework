@@ -10,11 +10,9 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
-  - echo $CXXFLAGS
 install:
   - if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-std=c++14"; fi
   - if [ "$CXX" == "g++" ]; then export CXXFLAGS="-std=c++14"; fi
-  - echo $CXXFLAGS
 
 script: make
 
@@ -23,12 +21,12 @@ addons:
     sources:
     # add PPAs with more up-to-date toolchains
     - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.6
+    - llvm-toolchain-precise-3.8
     packages:
     # install toolchains
-    - gcc-5
-    - g++-5
-    - clang-3.6
+    - gcc-5.4
+    - g++-5.4
+    - clang-3.8
 
 matrix:
   include:
@@ -38,14 +36,14 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-5
-      env: COMPILER=g++-5
+            - g++-5.4
+      env: COMPILER=g++-5.4
     - compiler: clang
       addons:
         apt:
           sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.7
+            - llvm-toolchain-precise-3.8
           packages:
-            - clang-3.7
-      env: COMPILER=clang++-3.7
+            - clang-3.8
+      env: COMPILER=clang++-3.8

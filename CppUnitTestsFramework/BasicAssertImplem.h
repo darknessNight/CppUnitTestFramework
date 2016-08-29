@@ -3,7 +3,7 @@
 template<typename T>
 inline void BasicAssert::IsNull(T val, std::string message) {
 	if (val != nullptr) {
-		std::string mess = getAddOwnMessageIfExists(message, "Expected nullptr, but was <" + ToStringConverter::ToString(val) + ">");
+		std::string mess = helper.getAddOwnMessageIfExists(message, "Expected nullptr, but was <" + ToStringConverter::ToString(val) + ">");
 		Fail(mess);
 	}
 }
@@ -11,7 +11,7 @@ inline void BasicAssert::IsNull(T val, std::string message) {
 template<typename T>
 inline void BasicAssert::IsNotNull(T val, std::string message) {
 	if (val == nullptr) {
-		std::string mess = getAddOwnMessageIfExists(message, "Expected non null value");
+		std::string mess = helper.getAddOwnMessageIfExists(message, "Expected non null value");
 		Fail(mess);
 	}
 }
