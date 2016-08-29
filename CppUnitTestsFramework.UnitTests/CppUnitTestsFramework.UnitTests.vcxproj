@@ -163,6 +163,10 @@
     <ClInclude Include="TestHelperFuncAndClassess.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssertArrayTests.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="AssertExceptionCatcherTests.cpp">
       <SubType>
       </SubType>

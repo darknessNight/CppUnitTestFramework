@@ -127,6 +127,9 @@
     <ClInclude Include="AssertHelper.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="AssertArray.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -187,7 +190,11 @@
     <ClCompile Include="ToStringConverter.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="BasicAssert.cpp" />
-    <ClCompile Include="AssertHelper.cpp" />
+    <ClCompile Include="AssertHelper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAssert.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

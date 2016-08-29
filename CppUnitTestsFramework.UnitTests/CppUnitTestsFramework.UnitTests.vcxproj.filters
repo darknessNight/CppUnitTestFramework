@@ -49,6 +49,9 @@
     <ClCompile Include="AssertStringTests.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="AssertArrayTests.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestHelperFuncAndClassess.h">
