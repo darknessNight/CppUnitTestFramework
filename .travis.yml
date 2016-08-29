@@ -8,8 +8,8 @@ compiler:
 
 before_script:
   - mkdir build
-  - cd build
   - ls
+  - cd build
   - cmake ..
 
 script: make
