@@ -15,7 +15,7 @@ namespace darknessNight_CppUnitTestFramework {
 		static std::string ToString(const wchar_t* obj);
 		template <typename T> static std::string ToString(const T obj);
 		template <typename T> static std::string ArrayToString(const T &obj) { return ""; }
-		template <typename T> static std::string ArrayToString(const T* obj) { return ""; }
+		template <typename T> static std::string ArrayToString(const T* obj, unsigned len) { return ""; }
 		template <typename T> static void RegisterConventerFunction(std::string(*convFunc)(const T));
 	private:
 		static std::string StringToString(std::string obj);

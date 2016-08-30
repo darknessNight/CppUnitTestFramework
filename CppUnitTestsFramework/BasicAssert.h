@@ -12,8 +12,6 @@ namespace darknessNight_CppUnitTestFramework {
 	public:
 		static void Fail(std::string message = "");
 		static void Pass(std::string message = "");
-		template <typename T> static void IsNull(T val, std::string message = "");
-		template <typename T> static void IsNotNull(T val, std::string message = "");
 
 	protected:
 		template <typename T> static int defaultComparerWithTolerance(T expected, T result, T tolerance);

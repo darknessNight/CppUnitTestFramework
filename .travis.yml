@@ -24,8 +24,8 @@ addons:
     - llvm-toolchain-precise-3.8
     packages:
     # install toolchains
-    - gcc-5.4
-    - g++-5.4
+    - gcc-5.2
+    - g++-5.2
     - clang-3.8
 
 matrix:
@@ -36,8 +36,8 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-5.4
-      env: COMPILER=g++-5.4
+            - g++-5.2
+      env: COMPILER=g++-5.2
     - compiler: clang
       addons:
         apt:

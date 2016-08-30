@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="Assert.h" />
     <ClInclude Include="AssertArray.h" />
+    <ClInclude Include="AssertArrayImplem.h" />
     <ClInclude Include="AssertBoolean.h" />
     <ClInclude Include="AssertExceptionCatcher.h" />
     <ClInclude Include="AssertExceptionCatcherImplem.h" />

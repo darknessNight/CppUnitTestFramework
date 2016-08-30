@@ -130,6 +130,9 @@
     <ClInclude Include="AssertArray.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="AssertArrayImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
