@@ -2,7 +2,7 @@
 #include <memory>
 
 using namespace darknessNight_CppUnitTestFramework;
-std::unique_ptr<ToStringConverter> ToStringConverter::instance=std::make_unique<ToStringConverter>();
+std::unique_ptr<ToStringConverter> ToStringConverter::instance= std::unique_ptr<ToStringConverter>(new ToStringConverter());
 
 darknessNight_CppUnitTestFramework::ToStringConverter::ToStringConverter() {
 	registerConverter<int>(std::to_string);

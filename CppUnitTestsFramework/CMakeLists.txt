@@ -1,3 +1,16 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required(VERSION 2.6)
 project (CppUnitTestFramework)
-	add_library(CppUnitTestFramework AssertExceptionCatcher.cpp AssertHelper.cpp BasicAssert.cpp FunctionTester.cpp HelperFuncs.cpp TestCase.cpp TestCategory.cpp TestContainer.cpp TestRegisterer.cpp TestReport.cpp TestResult.cpp TestSuite.cpp TestSuiteCreator.cpp ToStringConverter.cpp)
+file(GLOB SOURCES ./*.cpp)
+
+# Include header files
+#include_directories(include)
+
+# Create shared library
+add_library(${PROJECT_NAME} ${SOURCES})
+
+# Install library
+#install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
+
+# Install library headers
+#file(GLOB HEADERS include/*.h)
+#install(FILES ${HEADERS} DESTINATION include/${PROJECT_NAME})

@@ -4,12 +4,14 @@
 //
 
 #pragma once
-
+#ifdef _WIN32
 #include "targetver.h"
 
 #include <stdio.h>
 #include <tchar.h>
-
+#include <Windows.h>
+#include <iostream>
+#endif
 
 
 // TODO: reference additional headers your program requires here
