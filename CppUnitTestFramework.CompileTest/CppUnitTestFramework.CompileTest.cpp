@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include <cstdlib>
-#include <CppUnitTestsFramework\Framework.h>
+#include "../CppUnitTestsFramework\Framework.h"
 #include <iostream>
 #include "CppUnitTestFramework.CompileTest.h"
 

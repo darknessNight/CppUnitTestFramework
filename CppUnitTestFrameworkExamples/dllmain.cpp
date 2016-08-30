@@ -1,4 +1,4 @@
-#include <CppUnitTestsFramework\DynamicLibraryExports.h>
+#include "../CppUnitTestsFramework\DynamicLibraryExports.h"
 
 
 #ifdef _WIN32

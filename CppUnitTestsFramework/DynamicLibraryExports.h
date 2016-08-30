@@ -6,7 +6,7 @@ namespace darknessNight_CppUnitTestFramework {
 #ifdef _WIN32
 		__declspec(dllexport)
 #endif
-		TestContainer* getTests() {
+		TestContainer* getTestsFromDynamicTestsLibrary() {
 			return &TestsCollectionExport::getTestContainer();
 		}
 	}
