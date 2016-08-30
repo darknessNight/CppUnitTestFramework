@@ -133,6 +133,9 @@
     <ClInclude Include="AssertArrayImplem.h">
       <Filter>Headers\Asserts</Filter>
     </ClInclude>
+    <ClInclude Include="DynamicLibraryExports.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

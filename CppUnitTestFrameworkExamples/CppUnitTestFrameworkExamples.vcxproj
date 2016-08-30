@@ -19,34 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}</ProjectGuid>
+    <ProjectGuid>{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CppUnitTestsFramework</RootNamespace>
+    <RootNamespace>CppUnitTestFrameworkExamples</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>CppUnitTestFramework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,18 +69,30 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CPPUNITTESTFRAMEWORKEXAMPLES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -90,11 +101,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CPPUNITTESTFRAMEWORKEXAMPLES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,13 +117,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CPPUNITTESTFRAMEWORKEXAMPLES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -122,79 +135,46 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/std:c++latest %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;CPPUNITTESTFRAMEWORKEXAMPLES_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Assert.h" />
-    <ClInclude Include="AssertArray.h" />
-    <ClInclude Include="AssertArrayImplem.h" />
-    <ClInclude Include="AssertBoolean.h" />
-    <ClInclude Include="AssertExceptionCatcher.h" />
-    <ClInclude Include="AssertExceptionCatcherImplem.h" />
-    <ClInclude Include="AssertExceptions.h" />
-    <ClInclude Include="AssertHelper.h" />
-    <ClInclude Include="AssertString.h" />
-    <ClInclude Include="BasicAssert.h" />
-    <ClInclude Include="BasicAssertImplem.h" />
-    <ClInclude Include="ConfigurableTest.h" />
-    <ClInclude Include="ConfMacros.h" />
-    <ClInclude Include="DynamicLibraryExports.h">
-      <FileType>CppHeader</FileType>
-    </ClInclude>
-    <ClInclude Include="EqualAssert.h" />
-    <ClInclude Include="Exceptions.h" />
-    <ClInclude Include="Framework.h" />
-    <ClInclude Include="FuncMacros.h" />
-    <ClInclude Include="FunctionTester.h" />
-    <ClInclude Include="GreaterLessAssert.h" />
-    <ClInclude Include="HelperFuncs.h" />
-    <ClInclude Include="MethodMacros.h" />
-    <ClInclude Include="PredefinedTestResults.h" />
-    <ClInclude Include="SetUpRegister.h" />
-    <ClInclude Include="SuiteMacros.h" />
-    <ClInclude Include="TearDownRegister.h" />
-    <ClInclude Include="TestCaseIgnored.h" />
-    <ClInclude Include="TestClassWithCategoryRegister.h" />
-    <ClInclude Include="TestIgnoredRegister.h" />
-    <ClInclude Include="TestRegisterContainerAccess.h" />
-    <ClInclude Include="TestClassRegister.h" />
-    <ClInclude Include="TestFuncRegister.h" />
-    <ClInclude Include="TestsCollectionExport.h" />
-    <ClInclude Include="TestRegisters.h" />
-    <ClInclude Include="TestContainer.h" />
-    <ClInclude Include="TestSuiteCreator.h" />
-    <ClInclude Include="TestCase.h" />
-    <ClInclude Include="TestCaseFunc.h" />
-    <ClInclude Include="TestCategory.h" />
-    <ClInclude Include="TestReport.h" />
-    <ClInclude Include="TestResult.h" />
-    <ClInclude Include="TestSuite.h" />
-    <ClInclude Include="TestSuiteInstanceCreator.h" />
-    <ClInclude Include="ToStringConverter.h" />
-    <ClInclude Include="ToStringConverterImplem.h" />
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AssertExceptionCatcher.cpp" />
-    <ClCompile Include="AssertHelper.cpp" />
-    <ClCompile Include="BasicAssert.cpp" />
-    <ClCompile Include="FunctionTester.cpp" />
-    <ClCompile Include="HelperFuncs.cpp" />
-    <ClCompile Include="TestCase.cpp" />
-    <ClCompile Include="TestCategory.cpp" />
-    <ClCompile Include="TestContainer.cpp" />
-    <ClCompile Include="TestRegisterer.cpp" />
-    <ClCompile Include="TestReport.cpp" />
-    <ClCompile Include="TestResult.cpp" />
-    <ClCompile Include="TestSuite.cpp" />
-    <ClCompile Include="TestSuiteCreator.cpp" />
-    <ClCompile Include="ToStringConverter.cpp" />
+    <ClInclude Include="CppUnitTestFrameworkExamples.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CppUnitTestFrameworkExamples.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CppUnitTestsFramework\CppUnitTestsFramework.vcxproj">
+      <Project>{9d1e68a5-dcbd-4874-9adc-9c15d9191f42}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
