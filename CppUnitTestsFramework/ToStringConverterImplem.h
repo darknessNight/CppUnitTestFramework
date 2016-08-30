@@ -1,3 +1,4 @@
+#include "ToStringConverter.h"
 #pragma once
 namespace darknessNight_CppUnitTestFramework {
 
@@ -8,11 +9,26 @@ namespace darknessNight_CppUnitTestFramework {
 		else
 			return &ToStringConverter::UnknowTypeToString<T>;
 	}
-	template<typename T>
-	inline std::string ToStringConverter::ToString(const T obj) {
+	template<typename T> inline std::string ToStringConverter::ToString(const T obj) {
 		auto func = (instance->getMethod<T>());
 		return func(obj);
 	}
+	template<typename T> inline std::string ToStringConverter::ArrayToString(const T & obj) {
+		return IterableToString(std::begin(obj), std::end(obj));
+	}
+
+	template<typename T> inline std::string ToStringConverter::ArrayToString(const T * obj, unsigned len) {
+		return IterableToString(obj, &obj[len]);
+	}
+
+	template<typename T> inline std::string ToStringConverter::IterableToString(T iter, const T end) {
+		std::string message = "";
+		for (; iter != end;iter++) {
+			message += ToString(*iter) + ", ";
+		}
+		return message;
+	}
+
 	template<typename T>
 	inline void ToStringConverter::RegisterConventerFunction(std::string(*convFunc)(const T)) {
 		instance->registerConverter<T>(convFunc);

@@ -11,8 +11,8 @@ before_script:
   - cd build
   - cmake ..
 install:
-  - if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-std=c++14"; fi
-  - if [ "$CXX" == "g++" ]; then export CXXFLAGS="-std=c++14"; fi
+  - if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-std=c++14 -stdlib=libstdc++"; fi
+  - if [ "$CXX" == "g++" ]; then export CXXFLAGS="-std=c++1y"; fi
 
 script: make
 
@@ -24,8 +24,8 @@ addons:
     - llvm-toolchain-precise-3.8
     packages:
     # install toolchains
-    - gcc-5.2
-    - g++-5.2
+    - gcc-5
+    - g++-5
     - clang-3.8
 
 matrix:
@@ -36,8 +36,8 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-5.2
-      env: COMPILER=g++-5.2
+            - g++-5
+      env: COMPILER=g++-5
     - compiler: clang
       addons:
         apt:

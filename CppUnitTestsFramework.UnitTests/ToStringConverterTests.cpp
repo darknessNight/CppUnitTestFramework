@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <CppUnitTestsFramework\ToStringConverter.h>
+#include <vector>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -49,8 +50,20 @@ namespace darknessNight_CppUnitTestFramework::UnitTests {
 		}
 
 		TEST_METHOD(ToString_HasWString_CheckCorrectConvert) {
-			std::string result = ToStringConverter::ToString(std::wstring(L"Pawe³"));
-			StringAssert::Constains("Pawe", result);
+			std::string result = ToStringConverter::ToString(std::wstring(L"Ana³"));
+			StringAssert::Constains("Ana", result);
+		}
+
+		TEST_METHOD(ArrayToString_HasVector_CheckCorrectConvert) {
+			std::vector<int> testArray = { 1,2,3,4 };
+			std::string result = ToStringConverter::ArrayToString(testArray);
+			StringAssert::Constains("1, 2, 3, 4", result);
+		}
+
+		TEST_METHOD(ArrayToString_HasCArray_CheckCorrectConvert) {
+			int testArray[] = { 1,2,3,4 };
+			std::string result = ToStringConverter::ArrayToString(testArray,4);
+			StringAssert::Constains("1, 2, 3, 4", result);
 		}
 	};
 }
