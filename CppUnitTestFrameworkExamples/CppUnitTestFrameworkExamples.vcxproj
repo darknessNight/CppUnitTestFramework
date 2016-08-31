@@ -160,6 +160,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitTestProc.cpp" />
+    <ClCompile Include="UnitTestWithCategory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CppUnitTestsFramework\CppUnitTestsFramework.vcxproj">

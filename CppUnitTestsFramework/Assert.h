@@ -7,7 +7,7 @@
 #include "AssertArray.h"
 
 namespace darknessNight{namespace CppUnitTestFramework {
-	class Assert: public AssertEqual, public AssertGreaterLess, public AssertBoolean, public AssertExceptionCatcher{
+	class Assert:public virtual BasicAssert, public AssertEqual, public AssertGreaterLess, public AssertBoolean, public AssertExceptionCatcher{
 	public:
 		typedef AssertEqual Equal;
 		typedef AssertExceptionCatcher Exception;

@@ -16,10 +16,11 @@ namespace darknessNight {
 		public:
 			~SharedLibrary();
 			template <typename T> static T* importFunction(std::string libraryPath, std::string functionName);
-			template<typename T> static T * loadFuncFromModule(const HMODULE &module, std::string &functionName);
-
+			static void freeLibrary(std::string name);
 		private:
+			template<typename T> static T * loadFuncFromModule(void* module, std::string &functionName);
 			void* getModuleAndLoadIfNeeded(std::string &libraryPath);
+			bool moduleExists(std::string & libraryPath);
 			void* loadModule(std::string &libraryPath);
 		};
 
@@ -32,8 +33,8 @@ namespace darknessNight {
 			return loadFuncFromModule<T>(module, functionName);
 		}
 		template<typename T>
-		inline T * SharedLibrary::loadFuncFromModule(const HMODULE &module, std::string &functionName) {
-			auto func = GetProcAddress(module, functionName.c_str());
+		inline T * SharedLibrary::loadFuncFromModule(void* module, std::string &functionName) {
+			auto func = GetProcAddress((HMODULE)module, functionName.c_str());
 			if (func == nullptr)
 				throw FunctionLoadException("Not found function: " + functionName);
 			return (T*)func;

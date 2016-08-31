@@ -1,21 +1,30 @@
 #include "SharedLibrary.h"
 
-using namespace darknessNight_SharedLibrary;
+using namespace darknessNight::SharedLibrary;
 std::shared_ptr<SharedLibrary> SharedLibrary::instance = std::make_shared<SharedLibrary>();
 
 #ifdef _WIN32
-darknessNight_SharedLibrary::SharedLibrary::~SharedLibrary()
+darknessNight::SharedLibrary::SharedLibrary::~SharedLibrary()
 {
 	for (auto module : modules) {
 		FreeLibrary((HMODULE)module.second);
 	}
 }
 
+void darknessNight::SharedLibrary::SharedLibrary::freeLibrary(std::string name) {
+	if (instance->moduleExists(name))
+		FreeLibrary((HMODULE)instance->modules[name]);
+}
+
 void* SharedLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
-	if (modules.find(libraryPath) == modules.end())
+	if (moduleExists(libraryPath))
 		return loadModule(libraryPath);
 	else
 		return modules[libraryPath];
+}
+
+bool darknessNight::SharedLibrary::SharedLibrary::moduleExists(std::string & libraryPath) {
+	return modules.find(libraryPath) == modules.end();
 }
 
 

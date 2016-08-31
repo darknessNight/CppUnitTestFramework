@@ -29,7 +29,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SharedLibrary.cpp">
+    <ClCompile Include="SharedLibraryTests.cpp">
       <Filter>Source Files\Integration</Filter>
     </ClCompile>
   </ItemGroup>
