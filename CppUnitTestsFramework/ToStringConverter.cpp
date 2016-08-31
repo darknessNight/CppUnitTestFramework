@@ -1,10 +1,10 @@
 #include "ToStringConverter.h"
 #include <memory>
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 std::unique_ptr<ToStringConverter> ToStringConverter::instance= std::unique_ptr<ToStringConverter>(new ToStringConverter());
 
-darknessNight_CppUnitTestFramework::ToStringConverter::ToStringConverter() {
+darknessNight::CppUnitTestFramework::ToStringConverter::ToStringConverter() {
 	registerConverter<int>(std::to_string);
 	registerConverter<unsigned int>(std::to_string);
 	registerConverter<short>([](short obj) {return std::to_string(obj); });
@@ -21,19 +21,19 @@ darknessNight_CppUnitTestFramework::ToStringConverter::ToStringConverter() {
 	registerConverter<bool>([](bool cond)->std::string {return cond ? "True" : "False"; });
 }
 
-std::string darknessNight_CppUnitTestFramework::ToStringConverter::ToString(const char * obj) {
+std::string darknessNight::CppUnitTestFramework::ToStringConverter::ToString(const char * obj) {
 	return StringToString(obj);
 }
 
-std::string darknessNight_CppUnitTestFramework::ToStringConverter::ToString(const wchar_t * obj) {
+std::string darknessNight::CppUnitTestFramework::ToStringConverter::ToString(const wchar_t * obj) {
 	return WStringToString(obj);
 }
 
-std::string darknessNight_CppUnitTestFramework::ToStringConverter::StringToString(std::string obj) {
+std::string darknessNight::CppUnitTestFramework::ToStringConverter::StringToString(std::string obj) {
 	return "\"" + obj + "\"";
 }
 
-std::string darknessNight_CppUnitTestFramework::ToStringConverter::WStringToString(std::wstring obj) {
+std::string darknessNight::CppUnitTestFramework::ToStringConverter::WStringToString(std::wstring obj) {
 	std::string str;
 	for (auto c = obj.begin(); c != obj.end(); c++) {
 		str += *c;

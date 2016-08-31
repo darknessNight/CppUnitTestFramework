@@ -33,5 +33,14 @@ namespace darknessNight_SharedLibrary::IntegrationTests{
 			}
 		}
 
+		TEST_METHOD(FreeLibrary_HasIncorrectLibraryName_CheckNoThrow) {
+			try {
+				SharedLibrary::freeLibrary("NoExistsLibrary.dll");
+			}
+			catch (...) {
+				Assert::Fail();
+			}
+		}
+
 	};
 }

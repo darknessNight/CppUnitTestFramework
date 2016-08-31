@@ -2,16 +2,18 @@
 #include "TestRegisterContainerAccess.h"
 #include "HelperFuncs.h"
 
-namespace darknessNight_CppUnitTestFramework {
+namespace darknessNight {
+	namespace CppUnitTestFramework {
 
-	class TearDownRegister : TestRegisterContainerAccess {
-	public:
-		TearDownRegister(std::function<void()> func, std::string suiteName) {
-			getTestContainer().registerTearDown(suiteName, func);
-		}
+		class TearDownRegister : TestRegisterContainerAccess {
+		public:
+			TearDownRegister(std::function<void()> func, std::string suiteName) {
+				getTestContainer().registerTearDown(suiteName, func);
+			}
 
-		TearDownRegister(std::function<void()> func, ConfigurableTest* suite) :
-			TearDownRegister(func, getClassName(suite))
-		{}
-	};
+			TearDownRegister(std::function<void()> func, ConfigurableTest* suite) :
+				TearDownRegister(func, getClassName(suite)) {
+			}
+		};
+	}
 }

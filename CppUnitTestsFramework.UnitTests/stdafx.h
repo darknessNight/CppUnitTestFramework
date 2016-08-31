@@ -6,9 +6,9 @@
 #pragma once
 #include "targetver.h"
 
+#include <memory>
 // Headers for CppUnitTest
 #include "CppUnitTest.h"
 #include "StringAssert.h"
-#include <memory>
 
 // TODO: reference additional headers your program requires here

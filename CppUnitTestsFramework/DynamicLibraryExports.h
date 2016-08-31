@@ -1,13 +1,15 @@
 #pragma once
 #include "TestsCollectionExport.h"
 
-namespace darknessNight_CppUnitTestFramework {
-	extern "C" {
+namespace darknessNight {
+	namespace CppUnitTestFramework {
+		extern "C" {
 #ifdef _WIN32
-		__declspec(dllexport)
+			__declspec(dllexport)
 #endif
-		TestContainer* getTestsFromDynamicTestsLibrary() {
-			return &TestsCollectionExport::getTestContainer();
+				TestContainer* getTestsFromDynamicTestsLibrary() {
+				return &TestsCollectionExport::getTestContainer();
+			}
 		}
 	}
 }

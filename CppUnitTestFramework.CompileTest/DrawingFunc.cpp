@@ -4,7 +4,7 @@
 #include <string>
 
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
 void drawLineTest() {
 	std::cout << "\n===========================================================================\n\n";
@@ -37,7 +37,7 @@ void showError(void(*func)()) {
 		std::cout << "Register method exception\n";
 		std::cout << "Exception message: " << ex.what() << "\n";
 	}
-	catch (darknessNight_CppUnitTestFramework::exception ex) {
+	catch (darknessNight::CppUnitTestFramework::exception ex) {
 		std::cout << "Catched exception: " << ex.what() << "\n";
 	}
 	catch (std::exception ex) {

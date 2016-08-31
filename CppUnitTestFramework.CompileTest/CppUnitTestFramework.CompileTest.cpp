@@ -9,7 +9,7 @@
 
 
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
 int main()
 {

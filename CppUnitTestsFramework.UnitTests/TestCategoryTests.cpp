@@ -3,8 +3,10 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace darknessNight_CppUnitTestFramework::UnitTests
-{		
+
+namespace darknessNight {
+	namespace CppUnitTestFramework {
+		namespace UnitTests {
 	TEST_CLASS(TestCategoryTests)
 	{
 	public:
@@ -28,4 +30,4 @@ namespace darknessNight_CppUnitTestFramework::UnitTests
 			Assert::IsTrue(cat1 == cat2);
 		}
 	};
-}
+}}}

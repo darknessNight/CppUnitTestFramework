@@ -1,24 +1,24 @@
 #include "TestContainer.h"
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
-darknessNight_CppUnitTestFramework::TestContainer::TestContainer() {
+darknessNight::CppUnitTestFramework::TestContainer::TestContainer() {
 	unnamedSuite = std::shared_ptr<TestSuiteCreator>(new TestSuiteInstanceCreator<TestSuite>("Unnamed"));
 	addTestSuite(unnamedSuite);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::addTestSuite(std::shared_ptr<TestSuiteCreator> creator) {
+void darknessNight::CppUnitTestFramework::TestContainer::addTestSuite(std::shared_ptr<TestSuiteCreator> creator) {
 	std::string name = creator->getSuiteName();
 	mapArray[name] = creator;
 }
 
-TestSuitePtr darknessNight_CppUnitTestFramework::TestContainer::getTestSuiteByName(std::string name) {
+TestSuitePtr darknessNight::CppUnitTestFramework::TestContainer::getTestSuiteByName(std::string name) {
 	name = setUnnamedIfNotHaveName(name);
 	throwExceptionIfNotExistsSuite(name);
 	return mapArray[name]->createInstance();
 }
 
-std::vector<std::string> darknessNight_CppUnitTestFramework::TestContainer::getTestSuiteList()
+std::vector<std::string> darknessNight::CppUnitTestFramework::TestContainer::getTestSuiteList()
 {
 	std::vector<std::string> list;
 	for (auto suite = mapArray.begin(); suite != mapArray.end(); suite++)
@@ -26,43 +26,43 @@ std::vector<std::string> darknessNight_CppUnitTestFramework::TestContainer::getT
 	return list;
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::registerTestCaseToUnnamedSuite(TestCasePtr testCase) {
+void darknessNight::CppUnitTestFramework::TestContainer::registerTestCaseToUnnamedSuite(TestCasePtr testCase) {
 	registerTestCase("", testCase);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::registerTestCase(std::string testSuite, TestCasePtr testCase) {
+void darknessNight::CppUnitTestFramework::TestContainer::registerTestCase(std::string testSuite, TestCasePtr testCase) {
 	checkTestSuiteName(testSuite);
 	mapArray[testSuite]->registerTestCase(testCase);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::registerSetUp(std::string testSuite, std::function<void()> setUp) {
+void darknessNight::CppUnitTestFramework::TestContainer::registerSetUp(std::string testSuite, std::function<void()> setUp) {
 	checkTestSuiteName(testSuite);
 	mapArray[testSuite]->registerSetUp(setUp);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::registerTearDown(std::string testSuite, std::function<void()> tearDown) {
+void darknessNight::CppUnitTestFramework::TestContainer::registerTearDown(std::string testSuite, std::function<void()> tearDown) {
 	checkTestSuiteName(testSuite);
 	mapArray[testSuite]->registerTearDown(tearDown);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::checkTestSuiteName(std::string & testSuite)
+void darknessNight::CppUnitTestFramework::TestContainer::checkTestSuiteName(std::string & testSuite)
 {
 	testSuite = setUnnamedIfNotHaveName(testSuite);
 	throwExceptionIfNotExistsSuite(testSuite);
 }
 
-void darknessNight_CppUnitTestFramework::TestContainer::throwExceptionIfNotExistsSuite(std::string & testSuite)
+void darknessNight::CppUnitTestFramework::TestContainer::throwExceptionIfNotExistsSuite(std::string & testSuite)
 {
 	if (!keyExistsInArray(testSuite))
 		throw NotFoundException("Not found suite with this name: " + testSuite + " in file:" __FILE__);
 }
 
-std::string darknessNight_CppUnitTestFramework::TestContainer::setUnnamedIfNotHaveName(std::string name) {
+std::string darknessNight::CppUnitTestFramework::TestContainer::setUnnamedIfNotHaveName(std::string name) {
 	if (name.size() <= 0)
 		name = "Unnamed";
 	return name;
 }
 
-bool darknessNight_CppUnitTestFramework::TestContainer::keyExistsInArray(std::string name) {
+bool darknessNight::CppUnitTestFramework::TestContainer::keyExistsInArray(std::string name) {
 	return mapArray.find(name) != mapArray.end();
 }

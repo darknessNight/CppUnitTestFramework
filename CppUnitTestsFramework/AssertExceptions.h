@@ -1,25 +1,28 @@
 #pragma once
-#include "Exceptions.h"
 #include <string>
-namespace darknessNight_CppUnitTestFramework {
-	class AssertException :public exception {
-	public:
-		AssertException(std::string message):exception(message.c_str()){}
+#include "Exceptions.h"
 
-		std::string getMessage() {
-			return std::string(what());
-		}
-	};
+namespace darknessNight {
+	namespace CppUnitTestFramework {
+		class AssertException :public exception {
+		public:
+			AssertException(std::string message) :exception(message.c_str()) {}
 
-	class AssertFailException :public AssertException {
-	public:
-		AssertFailException(std::string message) :AssertException(message){
-		}
-	};
+			std::string getMessage() {
+				return std::string(what());
+			}
+		};
 
-	class AssertPassException :public AssertException {
-	public:
-		AssertPassException(std::string message) :AssertException(message) {
-		}
-	};
+		class AssertFailException :public AssertException {
+		public:
+			AssertFailException(std::string message) :AssertException(message) {
+			}
+		};
+
+		class AssertPassException :public AssertException {
+		public:
+			AssertPassException(std::string message) :AssertException(message) {
+			}
+		};
+	}
 }

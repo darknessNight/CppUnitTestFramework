@@ -1,29 +1,29 @@
 #include "TestCategory.h"
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
 TestCategory TestCategory::emptyCategory;
 
-darknessNight_CppUnitTestFramework::TestCategory::TestCategory() {
+darknessNight::CppUnitTestFramework::TestCategory::TestCategory() {
 	name = "";
 }
 
-darknessNight_CppUnitTestFramework::TestCategory::TestCategory(std::string suiteName) {
+darknessNight::CppUnitTestFramework::TestCategory::TestCategory(std::string suiteName) {
 	splitCategoryStringIfNeeded(suiteName);
 }
 
-std::string darknessNight_CppUnitTestFramework::TestCategory::getFullName() const {
+std::string darknessNight::CppUnitTestFramework::TestCategory::getFullName() const {
 	std::string name = getName();
 	addNextLevelFullName(name);
 	return name;
 }
 
-void darknessNight_CppUnitTestFramework::TestCategory::addNextLevelFullName(std::string & name) const
+void darknessNight::CppUnitTestFramework::TestCategory::addNextLevelFullName(std::string & name) const
 {
 	if (subCategory != nullptr)
 		name += "." + subCategory->getFullName();
 }
 
-void darknessNight_CppUnitTestFramework::TestCategory::splitCategoryStringIfNeeded(std::string & suiteName)
+void darknessNight::CppUnitTestFramework::TestCategory::splitCategoryStringIfNeeded(std::string & suiteName)
 {
 	int splitPos = suiteName.find(".");
 	if (splitPos > 0) {
@@ -34,25 +34,25 @@ void darknessNight_CppUnitTestFramework::TestCategory::splitCategoryStringIfNeed
 	}
 }
 
-void darknessNight_CppUnitTestFramework::TestCategory::saveSimpleCategoryString(std::string & suiteName)
+void darknessNight::CppUnitTestFramework::TestCategory::saveSimpleCategoryString(std::string & suiteName)
 {
 	name = suiteName;
 }
 
-void darknessNight_CppUnitTestFramework::TestCategory::saveMultiLevelCategoryString(std::string & suiteName, int splitPos)
+void darknessNight::CppUnitTestFramework::TestCategory::saveMultiLevelCategoryString(std::string & suiteName, int splitPos)
 {
 	name = suiteName.substr(0, splitPos);
 	subCategory = std::shared_ptr<TestCategory>(new TestCategory(suiteName.substr(splitPos + 1)));
 }
 
-const TestCategory & darknessNight_CppUnitTestFramework::TestCategory::getSubCategory() const {
+const TestCategory & darknessNight::CppUnitTestFramework::TestCategory::getSubCategory() const {
 	if (subCategory != nullptr)
 		return *subCategory;
 	else
 		return emptyCategory;
 }
 
-std::string darknessNight_CppUnitTestFramework::TestCategory::getName() const {
+std::string darknessNight::CppUnitTestFramework::TestCategory::getName() const {
 	return name;
 }
 

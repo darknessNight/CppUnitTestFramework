@@ -1,31 +1,34 @@
 #pragma once
 #include <memory>
-namespace darknessNight_CppUnitTestFramework {
-	class ConfigurableTest{
-	public:
-		typedef void (ConfigurableTest::*TestMethod)();
-	protected:
-		std::function<void()> setUpMethod;
-		std::function<void()> tearDownMethod;
 
-	protected:
-		virtual void setUp() {
-			if(setUpMethod!=nullptr)
-				setUpMethod();
-		}
+namespace darknessNight {
+	namespace CppUnitTestFramework {
+		class ConfigurableTest {
+		public:
+			typedef void (ConfigurableTest::*TestMethod)();
+		protected:
+			std::function<void()> setUpMethod;
+			std::function<void()> tearDownMethod;
 
-		virtual void tearDown() {
-			if (tearDownMethod != nullptr)
-				tearDownMethod();
-		}
-	public:
-		virtual void setSetUpMethod(std::function<void()> func) {
-			setUpMethod = func;
-		}
+		protected:
+			virtual void setUp() {
+				if (setUpMethod != nullptr)
+					setUpMethod();
+			}
 
-		virtual void setTearDownMethod(std::function<void()> func) {
-			tearDownMethod = func;
-		}
-	};
-	typedef std::shared_ptr<ConfigurableTest> ConfigurableTestPtr;
+			virtual void tearDown() {
+				if (tearDownMethod != nullptr)
+					tearDownMethod();
+			}
+		public:
+			virtual void setSetUpMethod(std::function<void()> func) {
+				setUpMethod = func;
+			}
+
+			virtual void setTearDownMethod(std::function<void()> func) {
+				tearDownMethod = func;
+			}
+		};
+		typedef std::shared_ptr<ConfigurableTest> ConfigurableTestPtr;
+	}
 }

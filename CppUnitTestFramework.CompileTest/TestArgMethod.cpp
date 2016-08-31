@@ -1,6 +1,6 @@
 #include "CppUnitTestFramework.CompileTest.h"
 #include "TestArgMethod.h"
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
 void testArgMethodAndFunc() {
 	int count = 0;

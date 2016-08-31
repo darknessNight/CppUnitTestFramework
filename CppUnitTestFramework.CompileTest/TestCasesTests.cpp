@@ -1,6 +1,6 @@
 #include "TestCasesTests.h"
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
 void testIgnoreMethod() {
 	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(getClassName<TestSuiteTestMacro>());
@@ -39,19 +39,19 @@ void checkCorrectRemeberFileAndLine(std::string &suite, std::string &funcName, s
 	checkCorrectRememberLine(report, funcLine);
 }
 
-const darknessNight_CppUnitTestFramework::TestReport getTestRaport(std::string & suite, std::string & funcName)
+const darknessNight::CppUnitTestFramework::TestReport getTestRaport(std::string & suite, std::string & funcName)
 {
 	TestSuitePtr testSuite = TestsCollectionExport::getTestContainer().getTestSuiteByName(suite);
 	return testSuite->runTestAndGetReport(funcName);
 }
 
-void checkCorrectRememberLine(darknessNight_CppUnitTestFramework::TestReport report, int funcLine)
+void checkCorrectRememberLine(darknessNight::CppUnitTestFramework::TestReport report, int funcLine)
 {
 	if (report.getLine() != funcLine)
 		throw SpecialException("No saved correct test line. Current saved line: " + std::to_string(report.getLine()));
 }
 
-void checkCorrectRemeberFile(darknessNight_CppUnitTestFramework::TestReport report, std::string & file)
+void checkCorrectRemeberFile(darknessNight::CppUnitTestFramework::TestReport report, std::string & file)
 {
 	if (report.getFile() != file)
 		throw SpecialException("No saved correct test file. Current saved file: " + report.getFile());

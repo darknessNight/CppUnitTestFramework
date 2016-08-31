@@ -1,48 +1,48 @@
 #include "TestSuiteInstanceCreator.h"
 
-using namespace darknessNight_CppUnitTestFramework;
+using namespace darknessNight::CppUnitTestFramework;
 
-std::string darknessNight_CppUnitTestFramework::TestSuiteCreator::getSuiteName() {
+std::string darknessNight::CppUnitTestFramework::TestSuiteCreator::getSuiteName() {
 	return suiteName;
 }
 
-TestSuitePtr darknessNight_CppUnitTestFramework::TestSuiteCreator::createInstance() {
+TestSuitePtr darknessNight::CppUnitTestFramework::TestSuiteCreator::createInstance() {
 	createIfNeeded();
 	return testSuite;
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::registerTestCase(TestCasePtr testCase) {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerTestCase(TestCasePtr testCase) {
 	if (testSuite == nullptr)
 		testCasesArray.push_back(testCase);
 	else
 		testSuite->addTestCase(testCase);
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::registerSetUp(std::function<void()> func) {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerSetUp(std::function<void()> func) {
 	setUp = func;
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::registerTearDown(std::function<void()> func) {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerTearDown(std::function<void()> func) {
 	tearDown = func;
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::prepareTestSuite() {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::prepareTestSuite() {
 	registerTestToSuite();
 	registerConfigurationFuncs();
 	saveCategory();
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::saveCategory() {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::saveCategory() {
 	testSuite->setCategory(category);
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::registerConfigurationFuncs()
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerConfigurationFuncs()
 {
 	testSuite->setSetUpMethod(setUp);
 	testSuite->setTearDownMethod(tearDown);
 }
 
-void darknessNight_CppUnitTestFramework::TestSuiteCreator::registerTestToSuite() {
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerTestToSuite() {
 	for(auto testCase=testCasesArray.begin();testCase!=testCasesArray.end();testCase++)
 		testSuite->addTestCase(*testCase);
 	testCasesArray.clear();

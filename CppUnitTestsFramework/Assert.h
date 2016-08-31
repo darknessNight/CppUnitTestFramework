@@ -6,7 +6,7 @@
 #include "AssertString.h"
 #include "AssertArray.h"
 
-namespace darknessNight_CppUnitTestFramework {
+namespace darknessNight{namespace CppUnitTestFramework {
 	class Assert: public AssertEqual, public AssertGreaterLess, public AssertBoolean, public AssertExceptionCatcher{
 	public:
 		typedef AssertEqual Equal;
@@ -16,4 +16,4 @@ namespace darknessNight_CppUnitTestFramework {
 		typedef AssertString String;
 		typedef AssertArray Array;
 	};
-}
+}}
