@@ -32,5 +32,8 @@
     <ClCompile Include="SharedLibraryTests.cpp">
       <Filter>Source Files\Integration</Filter>
     </ClCompile>
+    <ClCompile Include="DirectoryTests.cpp">
+      <Filter>Source Files\Integration</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

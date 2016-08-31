@@ -4,6 +4,13 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
+extern "C" {
+	__declspec(dllexport)
+		void* getTestsFromDynamicTestsLibrary() {
+		return nullptr;
+	}
+}
+
 namespace darknessNight {
 	namespace SharedLibrary {
 		namespace IntegrationTests {
@@ -11,13 +18,22 @@ namespace darknessNight {
 public:
 
 	TEST_METHOD(Import_HasCorrectNames_CheckReturnFunc) {
-		auto result = SharedLibrary::importFunction<void*()>("CppUnitTestFrameworkExamples.dll", "getTestsFromDynamicTestsLibrary");
-		Assert::IsTrue(result != nullptr);
+		try {
+			auto result = SharedLibrary::importFunction<void*()>("TestsRunner.UnitTest.dll", "getTestsFromDynamicTestsLibrary");
+			SharedLibrary::freeLibrary("TestsRunner.UnitTest.dll");
+			Assert::IsTrue(result != nullptr);
+		}
+		catch (Exception ex) {
+			std::string nstr = ex.getMessage();
+			std::wstring wstr(nstr.begin(), nstr.end());
+			Assert::Fail(wstr.c_str());
+		}
 	}
 
 	TEST_METHOD(Import_HasCorrectLibraryNameAndIncorrectFuncName_CheckThrow) {
 		try {
-			SharedLibrary::importFunction<void*()>("CppUnitTestFrameworkExamples.dll", "NoExistsFunc");
+			SharedLibrary::importFunction<void*()>("TestsRunner.UnitTest.dll", "NoExistsFunc");
+			SharedLibrary::freeLibrary("TestsRunner.UnitTest.dll");
 			Assert::Fail();
 		}
 		catch (FunctionLoadException ex) {
