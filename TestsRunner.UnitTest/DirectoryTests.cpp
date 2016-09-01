@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../TestsRunner/Directory.h"
+#include "../TestsRunner/Filesystem/Directory.h"
 #include <direct.h>
 #include <time.h>
 
@@ -23,10 +23,14 @@ public:
 		_mkdir("TestDir/Dir1");
 		_mkdir("TestDir/Dir2");
 		_mkdir("TestDir/DirN");
+		_mkdir("TestDir/Dir1/Rec1");
+		_mkdir("TestDir/Dir1/Rec2");
 		createDirTimeMax = time(nullptr) + 1;
 	}
 
 	TEST_METHOD_CLEANUP(TearDown) {
+		_rmdir("TestDir/Dir1/Rec1");
+		_rmdir("TestDir/Dir1/Rec2");
 		_rmdir("TestDir/Dir1");
 		_rmdir("TestDir/Dir2");
 		_rmdir("TestDir/DirN");
@@ -71,17 +75,35 @@ public:
 	}
 
 	TEST_METHOD(IterDir_HasCorrectDir_CheckReturnAllDirs) {
-		/*int count = 0;
+		int count = 0;
 		int dirNamedCount = 0;
 		Directory dir("./TestDir");
 		for (auto subdir : dir) {
 			count++;
-			if ((int)subdir.getPath().find("Dir") >= 0)
+			if ((int)subdir.getPath().find("/Dir") >= 0)
 				dirNamedCount++;
 		}
 
-		Assert::AreEqual(count, 5);
-		Assert::AreEqual(dirNamedCount, 3);*/
+		Assert::AreEqual(5,count);
+		Assert::AreEqual(3, dirNamedCount);
+	}
+
+	TEST_METHOD(IterDirRec_HasCorrectDir_CheckReturnAllDirs) {
+		int count = 0;
+		int dirNamedCount = 0;
+		int recNamedCount = ;
+		Directory dir("./TestDir");
+		for (auto subdir = dir.recursiveBegin(); subdir != dir.recursiveEnd();subdir++) {
+			count++;
+			if ((int)subdir->getPath().find("/Dir") >= 0)
+				dirNamedCount++;
+			if ((int)subdir->getPath().find("/Rec") >= 0)
+				recNamedCount++;
+		}
+
+		Assert::AreEqual(7, count);
+		Assert::AreEqual(3, dirNamedCount);
+		Assert::AreEqual(2, recNamedCount);
 	}
 
 
