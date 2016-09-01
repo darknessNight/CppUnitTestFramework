@@ -22,9 +22,9 @@ namespace darknessNight {
 	}
 }
 
+using namespace darknessNight::Exceptions;
 namespace darknessNight {
 	namespace SharedLibrary {
-		using namespace darknessNight::Exceptions;
 		class FunctionLoadException :public Exception {
 		public:
 			FunctionLoadException(std::string mess) :Exception(mess) {
@@ -34,6 +34,15 @@ namespace darknessNight {
 		public:
 			LibraryLoadException(std::string mess) :Exception(mess) {
 			}
+		};
+	}
+}
+
+namespace darknessNight {
+	namespace Filesystem {
+		class FilesystemException :public Exception {
+		public:
+			FilesystemException(std::string mess): Exception(mess){}
 		};
 	}
 }

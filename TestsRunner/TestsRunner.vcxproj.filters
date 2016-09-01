@@ -24,6 +24,9 @@
     <ClCompile Include="Directory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Entry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SharedLibrary.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Directory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

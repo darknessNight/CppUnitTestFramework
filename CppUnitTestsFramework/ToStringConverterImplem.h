@@ -6,7 +6,8 @@ namespace darknessNight {
 		template <typename T> std::string(*ToStringConverter::getMethod())(const T) {
 			auto result = findTypeFunc<T>();
 			if (result != funcArray.end())
-				return static_cast<std::string(*)(const T)>(result->second);
+				//return static_cast<std::string(*)(const T)>(result->second);
+				return (std::string(*)(const T))result->second;
 			else
 				return &ToStringConverter::UnknowTypeToString<T>;
 		}

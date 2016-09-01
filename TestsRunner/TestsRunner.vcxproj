@@ -131,10 +131,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Directory.cpp" />
+    <ClCompile Include="Entry.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Directory.h" />
+    <ClInclude Include="Entry.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="SharedLibrary.h" />
   </ItemGroup>
