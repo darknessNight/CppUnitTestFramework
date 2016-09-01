@@ -32,3 +32,5 @@ static ::darknessNight::CppUnitTestFramework::TearDownRegister NAME##SetUpRegist
 #define TEARDOWN_FUNCTION(NAME, SUITE) \
 TEARDOWN_FUNCTION_DECLARE(NAME, SUITE)\
 void NAME()
+
+

@@ -1,6 +1,7 @@
 #pragma once
 #include "Entry.h"
 #include <iterator>
+#ifdef _WIN32
 #include <Windows.h>
 
 namespace darknessNight {
@@ -10,21 +11,23 @@ namespace darknessNight {
 			HANDLE handle;
 			Entry entry;
 			std::string parentPath;
-		protected:
 			friend class Directory;
+		public:
+			bool operator==(DirOneLevelIterator other) const;
+			bool operator!=(DirOneLevelIterator other) const;
+			DirOneLevelIterator& operator++();
+			DirOneLevelIterator& operator++(int);
+			Entry& operator*();
+			Entry* operator->();
+		protected:
 			DirOneLevelIterator(HANDLE handle, Entry& entry, std::string parentPath);
 			DirOneLevelIterator(Entry& entry);
-		public:
-			DirOneLevelIterator& operator++();
 			void findNextFile();
 			virtual bool nextFileExists(WIN32_FIND_DATAA &ffd);
 			virtual void getNextFile(WIN32_FIND_DATAA &ffd);
 			virtual void closeFind();
-			bool operator==(DirOneLevelIterator other) const;
-			bool operator!=(DirOneLevelIterator other) const;
-			Entry& operator*();
-			Entry& operator->();
 		};
 
 	}
 }
+#endif

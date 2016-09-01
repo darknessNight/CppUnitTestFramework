@@ -91,9 +91,9 @@ public:
 	TEST_METHOD(IterDirRec_HasCorrectDir_CheckReturnAllDirs) {
 		int count = 0;
 		int dirNamedCount = 0;
-		int recNamedCount = ;
+		int recNamedCount = 0;
 		Directory dir("./TestDir");
-		for (auto subdir = dir.recursiveBegin(); subdir != dir.recursiveEnd();subdir++) {
+		for (auto subdir = dir.recursiveBegin(); subdir != dir.recursiveEnd(); subdir++) {
 			count++;
 			if ((int)subdir->getPath().find("/Dir") >= 0)
 				dirNamedCount++;

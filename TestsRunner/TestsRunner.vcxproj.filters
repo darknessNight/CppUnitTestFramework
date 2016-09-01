@@ -34,6 +34,9 @@
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
     <ClCompile Include="Filesystem\DirOneLevelIterator.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Filesystem\DirRecursiveIterator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,6 +57,9 @@
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
     <ClInclude Include="Filesystem\DirOneLevelIterator.h">
+      <Filter>Header Files\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystem\DirRecursiveIterator.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>

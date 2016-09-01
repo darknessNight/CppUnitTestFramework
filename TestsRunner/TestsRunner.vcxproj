@@ -132,6 +132,7 @@
   <ItemGroup>
     <ClCompile Include="Filesystem\Directory.cpp" />
     <ClCompile Include="Filesystem\DirOneLevelIterator.cpp" />
+    <ClCompile Include="Filesystem\DirRecursiveIterator.cpp" />
     <ClCompile Include="Filesystem\Entry.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
   </ItemGroup>
@@ -139,6 +140,7 @@
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Filesystem\Directory.h" />
     <ClInclude Include="Filesystem\DirOneLevelIterator.h" />
+    <ClInclude Include="Filesystem\DirRecursiveIterator.h" />
     <ClInclude Include="Filesystem\Entry.h" />
     <ClInclude Include="Filesystem\Exceptions.h" />
     <ClInclude Include="SharedLibrary.h" />
