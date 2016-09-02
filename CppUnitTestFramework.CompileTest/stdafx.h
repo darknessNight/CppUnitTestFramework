@@ -5,5 +5,6 @@
 
 #pragma once
 
+#include <CppUnitTestsFramework\Framework.h>
 
 // TODO: reference additional headers your program requires here

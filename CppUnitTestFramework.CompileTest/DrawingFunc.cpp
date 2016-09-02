@@ -1,5 +1,4 @@
 #include "CppUnitTestFramework.CompileTest.h"
-#include "../CppUnitTestsFramework\Framework.h""
 #include <iostream>
 #include <string>
 

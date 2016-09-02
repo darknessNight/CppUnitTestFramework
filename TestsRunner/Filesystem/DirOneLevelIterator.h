@@ -16,7 +16,7 @@ namespace darknessNight {
 			bool operator==(DirOneLevelIterator other) const;
 			bool operator!=(DirOneLevelIterator other) const;
 			DirOneLevelIterator& operator++();
-			DirOneLevelIterator& operator++(int);
+			DirOneLevelIterator operator++(int);
 			Entry& operator*();
 			Entry* operator->();
 		protected:

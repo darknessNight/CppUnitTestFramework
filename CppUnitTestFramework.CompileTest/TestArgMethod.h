@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 
 const std::vector<std::string> getTestCasesList();
 

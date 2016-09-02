@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "MacrosClassess.h"
+#include "stdafx.h"
 
 
 

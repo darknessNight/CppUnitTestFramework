@@ -1,5 +1,5 @@
 #pragma once
-#include "../CppUnitTestsFramework/Framework.h"
+#include "stdafx.h"
 
 
 

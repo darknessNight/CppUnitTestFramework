@@ -16,7 +16,7 @@ DirOneLevelIterator & darknessNight::Filesystem::DirOneLevelIterator::operator++
 	return *this;
 }
 
-DirOneLevelIterator & darknessNight::Filesystem::DirOneLevelIterator::operator++(int) {
+DirOneLevelIterator darknessNight::Filesystem::DirOneLevelIterator::operator++(int) {
 	DirOneLevelIterator old(*this);
 	operator++();
 	return old;
@@ -24,14 +24,14 @@ DirOneLevelIterator & darknessNight::Filesystem::DirOneLevelIterator::operator++
 
 void darknessNight::Filesystem::DirOneLevelIterator::findNextFile() {
 	WIN32_FIND_DATAA ffd;
-	if (nextFileExists(ffd)) {
+	if (!nextFileExists(ffd)) {
 		closeFind();
 	} else
 		getNextFile(ffd);
 }
 
 bool darknessNight::Filesystem::DirOneLevelIterator::nextFileExists(WIN32_FIND_DATAA &ffd) {
-	return FindNextFileA(handle, &ffd) == 0;
+	return FindNextFileA(handle, &ffd) != 0;
 }
 
 void darknessNight::Filesystem::DirOneLevelIterator::getNextFile(WIN32_FIND_DATAA &ffd) {
@@ -39,7 +39,8 @@ void darknessNight::Filesystem::DirOneLevelIterator::getNextFile(WIN32_FIND_DATA
 }
 
 void darknessNight::Filesystem::DirOneLevelIterator::closeFind() {
-	FindClose(handle);
+	if(handle!=nullptr)
+		FindClose(handle);
 	handle = nullptr;
 }
 

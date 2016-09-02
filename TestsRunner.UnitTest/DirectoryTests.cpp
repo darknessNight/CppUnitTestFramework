@@ -2,6 +2,7 @@
 #include "../TestsRunner/Filesystem/Directory.h"
 #include <direct.h>
 #include <time.h>
+#include <regex>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -92,18 +93,37 @@ public:
 		int count = 0;
 		int dirNamedCount = 0;
 		int recNamedCount = 0;
-		Directory dir("./TestDir");
-		for (auto subdir = dir.recursiveBegin(); subdir != dir.recursiveEnd(); subdir++) {
-			count++;
-			if ((int)subdir->getPath().find("/Dir") >= 0)
-				dirNamedCount++;
-			if ((int)subdir->getPath().find("/Rec") >= 0)
-				recNamedCount++;
-		}
 
-		Assert::AreEqual(7, count);
+		Directory dir("./TestDir");
+		sumFindedFiles(dir, count, dirNamedCount, recNamedCount);
+
+		assertFindedFilesCounts(count, dirNamedCount, recNamedCount);
+	}
+
+	void assertFindedFilesCounts(int &count, int &dirNamedCount, int &recNamedCount) {
+		Assert::AreEqual(17, count);
 		Assert::AreEqual(3, dirNamedCount);
 		Assert::AreEqual(2, recNamedCount);
+	}
+
+	void sumFindedFiles(darknessNight::Filesystem::Directory &dir, int &count, int &dirNamedCount, int &recNamedCount) {
+		for (auto subdir = dir.recursiveBegin(); subdir != dir.recursiveEnd(); subdir++) {
+			count++;
+			sumDirNamedFiles(subdir, dirNamedCount);
+			sumRecNamedFiles(subdir, recNamedCount);
+		}
+	}
+
+	void sumRecNamedFiles(darknessNight::Filesystem::DirRecursiveIterator &subdir, int & recNamedCount) {
+		std::regex recNamed(".*\\/Rec.$");
+		if (std::regex_match(subdir->getPath(), recNamed))
+			recNamedCount++;
+	}
+
+	void sumDirNamedFiles(darknessNight::Filesystem::DirRecursiveIterator &subdir, int & dirNamedCount) {
+		std::regex dirNamed(".*\\/Dir.$");
+		if (std::regex_match(subdir->getPath(), dirNamed))
+			dirNamedCount++;
 	}
 
 
