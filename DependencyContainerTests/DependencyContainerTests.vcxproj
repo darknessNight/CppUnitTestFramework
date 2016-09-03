@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CBDC6ABB-9A92-4103-ABA1-C1C0F20E08C4}</ProjectGuid>
+    <ProjectGuid>{BD199048-4494-4747-B061-03FE7C40AA0F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TestsRunnerUnitTest</RootNamespace>
+    <RootNamespace>DependencyContenerTests</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,20 +154,17 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DependencyContainerTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestsDiscoverTests.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestsRunner\TestsRunner.vcxproj">
-      <Project>{b74ee55c-4cd9-4b2e-9b9a-54c7a3d7eb76}</Project>
+    <ProjectReference Include="..\DependencyContainer\DependencyContainer.vcxproj">
+      <Project>{fef716c0-7695-4813-84fb-5dc252a9c8af}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{CBDC6ABB-9A92-4103-ABA1-C1C0F20E08C4}</ProjectGuid>
+    <ProjectGuid>{024E07DF-7D6E-49AB-9C74-08E444F1FC5D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>TestsRunnerUnitTest</RootNamespace>
+    <RootNamespace>TestsRunnerIntegrationTests</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,15 +154,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DirectoryTests.cpp" />
+    <ClCompile Include="SharedLibraryTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="TestsDiscoverTests.cpp">
-      <SubType>
-      </SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

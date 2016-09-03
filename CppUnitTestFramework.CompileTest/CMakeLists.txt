@@ -3,5 +3,5 @@ project (CppUnitTestFramework.CompileTest)
 file(GLOB SOURCES ./*.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
-include_directories(" ${PROJECT_SOURCE_DIR}")
+include_directories(" ${PROJECT_SOURCE_DIR}/..")
 target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
