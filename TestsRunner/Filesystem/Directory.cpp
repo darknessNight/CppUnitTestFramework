@@ -3,32 +3,27 @@
 using namespace darknessNight::Filesystem;
 
 darknessNight::Filesystem::Directory::iterator darknessNight::Filesystem::Directory::begin() {
-	HANDLE handle;
-	Entry entry=findFirstFile(handle);
-	return iterator(handle, entry, path+"/");
+	return iterator(path);
 }
-
-#ifdef _WIN32
-Entry darknessNight::Filesystem::Directory::findFirstFile(void*& handle) {
-	WIN32_FIND_DATAA ffd;
-	handle = FindFirstFileA((path + "/*").c_str(), &ffd);
-	Entry entry(path + "/" + ffd.cFileName);
-	return entry;
-}
-#endif
 
 darknessNight::Filesystem::Directory::iterator darknessNight::Filesystem::Directory::end() {
-	return DirOneLevelIterator(*this);
+	return iterator();
 }
 
 darknessNight::Filesystem::Directory::recursiveIterator darknessNight::Filesystem::Directory::recursiveBegin() {
-	HANDLE handle;
-	Entry entry = findFirstFile(handle);
-	return recursiveIterator(handle, entry, path + "/");
+	return recursiveIterator(path);
 }
 
 darknessNight::Filesystem::Directory::recursiveIterator darknessNight::Filesystem::Directory::recursiveEnd() {
-	return recursiveIterator(*this);
+	return recursiveIterator();
+}
+
+darknessNight::Filesystem::Directory::searchIterator darknessNight::Filesystem::Directory::searchBegin(std::string pattern) {
+	return searchIterator(path, pattern);
+}
+
+darknessNight::Filesystem::Directory::searchIterator darknessNight::Filesystem::Directory::searchEnd() {
+	return searchIterator();
 }
 
 darknessNight::Filesystem::Directory::Directory(std::string path):Entry(path) {

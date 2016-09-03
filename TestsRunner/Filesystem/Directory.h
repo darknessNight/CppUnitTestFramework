@@ -1,5 +1,5 @@
 #pragma once
-#include "DirRecursiveIterator.h"
+#include "DirSearchIterator.h"
 namespace darknessNight {
 	namespace Filesystem {
 
@@ -9,11 +9,14 @@ namespace darknessNight {
 		public:
 			typedef DirOneLevelIterator iterator;
 			typedef DirRecursiveIterator recursiveIterator;
+			typedef DirSearchIterator searchIterator;
 			iterator begin();
 			iterator end();
 			recursiveIterator recursiveBegin();
 			recursiveIterator recursiveEnd();
-			Directory(std::string path);
+			searchIterator searchBegin(std::string pattern);
+			searchIterator searchEnd();
+			explicit Directory(std::string path);
 			static Directory Current();
 		private:
 			Entry findFirstFile(void*& handle);

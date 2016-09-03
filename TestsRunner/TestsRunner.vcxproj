@@ -133,7 +133,9 @@
     <ClCompile Include="Filesystem\Directory.cpp" />
     <ClCompile Include="Filesystem\DirOneLevelIterator.cpp" />
     <ClCompile Include="Filesystem\DirRecursiveIterator.cpp" />
+    <ClCompile Include="Filesystem\DirSearchIterator.cpp" />
     <ClCompile Include="Filesystem\Entry.cpp" />
+    <ClCompile Include="Filesystem\SystemSpecificDirIterator.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,8 +143,10 @@
     <ClInclude Include="Filesystem\Directory.h" />
     <ClInclude Include="Filesystem\DirOneLevelIterator.h" />
     <ClInclude Include="Filesystem\DirRecursiveIterator.h" />
+    <ClInclude Include="Filesystem\DirSearchIterator.h" />
     <ClInclude Include="Filesystem\Entry.h" />
     <ClInclude Include="Filesystem\Exceptions.h" />
+    <ClInclude Include="Filesystem\SystemSpecificDirIterator.h" />
     <ClInclude Include="SharedLibrary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

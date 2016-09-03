@@ -23,13 +23,13 @@ namespace darknessNight {
 			std::string path;
 			unsigned long mTime, cTime, aTime;
 		public:
-			Entry(std::string);
-			std::string getPath();
-			unsigned long getModificationTime();
-			unsigned long getCreateTime();
-			unsigned long getLastAccessTime();
-			bool isDir();
-			bool isFile();
+			explicit Entry(std::string);
+			std::string getPath() const;
+			unsigned long getModificationTime() const;
+			unsigned long getCreateTime() const;
+			unsigned long getLastAccessTime() const;
+			bool isDir() const;
+			bool isFile() const;
 		protected:
 			Entry() {}
 		private:

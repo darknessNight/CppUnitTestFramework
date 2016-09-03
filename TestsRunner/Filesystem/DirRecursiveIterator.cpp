@@ -1,48 +1,46 @@
 #include "DirRecursiveIterator.h"
-#include <Windows.h>
 #include <regex>
 
-darknessNight::Filesystem::DirRecursiveIterator::DirRecursiveIterator(HANDLE handle, Entry & entry, std::string parentPath)
-:DirOneLevelIterator(handle, entry,parentPath)
+darknessNight::Filesystem::DirRecursiveIterator::DirRecursiveIterator(std::string parentPath)
+:DirOneLevelIterator(parentPath)
 {
 }
 
-darknessNight::Filesystem::DirRecursiveIterator::DirRecursiveIterator(Entry & entry) 
-	:DirOneLevelIterator(entry) 
+darknessNight::Filesystem::DirRecursiveIterator::DirRecursiveIterator() 
+	:DirOneLevelIterator() 
 {}
 
-bool darknessNight::Filesystem::DirRecursiveIterator::nextFileExists(WIN32_FIND_DATAA & ffd) {
-	if (FindNextFileA(handle, &ffd) == 0) {
-		return changeSearchDir(ffd);
+bool darknessNight::Filesystem::DirRecursiveIterator::nextFileExists() {
+	if (findNextFileFromHandle() == 0) {
+		return changeSearchDir();
 	}
 	return true;
 }
 
-bool darknessNight::Filesystem::DirRecursiveIterator::changeSearchDir(WIN32_FIND_DATAA & ffd) {
-	if (dirs.size() > 0) {
-		FindClose(handle);
-		return setNewSearchDir(ffd);
+bool darknessNight::Filesystem::DirRecursiveIterator::changeSearchDir() {
+	while (dirs.size() > 0) {
+		if (setNewSearchDir())
+			return true;
 	}
 	return false;
 }
 
-bool darknessNight::Filesystem::DirRecursiveIterator::setNewSearchDir(WIN32_FIND_DATAA & ffd) {
-	handle = FindFirstFileA((dirs.front() + "*").c_str(), &ffd);
-	if (handle != nullptr) {
-		setNewParentPrefixAndRemoveDirFromList();
+bool darknessNight::Filesystem::DirRecursiveIterator::setNewSearchDir() {
+	closeFind();
+	if (findFirstFile(getNextDir()))
 		return true;
-	}
 	return false;
 }
 
-void darknessNight::Filesystem::DirRecursiveIterator::setNewParentPrefixAndRemoveDirFromList() {
+std::string darknessNight::Filesystem::DirRecursiveIterator::getNextDir() {
 	parentPath = dirs.front();
 	dirs.pop_front();
+	return parentPath;
 }
 
-void darknessNight::Filesystem::DirRecursiveIterator::getNextFile(WIN32_FIND_DATAA & ffd) {
-	DirOneLevelIterator::getNextFile(ffd);
+void darknessNight::Filesystem::DirRecursiveIterator::findNextFile() {
+	DirOneLevelIterator::findNextFile();
 	std::regex reg(".*\\/\\.{1,2}$");
-	if (entry.isDir() && !std::regex_match(entry.getPath(),reg))
+	if (entry.isDir() && !std::regex_match(entry.getPath(), reg))
 		dirs.push_back(entry.getPath() + "/");
 }

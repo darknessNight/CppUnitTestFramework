@@ -15,6 +15,7 @@ private:
 	unsigned long createDirTimeMin;
 	unsigned long createDirTimeMax;
 public:
+
 	TEST_METHOD_INITIALIZE(SetUp) {
 		char buff[1000];
 		_getcwd(buff, 1000);
@@ -24,19 +25,23 @@ public:
 		_mkdir("TestDir/Dir1");
 		_mkdir("TestDir/Dir2");
 		_mkdir("TestDir/DirN");
+		_mkdir("TestDir/RecN");
+		_mkdir("TestDir/RecN/NotUse");
 		_mkdir("TestDir/Dir1/Rec1");
 		_mkdir("TestDir/Dir1/Rec2");
 		createDirTimeMax = time(nullptr) + 1;
 	}
-
 	TEST_METHOD_CLEANUP(TearDown) {
 		_rmdir("TestDir/Dir1/Rec1");
 		_rmdir("TestDir/Dir1/Rec2");
+		_rmdir("TestDir/RecN/NotUse");
 		_rmdir("TestDir/Dir1");
 		_rmdir("TestDir/Dir2");
 		_rmdir("TestDir/DirN");
+		_rmdir("TestDir/RecN");
 		_rmdir("TestDir");
 	}
+	
 
 	TEST_METHOD(GetCurrentDirectory_CheckReturnCorrectDir) {
 		Directory dir = Directory::Current();
@@ -85,7 +90,7 @@ public:
 				dirNamedCount++;
 		}
 
-		Assert::AreEqual(5,count);
+		Assert::AreEqual(6,count);
 		Assert::AreEqual(3, dirNamedCount);
 	}
 
@@ -101,9 +106,9 @@ public:
 	}
 
 	void assertFindedFilesCounts(int &count, int &dirNamedCount, int &recNamedCount) {
-		Assert::AreEqual(17, count);
+		Assert::AreEqual(23, count);
 		Assert::AreEqual(3, dirNamedCount);
-		Assert::AreEqual(2, recNamedCount);
+		Assert::AreEqual(3, recNamedCount);
 	}
 
 	void sumFindedFiles(darknessNight::Filesystem::Directory &dir, int &count, int &dirNamedCount, int &recNamedCount) {
@@ -127,6 +132,27 @@ public:
 	}
 
 
+	TEST_METHOD(IterDirSearch_HasCorrectDir_CheckReturnAllPatternDirs) {
+		int count = 0;
+		int dirNamedCount = 0;
+		countSearchedDirs(count, dirNamedCount);
+		AssertSearchIter(count, dirNamedCount);
+	}
+
+	void AssertSearchIter(int &count, int &dirNamedCount) {
+		Assert::AreEqual(3, count);
+		Assert::AreEqual(3, dirNamedCount);
+	}
+
+	void countSearchedDirs(int &count, int &dirNamedCount) {
+		Directory dir("./TestDir");
+		std::regex reg(".*/Dir.$");
+		for (auto subdir = dir.searchBegin(".*/Dir.$"); subdir != dir.searchEnd(); subdir++) {
+			count++;
+			if (std::regex_match(subdir->getPath(), reg))
+				dirNamedCount++;
+		}
+	}
 
 
 			};

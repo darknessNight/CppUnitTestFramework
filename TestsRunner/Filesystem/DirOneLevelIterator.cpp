@@ -2,13 +2,18 @@
 
 using namespace darknessNight::Filesystem;
 
-darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(Entry& entry) :entry(entry) {
+darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator():entry("."){
 	handle = nullptr;
 }
 
-darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(HANDLE handle, Entry& entry, std::string parentPath) : entry(entry) {
-	this->handle = handle;
-	this->parentPath = parentPath;
+darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(std::string parentPath):entry("."){
+	getFirstEntry(parentPath);
+	this->parentPath = parentPath+"/";
+}
+
+void darknessNight::Filesystem::DirOneLevelIterator::getFirstEntry(std::string &parentPath) {
+	findFirstFile(parentPath);
+	entry = Entry(getNextFileName());
 }
 
 DirOneLevelIterator & darknessNight::Filesystem::DirOneLevelIterator::operator++() {
@@ -23,33 +28,12 @@ DirOneLevelIterator darknessNight::Filesystem::DirOneLevelIterator::operator++(i
 }
 
 void darknessNight::Filesystem::DirOneLevelIterator::findNextFile() {
-	WIN32_FIND_DATAA ffd;
-	if (!nextFileExists(ffd)) {
+	if (!nextFileExists()) {
 		closeFind();
-	} else
-		getNextFile(ffd);
-}
-
-bool darknessNight::Filesystem::DirOneLevelIterator::nextFileExists(WIN32_FIND_DATAA &ffd) {
-	return FindNextFileA(handle, &ffd) != 0;
-}
-
-void darknessNight::Filesystem::DirOneLevelIterator::getNextFile(WIN32_FIND_DATAA &ffd) {
-	entry = Entry(parentPath + ffd.cFileName);
-}
-
-void darknessNight::Filesystem::DirOneLevelIterator::closeFind() {
-	if(handle!=nullptr)
-		FindClose(handle);
-	handle = nullptr;
-}
-
-bool darknessNight::Filesystem::DirOneLevelIterator::operator==(DirOneLevelIterator other) const {
-	return handle == other.handle;
-}
-
-bool darknessNight::Filesystem::DirOneLevelIterator::operator!=(DirOneLevelIterator other) const {
-	return handle != other.handle;
+	} else {
+		auto tmp = getNextFileName();
+		entry = Entry(tmp);
+	}
 }
 
 Entry& darknessNight::Filesystem::DirOneLevelIterator::operator*() {

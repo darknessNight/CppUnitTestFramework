@@ -23,24 +23,24 @@ void darknessNight::Filesystem::Entry::getInfoStruct(struct stat &fileInfo, std:
 		throw FilesystemException("Path is not exists");
 }
 
-std::string darknessNight::Filesystem::Entry::getPath() {
+std::string darknessNight::Filesystem::Entry::getPath() const {
 	return path;
 }
-unsigned long darknessNight::Filesystem::Entry::getModificationTime() {
+unsigned long darknessNight::Filesystem::Entry::getModificationTime() const {
 	return mTime;
 }
-unsigned long darknessNight::Filesystem::Entry::getCreateTime() {
+unsigned long darknessNight::Filesystem::Entry::getCreateTime()  const {
 	return cTime;
 }
-unsigned long darknessNight::Filesystem::Entry::getLastAccessTime() {
+unsigned long darknessNight::Filesystem::Entry::getLastAccessTime()  const {
 	return aTime;
 }
 
-bool darknessNight::Filesystem::Entry::isDir() {
+bool darknessNight::Filesystem::Entry::isDir() const {
 	return _isDir;
 }
 
-bool darknessNight::Filesystem::Entry::isFile() {
+bool darknessNight::Filesystem::Entry::isFile() const {
 	return _isFile;
 }
 
