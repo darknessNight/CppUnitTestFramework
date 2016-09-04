@@ -4,17 +4,17 @@
 
 namespace darknessNight {
 	namespace Filesystem {
-		class SystemSpecificDirIterator {
+		class SystemDirIterator {
 		protected:
 			HANDLE handle=nullptr;
 			WIN32_FIND_DATAA ffd;
 			std::string parentPath;
 			const std::string patternAll = "*";
 		public:
-			bool operator==(const SystemSpecificDirIterator& other) const;
-			bool operator!=(const SystemSpecificDirIterator& other) const;
-		protected:
-			SystemSpecificDirIterator();
+			bool operator==(const SystemDirIterator& other) const;
+			bool operator!=(const SystemDirIterator& other) const;
+
+			SystemDirIterator();
 			virtual bool findFirstFile(std::string path);
 			bool isEnded();
 			virtual int findNextFileFromHandle();

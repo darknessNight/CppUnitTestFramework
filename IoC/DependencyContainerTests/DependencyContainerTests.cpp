@@ -12,7 +12,14 @@ public:
 			};
 
 			class FakeInstance :public FakeInterface {
+			private:
+				int e = 0;
 			public:
+				FakeInstance(int i) {
+					e = i;
+				}
+				FakeInstance() :FakeInstance(0) {}
+
 				bool OneMethod() {
 					return true;
 				}

@@ -1,34 +1,22 @@
 #pragma once
+#include <memory>
 #include "DirSearchIterator.h"
 namespace darknessNight {
 	namespace Filesystem {
-
-		class IDirectory {
-		public:
-			typedef DirOneLevelIterator iterator;
-			typedef DirRecursiveIterator recursiveIterator;
-			typedef DirSearchIterator searchIterator;
-			virtual iterator begin()=0;
-			virtual iterator end()=0;
-			virtual recursiveIterator recursiveBegin()=0;
-			virtual recursiveIterator recursiveEnd() = 0;
-			virtual searchIterator searchBegin(std::string pattern) = 0;
-			virtual searchIterator searchEnd() = 0;
-		};
-
-		class Directory:public Entry, public IDirectory {
-		private:
+		class Directory:public Entry{
+		protected:
 			Directory() {}
 		public:
 			typedef DirOneLevelIterator iterator;
 			typedef DirRecursiveIterator recursiveIterator;
 			typedef DirSearchIterator searchIterator;
-			iterator begin();
-			iterator end();
-			recursiveIterator recursiveBegin();
-			recursiveIterator recursiveEnd();
-			searchIterator searchBegin(std::string pattern);
-			searchIterator searchEnd();
+			virtual iterator begin();
+			virtual iterator end();
+			virtual recursiveIterator recursiveBegin();
+			virtual recursiveIterator recursiveEnd();
+			virtual searchIterator searchBegin(std::string pattern);
+			virtual searchIterator searchEnd();
+			virtual std::shared_ptr<Directory> get(std::string path);
 			virtual std::vector<Entry> getElements();
 			virtual std::vector<Entry> getElementsRecursive();
 			virtual std::vector<Entry> searchElements(std::string pattern);

@@ -22,7 +22,7 @@ void darknessNight::Filesystem::DirSearchIterator::findNextFile() {
 }
 
 bool darknessNight::Filesystem::DirSearchIterator::entryNotMatchAndCanSearch() {
-	return !isEnded() && !matchPattern(entry.getPath());
+	return !systemIterator->isEnded() && !matchPattern(entry.getPath());
 }
 
 bool darknessNight::Filesystem::DirSearchIterator::matchPattern(std::string str) {

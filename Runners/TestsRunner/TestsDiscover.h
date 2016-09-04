@@ -15,9 +15,10 @@ namespace darknessNight {
 			std::vector<TestSuitePtr> suites;
 		public:
 			void findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
+				std::string pattern = "";
 				for (auto path : paths) {
-					auto directory = DIContainer::Get<IDirectory>();
-					for (auto dir : *directory) {
+					auto directory = DIContainer::Get<Directory>()->get(path);
+					for (auto dir : directory->searchElements(pattern)) {
 						std::string tmp = dir.getPath();
 						suites.push_back(nullptr);
 					}

@@ -17,6 +17,7 @@
 
 namespace darknessNight {
 	namespace Filesystem {
+
 		class Entry {
 		protected:
 			bool _isDir, _isFile;

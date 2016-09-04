@@ -26,6 +26,10 @@ darknessNight::Filesystem::Directory::searchIterator darknessNight::Filesystem::
 	return searchIterator();
 }
 
+std::shared_ptr<Directory> darknessNight::Filesystem::Directory::get(std::string path) {
+	return std::make_shared<Directory>(path);
+}
+
 std::vector<Entry> darknessNight::Filesystem::Directory::getElements() {
 	std::vector<Entry> entries;
 	for (auto el : *this)

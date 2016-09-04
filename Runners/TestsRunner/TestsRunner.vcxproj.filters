@@ -42,7 +42,7 @@
     <ClCompile Include="Filesystem\DirSearchIterator.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="Filesystem\SystemSpecificDirIterator.cpp">
+    <ClCompile Include="Filesystem\SystemDirIterator.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,11 +71,11 @@
     <ClInclude Include="Filesystem\DirSearchIterator.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="Filesystem\SystemSpecificDirIterator.h">
-      <Filter>Header Files\Filesystem</Filter>
-    </ClInclude>
     <ClInclude Include="TestsDiscover.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystem\SystemDirIterator.h">
+      <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

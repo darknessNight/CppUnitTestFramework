@@ -139,7 +139,7 @@
     <ClCompile Include="Filesystem\DirRecursiveIterator.cpp" />
     <ClCompile Include="Filesystem\DirSearchIterator.cpp" />
     <ClCompile Include="Filesystem\Entry.cpp" />
-    <ClCompile Include="Filesystem\SystemSpecificDirIterator.cpp" />
+    <ClCompile Include="Filesystem\SystemDirIterator.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,7 +150,7 @@
     <ClInclude Include="Filesystem\DirSearchIterator.h" />
     <ClInclude Include="Filesystem\Entry.h" />
     <ClInclude Include="Filesystem\Exceptions.h" />
-    <ClInclude Include="Filesystem\SystemSpecificDirIterator.h" />
+    <ClInclude Include="Filesystem\SystemDirIterator.h" />
     <ClInclude Include="SharedLibrary.h" />
     <ClInclude Include="TestsDiscover.h" />
   </ItemGroup>

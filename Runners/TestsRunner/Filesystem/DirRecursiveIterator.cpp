@@ -11,7 +11,7 @@ darknessNight::Filesystem::DirRecursiveIterator::DirRecursiveIterator()
 {}
 
 bool darknessNight::Filesystem::DirRecursiveIterator::nextFileExists() {
-	if (findNextFileFromHandle() == 0) {
+	if (systemIterator->findNextFileFromHandle() == 0) {
 		return changeSearchDir();
 	}
 	return true;
@@ -26,16 +26,16 @@ bool darknessNight::Filesystem::DirRecursiveIterator::changeSearchDir() {
 }
 
 bool darknessNight::Filesystem::DirRecursiveIterator::setNewSearchDir() {
-	closeFind();
-	if (findFirstFile(getNextDir()))
+	systemIterator->closeFind();
+	if (systemIterator->findFirstFile(getNextDir()))
 		return true;
 	return false;
 }
 
 std::string darknessNight::Filesystem::DirRecursiveIterator::getNextDir() {
-	parentPath = dirs.front();
+	std::string path = dirs.front();
 	dirs.pop_front();
-	return parentPath;
+	return path;
 }
 
 void darknessNight::Filesystem::DirRecursiveIterator::findNextFile() {

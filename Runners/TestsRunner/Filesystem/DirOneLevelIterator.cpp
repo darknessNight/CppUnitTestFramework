@@ -3,17 +3,20 @@
 using namespace darknessNight::Filesystem;
 
 darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator():entry("."){
-	handle = nullptr;
+	systemIterator = std::make_shared<SystemDirIterator>();
 }
 
-darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(std::string parentPath):entry("."){
+darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(std::string parentPath):DirOneLevelIterator(){
 	getFirstEntry(parentPath);
-	this->parentPath = parentPath+"/";
+}
+
+bool darknessNight::Filesystem::DirOneLevelIterator::nextFileExists() {
+	return systemIterator->nextFileExists();
 }
 
 void darknessNight::Filesystem::DirOneLevelIterator::getFirstEntry(std::string &parentPath) {
-	findFirstFile(parentPath);
-	entry = Entry(getNextFileName());
+	systemIterator->findFirstFile(parentPath);
+	entry = Entry(systemIterator->getNextFileName());
 }
 
 DirOneLevelIterator & darknessNight::Filesystem::DirOneLevelIterator::operator++() {
@@ -27,11 +30,19 @@ DirOneLevelIterator darknessNight::Filesystem::DirOneLevelIterator::operator++(i
 	return old;
 }
 
+bool darknessNight::Filesystem::DirOneLevelIterator::operator==(const DirOneLevelIterator & other) const {
+	return *systemIterator==*other.systemIterator;
+}
+
+bool darknessNight::Filesystem::DirOneLevelIterator::operator!=(const DirOneLevelIterator & other) const {
+	return *systemIterator != *other.systemIterator;
+}
+
 void darknessNight::Filesystem::DirOneLevelIterator::findNextFile() {
 	if (!nextFileExists()) {
-		closeFind();
+		systemIterator->closeFind();
 	} else {
-		auto tmp = getNextFileName();
+		auto tmp = systemIterator->getNextFileName();
 		entry = Entry(tmp);
 	}
 }
