@@ -26,6 +26,27 @@ darknessNight::Filesystem::Directory::searchIterator darknessNight::Filesystem::
 	return searchIterator();
 }
 
+std::vector<Entry> darknessNight::Filesystem::Directory::getElements() {
+	std::vector<Entry> entries;
+	for (auto el : *this)
+		entries.push_back(el);
+	return entries;
+}
+
+std::vector<Entry> darknessNight::Filesystem::Directory::getElementsRecursive() {
+	std::vector<Entry> entries;
+	for (auto iter=recursiveBegin();iter!=recursiveEnd();iter++)
+		entries.push_back(*iter);
+	return entries;
+}
+
+std::vector<Entry> darknessNight::Filesystem::Directory::searchElements(std::string pattern) {
+	std::vector<Entry> entries;
+	for (auto iter = searchBegin(pattern); iter != searchEnd(); iter++)
+		entries.push_back(*iter);
+	return entries;
+}
+
 darknessNight::Filesystem::Directory::Directory(std::string path):Entry(path) {
 	if(!isDir())
 		throw FilesystemException("Path is not directory");

@@ -5,5 +5,6 @@ environment:
   - solution_name: IoC/IoC.sln
   - solution_name: CppUnitTest/CppUnitTest.sln
 build:
-  project: $(solution_name)
   verbosity: normal
+build_script:
+  - msbuild %solution_name%

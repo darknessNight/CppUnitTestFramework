@@ -155,6 +155,27 @@ public:
 	}
 
 
+	TEST_METHOD(getElements_HasCorrectDir_CheckReturnAllPatternDirs) {
+		Directory dir("./TestDir");
+		auto entries = dir.getElements();
+		Assert::AreEqual<unsigned>(6, entries.size());
+	}
+
+
+	TEST_METHOD(getElementsRecursive_HasCorrectDir_CheckReturnAllPatternDirs) {
+		Directory dir("./TestDir");
+		auto entries = dir.getElementsRecursive();
+		Assert::AreEqual<unsigned>(23, entries.size());
+	}
+
+
+	TEST_METHOD(SearchElements_HasCorrectDir_CheckReturnAllPatternDirs) {
+		Directory dir("./TestDir");
+		auto entries = dir.searchElements(".*/Dir.$");
+		Assert::AreEqual<unsigned>(3, entries.size());
+	}
+
+
 			};
 		}
 	}

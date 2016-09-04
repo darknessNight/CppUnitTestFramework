@@ -29,9 +29,9 @@ namespace darknessNight {
 			recursiveIterator recursiveEnd();
 			searchIterator searchBegin(std::string pattern);
 			searchIterator searchEnd();
-			std::vector<Entry> getElements();
-			std::vector<Entry> getElementsRecursive();
-			std::vector<Entry> serachElements(std::string pattern);
+			virtual std::vector<Entry> getElements();
+			virtual std::vector<Entry> getElementsRecursive();
+			virtual std::vector<Entry> searchElements(std::string pattern);
 			explicit Directory(std::string path);
 			static Directory Current();
 		};
