@@ -45,7 +45,8 @@ namespace darknessNight {
 
 			template<typename T> static std::shared_ptr<T> Get() {
 				std::vector<std::string> el = { typeid(T).name() };
-				return ((TypeCreatorTemplate<T>*)instance->typesMap[el])->getType();
+				auto ret = ((TypeCreatorTemplate<T>*)instance->typesMap[el])->getType();
+				return ret;
 			}
 
 			template<typename T, typename ...Args> static std::shared_ptr<T> Get(Args... args) {

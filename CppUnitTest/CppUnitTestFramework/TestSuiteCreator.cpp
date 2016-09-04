@@ -2,6 +2,10 @@
 
 using namespace darknessNight::CppUnitTestFramework;
 
+darknessNight::CppUnitTestFramework::TestSuiteCreator::TestSuiteCreator(std::string name) {
+	suiteName = name;
+}
+
 std::string darknessNight::CppUnitTestFramework::TestSuiteCreator::getSuiteName() {
 	return suiteName;
 }
@@ -24,6 +28,12 @@ void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerSetUp(std::f
 
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::registerTearDown(std::function<void()> func) {
 	tearDown = func;
+}
+
+darknessNight::CppUnitTestFramework::TestSuiteCreator::TestSuiteCreator() {}
+
+void darknessNight::CppUnitTestFramework::TestSuiteCreator::createIfNeeded() {
+	testSuite = TestSuitePtr(new TestSuite(suiteName));
 }
 
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::prepareTestSuite() {

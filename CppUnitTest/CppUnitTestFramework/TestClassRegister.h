@@ -17,7 +17,9 @@ namespace darknessNight {
 		private:
 
 			void saveTestSuite(std::string name) {
-				std::shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name));
+				if(typeid(TestSuiteType)==typeid(TestSuite))
+					std::shared_ptr<TestSuiteCreator> testSuite(new TestSuiteCreator(name));
+				else std::shared_ptr<TestSuiteCreator> testSuite(new TestSuiteInstanceCreator<TestSuiteType>(name));
 				getTestContainer().addTestSuite(testSuite);
 			}
 		};

@@ -13,8 +13,10 @@ namespace darknessNight {
 			std::string suiteName = "";
 		public:
 			typedef std::vector<TestReport> TestReportArray;
-			virtual std::string getName();
 		public:
+			TestSuite();
+			TestSuite(std::string name);
+			virtual std::string getName();
 			void addTestCase(TestCasePtr testCase);
 			void setCategory(TestCategory cat);
 			const TestCategory& getCategory();

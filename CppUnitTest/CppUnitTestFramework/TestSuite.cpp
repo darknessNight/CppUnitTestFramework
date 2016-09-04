@@ -8,6 +8,10 @@ std::string darknessNight::CppUnitTestFramework::TestSuite::getName() {
 	return suiteName;
 }
 
+darknessNight::CppUnitTestFramework::TestSuite::TestSuite() {}
+
+darknessNight::CppUnitTestFramework::TestSuite::TestSuite(std::string name) { suiteName = name; }
+
 void darknessNight::CppUnitTestFramework::TestSuite::addTestCase(TestCasePtr testCase) {
 	testArray.push_back(testCase);
 	testMap[testCase->getName()] = testCase;

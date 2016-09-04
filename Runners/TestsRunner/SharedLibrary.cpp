@@ -1,34 +1,46 @@
 #include "SharedLibrary.h"
 
 using namespace darknessNight::SharedLibrary;
-std::shared_ptr<SharedLibrary> SharedLibrary::instance = std::make_shared<SharedLibrary>();
+std::shared_ptr<DynamicLibrary> DynamicLibrary::instance = std::make_shared<DynamicLibrary>();
 
 #ifdef _WIN32
-darknessNight::SharedLibrary::SharedLibrary::~SharedLibrary()
+darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()
 {
 	for (auto module : modules) {
 		FreeLibrary((HMODULE)module.second);
 	}
 }
 
-void darknessNight::SharedLibrary::SharedLibrary::freeLibrary(std::string name) {
+void darknessNight::SharedLibrary::DynamicLibrary::freeLibrary(std::string name) {
 	if (instance->moduleExists(name))
 		FreeLibrary((HMODULE)instance->modules[name]);
 }
 
-void* SharedLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
+void * darknessNight::SharedLibrary::DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
+	HMODULE module = (HMODULE)instance->getModuleAndLoadIfNeeded(libraryPath);
+	return getFunctionFromModule(module, functionName);
+}
+
+void * darknessNight::SharedLibrary::DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
+	auto func = GetProcAddress((HMODULE)module, functionName.c_str());
+	if (func == nullptr)
+		throw FunctionLoadException("Not found function: " + functionName);
+	return func;
+}
+
+void* DynamicLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
 	if (moduleExists(libraryPath))
 		return loadModule(libraryPath);
 	else
 		return modules[libraryPath];
 }
 
-bool darknessNight::SharedLibrary::SharedLibrary::moduleExists(std::string & libraryPath) {
+bool darknessNight::SharedLibrary::DynamicLibrary::moduleExists(std::string & libraryPath) {
 	return modules.find(libraryPath) == modules.end();
 }
 
 
-void* SharedLibrary::loadModule(std::string &libraryPath)
+void* DynamicLibrary::loadModule(std::string &libraryPath)
 {
 	auto module = LoadLibraryA(libraryPath.c_str());
 	if (module == nullptr)

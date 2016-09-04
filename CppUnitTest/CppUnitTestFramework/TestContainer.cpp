@@ -3,7 +3,7 @@
 using namespace darknessNight::CppUnitTestFramework;
 
 darknessNight::CppUnitTestFramework::TestContainer::TestContainer() {
-	unnamedSuite = std::shared_ptr<TestSuiteCreator>(new TestSuiteInstanceCreator<TestSuite>("Unnamed"));
+	unnamedSuite = std::shared_ptr<TestSuiteCreator>(new TestSuiteCreator("Unnamed"));
 	addTestSuite(unnamedSuite);
 }
 
@@ -16,6 +16,13 @@ TestSuitePtr darknessNight::CppUnitTestFramework::TestContainer::getTestSuiteByN
 	name = setUnnamedIfNotHaveName(name);
 	throwExceptionIfNotExistsSuite(name);
 	return mapArray[name]->createInstance();
+}
+
+std::vector<TestSuitePtr> darknessNight::CppUnitTestFramework::TestContainer::getAllTestSuites() {
+	std::vector<TestSuitePtr> suites;
+	for (auto el : mapArray)
+		suites.push_back(el.second->createInstance());
+	return suites;
 }
 
 std::vector<std::string> darknessNight::CppUnitTestFramework::TestContainer::getTestSuiteList()

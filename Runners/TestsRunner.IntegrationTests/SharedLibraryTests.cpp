@@ -19,7 +19,7 @@ public:
 
 	TEST_METHOD(Import_HasCorrectNames_CheckReturnFunc) {
 		try {
-			auto result = SharedLibrary::importFunction<void*()>("TestsRunner.IntegrationTests.dll", "getTestsFromDynamicTestsLibrary");
+			auto result = SharedLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "getTestsFromDynamicTestsLibrary");
 			SharedLibrary::freeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::IsTrue(result != nullptr);
 		}
@@ -32,7 +32,7 @@ public:
 
 	TEST_METHOD(Import_HasCorrectLibraryNameAndIncorrectFuncName_CheckThrow) {
 		try {
-			SharedLibrary::importFunction<void*()>("TestsRunner.IntegrationTests.dll", "NoExistsFunc");
+			SharedLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "NoExistsFunc");
 			SharedLibrary::freeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::Fail();
 		}
@@ -43,7 +43,7 @@ public:
 
 	TEST_METHOD(Import_HasIncorrectLibraryName_CheckThrow) {
 		try {
-			SharedLibrary::importFunction<void*()>("NoExistsLibrary.dll", "NoExistsFunc");
+			SharedLibrary::ImportFunction<void*()>("NoExistsLibrary.dll", "NoExistsFunc");
 			Assert::Fail();
 		}
 		catch (LibraryLoadException ex) {

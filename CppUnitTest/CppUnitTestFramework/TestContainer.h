@@ -11,6 +11,7 @@ namespace darknessNight {
 			TestContainer();
 			void addTestSuite(std::shared_ptr<TestSuiteCreator> creator);
 			TestSuitePtr getTestSuiteByName(std::string name);
+			std::vector<TestSuitePtr> getAllTestSuites();
 			std::vector<std::string> getTestSuiteList();
 			void registerTestCaseToUnnamedSuite(TestCasePtr testCase);
 			void registerTestCase(std::string testSuite, TestCasePtr testCase);

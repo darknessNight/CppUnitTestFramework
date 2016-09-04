@@ -12,13 +12,15 @@ namespace darknessNight {
 			std::function<void()> setUp;
 			std::function<void()> tearDown;
 		public:
+			TestSuiteCreator(std::string name);
 			std::string getSuiteName();
 			TestSuitePtr createInstance();
 			void registerTestCase(TestCasePtr testCase);
 			void registerSetUp(std::function<void()> func);
 			void registerTearDown(std::function<void()> func);
 		protected:
-			virtual void createIfNeeded() = 0;
+			TestSuiteCreator();
+			virtual void createIfNeeded();
 			void prepareTestSuite();
 			void saveCategory();
 			void registerConfigurationFuncs();

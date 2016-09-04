@@ -9,16 +9,18 @@
 namespace darknessNight {
 	namespace SharedLibrary {
 
-		class SharedLibrary {
+		class DynamicLibrary {
 		private:
-			static std::shared_ptr<SharedLibrary> instance;
+			static std::shared_ptr<DynamicLibrary> instance;
 			std::map<std::string, void*> modules;
 		public:
-			~SharedLibrary();
-			template <typename T> static T* importFunction(std::string libraryPath, std::string functionName);
+			~DynamicLibrary();
+			template <typename T> static T* ImportFunction(std::string libraryPath, std::string functionName);
+			template <typename T> T* importFunction(std::string libraryPath, std::string functionName);
 			static void freeLibrary(std::string name);
-		private:
-			template<typename T> static T * loadFuncFromModule(void* module, std::string &functionName);
+		protected:
+			virtual void* getFunction(std::string &libraryPath, std::string &functionName);
+			void* getFunctionFromModule(void* module, std::string &functionName);
 			void* getModuleAndLoadIfNeeded(std::string &libraryPath);
 			bool moduleExists(std::string & libraryPath);
 			void* loadModule(std::string &libraryPath);
@@ -28,16 +30,12 @@ namespace darknessNight {
 		//implem
 #ifdef _WIN32
 		template<typename T>
-		inline T * SharedLibrary::importFunction(std::string libraryPath, std::string functionName) {
-			HMODULE module = (HMODULE)instance->getModuleAndLoadIfNeeded(libraryPath);
-			return loadFuncFromModule<T>(module, functionName);
+		inline T * DynamicLibrary::ImportFunction(std::string libraryPath, std::string functionName) {
+			return instance->importFunction<T>(libraryPath, functionName);
 		}
 		template<typename T>
-		inline T * SharedLibrary::loadFuncFromModule(void* module, std::string &functionName) {
-			auto func = GetProcAddress((HMODULE)module, functionName.c_str());
-			if (func == nullptr)
-				throw FunctionLoadException("Not found function: " + functionName);
-			return (T*)func;
+		inline T * DynamicLibrary::importFunction(std::string libraryPath, std::string functionName) {
+			return (T*)getFunction(libraryPath, functionName);
 		}
 
 #endif
