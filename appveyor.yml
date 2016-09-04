@@ -1,0 +1,9 @@
+version: 0.0.{build}
+environment:
+  matrix:
+  - solution_name: Runners/Runners.sln
+  - solution_name: IoC/IoC.sln
+  - solution_name: CppUnitTest/CppUnitTest.sln
+build:
+  project: $(solution_name)
+  verbosity: normal
