@@ -1,3 +1,4 @@
+#include "AssertArray.h"
 #pragma once
 
 template<typename T>
@@ -48,16 +49,30 @@ inline bool AssertArray::checkContains(T expIter, T expEnd, T resIter, T resEnd)
 	auto resEls = getCopyOfArray<decltype(el)>(resIter, resEnd);
 	auto expEls = getCopyOfArray<decltype(el)>(expIter, expEnd);
 	std::sort(resEls.begin(), resEls.end());
+	std::sort(expEls.begin(), expEls.end());
 
-	return findAllElements(expIter, expEnd, resEls);
+	return findAllElements(expEls, resEls);
 }
-template<typename T, typename U>
-inline bool AssertArray::findAllElements(T & expIter, T & expEnd, std::vector<U>& resEls)
+template<typename T>
+inline bool AssertArray::findAllElements(std::vector<T>& expEls, std::vector<T>& resEls)
 {
-	for (; expIter != expEnd; expIter++) {
-		if (!std::binary_search(resEls.begin(), resEls.end(), *expIter))
+	auto res = resEls.begin();
+	for (auto exp : expEls) {
+		if (!hasPassElementInResult(res, resEls, exp))
 			return false;
 	}
+	return true;
+}
+template<typename T, typename U, typename W>
+inline bool darknessNight::CppUnitTestFramework::AssertArray::hasPassElementInResult(W &res, std::vector<T> & resEls, U &exp) {
+	if (res == resEls.end())
+		return false;
+	while (*res != exp) {
+		res++;
+		if (res == resEls.end())
+			return false;
+	}
+	res++;
 	return true;
 }
 template<typename T>

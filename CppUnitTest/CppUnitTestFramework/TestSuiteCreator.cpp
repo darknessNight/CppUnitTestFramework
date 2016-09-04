@@ -34,6 +34,7 @@ darknessNight::CppUnitTestFramework::TestSuiteCreator::TestSuiteCreator() {}
 
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::createIfNeeded() {
 	testSuite = TestSuitePtr(new TestSuite(suiteName));
+	prepareTestSuite();
 }
 
 void darknessNight::CppUnitTestFramework::TestSuiteCreator::prepareTestSuite() {

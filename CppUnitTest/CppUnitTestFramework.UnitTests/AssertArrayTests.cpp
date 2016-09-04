@@ -147,8 +147,8 @@ public:
 	}
 
 	TEST_METHOD(Constains_HasCoinstainsVector_CheckNoThrow) {
-		std::vector<int> testArray = { 1,2,3,4,5,6,7,8 };
-		std::vector<int> testArray2 = { 1,4,5,6,7,2,3 };
+		std::vector<int> testArray = { 1,2,3,4,1,6,7,8 };
+		std::vector<int> testArray2 = { 1,4,1,6,7,2,3 };
 		try {
 			AssertArray::Contains(testArray2, testArray);
 		}
@@ -159,7 +159,7 @@ public:
 
 	TEST_METHOD(Constains_HasNonCoinstainsVector_CheckThrow) {
 		std::vector<int> testArray2 = { 1,2,3,4,5,6,7,8 };
-		std::vector<int> testArray = { 1,4,5,6,0,2,3 };
+		std::vector<int> testArray = { 1,4,5,6,1,2,3 };
 		try {
 			AssertArray::Contains(testArray, testArray2, "TestMessage");
 			Assert::Fail();

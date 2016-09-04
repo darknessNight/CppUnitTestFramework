@@ -135,7 +135,9 @@ namespace darknessNight {
 			template<typename T> static void sortArrays(std::vector<T> &resEls, std::vector<T> &expEls);
 			template<typename T, typename U> static std::vector<T> getCopyOfArray(U& arrIter, U& arrEnd);
 			template<typename T> static bool checkContains(T expIter, T expEnd, T resIter, T resEnd);
-			template<typename T, typename U> static bool findAllElements(T &expIter, T &expEnd, std::vector<U> &resEls);
+			template<typename T> static bool findAllElements(std::vector<T> &expEls, std::vector<T> &resEls);
+			template<typename T, typename U, typename W>
+			static bool hasPassElementInResult(W &res, std::vector<T> & resEls, U &exp);
 			template<typename T> static bool checkIsSubsequence(T expIter, T expEnd, T resIter, T resEnd);
 			template<typename T> static bool findSubsequence(T &resIter, T &resEnd, T &expIter, T &expEnd);
 			template<typename T> static bool isSubsequence(T & resIter, T & expIter, T & resEnd, T & expEnd);
