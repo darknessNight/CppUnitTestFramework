@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <CppUnitTestFramework\TestSuite.h>
 #include <CppUnitTestFramework\TestCaseFunc.h>
+#include <CppUnitTestFramework\TestCaseIgnored.h>
 #include "TestHelperFuncAndClassess.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -9,6 +10,9 @@ namespace darknessNight {
 	namespace CppUnitTestFramework {
 		namespace UnitTests {
 			class TestSuiteTest :public TestSuite {
+			public:
+				TestSuiteTest() :TestSuite() {}
+				TestSuiteTest(std::string name) :TestSuite(name) {}
 			};
 
 			TEST_CLASS(TestSuiteTests) {
@@ -100,6 +104,13 @@ namespace darknessNight {
 					TestSuiteTest test;
 					std::string name = test.getName();
 					StringAssert::Constains("TestSuiteTest", test.getName());
+				}
+
+				TEST_METHOD(getTestCases_HasSampleTest_CheckReturnConfiguredTest) {
+					TestSuiteTest testSuite("TestSuiteTest");
+					testSuite.addTestCase(TestCasePtr(new TestCaseIgnored("Name", "Res")));
+					TestCasePtr testCase = testSuite.getTestCases()[0];
+					Assert::AreEqual<std::string>("TestSuiteTest", testCase->getReportWithoutResult().getSuiteName());
 				}
 			};
 		}

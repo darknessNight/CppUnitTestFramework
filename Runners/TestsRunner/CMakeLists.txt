@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 project (TestsRunner)
 file(GLOB SOURCES ./*.cpp)
 
-# Include header files
-#include_directories(include)
-
-# Create shared library
+include_directories("../../")
+target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
+#add_library(${PROJECT_NAME} SHARE ${SOURCES})
 add_library(${PROJECT_NAME} SHARE ${SOURCES})
 
 # Install library

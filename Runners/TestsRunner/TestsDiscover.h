@@ -69,10 +69,19 @@ namespace darknessNight {
 		public:
 			std::vector<std::string> getSuitesNames() {
 				std::vector<std::string> names;
-				for (auto suites : suites) {
-					names.push_back(suites->getName());
+				for (auto suite : suites) {
+					names.push_back(suite->getName());
 				}
 				return names;
+			}
+
+			std::vector<TestCasePtr> getTestsList() {
+				std::vector<TestCasePtr> tests;
+				for (auto suite : suites) {
+					for(auto test: suite->getTestCaseList())
+						tests.push_back(nullptr);
+				}
+				return tests;
 			}
 		};
 	}

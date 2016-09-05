@@ -44,6 +44,12 @@ const std::shared_ptr<const TestCase> darknessNight::CppUnitTestFramework::TestS
 	return findTestFromName(name);
 }
 
+std::vector<TestCasePtr> darknessNight::CppUnitTestFramework::TestSuite::getTestCases() {
+	for (auto test : testArray)
+		prepareTestCase(test);
+	return testArray;
+}
+
 std::vector<std::string> darknessNight::CppUnitTestFramework::TestSuite::getTestCaseList() {
 	std::vector<std::string> array;
 	for(auto el=testMap.begin();el!=testMap.end();el++)

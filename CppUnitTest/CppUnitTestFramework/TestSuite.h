@@ -23,6 +23,7 @@ namespace darknessNight {
 			TestReportArray runTestsAndGetReports();
 			TestReport runTestAndGetReport(std::string name);
 			const std::shared_ptr<const TestCase> getTestCase(std::string name);
+			std::vector<TestCasePtr> getTestCases();
 			std::vector<std::string> getTestCaseList();
 
 		protected:
