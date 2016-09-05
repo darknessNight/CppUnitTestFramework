@@ -141,6 +141,7 @@
     <ClCompile Include="Filesystem\Entry.cpp" />
     <ClCompile Include="Filesystem\SystemDirIterator.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
+    <ClCompile Include="TestsDiscover.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Exceptions.h" />

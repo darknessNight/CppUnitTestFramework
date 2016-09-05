@@ -19,70 +19,19 @@ namespace darknessNight {
 			std::shared_ptr<DynamicLibrary> dynamicLibrary = DIContainer::Get<DynamicLibrary>();
 			std::shared_ptr<Directory> directory = DIContainer::Get<Directory>();
 		public:
-			void findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
-				std::string pattern = prepareSearchPattern(extensions);
-				searchLibraries(paths, pattern);
-			}
-
-		private:
-			void searchLibraries(std::vector<std::string> &paths, std::string &pattern) {
-				for (auto path : paths) {
-					auto dir = directory->get(path);
-					searchLibrariesInDir(dir, pattern);
-				}
-			}
-
-			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern) {
-				for (auto dir : directory->searchElements(pattern)) {
-					getTestsIfLibraryIsCorrect(dir.getPath());
-				}
-			}
-
-			void getTestsIfLibraryIsCorrect(std::string &path) {
-				try {
-					tryGetTests(path);
-				}
-				catch (SharedLibrary::LibraryLoadException) {}
-				catch (SharedLibrary::FunctionLoadException) {
-					dynamicLibrary->freeLibrary(path);
-				}
-			}
-
-			void tryGetTests(std::string & path) {
-				auto func = dynamicLibrary->importFunction<TestContainer*()>(path, dllFuncName);
-				TestContainer* container = func();
-				for (auto suite : container->getAllTestSuites())
-					suites.push_back(suite);
-			}
-
-			std::string prepareSearchPattern(std::vector<std::string> &extensions) {
-				std::string pattern = ".*/.*\\.(";
-				addExtensionsToPattern(extensions, pattern);
-				return pattern;
-			}
-
-			void addExtensionsToPattern(std::vector<std::string> & extensions, std::string &pattern) {
-				for (auto ext : extensions)
-					pattern += ext + "|";
-				pattern = pattern.substr(0, pattern.size() - 1) + ")";
-			}
+			virtual void findAll(std::vector<std::string> paths, std::vector<std::string> extensions);
+			virtual void findInFile(std::string path);
+			virtual std::vector<std::string> getSuitesNames();
+			virtual std::vector<TestCasePtr> getTestsList();
+		protected:
+			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);
+			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern);
+			void getTestsIfLibraryIsCorrect(std::string &path);
+			void tryGetTests(std::string & path);
+			std::string prepareSearchPattern(std::vector<std::string> &extensions);
+			void addExtensionsToPattern(std::vector<std::string> & extensions, std::string &pattern);
 		public:
-			std::vector<std::string> getSuitesNames() {
-				std::vector<std::string> names;
-				for (auto suite : suites) {
-					names.push_back(suite->getName());
-				}
-				return names;
-			}
-
-			std::vector<TestCasePtr> getTestsList() {
-				std::vector<TestCasePtr> tests;
-				for (auto suite : suites) {
-					for(auto test: suite->getTestCaseList())
-						tests.push_back(nullptr);
-				}
-				return tests;
-			}
+			
 		};
 	}
 }

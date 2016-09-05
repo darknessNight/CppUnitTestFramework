@@ -45,6 +45,9 @@
     <ClCompile Include="Filesystem\SystemDirIterator.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
+    <ClCompile Include="TestsDiscover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SharedLibrary.h">

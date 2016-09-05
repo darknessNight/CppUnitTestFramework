@@ -55,15 +55,27 @@ namespace darknessNight {
 				TEST_METHOD(FindAll_HasFakes_CheckLoadSuites) {
 					TestsDiscover discover;
 					actDiscoverFindAll(discover);
+					assertCorrectLoadSuites(discover);
+				}
+
+				void assertCorrectLoadSuites(darknessNight::TestsRunner::TestsDiscover &discover) {
 					Assert::AreEqual<unsigned>(2, discover.getSuitesNames().size());
 					Assert::AreEqual<std::string>("Unnamed", discover.getSuitesNames()[0]);
 				}
 
 				TEST_METHOD(GetTestsList_HasFakes_CheckReturnAllTestCases) {
-					prepareFakeDynamicLibraryToReturnTestCase();
-					prepareFakeDirToReturnOneLibrary();
+					prepareFakes();
 					TestsDiscover discover;
 					actDiscoverFindAll(discover);
+					assertGetCorrectTestsCount(discover);
+				}
+
+				void prepareFakes() {
+					prepareFakeDynamicLibraryToReturnTestCase();
+					prepareFakeDirToReturnOneLibrary();
+				}
+
+				void assertGetCorrectTestsCount(darknessNight::TestsRunner::TestsDiscover &discover) {
 					Assert::AreEqual<unsigned>(1, discover.getTestsList().size());
 				}
 
@@ -81,11 +93,21 @@ namespace darknessNight {
 				}
 
 				TEST_METHOD(GetTestsList_HasFakes_CheckIsCorrectCase) {
-					/*prepareFakeDynamicLibraryToReturnTestCase();
-					prepareFakeDirToReturnOneLibrary();
+					prepareFakes();
 					TestsDiscover discover;
 					actDiscoverFindAll(discover);
-					Assert::AreEqual<unsigned>(1, discover.getTestsList().size());*/
+					assertGetCorrectTest(discover);
+				}
+
+				void assertGetCorrectTest(darknessNight::TestsRunner::TestsDiscover &discover) {
+					TestCasePtr test = discover.getTestsList()[0];
+					Assert::AreEqual<std::string>("IgnoredTest(Unnamed)", test->getReportWithoutResult().getFullName());
+				}
+
+				TEST_METHOD(FindInFile_HasFake_CheckIsCorrectLoadedSuite) {
+					TestsDiscover discover;
+					discover.findInFile("Dll.dll");
+					Assert::AreEqual<unsigned>(1, discover.getSuitesNames().size());
 				}
 			};
 		}
