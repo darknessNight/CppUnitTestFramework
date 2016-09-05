@@ -16,6 +16,10 @@ std::string darknessNight::CppUnitTestFramework::TestReport::getFile() {
 	return testFile;
 }
 
+std::string darknessNight::CppUnitTestFramework::TestReport::getFullName() {
+	return testName + "(" + testSuite + ")";
+}
+
 unsigned darknessNight::CppUnitTestFramework::TestReport::getLine() {
 	return testLine;
 }

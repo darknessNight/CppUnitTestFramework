@@ -18,6 +18,7 @@ namespace darknessNight {
 			TestResult getResult();
 			std::string getTestName();
 			std::string getFile();
+			std::string getFullName();
 			unsigned getLine();
 			std::string getSuiteName();
 			TestCategory getCategory();

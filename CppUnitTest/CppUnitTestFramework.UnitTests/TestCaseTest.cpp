@@ -91,6 +91,14 @@ private:
 		TestCasePtr testCase = getTestObject(tester, "TestName");
 		return testCase;
 	}
+
+public:
+	TEST_METHOD(GetReportFromTest_SettedSuiteName_CheckGetFullNameIsCorrect) {
+		TestCasePtr testCase = getTestObjectWithPredefinedTestResult();
+		testCase->setSuite("TestSuite");
+		TestReport testReport = testCase->runTestAndGetReport();
+		StringAssert::Constains("TestName(TestSuite)", testReport.getFullName());
+	}
 			};
 		}
 	}
