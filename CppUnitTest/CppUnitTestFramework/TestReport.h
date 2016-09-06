@@ -15,7 +15,7 @@ namespace darknessNight {
 		private:
 			TestReport();
 		public:
-			TestResult getResult();
+			TestResult& getResult();
 			std::string getTestName();
 			std::string getFile();
 			std::string getFullName();

@@ -59,6 +59,10 @@ std::vector<std::string> darknessNight::TestsRunner::TestsDiscover::getSuitesNam
 	return names;
 }
 
+std::vector<TestSuitePtr> darknessNight::TestsRunner::TestsDiscover::getSuites() {
+	return suites;
+}
+
 std::vector<TestCasePtr> darknessNight::TestsRunner::TestsDiscover::getTestsList() {
 	std::vector<TestCasePtr> tests;
 	for (auto suite : suites) {

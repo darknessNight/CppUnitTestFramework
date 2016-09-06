@@ -80,5 +80,8 @@
     <ClInclude Include="Filesystem\SystemDirIterator.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
+    <ClInclude Include="TestExecutor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

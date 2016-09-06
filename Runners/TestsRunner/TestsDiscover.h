@@ -22,6 +22,7 @@ namespace darknessNight {
 			virtual void findAll(std::vector<std::string> paths, std::vector<std::string> extensions);
 			virtual void findInFile(std::string path);
 			virtual std::vector<std::string> getSuitesNames();
+			virtual std::vector<TestSuitePtr> getSuites();
 			virtual std::vector<TestCasePtr> getTestsList();
 		protected:
 			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);

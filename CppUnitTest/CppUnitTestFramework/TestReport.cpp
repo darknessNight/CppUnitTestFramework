@@ -4,7 +4,7 @@ using namespace darknessNight::CppUnitTestFramework;
 
 darknessNight::CppUnitTestFramework::TestReport::TestReport() :testResult(false) {}
 
-TestResult darknessNight::CppUnitTestFramework::TestReport::getResult() {
+TestResult& darknessNight::CppUnitTestFramework::TestReport::getResult() {
 	return testResult;
 }
 

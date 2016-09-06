@@ -1,5 +1,9 @@
 #include "TestResult.h"
 
+void darknessNight::CppUnitTestFramework::TestResult::setTime(std::chrono::nanoseconds time) {
+	this->time = time;
+}
+
 darknessNight::CppUnitTestFramework::TestResult::TestResult(bool result) {
 	isTestSuccess = result;
 	errorMessage = "";
@@ -23,6 +27,10 @@ std::string darknessNight::CppUnitTestFramework::TestResult::getErrorMessage() {
 
 std::string darknessNight::CppUnitTestFramework::TestResult::getCause() {
 	return errorCause;
+}
+
+std::chrono::nanoseconds darknessNight::CppUnitTestFramework::TestResult::getTime() {
+	return time;
 }
 
 bool darknessNight::CppUnitTestFramework::TestResult::isSuccess() {

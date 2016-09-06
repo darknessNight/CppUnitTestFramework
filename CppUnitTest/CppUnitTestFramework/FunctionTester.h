@@ -17,6 +17,7 @@ namespace darknessNight {
 			FunctionTester(TestMethod test);
 			virtual TestResult runTest();
 		protected:
+			TestResult tryRunTestAndSetTime();
 			void throwExceptionIfTestIsNullptr(TestMethod test);
 			TestResult tryRunTest();
 			void runSetUpMethod();
