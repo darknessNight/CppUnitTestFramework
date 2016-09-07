@@ -154,6 +154,7 @@
     <ClInclude Include="Filesystem\SystemDirIterator.h" />
     <ClInclude Include="SharedLibrary.h" />
     <ClInclude Include="TestExecutor.h" />
+    <ClInclude Include="TestReportCategoryContainer.h" />
     <ClInclude Include="TestReportContainer.h" />
     <ClInclude Include="TestsDiscover.h" />
   </ItemGroup>
