@@ -55,14 +55,22 @@ public:
 	}
 
 	void addToTestSuiteTestCases(darknessNight::CppUnitTestFramework::TestSuite &testSuite) {
-		TestCasePtr testCase = TestCasePtr(new TestCaseIgnored("Test", "IgnoreResult"));
-		for (auto test : { testCase, testCase })
+		TestCasePtr testCase1 = TestCasePtr(new TestCaseIgnored("Test", "IgnoreResult"));
+		TestCasePtr testCase2 = TestCasePtr(new TestCaseIgnored("Test2", "IgnoreResult"));
+		for (auto test : { testCase1, testCase2 })
 			testSuite.addTestCase(test);
 	}
 
 	TEST_METHOD(RunTests_HasTestSuite_CheckHasDurationTime) {
 		auto reports = actRunTestsTestSuite();
 		Assert::IsTrue(reports[0].getResult().getTime().count()>0);
+	}
+
+	TEST_METHOD(RunTest_HasTestSuiteAndTestCaseName_CheckReturnReport) {
+		TestSuite testSuite=prepareTestSuite();
+		TestExecutor executor;
+		auto report=executor.runTest(TestSuitePtr(&testSuite, [](void*) {}), "Test");
+		Assert::AreEqual<std::string>("Test", report.getTestName());
 	}
 			};
 		}

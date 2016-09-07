@@ -21,6 +21,10 @@ namespace darknessNight {
 				report.getResult().setTime((end - start));
 			}
 
+			TestReport runTest(TestSuitePtr testSuite, std::string testName) {
+				return runTest(testSuite->getTestCase(testName));
+			}
+
 			std::vector<TestReport> runTests(std::vector<TestCasePtr> testCases) {
 				std::vector<TestReport> reports;
 				for (auto test : testCases)
@@ -29,10 +33,7 @@ namespace darknessNight {
 			}
 
 			std::vector<TestReport> runTests(TestSuitePtr testSuite) {
-				std::vector<TestReport> reports;
-				for (auto test : testSuite->getTestCases())
-					reports.push_back(runTest(test));
-				return reports;
+				return runTests(testSuite->getTestCases());
 			}
 		};
 	}
