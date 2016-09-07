@@ -30,9 +30,7 @@ namespace darknessNight {
 			void getTestsIfLibraryIsCorrect(std::string &path);
 			void tryGetTests(std::string & path);
 			std::string prepareSearchPattern(std::vector<std::string> &extensions);
-			void addExtensionsToPattern(std::vector<std::string> & extensions, std::string &pattern);
-		public:
-			
+			void addExtensionsToPattern(std::vector<std::string> & extensions, std::string &pattern);			
 		};
 	}
 }

@@ -1,5 +1,5 @@
 #include <CppUnitTestFramework/Framework.h>
-
+#include <CppUnitTestFramework/DynamicLibraryExports.h>
 
 #ifdef _WIN32
 #include <windows.h>

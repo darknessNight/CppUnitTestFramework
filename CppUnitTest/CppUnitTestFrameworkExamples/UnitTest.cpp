@@ -14,6 +14,10 @@ namespace ExampleProject {
 				Assert::Fail("This test has some error!");
 			}
 
+			IGNORE_TEST_METHOD(IgnoredMethod, "Because ignored") {
+				Assert::Fail("This test has some error!");
+			}
+
 			ARG_TEST_METHOD(ArgTest, "FirstArg", "Second", 3);
 			ARG_TEST_METHOD(ArgTest, "F", "S", 3);
 			ARG_TEST_METHOD(ArgTest, "F", "Se", 3);
