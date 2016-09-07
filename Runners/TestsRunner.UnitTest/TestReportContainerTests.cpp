@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <CppUnitTestFramework/PredefinedTestResults.h>
 #include "../TestsRunner/TestReportContainer.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -25,9 +26,9 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			this->testSuite = suite;
 		}
 
-		FakeTestReport(std::string name, bool isPassing) {
+		FakeTestReport(std::string name, TestResult res) {
 			this->testName = name;
-			this->testResult = TestResult(isPassing);
+			this->testResult = res;
 		}
 	};
 
@@ -61,11 +62,22 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 
 		TEST_METHOD(GetReportsGroupByTestResult_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
 			TestReportContainer container;
-			container.addReports({ FakeTestReport("Test1",true),FakeTestReport("Test2",false) });
+			container.addReports({ FakeTestReport("Test1",SuccessTestResult()),FakeTestReport("Test2",TestResult(false)),
+			FakeTestReport("Test3", IgnoredTestResult("Ignored"))});
 			auto reports = container.getReportsGroupBySuite();
-			Assert::AreEqual<std::string>("Test2", reports["Fail"][0].getTestName());
+			Assert::AreEqual<std::string>("Test2", reports["Failed"][0].getTestName());
 			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());
-			Assert::AreEqual<std::string>("Test3", reports["Ignore"][0].getTestName());
+			Assert::AreEqual<std::string>("Test3", reports["Ignored"][0].getTestName());
+		}
+
+		TEST_METHOD(GetReportsGroupByTestResult_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
+			TestReportContainer container;
+			container.addReports({ FakeTestReport("Test1",SuccessTestResult()),FakeTestReport("Test2",TestResult(false)),
+								 FakeTestReport("Test3", IgnoredTestResult("Ignored")) });
+			auto reports = container.getReportsGroupBySuite();
+			Assert::AreEqual<std::string>("Test2", reports["Failed"][0].getTestName());
+			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());
+			Assert::AreEqual<std::string>("Test3", reports["Ignored"][0].getTestName());
 		}
 	};
 }}}

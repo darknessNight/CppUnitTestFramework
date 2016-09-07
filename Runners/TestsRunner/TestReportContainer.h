@@ -68,9 +68,18 @@ namespace darknessNight {
 
 			std::map<std::string,std::vector<TestReport>> getReportsGroupBySuite() {
 				std::map<std::string, std::vector<TestReport>> ret;
-				for (auto test : reportsArray)
-					ret[test.getSuiteName()].push_back(test);
+				for (auto test : reportsArray) {
+					addTestToField(test, ret);
+				}
+
 				return ret;
+			}
+			void addTestToField(darknessNight::CppUnitTestFramework::TestReport &test, std::map<std::string, std::vector<darknessNight::CppUnitTestFramework::TestReport>> &ret) {
+				if (test.getResult().isSuccess())
+					ret["Success"].push_back(test);
+				else if (test.getResult().getCause() == "Ignored")
+					ret["Ignored"].push_back(test);
+				else ret["Failed"].push_back(test);
 			}
 		};
 	}

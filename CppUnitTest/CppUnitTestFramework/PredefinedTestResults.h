@@ -1,5 +1,6 @@
 #pragma once
 #include "TestResult.h"
+#include "Exceptions.h"
 
 namespace darknessNight {
 	namespace CppUnitTestFramework {
