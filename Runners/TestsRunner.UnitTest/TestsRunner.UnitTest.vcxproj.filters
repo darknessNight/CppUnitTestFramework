@@ -32,7 +32,10 @@
     <ClCompile Include="TestsDiscoverTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestExecutor.cpp">
+    <ClCompile Include="TestExecutorTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestReportContainerTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

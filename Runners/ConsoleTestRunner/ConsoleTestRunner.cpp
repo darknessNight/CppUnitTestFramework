@@ -2,20 +2,24 @@
 //
 
 #include "stdafx.h"
-#include "../TestsRunner/SharedLibrary.h"
+#include "../TestsRunner/TestsDiscover.h"
+#include "../TestsRunner/TestExecutor.h"
+
+using namespace darknessNight::TestsRunner;
 
 int main()
 {
-	/*try {
-		darknessNight_SharedLibrary::SharedLibrary::importFunction<void*()>("CppUnitTestFrameworkExamples.dll", "getTestsFromDynamicTestsLibrary");
-			std::cout << "Success";
+	TestsDiscover discover;
+	discover.findAll({ "." }, { ".dll" });
+	auto result = discover.getTestsList();
+	TestExecutor executor;
+	auto testReports=executor.runTests(result);
+
+	for (auto testReport : testReports) {
+		std::cout << "[" << (testReport.getResult().isSuccess() ? "Success" : "Failure") << " Cause: "
+			<< testReport.getResult().getCause() << " Name: " << testReport.getFullName();
 	}
-	catch (darknessNight_SharedLibrary::FunctionLoadException) {
-		std::cout << "Failed load func";
-	}
-	catch (darknessNight_SharedLibrary::LibraryLoadException) {
-		std::cout << "Failed load dll";
-	}*/
+
 	std::cout << "\n\n\n";
 	system("PAUSE");
     return 0;

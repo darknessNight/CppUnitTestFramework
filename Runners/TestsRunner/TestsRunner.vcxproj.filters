@@ -83,5 +83,8 @@
     <ClInclude Include="TestExecutor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestReportContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

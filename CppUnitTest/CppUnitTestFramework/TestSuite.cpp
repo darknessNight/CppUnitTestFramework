@@ -40,8 +40,10 @@ TestReport darknessNight::CppUnitTestFramework::TestSuite::runTestAndGetReport(s
 	return prepareAndRunTest(test);
 }
 
-const std::shared_ptr<const TestCase> darknessNight::CppUnitTestFramework::TestSuite::getTestCase(std::string name){
-	return findTestFromName(name);
+TestCasePtr darknessNight::CppUnitTestFramework::TestSuite::getTestCase(std::string name){
+	auto test= findTestFromName(name);
+	prepareTestCase(test);
+	return test;
 }
 
 std::vector<TestCasePtr> darknessNight::CppUnitTestFramework::TestSuite::getTestCases() {

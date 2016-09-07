@@ -4,7 +4,7 @@
 namespace darknessNight {
 	namespace CppUnitTestFramework {
 		class TestReport {
-		private:
+		protected:
 			TestResult testResult;
 			std::string testName;
 			std::string testFile;
@@ -12,7 +12,7 @@ namespace darknessNight {
 			std::string testSuite;
 			TestCategory testCategory;
 			friend class TestCase;
-		private:
+		protected:
 			TestReport();
 		public:
 			TestResult& getResult();
