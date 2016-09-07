@@ -36,15 +36,22 @@ void darknessNight::TestsRunner::TestsDiscover::tryGetTests(std::string & path) 
 }
 
 std::string darknessNight::TestsRunner::TestsDiscover::prepareSearchPattern(std::vector<std::string>& extensions) {
-	std::string pattern = ".*/.*\\.(";
+	std::string pattern = ".*\\.(";
 	addExtensionsToPattern(extensions, pattern);
 	return pattern;
 }
 
 void darknessNight::TestsRunner::TestsDiscover::addExtensionsToPattern(std::vector<std::string>& extensions, std::string & pattern) {
-	for (auto ext : extensions)
+	for (auto ext : extensions) {
+		deleteDotsAtBeginExt(ext);
 		pattern += ext + "|";
+	}
 	pattern = pattern.substr(0, pattern.size() - 1) + ")";
+}
+
+void darknessNight::TestsRunner::TestsDiscover::deleteDotsAtBeginExt(std::string &ext) {
+	while (ext.size() > 0 && ext[0] == '.')
+		ext = ext.substr(1);
 }
 
 void darknessNight::TestsRunner::TestsDiscover::findInFile(std::string path) {

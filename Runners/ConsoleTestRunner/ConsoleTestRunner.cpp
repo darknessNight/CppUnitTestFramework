@@ -21,7 +21,7 @@ int main()
 	std::cout << "Hello everybody\n";
 	TestsDiscover discover;
 	std::cout << "Start discover tests\n";
-	discover.findAll({ "../" }, { "dll" });
+	discover.findAll({ "../" }, { ".dll" });
 	auto result = discover.getTestsList();
 	TestExecutor executor;
 	std::cout << "Start running tests\n";
