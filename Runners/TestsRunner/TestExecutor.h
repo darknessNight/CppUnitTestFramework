@@ -18,7 +18,7 @@ namespace darknessNight {
 
 			void setTestDurationTime(darknessNight::CppUnitTestFramework::TestReport &report, std::chrono::time_point<std::chrono::steady_clock> &start) {
 				auto end = std::chrono::high_resolution_clock::now();
-				report.getResult().setTime((end - start));
+				report.getResult().setDurationTime(std::chrono::duration_cast<TestResult::TimeDuration>(end - start));
 			}
 
 			TestReport runTest(TestSuitePtr testSuite, std::string testName) {

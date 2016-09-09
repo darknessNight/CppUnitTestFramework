@@ -44,5 +44,16 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());
 			Assert::AreEqual<std::string>("Test3", reports["Ignored"][0].getTestName());
 		}
+
+		TEST_METHOD(GetReportsGroupByDuration_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
+			TestReportContainer container;
+			container.addReports({ FakeTestReport("Test1",1),FakeTestReport("Test2",11),
+								 FakeTestReport("Test3", 101), FakeTestReport("Test4",250) });
+			auto reports = container.getReportsGroupByDuration({10,100,250});
+			Assert::AreEqual<std::string>("Test1", reports["<10"][0].getTestName());
+			Assert::AreEqual<std::string>("Test2", reports["<100"][0].getTestName());
+			Assert::AreEqual<std::string>("Test3", reports["<250"][0].getTestName());
+			Assert::AreEqual<std::string>("Test4", reports[">=250"][0].getTestName());
+		}
 	};
 }}}

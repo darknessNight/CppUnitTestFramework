@@ -5,11 +5,13 @@
 namespace darknessNight {
 	namespace CppUnitTestFramework {
 		class TestResult {
+		public:
+			typedef std::chrono::microseconds TimeDuration;
 		protected:
 			bool isTestSuccess;
 			std::string errorMessage;
 			std::string errorCause;
-			std::chrono::nanoseconds time=std::chrono::nanoseconds::zero();
+			TimeDuration time= TimeDuration::zero();
 		public:
 			TestResult(bool result);
 			TestResult(const char* message);
@@ -17,8 +19,8 @@ namespace darknessNight {
 			std::string getFullMessage();
 			std::string getErrorMessage();
 			std::string getCause();
-			std::chrono::nanoseconds getTime();
-			void setTime(std::chrono::nanoseconds time);
+			TimeDuration getDurationTime();
+			void setDurationTime(TimeDuration time);
 			bool isSuccess();
 			bool isFailure();
 		};

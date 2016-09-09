@@ -1,6 +1,6 @@
 #include "TestResult.h"
 
-void darknessNight::CppUnitTestFramework::TestResult::setTime(std::chrono::nanoseconds time) {
+void darknessNight::CppUnitTestFramework::TestResult::setDurationTime(TimeDuration time) {
 	this->time = time;
 }
 
@@ -29,7 +29,7 @@ std::string darknessNight::CppUnitTestFramework::TestResult::getCause() {
 	return errorCause;
 }
 
-std::chrono::nanoseconds darknessNight::CppUnitTestFramework::TestResult::getTime() {
+darknessNight::CppUnitTestFramework::TestResult::TimeDuration darknessNight::CppUnitTestFramework::TestResult::getDurationTime() {
 	return time;
 }
 

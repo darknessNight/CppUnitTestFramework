@@ -14,7 +14,8 @@ namespace darknessNight {
 
 				FakeTestReport(std::string name, int time) {
 					this->testName = name;
-					this->testResult.setTime(std::chrono::nanoseconds(time));
+					this->testResult.setDurationTime(std::chrono::duration_cast<TestResult::TimeDuration>
+						(std::chrono::milliseconds(time)));
 				}
 
 				FakeTestReport(std::string name, TestCategory cat) {
