@@ -22,7 +22,7 @@ void * darknessNight::SharedLibrary::DynamicLibrary::getFunction(std::string & l
 }
 
 void * darknessNight::SharedLibrary::DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
-	auto func = GetProcAddress((HMODULE)module, functionName.c_str());
+	auto func = (void*)GetProcAddress((HMODULE)module, functionName.c_str());
 	if (func == nullptr)
 		throw FunctionLoadException("Not found function: " + functionName);
 	return func;

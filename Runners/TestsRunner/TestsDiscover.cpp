@@ -19,7 +19,7 @@ void darknessNight::TestsRunner::TestsDiscover::searchLibrariesInDir(std::shared
 	}
 }
 
-void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::string & path) {
+void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::string path) {
 	try {
 		tryGetTests(path);
 	}

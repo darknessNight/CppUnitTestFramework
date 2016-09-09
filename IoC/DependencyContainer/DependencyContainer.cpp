@@ -2,4 +2,4 @@
 
 using namespace darknessNight::DependencyContainer;
 
-std::unique_ptr<DIContainer> DIContainer::instance = std::unique_ptr<DIContainer>(new DIContainer());
+//std::unique_ptr<DIContainer> DIContainer::instance = std::unique_ptr<DIContainer>(new DIContainer());

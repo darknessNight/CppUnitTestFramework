@@ -1,5 +1,5 @@
 #include "Entry.h"
-
+#include <memory.h>
 
 darknessNight::Filesystem::Entry::Entry(std::string path) {
 	getInfoOrThrowIfNotExists(path);

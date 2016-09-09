@@ -14,7 +14,7 @@ namespace darknessNight {
 
 		class DIContainer {
 		private:
-			static std::unique_ptr<DIContainer> instance;
+			//static std::unique_ptr<DIContainer> instance;
 			std::map<std::vector<std::string>, void*> typesMap;
 		public:
 			~DIContainer() {
@@ -30,7 +30,7 @@ namespace darknessNight {
 				TypeCreatorTemplate<T> *creator = new TypeCreatorTemplate<T>();
 				creator->getType = func;
 				std::vector<std::string> el = { typeid(T).name() };
-				instance->typesMap[el] = (void*)creator;
+				getInstance()->typesMap[el] = (void*)creator;
 			}
 
 			template<typename T, typename U> static void Register() {
@@ -39,23 +39,27 @@ namespace darknessNight {
 
 			template<typename T, typename U> static void RegisterEx(std::initializer_list<std::string> types) {
 				std::vector<std::string> list = { typeid(T).name() };
-				getTypesList<Args...>(list)
 				Register<T, U>();
 			}
 
 			template<typename T> static std::shared_ptr<T> Get() {
 				std::vector<std::string> el = { typeid(T).name() };
-				auto ret = ((TypeCreatorTemplate<T>*)instance->typesMap[el])->getType();
+				auto ret = ((TypeCreatorTemplate<T>*)getInstance()->typesMap[el])->getType();
 				return ret;
 			}
 
 			template<typename T, typename ...Args> static std::shared_ptr<T> Get(Args... args) {
-				return ((TypeCreatorTemplate<T>*)instance->typesMap.begin()->second)->getType();
+				return ((TypeCreatorTemplate<T>*)getInstance()->typesMap.begin()->second)->getType();
 			}
 
 			static void clear() {
-				instance->typesMap.clear();
+				getInstance()->typesMap.clear();
 			}
+        private:
+            static DIContainer* getInstance(){
+                static DIContainer staticContainer;
+                return &staticContainer;
+            }
 		};
 	}
 }

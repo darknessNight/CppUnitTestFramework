@@ -27,7 +27,7 @@ namespace darknessNight {
 		protected:
 			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);
 			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern);
-			void getTestsIfLibraryIsCorrect(std::string &path);
+			void getTestsIfLibraryIsCorrect(std::string path);
 			void tryGetTests(std::string & path);
 			std::string prepareSearchPattern(std::vector<std::string> &extensions);
 			void addExtensionsToPattern(std::vector<std::string> & extensions, std::string &pattern);
