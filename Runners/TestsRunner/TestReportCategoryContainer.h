@@ -30,6 +30,14 @@ namespace darknessNight {
 			TestReport& operator[](int index) {
 				return reports[index];
 			}
+
+			std::map<std::string, CategoryContainer> getSubCats() {
+				return subcats;
+			}
+
+			std::vector<TestReport>  getTestsReports() {
+				return reports;
+			}
 		};
 	}
 }

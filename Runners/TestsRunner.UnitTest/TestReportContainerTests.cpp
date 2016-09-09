@@ -1,36 +1,11 @@
 #include "stdafx.h"
 #include <CppUnitTestFramework/PredefinedTestResults.h>
 #include "../TestsRunner/TestReportContainer.h"
+#include "FakeTestReport.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace darknessNight {namespace TestsRunner {namespace Tests{
-	class FakeTestReport :public TestReport {
-	public:
-		FakeTestReport(std::string name) {
-			this->testName = name;
-		}
-
-		FakeTestReport(std::string name, int time) {
-			this->testName = name;
-			this->testResult.setTime(std::chrono::nanoseconds(time));
-		}
-
-		FakeTestReport(std::string name, TestCategory cat) {
-			this->testName = name;
-			this->testCategory = cat;
-		}
-
-		FakeTestReport(std::string name, std::string suite) {
-			this->testName = name;
-			this->testSuite = suite;
-		}
-
-		FakeTestReport(std::string name, TestResult res) {
-			this->testName = name;
-			this->testResult = res;
-		}
-	};
 
 	TEST_CLASS(TestReportSortTests)
 	{
@@ -64,16 +39,6 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			TestReportContainer container;
 			container.addReports({ FakeTestReport("Test1",SuccessTestResult()),FakeTestReport("Test2",TestResult(false)),
 			FakeTestReport("Test3", IgnoredTestResult("Ignored"))});
-			auto reports = container.getReportsGroupBySuite();
-			Assert::AreEqual<std::string>("Test2", reports["Failed"][0].getTestName());
-			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());
-			Assert::AreEqual<std::string>("Test3", reports["Ignored"][0].getTestName());
-		}
-
-		TEST_METHOD(GetReportsGroupByTestResult_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
-			TestReportContainer container;
-			container.addReports({ FakeTestReport("Test1",SuccessTestResult()),FakeTestReport("Test2",TestResult(false)),
-								 FakeTestReport("Test3", IgnoredTestResult("Ignored")) });
 			auto reports = container.getReportsGroupBySuite();
 			Assert::AreEqual<std::string>("Test2", reports["Failed"][0].getTestName());
 			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());

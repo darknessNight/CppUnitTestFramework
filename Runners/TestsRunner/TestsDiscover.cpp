@@ -8,6 +8,7 @@ void darknessNight::TestsRunner::TestsDiscover::findAll(std::vector<std::string>
 void darknessNight::TestsRunner::TestsDiscover::searchLibraries(std::vector<std::string>& paths, std::string & pattern) {
 	for (auto path : paths) {
 		auto dir = directory->get(path);
+		auto tmp = dir->getPath();
 		searchLibrariesInDir(dir, pattern);
 	}
 }

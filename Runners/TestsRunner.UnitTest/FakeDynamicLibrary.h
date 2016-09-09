@@ -33,6 +33,7 @@ namespace darknessNight {
 				virtual std::shared_ptr<Directory> get(std::string path) override {
 					auto ptr = std::make_shared<FakeDir>();
 					ptr->retEntries = retEntries;
+					ptr->path = path;
 					return ptr;
 				}
 				virtual std::vector<Entry> getElements() override {
@@ -42,7 +43,7 @@ namespace darknessNight {
 					return std::vector<Entry>();
 				}
 				virtual std::vector<Entry> searchElements(std::string pattern) override {
-					if (pattern == ".*/.*\\.(dll|so)")
+					if ((int)pattern.find("\\.(dll|so)")>=0)
 						return retEntries;
 					else return std::vector<Entry>();
 				}
