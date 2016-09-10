@@ -18,7 +18,7 @@ void darknessNight::CppUnitTestFramework::ClassTypePrefix::setPrefixCountIfNeede
 }
 
 
-#ifdef _MSC_VER
+#if _MSC_VER
 class HelperClass {};
 
 void darknessNight::CppUnitTestFramework::ClassTypePrefix::setPrefixCount()

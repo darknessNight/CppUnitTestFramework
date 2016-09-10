@@ -55,14 +55,9 @@ void* DynamicLibrary::loadModule(std::string &libraryPath)
 
 darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()
 {
-	for (auto module : modules) {
-		dlclose(module.second);
-	}
 }
 
 void darknessNight::SharedLibrary::DynamicLibrary::freeLibrary(std::string name) {
-    if (instance->moduleExists(name))
-		dlclose(instance->modules[name]);
 }
 
 void * darknessNight::SharedLibrary::DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
@@ -71,7 +66,7 @@ void * darknessNight::SharedLibrary::DynamicLibrary::getFunction(std::string & l
 }
 
 void * darknessNight::SharedLibrary::DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
-	auto func = (void*)dlsym(module, functionName.c_str());
+    auto func = (void*)dlsym(module, functionName.c_str());
 	if (func == nullptr)
 		throw FunctionLoadException("Not found function: " + functionName);
 	return func;
@@ -91,7 +86,7 @@ bool darknessNight::SharedLibrary::DynamicLibrary::moduleExists(std::string & li
 
 void* DynamicLibrary::loadModule(std::string &libraryPath)
 {
-    auto module = dlopen("/opt/lib/libctest.so", RTLD_LAZY);
+    auto module = dlopen(libraryPath.c_str(), RTLD_LAZY);
 	if (module == nullptr)
 		throw LibraryLoadException("Cannot load library: " + libraryPath);
 	modules[libraryPath] = module;
