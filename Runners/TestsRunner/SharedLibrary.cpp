@@ -51,7 +51,6 @@ void* DynamicLibrary::loadModule(std::string &libraryPath)
 
 #endif
 #ifdef __linux
-//#ifdef _DEBUG
 #include <dlfcn.h>
 
 darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()

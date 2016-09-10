@@ -9,6 +9,7 @@ namespace darknessNight {
 		class DirOneLevelIterator :public std::iterator<std::input_iterator_tag, Entry>{
 		protected:
 			Entry entry;
+			std::string parent;
 			std::shared_ptr<SystemDirIterator> systemIterator;
 			friend class Directory;
 		public:
@@ -22,7 +23,7 @@ namespace darknessNight {
 			explicit DirOneLevelIterator(std::string parentPath);
 			explicit DirOneLevelIterator();
 			virtual bool nextFileExists();
-			void getFirstEntry(std::string &parentPath);
+			virtual void getFirstEntry(std::string &parentPath);
 			virtual void findNextFile();
 		};
 

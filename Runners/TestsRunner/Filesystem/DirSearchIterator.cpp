@@ -2,7 +2,7 @@
 #include <regex>
 
 darknessNight::Filesystem::DirSearchIterator::DirSearchIterator(std::string parentPath, std::string pattern)
-	:DirRecursiveIterator(parentPath), searchRegex(pattern) {
+	:DirRecursiveIterator(parentPath),searchRegex(pattern){
 	findFirstMatchedEntry();
 }
 
@@ -22,7 +22,8 @@ void darknessNight::Filesystem::DirSearchIterator::findNextFile() {
 }
 
 bool darknessNight::Filesystem::DirSearchIterator::entryNotMatchAndCanSearch() {
-	return !systemIterator->isEnded() && !matchPattern(entry.getPath());
+    auto tmp=!systemIterator->isEnded() && !matchPattern(entry.getPath());
+    return tmp;
 }
 
 bool darknessNight::Filesystem::DirSearchIterator::matchPattern(std::string str) {

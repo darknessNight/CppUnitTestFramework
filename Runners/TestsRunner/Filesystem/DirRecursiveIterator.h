@@ -16,6 +16,7 @@ namespace darknessNight {
 			std::string getNextDir();
 			bool setNewSearchDir();
 			void findNextFile()override;
+			void addToListIfIsDir();
 		};
 
 	}
