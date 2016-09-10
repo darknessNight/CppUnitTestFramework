@@ -42,11 +42,14 @@
     <ClCompile Include="Filesystem\DirSearchIterator.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="Filesystem\SystemDirIterator.cpp">
-      <Filter>Source Files\Filesystem</Filter>
-    </ClCompile>
     <ClCompile Include="TestsDiscover.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filesystem\SystemDirIteratorLinux.cpp">
+      <Filter>Source Files\Filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Filesystem\SystemDirIteratorWindows.cpp">
+      <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="TestReportCategoryContainer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystem\SystemDirIteratorLinux.h">
+      <Filter>Header Files\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystem\SystemDirIteratorWindows1.h">
+      <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

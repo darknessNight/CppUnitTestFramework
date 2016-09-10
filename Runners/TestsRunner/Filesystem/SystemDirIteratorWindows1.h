@@ -15,7 +15,7 @@ namespace darknessNight {
 			bool operator==(const SystemDirIterator& other) const;
 			bool operator!=(const SystemDirIterator& other) const;
 
-			SystemDirIterator();
+			SystemDirIteratorWindows();
 			virtual bool findFirstFile(std::string path);
 			bool isEnded();
 			virtual int findNextFileFromHandle();

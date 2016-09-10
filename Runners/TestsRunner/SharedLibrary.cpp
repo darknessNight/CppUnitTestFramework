@@ -4,6 +4,8 @@ using namespace darknessNight::SharedLibrary;
 std::shared_ptr<DynamicLibrary> DynamicLibrary::instance = std::make_shared<DynamicLibrary>();
 
 #ifdef _WIN32
+#include <Windows.h>
+
 darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()
 {
 	for (auto module : modules) {
