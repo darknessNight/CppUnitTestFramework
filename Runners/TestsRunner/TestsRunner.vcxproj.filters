@@ -95,7 +95,7 @@
     <ClInclude Include="Filesystem\SystemDirIteratorLinux.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="Filesystem\SystemDirIteratorWindows1.h">
+    <ClInclude Include="Filesystem\SystemDirIteratorWindows.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>

@@ -154,7 +154,7 @@
     <ClInclude Include="Filesystem\Exceptions.h" />
     <ClInclude Include="Filesystem\SystemDirIterator.h" />
     <ClInclude Include="Filesystem\SystemDirIteratorLinux.h" />
-    <ClInclude Include="Filesystem\SystemDirIteratorWindows1.h" />
+    <ClInclude Include="Filesystem\SystemDirIteratorWindows.h" />
     <ClInclude Include="SharedLibrary.h" />
     <ClInclude Include="TestExecutor.h" />
     <ClInclude Include="TestReportCategoryContainer.h" />
