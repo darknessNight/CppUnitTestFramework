@@ -2,6 +2,7 @@
 //
 
 #include "stdafx.h"
+#include <iostream>
 #include "../TestsRunner/TestsDiscover.h"
 #include "../TestsRunner/TestExecutor.h"
 

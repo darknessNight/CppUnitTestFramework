@@ -2,9 +2,6 @@
 #include "Exceptions.h"
 #include <memory>
 #include <map>
-#ifdef _WIN32
-#include <Windows.h>
-#endif
 
 namespace darknessNight {
 	namespace SharedLibrary {
@@ -26,9 +23,6 @@ namespace darknessNight {
 			void* loadModule(std::string &libraryPath);
 		};
 
-
-		//implem
-#ifdef _WIN32
 		template<typename T>
 		inline T * DynamicLibrary::ImportFunction(std::string libraryPath, std::string functionName) {
 			return instance->importFunction<T>(libraryPath, functionName);
@@ -38,9 +32,5 @@ namespace darknessNight {
 			return (T*)getFunction(libraryPath, functionName);
 		}
 
-#endif
-#ifdef __linux
-#error Not supported yet
-#endif
 	}
 }

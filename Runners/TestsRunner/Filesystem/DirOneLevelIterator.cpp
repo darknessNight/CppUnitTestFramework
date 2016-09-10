@@ -1,12 +1,15 @@
 #include "DirOneLevelIterator.h"
+#include "SystemDirIteratorLinux.h"
+#include "SystemDirIteratorWindows.h"
 
 using namespace darknessNight::Filesystem;
 
 darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator():entry("."){
-	systemIterator = std::make_shared<SystemDirIterator>();
+	systemIterator = std::make_shared<CurrentSystemDirIterator>();
 }
 
-darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(std::string parentPath):DirOneLevelIterator(){
+darknessNight::Filesystem::DirOneLevelIterator::DirOneLevelIterator(std::string parentPath):entry("."){
+    systemIterator = std::make_shared<CurrentSystemDirIterator>();
 	getFirstEntry(parentPath);
 }
 

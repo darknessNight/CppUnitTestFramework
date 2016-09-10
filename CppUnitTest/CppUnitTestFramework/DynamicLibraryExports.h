@@ -3,13 +3,16 @@
 
 namespace darknessNight {
 	namespace CppUnitTestFramework {
-		extern "C" {
+
 #ifdef _WIN32
+extern "C" {
 			__declspec(dllexport)
 #endif
 				TestContainer* getTestsFromDynamicTestsLibrary() {
 				return &TestsCollectionExport::getTestContainer();
 			}
+#ifdef _WIN32
 		}
+#endif
 	}
 }

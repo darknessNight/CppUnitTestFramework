@@ -2,7 +2,6 @@
 #include "Entry.h"
 #include <iterator>
 #include <memory>
-#ifdef _WIN32
 #include "SystemDirIterator.h"
 
 namespace darknessNight {
@@ -29,4 +28,3 @@ namespace darknessNight {
 
 	}
 }
-#endif

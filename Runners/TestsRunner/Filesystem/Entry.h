@@ -11,8 +11,8 @@
 #define ModeIsFile S_IFREG
 #else
 #include <unistd.h>
-#define ModeIsDir S_ISDIR
-#define ModeIsFile S_ISREG
+#define ModeIsDir S_IFDIR
+#define ModeIsFile S_IFREG
 #endif
 
 namespace darknessNight {
