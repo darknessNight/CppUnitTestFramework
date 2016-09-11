@@ -1,5 +1,4 @@
 #include "TestsDiscover.h"
-#include<iostream>
 
 void darknessNight::TestsRunner::TestsDiscover::findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
 	std::string pattern = prepareSearchPattern(extensions);
@@ -16,7 +15,6 @@ void darknessNight::TestsRunner::TestsDiscover::searchLibraries(std::vector<std:
 
 void darknessNight::TestsRunner::TestsDiscover::searchLibrariesInDir(std::shared_ptr<Directory>& directory, std::string & pattern) {
 	for (auto dir : directory->searchElements(pattern)) {
-	std::cout<<"Have: "<<dir.getPath()<<std::endl;
 		getTestsIfLibraryIsCorrect(dir.getPath());
 	}
 }
@@ -25,10 +23,9 @@ void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::
 	try {
 		tryGetTests(path);
 	}
-	catch (SharedLibrary::LibraryLoadException) {std::cout<<"GetError Library"<<std::endl;}
+	catch (SharedLibrary::LibraryLoadException) {}
 	catch (SharedLibrary::FunctionLoadException) {
 		dynamicLibrary->freeLibrary(path);
-		std::cout<<"GetError Func"<<std::endl;
 	}
 }
 

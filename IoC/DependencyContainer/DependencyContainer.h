@@ -14,7 +14,6 @@ namespace darknessNight {
 
 		class DIContainer {
 		private:
-			//static std::unique_ptr<DIContainer> instance;
 			std::map<std::vector<std::string>, void*> typesMap;
 		public:
 			~DIContainer() {
@@ -57,8 +56,11 @@ namespace darknessNight {
 			}
         private:
             static DIContainer* getInstance(){
-                static DIContainer staticContainer;
-                return &staticContainer;
+				//NOTE cannot use smart pointer, because in managed project static object cause errors
+                static DIContainer* staticContainer=nullptr;
+				if (staticContainer == nullptr)
+					staticContainer = new DIContainer();
+				return staticContainer;
             }
 		};
 	}

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
     [TestFixture]
@@ -13,27 +15,80 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         [Test]
         public void TestReadAllSources_HasBasicArray_CheckSendsNamesToLogger() {
             List<string> usedPath = new List<string>();
-            IMessageLogger fakeLogger = prepareFakeLoggerForGetListUsedpath(usedPath);
+            IMessageLogger fakeLogger = prepareFakeLoggerForGetMessages(usedPath);
             actTestReadSampleSources(fakeLogger);
             assertTestReadAllSources(usedPath);
         }
 
         private static void actTestReadSampleSources(IMessageLogger fakeLogger) {
+            var container = Substitute.For<ITestCaseDiscoverySink>();
             TestDiscover discover = new TestDiscover();
-            discover.DiscoverTests(new string[] { "../1.dll", "../2.dll" }, null, fakeLogger, null);
+            discover.DiscoverTests(new string[] { "../1.dll", "../2.dll" }, null, fakeLogger, container);
         }
 
         private static void assertTestReadAllSources(List<string> usedPath) {
-            var listOfCorrectMessages = new string[] { "Has: ../1.dll", "Has: ../2.dll", "----CppUnitTestAdapter:Ended----", "----CppUnitTestAdapter:Started----" };
+            var listOfCorrectMessages = new string[] { "Tests found: 0", "Has: ../1.dll", "Has: ../2.dll", "----CppUnitTestAdapter:Ended----", "----CppUnitTestAdapter:Started----" };
             CollectionAssert.AreEquivalent(listOfCorrectMessages, usedPath);
         }
 
-        private static IMessageLogger prepareFakeLoggerForGetListUsedpath(List<string> usedPath) {
+        private static IMessageLogger prepareFakeLoggerForGetMessages(List<string> messages) {
             var fakeLogger = Substitute.For<IMessageLogger>();
             fakeLogger.SendMessage(Arg.Any<TestMessageLevel>(), Arg.Do<string>((arg) => {
-                usedPath.Add(arg);
+                messages.Add(arg);
             }));
             return fakeLogger;
+        }
+
+        [Test]
+        public void TestTryReadLibrary_HasNonExistsLibraryPath_CheckNoThrow() {
+            List<string> messages = new List<string>();
+            TestDiscover discover=new TestDiscover();
+            var fakeLogger=prepareFakeLoggerForGetMessages(messages);
+            var container = Substitute.For<ITestCaseDiscoverySink>();
+            TestDelegate test=()=>{ discover.DiscoverTests(new string[] { "Unexists.dll" }, null, fakeLogger, container); };
+            Assert.DoesNotThrow(test);
+        }
+
+        [Test]
+        public void TestTryReadLibrary_HasCorrectLibrary_CheckSendTestCase() {
+            List<TestCase> loadedCases = new List<TestCase>();
+            ITestCaseDiscoverySink container = prepareFakeContainerForGetLoadedCases(loadedCases);
+            actDiscoverExistingTests(container);
+            AssertSendCorrectCases(loadedCases);
+        }
+
+        private static void actDiscoverExistingTests(ITestCaseDiscoverySink container) {
+            var fakeLogger = Substitute.For<IMessageLogger>();
+            TestDiscover discover = new TestDiscover();
+            discover.DiscoverTests(new string[] { "./Debug/CppUnitTestFrameworkExamples.dll", "Release/CppUnitTestFrameworkExamples.dll" }, null, fakeLogger, container);
+        }
+
+        private static void AssertSendCorrectCases(List<TestCase> loadedCases) {
+            AssertSendCorrrectCountOFcases(loadedCases);
+            AssertSendCorrectCase(loadedCases);
+        }
+
+        private static void AssertSendCorrectCase(List<TestCase> loadedCases) {
+            bool found = checkHasCaseWithName(loadedCases, "IgnoredMethod");
+            Assert.IsTrue(found, "Not founded test");
+        }
+
+        private static bool checkHasCaseWithName(List<TestCase> loadedCases, string caseName) {
+            bool found = false;
+            foreach (var test in loadedCases)
+                if (test.FullyQualifiedName.Contains(caseName))
+                    found = true;
+            return found;
+        }
+
+        private static void AssertSendCorrrectCountOFcases(List<TestCase> loadedCases) {
+            Assert.GreaterOrEqual(loadedCases.Count, 1);
+        }
+
+        private static ITestCaseDiscoverySink prepareFakeContainerForGetLoadedCases(List<TestCase> loadedCases) {
+            var container = Substitute.For<ITestCaseDiscoverySink>();
+            container.SendTestCase(Arg.Do<TestCase>((arg) => { loadedCases.Add(arg); }));
+            return container;
         }
     }
 }
