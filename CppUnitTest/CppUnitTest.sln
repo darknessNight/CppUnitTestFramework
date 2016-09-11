@@ -8,6 +8,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFramework.CompileTest", "CppUnitTestFramework.CompileTest\CppUnitTestFramework.CompileTest.vcxproj", "{D9729801-7900-4F37-9350-AEC05D1961A5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFramework.UnitTests", "CppUnitTestFramework.UnitTests\CppUnitTestsFramework.UnitTests.vcxproj", "{A8580500-3AA2-4DA4-9973-75DB7BF056E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF} = {0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFrameworkExamples", "CppUnitTestFrameworkExamples\CppUnitTestFrameworkExamples.vcxproj", "{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}"
 EndProject
@@ -36,7 +39,9 @@ Global
 		{D9729801-7900-4F37-9350-AEC05D1961A5}.Release|x86.ActiveCfg = Release|Win32
 		{D9729801-7900-4F37-9350-AEC05D1961A5}.Release|x86.Build.0 = Release|Win32
 		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Debug|x64.ActiveCfg = Debug|Win32
+		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Debug|x64.Build.0 = Debug|Win32
 		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Debug|x86.ActiveCfg = Debug|Win32
+		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Debug|x86.Build.0 = Debug|Win32
 		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Release|x64.ActiveCfg = Release|x64
 		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Release|x64.Build.0 = Release|x64
 		{A8580500-3AA2-4DA4-9973-75DB7BF056E5}.Release|x86.ActiveCfg = Release|Win32
