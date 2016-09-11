@@ -165,9 +165,6 @@
     <ProjectReference Include="..\..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj">
       <Project>{9d1e68a5-dcbd-4874-9adc-9c15d9191f42}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\IoC\DependencyContainer\DependencyContainer.vcxproj">
-      <Project>{fef716c0-7695-4813-84fb-5dc252a9c8af}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
