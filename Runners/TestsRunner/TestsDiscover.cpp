@@ -1,4 +1,5 @@
 #include "TestsDiscover.h"
+#include "ManagedLibraryChecker.h"
 
 void darknessNight::TestsRunner::TestsDiscover::findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
 	std::string pattern = prepareSearchPattern(extensions);
@@ -21,7 +22,8 @@ void darknessNight::TestsRunner::TestsDiscover::searchLibrariesInDir(std::shared
 
 void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::string path) {
 	try {
-		tryGetTests(path);
+		if(!ManagedLibraryChecker::isManagedLib(path))
+			tryGetTests(path);
 	}
 	catch (SharedLibrary::LibraryLoadException) {
 	}
@@ -57,6 +59,7 @@ void darknessNight::TestsRunner::TestsDiscover::deleteDotsAtBeginExt(std::string
 }
 
 void darknessNight::TestsRunner::TestsDiscover::findInFile(std::string path) {
+	
 	getTestsIfLibraryIsCorrect(path);
 }
 

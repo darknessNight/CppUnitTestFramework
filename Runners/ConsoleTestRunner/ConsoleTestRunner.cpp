@@ -11,10 +11,13 @@ using namespace darknessNight::DependencyContainer;
 using namespace darknessNight::Filesystem;
 using namespace darknessNight::SharedLibrary;
 
+#include "ConsoleTestRunner.h"
+
+using namespace std;
 
 
-int main()
-{
+
+int main() {
 	std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
 	DIContainer::Register<Directory>(dirPtr);
 	DIContainer::Register<DynamicLibrary, DynamicLibrary>();
@@ -29,13 +32,26 @@ int main()
 	std::cout << "Start running tests\n";
 	auto testReports=executor.runTests(result);
 
+	int passing = 0, falling = 0;
 	for (auto testReport : testReports) {
 		std::cout << "[" << (testReport.getResult().isSuccess() ? "Success" : "Failure") << "] Cause: <"
-			<< testReport.getResult().getCause() << "> Name: <" << testReport.getFullName()<<">\n";
+			<< testReport.getResult().getCause() << "> Name: <" << testReport.getFullName()<<">";
+		if (testReport.getResult().isFailure())
+			std::cout << "Error: <" << testReport.getResult().getErrorMessage() << ">";
+		std::cout <<" Duration: <" << std::chrono::duration_cast<std::chrono::milliseconds>(testReport.getResult().getDurationTime()).count() << "ms>\n";	
+		if (testReport.getResult().isSuccess())
+			passing++;
+		else falling++;
 	}
 
+	std::cout << "\n\nPassing tests: " << passing << "\nFalling tests: " << falling;
+
+#ifdef _DEBUG
 	std::cout << "\n\n\n";
-	system("PAUSE");
-    return 0;
+	std::system("PAUSE");
+#endif
+	if (falling)
+		return 1;
+	return 0;
 }
 

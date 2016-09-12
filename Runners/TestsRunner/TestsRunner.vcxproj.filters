@@ -98,5 +98,8 @@
     <ClInclude Include="Filesystem\SystemDirIteratorWindows.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
+    <ClInclude Include="ManagedLibraryChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
