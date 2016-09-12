@@ -1,4 +1,5 @@
 #pragma once
+#include <TestsRunner/TestExecutor.h>
 #include "MessageLogger.h"
 using namespace System;
 using namespace System::Collections::Generic;
@@ -23,6 +24,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			for each(auto test in tests) {
 				if (m_cancelled) break;
 
+				
 				auto testResult = gcnew ObjectModel::TestResult(test);
 
 				testResult->Outcome = TestOutcome::Skipped;

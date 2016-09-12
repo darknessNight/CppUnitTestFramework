@@ -12,5 +12,13 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
             var dllPath2 = AppDomain.CurrentDomain.BaseDirectory + "../../../Release/CppUnitTestFrameworkExamples.dll";
             return new string[] { dllPath1, dllPath2 };
         }
+
+        public static string getExampleTestPath() {
+#if DEBUG
+            return AppDomain.CurrentDomain.BaseDirectory + "../../../Debug/CppUnitTestFrameworkExamples.dll";
+#else
+            return AppDomain.CurrentDomain.BaseDirectory + "../../../Release/CppUnitTestFrameworkExamples.dll";
+#endif
+        }
     }
 }

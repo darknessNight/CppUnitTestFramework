@@ -15,7 +15,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         [Test]
         public void TestRunTestFromTestCase_HasSampleTestCase_CheckRunTest() {
             List<TestResult> results = new List<TestResult>();
-            TestCase testCase = new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", TestDiscover.executorUri, "Debug/CppUnitTestFrameworkExamples.dll");
+            TestCase testCase = new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", TestDiscover.executorUri, IntegrationsPaths.getExampleTestPath());
             TestsExecutor executor=new TestsExecutor();
             var framework = Substitute.For<IFrameworkHandle>();
             framework.RecordResult(Arg.Do<TestResult>((arg) => { results.Add(arg); }));

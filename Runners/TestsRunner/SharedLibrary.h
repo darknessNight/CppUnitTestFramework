@@ -18,9 +18,13 @@ namespace darknessNight {
 		protected:
 			virtual void* getFunction(std::string &libraryPath, std::string &functionName);
 			void* getFunctionFromModule(void* module, std::string &functionName);
+			void throwIfNotLoadedFunction(void * func, std::string & functionName);
 			void* getModuleAndLoadIfNeeded(std::string &libraryPath);
 			bool moduleExists(std::string & libraryPath);
 			void* loadModule(std::string &libraryPath);
+			void throwIfNotLoadedLibrary(void* module, std::string & libraryPath);
+			void* getFunctionSystemFunc(void* module, std::string&functionName);
+			void *loadModuleSystemFunc(std::string&libraryPath);
 		};
 
 		template<typename T>
