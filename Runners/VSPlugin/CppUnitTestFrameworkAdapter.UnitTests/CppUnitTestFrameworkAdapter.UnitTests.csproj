@@ -53,8 +53,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntegrationsPaths.cs" />
     <Compile Include="TestDiscoverTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestsExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

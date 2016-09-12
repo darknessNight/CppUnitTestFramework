@@ -42,10 +42,10 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         [Test]
         public void TestTryReadLibrary_HasNonExistsLibraryPath_CheckNoThrow() {
             List<string> messages = new List<string>();
-            TestDiscover discover=new TestDiscover();
-            var fakeLogger=prepareFakeLoggerForGetMessages(messages);
+            TestDiscover discover = new TestDiscover();
+            var fakeLogger = prepareFakeLoggerForGetMessages(messages);
             var container = Substitute.For<ITestCaseDiscoverySink>();
-            TestDelegate test=()=>{ discover.DiscoverTests(new string[] { "Unexists.dll" }, null, fakeLogger, container); };
+            TestDelegate test = () => { discover.DiscoverTests(new string[] { "Unexists.dll" }, null, fakeLogger, container); };
             Assert.DoesNotThrow(test);
         }
 
@@ -58,9 +58,10 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         }
 
         private static void actDiscoverExistingTests(ITestCaseDiscoverySink container) {
+            string[] dllPaths = IntegrationsPaths.getExampleTestsAssemblyPath();
             var fakeLogger = Substitute.For<IMessageLogger>();
             TestDiscover discover = new TestDiscover();
-            discover.DiscoverTests(new string[] { "./Debug/CppUnitTestFrameworkExamples.dll", "Release/CppUnitTestFrameworkExamples.dll" }, null, fakeLogger, container);
+            discover.DiscoverTests(dllPaths, null, fakeLogger, container);
         }
 
         private static void AssertSendCorrectCases(List<TestCase> loadedCases) {

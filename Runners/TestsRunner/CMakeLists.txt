@@ -4,8 +4,7 @@ file(GLOB SOURCES ./*.cpp)
 
 include_directories("../../")
 target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
-#add_library(${PROJECT_NAME} SHARE ${SOURCES})
-add_library(${PROJECT_NAME} SHARE ${SOURCES})
+add_library(${PROJECT_NAME} ${SOURCES})
 
 # Install library
 #install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})

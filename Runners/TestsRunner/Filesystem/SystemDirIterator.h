@@ -19,8 +19,3 @@ namespace darknessNight {
 	}
 }
 
-
-#ifdef __linux
-    class SystemDirIterator{
-    };
-#endif

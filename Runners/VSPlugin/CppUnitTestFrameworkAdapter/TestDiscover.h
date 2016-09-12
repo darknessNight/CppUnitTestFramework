@@ -5,7 +5,6 @@
 #include "MessageLogger.h"
 using namespace System;
 using namespace System::Collections::Generic;
-using namespace System::Xml;
 using namespace Microsoft::VisualStudio::TestPlatform;
 using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel;
 using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter;
@@ -20,8 +19,8 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		MessageLogger^ logger = nullptr;
 		int countOfTests = 0;
 	public:
-		String^ executorUriString = gcnew String("executor://darknessNight_CppUnitTestExecutor/v1");
-		Uri^ executorUri = gcnew Uri(executorUriString);
+		static String^ executorUriString = gcnew String("executor://darknessNight_CppUnitTestExecutor/v1");
+		static Uri^ executorUri = gcnew Uri(executorUriString);
 	public:
 		TestDiscover() {
 			darknessNight::DependencyContainer::DIContainer::Register<darknessNight::SharedLibrary::DynamicLibrary, darknessNight::SharedLibrary::DynamicLibrary>();
@@ -41,6 +40,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			return cases;
 		}
 
+	private:
 		void logEndFindTest() {
 			logger->sendInfo("Tests found: " + countOfTests.ToString());
 			logger->sendInfo("----CppUnitTestAdapter:Ended----");
@@ -53,7 +53,6 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		}
 
 
-	private:
 		List<ObjectModel::TestCase^>^ findAllTests(IEnumerable<System::String ^> ^ sources, ITestCaseDiscoverySink ^discoverySink) {
 			List<ObjectModel::TestCase^>^ cases = gcnew List<ObjectModel::TestCase^>();
 			for each (auto path in sources) {
@@ -82,13 +81,9 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 
 		void saveAndSendTestCase(darknessNight::CppUnitTestFramework::TestCasePtr &test, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ cases) {
 			ObjectModel::TestCase^ testCase = gcnew ObjectModel::TestCase(gcnew String(test->getName().c_str()), executorUri, path);
-			discoverySink->SendTestCase(testCase);
+			if(discoverySink!=nullptr)
+				discoverySink->SendTestCase(testCase);
 			cases->Add(testCase);
 		}
-	
-		System::String^ getCliString(std::string str) {
-			return gcnew System::String(str.c_str());
-		}
 	};
-
 }
