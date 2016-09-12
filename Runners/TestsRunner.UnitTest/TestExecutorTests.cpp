@@ -2,6 +2,7 @@
 #include <CppUnitTestFramework/TestCaseIgnored.h>
 #include <CppUnitTestFramework/TestSuite.h>
 #include "../TestsRunner/TestExecutor.h"
+#include "FakeDynamicLibrary.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -9,7 +10,7 @@ using namespace darknessNight::CppUnitTestFramework;
 
 namespace darknessNight {
 	namespace TestsRunner {
-		namespace UnitTests {
+		namespace UnitTest {
 			TEST_CLASS(TestExecutorTests) {
 public:
 	TEST_METHOD(RunTest_HasTest_CheckRunTest) {
@@ -71,6 +72,39 @@ public:
 		TestExecutor executor;
 		auto report=executor.runTest(TestSuitePtr(&testSuite, [](void*) {}), "Test");
 		Assert::AreEqual<std::string>("Test", report.getTestName());
+	}
+
+	TEST_METHOD(RunTest_HasPathAndFullTestName_CheckReturnReport) {
+		prepareFakesForTestsDiscover();
+		TestExecutor executor;
+		auto report = executor.runTests("Dll.dll", {"FullNamedTest(TestSuite)", "TrashName1", "TrashName2", "Second(TestSuite)"});
+
+		auto firstName = report[0].getTestName();
+		auto secondName = report[1].getTestName();
+		Assert::IsTrue("FullNamedTest"==firstName || "FullNamedTest"==secondName);
+		Assert::IsTrue("Second" == firstName || "Second" == secondName);
+	}
+
+	void prepareFakesForTestsDiscover() {
+		prepareFakeLibrary();
+		registerToDIContainerDirectory();
+	}
+	void registerToDIContainerDirectory() {
+		DIContainer::Register<Directory>(std::make_shared<Directory>("."));
+	}
+	void prepareFakeLibrary() {
+		auto fakeLibrary = std::make_shared<FakeDynamicLibrary>();
+		setTestCointanerFakeFunc(fakeLibrary);
+		DIContainer::Register<DynamicLibrary>(fakeLibrary);
+	}
+	void setTestCointanerFakeFunc(std::shared_ptr<darknessNight::TestsRunner::UnitTest::FakeDynamicLibrary> &fakeLibrary) {
+		fakeLibrary->dllFunc = []() {
+			TestContainer* container = new TestContainer();
+			container->addTestSuite(std::make_shared<TestSuiteCreator>("TestSuite"));
+			container->registerTestCase("TestSuite", std::make_shared<TestCaseIgnored>("FullNamedTest", "Ignored"));
+			container->registerTestCase("TestSuite", std::make_shared<TestCaseIgnored>("Second", "Ignored"));
+			return container;
+		};
 	}
 			};
 		}

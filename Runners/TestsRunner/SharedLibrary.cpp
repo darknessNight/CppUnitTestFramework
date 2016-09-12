@@ -14,8 +14,10 @@ darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()
 }
 
 void darknessNight::SharedLibrary::DynamicLibrary::freeLibrary(std::string name) {
-	if (instance->moduleExists(name))
-		FreeLibrary((HMODULE)instance->modules[name]);
+	if (instance->moduleExists(name)) {
+		auto module = (HMODULE)instance->modules[name];
+		FreeLibrary(module);
+	}
 }
 
 void* darknessNight::SharedLibrary::DynamicLibrary::getFunctionSystemFunc(void* module, std::string&functionName) {
