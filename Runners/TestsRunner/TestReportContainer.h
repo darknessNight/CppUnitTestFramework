@@ -15,7 +15,7 @@ namespace darknessNight {
 			}
 
 			std::vector<TestReport> getReportsSortByName() {
-				std::sort(reportsArray.begin(), reportsArray.end(), &TestReportContainer::sortByName);
+				sort(reportsArray.begin(), reportsArray.end(), &TestReportContainer::sortByName);
 				return reportsArray;
 			}
 
@@ -24,7 +24,7 @@ namespace darknessNight {
 			}
 
 			std::vector<TestReport> getReportsSortByTime() {
-				std::sort(reportsArray.begin(), reportsArray.end(), &TestReportContainer::sortByTime);
+				sort(reportsArray.begin(), reportsArray.end(), &TestReportContainer::sortByTime);
 				return reportsArray;
 			}
 
@@ -48,7 +48,7 @@ namespace darknessNight {
 				return ret;
 			}
 
-			void addTestToField(darknessNight::CppUnitTestFramework::TestReport &test, std::map<std::string, std::vector<darknessNight::CppUnitTestFramework::TestReport>> &ret) {
+			void addTestToField(TestReport &test, std::map<std::string, std::vector<TestReport>> &ret) {
 				if (test.getResult().isSuccess())
 					ret["Success"].push_back(test);
 				else if (test.getResult().getCause() == "Ignored")

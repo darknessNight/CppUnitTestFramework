@@ -70,29 +70,29 @@ namespace darknessNight {
 
 
 		private:
-			static bool constains(std::string &expected, std::string &result) {
+			static bool constains(string &expected, string &result) {
 				return getStringPos(expected, result) >= 0;
 			}
 
-			static bool endsWith(std::string &expected, std::string &result) {
+			static bool endsWith(string &expected, string &result) {
 				return getStringPos(expected, result) == result.size() - expected.size();
 			}
 
-			static bool startsWith(std::string &expected, std::string &result) {
+			static bool startsWith(string &expected, string &result) {
 				return getStringPos(expected, result) == 0;
 			}
 
-			static int getStringPos(std::string& expected, std::string& result) {
+			static int getStringPos(string& expected, string& result) {
 				return result.find(expected);
 			}
 
-			static bool match(std::string &expected, std::string &result) {
+			static bool match(string &expected, string &result) {
 				std::regex regex(expected);
-				return std::regex_match(result, regex);
+				return regex_match(result, regex);
 			}
 
 			static string stringToUpper(string str) {
-				std::transform(str.begin(), str.end(), str.begin(), ::toupper);
+				transform(str.begin(), str.end(), str.begin(), toupper);
 				return str;
 			}
 

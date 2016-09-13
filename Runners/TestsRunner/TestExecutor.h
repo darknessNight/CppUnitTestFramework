@@ -9,17 +9,15 @@ using namespace darknessNight::CppUnitTestFramework;
 namespace darknessNight {
 	namespace TestsRunner {
 		class TestExecutor {
+		private:
+			bool running = false;
 		public:
-			TestReport runTest(TestCasePtr testCase) {
-				auto start = std::chrono::high_resolution_clock::now();
-				auto report = testCase->runTestAndGetReport();
-				setTestDurationTime(report, start);
-				return report;
+			void stop() {
+				running = false;
 			}
 
-			void setTestDurationTime(darknessNight::CppUnitTestFramework::TestReport &report, std::chrono::high_resolution_clock::time_point start) {
-				auto end = std::chrono::high_resolution_clock::now();
-				report.getResult().setDurationTime(std::chrono::duration_cast<TestResult::TimeDuration>(end - start));
+			TestReport runTest(TestCasePtr testCase) {
+				return testCase->runTestAndGetReport();
 			}
 
 			TestReport runTest(TestSuitePtr testSuite, std::string testName) {
@@ -27,9 +25,12 @@ namespace darknessNight {
 			}
 
 			std::vector<TestReport> runTests(std::vector<TestCasePtr> testCases) {
+				running = true;
 				std::vector<TestReport> reports;
-				for (auto test : testCases)
+				for (auto test : testCases) {
+					if (!running)break;
 					reports.push_back(runTest(test));
+				}
 				return reports;
 			}
 
@@ -49,15 +50,17 @@ namespace darknessNight {
 			}
 
 			std::vector<TestReport> filterAndRunTests(std::vector<TestCasePtr> tests, std::vector<std::string> &names) {
+				running = true;
 				std::vector<TestReport> reports;
 				for (auto test : tests) {
+					if (!running)break;
 					runTestWithNameHasInFilter(names, test, reports);
 				}
 				return reports;
 			}
 
-			void runTestWithNameHasInFilter(std::vector<std::string> & names, darknessNight::CppUnitTestFramework::TestCasePtr &test, std::vector<darknessNight::CppUnitTestFramework::TestReport> & reports) {
-				for (auto name=names.begin();name!=names.end();name++)
+			void runTestWithNameHasInFilter(std::vector<std::string> & names, TestCasePtr &test, std::vector<TestReport> & reports) {
+				for (auto name = names.begin(); name != names.end(); name++)
 					if (isTestHasPassFullname(test, *name)) {
 						runTestAndSaveReport(reports, test);
 						deleteNameFromNamesTab(name, names);
@@ -66,15 +69,15 @@ namespace darknessNight {
 			}
 
 			void deleteNameFromNamesTab(std::_Vector_iterator<std::_Vector_val<std::_Simple_types<std::string>>> &name, std::vector<std::string> & names) {
-				std::swap(*name, *names.rbegin());
+				swap(*name, *names.rbegin());
 				names.pop_back();
 			}
 
-			bool isTestHasPassFullname(darknessNight::CppUnitTestFramework::TestCasePtr & test, std::string &name) {
+			bool isTestHasPassFullname(TestCasePtr & test, std::string &name) {
 				return test->getReportWithoutResult().getFullName() == name;
 			}
 
-			void runTestAndSaveReport(std::vector<darknessNight::CppUnitTestFramework::TestReport> & reports, darknessNight::CppUnitTestFramework::TestCasePtr & test) {
+			void runTestAndSaveReport(std::vector<TestReport> & reports, TestCasePtr & test) {
 				reports.push_back(test->runTestAndGetReport());
 			}
 		};

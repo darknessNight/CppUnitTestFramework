@@ -6,25 +6,25 @@ std::shared_ptr<DynamicLibrary> DynamicLibrary::instance = std::make_shared<Dyna
 #ifdef _WIN32
 #include <Windows.h>
 
-darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary()
+DynamicLibrary::~DynamicLibrary()
 {
 	for (auto module : modules) {
 		FreeLibrary((HMODULE)module.second);
 	}
 }
 
-void darknessNight::SharedLibrary::DynamicLibrary::freeLibrary(std::string name) {
+void DynamicLibrary::freeLibrary(std::string name) {
 	if (instance->moduleExists(name)) {
 		auto module = (HMODULE)instance->modules[name];
 		FreeLibrary(module);
 	}
 }
 
-void* darknessNight::SharedLibrary::DynamicLibrary::getFunctionSystemFunc(void* module, std::string&functionName) {
+void* DynamicLibrary::getFunctionSystemFunc(void* module, std::string&functionName) {
 	return (void*)GetProcAddress((HMODULE)module, functionName.c_str());
 }
 
-void* darknessNight::SharedLibrary::DynamicLibrary::loadModuleSystemFunc(std::string&libraryPath) {
+void* DynamicLibrary::loadModuleSystemFunc(std::string&libraryPath) {
 	return LoadLibraryA(libraryPath.c_str());
 }
 #endif
@@ -46,7 +46,7 @@ void* darknessNight::SharedLibrary::DynamicLibrary::loadModuleSystemFunc(std::st
 }
 #endif
 
-void * darknessNight::SharedLibrary::DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
+void * DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
 	auto func = getFunctionSystemFunc(module, functionName);
 	throwIfNotLoadedFunction(func, functionName);
 	return func;
@@ -59,16 +59,16 @@ void* DynamicLibrary::loadModule(std::string &libraryPath) {
 	return module;
 }
 
-bool darknessNight::SharedLibrary::DynamicLibrary::moduleExists(std::string & libraryPath) {
+bool DynamicLibrary::moduleExists(std::string & libraryPath) {
 	return modules.find(libraryPath) != modules.end();
 }
 
-void darknessNight::SharedLibrary::DynamicLibrary::throwIfNotLoadedFunction(void * func, std::string & functionName) {
+void DynamicLibrary::throwIfNotLoadedFunction(void * func, std::string & functionName) {
 	if (func == nullptr)
 		throw FunctionLoadException("Not found function: " + functionName);
 }
 
-void darknessNight::SharedLibrary::DynamicLibrary::throwIfNotLoadedLibrary(void* module, std::string & libraryPath) {
+void DynamicLibrary::throwIfNotLoadedLibrary(void* module, std::string & libraryPath) {
 	if (module == nullptr)
 		throw LibraryLoadException("Cannot load library: " + libraryPath);
 }
@@ -80,7 +80,7 @@ void* DynamicLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
 		return modules[libraryPath];
 }
 
-void * darknessNight::SharedLibrary::DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
+void * DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
 	void* module = instance->getModuleAndLoadIfNeeded(libraryPath);
 	return getFunctionFromModule(module, functionName);
 }

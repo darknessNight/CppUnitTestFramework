@@ -45,6 +45,6 @@ void darknessNight::Filesystem::DirRecursiveIterator::findNextFile() {
 
 void darknessNight::Filesystem::DirRecursiveIterator::addToListIfIsDir(){
     std::regex reg(".*\\/\\.{1,2}$");
-	if (entry.isDir() && !std::regex_match(entry.getPath(), reg))
+	if (entry.isDir() && !regex_match(entry.getPath(), reg))
 		dirs.push_back(entry.getPath() + "/");
 }

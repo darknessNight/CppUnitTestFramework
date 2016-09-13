@@ -1,20 +1,33 @@
 #include "FunctionTester.h"
 #include "PredefinedTestResults.h"
 #include "Exceptions.h"
+#include "Assert.h"
 
 using namespace darknessNight::CppUnitTestFramework;
 
-darknessNight::CppUnitTestFramework::FunctionTester::FunctionTester(TestMethod test) {
+FunctionTester::FunctionTester(TestMethod test) {
 	throwExceptionIfTestIsNullptr(test);
 	testMethod = test;
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
+void FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
 		if (test == nullptr)
 			throw NullPointerException(std::string("Argument cannot be nullptr in ") + __FILE__ " " + std::to_string(__LINE__));
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTest() {
+void FunctionTester::setTestDuration(std::chrono::steady_clock::time_point start, TestResult& testResult) {
+	auto end = std::chrono::high_resolution_clock::now();
+	testResult.time = std::chrono::duration_cast<TestResult::TimeDuration>(end - start);
+}
+
+TestResult FunctionTester::runTest() {
+	auto start = std::chrono::high_resolution_clock::now();
+	auto testResult = runTestWithoutDuration();
+	setTestDuration(start, testResult);
+	return testResult;
+}
+
+TestResult FunctionTester::runTestWithoutDuration() {
 	try {
 		return tryRunTest();
 	}
@@ -26,14 +39,14 @@ TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTest() {
 	}
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::tryRunTest(){
+TestResult FunctionTester::tryRunTest(){
 	runSetUpMethod();
 	TestResult result = runTestMethod();
 	runTearDownMethod();
 	return result;
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::runSetUpMethod(){
+void FunctionTester::runSetUpMethod(){
 	try {
 		setUp();
 	}
@@ -53,7 +66,7 @@ void darknessNight::CppUnitTestFramework::FunctionTester::runSetUpMethod(){
 	}
 }
 
-TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTestMethod(){
+TestResult FunctionTester::runTestMethod() const {
 	try {
 		testMethod();
 	}
@@ -76,7 +89,7 @@ TestResult darknessNight::CppUnitTestFramework::FunctionTester::runTestMethod(){
 	return SuccessTestResult();
 }
 
-void darknessNight::CppUnitTestFramework::FunctionTester::runTearDownMethod(){
+void FunctionTester::runTearDownMethod(){
 	try {
 		tearDown();
 	}

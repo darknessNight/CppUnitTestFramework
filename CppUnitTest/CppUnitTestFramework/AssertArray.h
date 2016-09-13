@@ -8,124 +8,124 @@ namespace darknessNight {
 	namespace CppUnitTestFramework {
 		class AssertArray :protected virtual BasicAssert {
 		public:
-			template <typename T> static void AreEqual(T &expected, T &result, std::string message = "") {
+			template <typename T> static void AreEqual(T &expected, T &result, string message = "") {
 				if (!checkAreEqual(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void AreEqual(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void AreEqual(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (!checkAreEqual(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void AreNotEqual(T &expected, T &result, std::string message = "") {
+			template <typename T> static void AreNotEqual(T &expected, T &result, string message = "") {
 				if (checkAreEqual(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					helper.throwFailedExceptionFromPattern("Arrays are equal", std::string(), std::string(), message);
+					helper.throwFailedExceptionFromPattern("Arrays are equal", string(), string(), message);
 			}
 
-			template <typename T> static void AreNotEqual(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void AreNotEqual(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (checkAreEqual(expected, &expected[expLen], result, &result[resLen]))
-					helper.throwFailedExceptionFromPattern("Arrays are equal", std::string(), std::string(), message);
+					helper.throwFailedExceptionFromPattern("Arrays are equal", string(), string(), message);
 			}
 
-			template <typename T> static void AreEquivalent(T &expected, T &result, std::string message = "") {
+			template <typename T> static void AreEquivalent(T &expected, T &result, string message = "") {
 				if (!checkAreEquivalent(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void AreEquivalent(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void AreEquivalent(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (!checkAreEquivalent(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Expected <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void AreNotEquivalent(T &expected, T &result, std::string message = "") {
+			template <typename T> static void AreNotEquivalent(T &expected, T &result, string message = "") {
 				if (checkAreEquivalent(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Arrays are equivalents", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Arrays are equivalents", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void AreNotEquivalent(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void AreNotEquivalent(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (checkAreEquivalent(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Arrays are equivalents", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Arrays are equivalents", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void Contains(T &expected, T &result, std::string message = "") {
+			template <typename T> static void Contains(T &expected, T &result, string message = "") {
 				if (!checkContains(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected constains <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Expected constains <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void Contains(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void Contains(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (!checkContains(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Expected constains <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Expected constains <%expected>, but was <%result>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void DoesNotContain(T &expected, T &result, std::string message = "") {
+			template <typename T> static void DoesNotContain(T &expected, T &result, string message = "") {
 				if (checkContains(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Result array constains expected array", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Result array constains expected array", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void DoesNotContain(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void DoesNotContain(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (checkContains(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Result array constains expected array", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Result array constains expected array", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void IsSubsequence(T &expected, T &result, std::string message = "") {
+			template <typename T> static void IsSubsequence(T &expected, T &result, string message = "") {
 				if (!checkIsSubsequence(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("<%result> has not subsequence <%expected>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("<%result> has not subsequence <%expected>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void IsSubsequence(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void IsSubsequence(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (!checkIsSubsequence(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("<%result> has not subsequence <%expected>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("<%result> has not subsequence <%expected>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void IsNotSubsequence(T &expected, T &result, std::string message = "") {
+			template <typename T> static void IsNotSubsequence(T &expected, T &result, string message = "") {
 				if (checkIsSubsequence(std::begin(expected), std::end(expected), std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("<%result> has subsequence <%expected>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("<%result> has subsequence <%expected>", ToStringConverter::ArrayToString(expected), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void IsNotSubsequence(const T *expected, unsigned expLen, const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void IsNotSubsequence(const T *expected, unsigned expLen, const T *result, unsigned resLen, string message = "") {
 				if (checkIsSubsequence(expected, &expected[expLen], result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("<%result> has subsequence <%expected>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("<%result> has subsequence <%expected>", ToStringConverter::ArrayToString(expected, expLen), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void IsOrdered(T &result, std::string message = "") {
+			template <typename T> static void IsOrdered(T &result, string message = "") {
 				if (!checkIsOrdered(std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> is not ordered", std::string(), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> is not ordered", string(), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void IsOrdered(const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void IsOrdered(const T *result, unsigned resLen, string message = "") {
 				if (!checkIsOrdered(result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> is not ordered", std::string(), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> is not ordered", string(), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <typename T> static void IsNotOrdered(T &result, std::string message = "") {
+			template <typename T> static void IsNotOrdered(T &result, string message = "") {
 				if (checkIsOrdered(std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> is ordered", std::string(), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> is ordered", string(), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void IsNotOrdered(const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void IsNotOrdered(const T *result, unsigned resLen, string message = "") {
 				if (checkIsOrdered(result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> is ordered", std::string(), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> is ordered", string(), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <class T> static void AllItemsAre(T &result, bool(*predicate)(typename T::const_iterator), std::string message = "") {
+			template <class T> static void AllItemsAre(T &result, bool(*predicate)(typename T::const_iterator), string message = "") {
 				if (!checkAllItemsAre(std::begin(result), std::end(result), predicate))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> items not satisfy a predicate", std::string(), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> items not satisfy a predicate", string(), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void AllItemsAre(const T *result, unsigned resLen, bool(*predicate)(const T*), std::string message = "") {
+			template <typename T> static void AllItemsAre(const T *result, unsigned resLen, bool(*predicate)(const T*), string message = "") {
 				if (!checkAllItemsAre(result, &result[resLen], predicate))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> items not satisfy a predicate", std::string(), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> items not satisfy a predicate", string(), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
-			template <class T> static void AllItemsAreUnique(T &result, std::string message = "") {
+			template <class T> static void AllItemsAreUnique(T &result, string message = "") {
 				if (!checkAllItemsAreUnique(std::begin(result), std::end(result)))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> items are not unique", std::string(), ToStringConverter::ArrayToString(result), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> items are not unique", string(), ToStringConverter::ArrayToString(result), message);
 			}
 
-			template <typename T> static void AllItemsAreUnique(const T *result, unsigned resLen, std::string message = "") {
+			template <typename T> static void AllItemsAreUnique(const T *result, unsigned resLen, string message = "") {
 				if (!checkAllItemsAreUnique(result, &result[resLen]))
-					BasicAssert::helper.throwFailedExceptionFromPattern("Array <%result> items are not unique", std::string(), ToStringConverter::ArrayToString(result, resLen), message);
+					helper.throwFailedExceptionFromPattern("Array <%result> items are not unique", string(), ToStringConverter::ArrayToString(result, resLen), message);
 			}
 
 		private:

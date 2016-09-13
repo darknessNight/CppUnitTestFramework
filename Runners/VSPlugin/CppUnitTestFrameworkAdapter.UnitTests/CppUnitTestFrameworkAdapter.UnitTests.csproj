@@ -7,7 +7,7 @@
     <ProjectGuid>{8EDF4429-251A-416D-BB68-93F227191BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CppUnitTestFrameworkAdapter.UnitTests</RootNamespace>
+    <RootNamespace>darknessNight.CppUnitTest.VSAdapter.UnitTests</RootNamespace>
     <AssemblyName>CppUnitTestFrameworkAdapter.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -27,5 +27,5 @@ bool darknessNight::Filesystem::DirSearchIterator::entryNotMatchAndCanSearch() {
 }
 
 bool darknessNight::Filesystem::DirSearchIterator::matchPattern(std::string str) {
-	return std::regex_match(str, searchRegex);
+	return regex_match(str, searchRegex);
 }

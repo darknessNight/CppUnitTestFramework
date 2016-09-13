@@ -150,9 +150,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConvertTools.h" />
     <ClInclude Include="MessageLogger.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="TestReportConverter.h" />
     <ClInclude Include="TestDiscover.h" />
     <ClInclude Include="TestsExecutor.h" />
   </ItemGroup>
@@ -165,6 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TestReportConverter.cpp" />
     <ClCompile Include="TestDiscover.cpp" />
     <ClCompile Include="TestsExecutor.cpp" />
   </ItemGroup>

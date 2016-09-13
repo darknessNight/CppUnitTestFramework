@@ -25,9 +25,9 @@ void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::
 		if(!ManagedLibraryChecker::isManagedLib(path))
 			tryGetTests(path);
 	}
-	catch (SharedLibrary::LibraryLoadException) {
+	catch (LibraryLoadException) {
 	}
-	catch (SharedLibrary::FunctionLoadException) {
+	catch (FunctionLoadException) {
 		dynamicLibrary->freeLibrary(path);
 	}
 }

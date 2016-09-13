@@ -64,7 +64,7 @@ inline bool AssertArray::findAllElements(std::vector<T>& expEls, std::vector<T>&
 	return true;
 }
 template<typename T, typename U, typename W>
-inline bool darknessNight::CppUnitTestFramework::AssertArray::hasPassElementInResult(W &res, std::vector<T> & resEls, U &exp) {
+inline bool AssertArray::hasPassElementInResult(W &res, std::vector<T> & resEls, U &exp) {
 	if (res == resEls.end())
 		return false;
 	while (*res != exp) {

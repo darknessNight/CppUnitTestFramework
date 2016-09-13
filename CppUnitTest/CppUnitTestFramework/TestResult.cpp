@@ -1,9 +1,5 @@
 #include "TestResult.h"
 
-void darknessNight::CppUnitTestFramework::TestResult::setDurationTime(TimeDuration time) {
-	this->time = time;
-}
-
 darknessNight::CppUnitTestFramework::TestResult::TestResult(bool result) {
 	isTestSuccess = result;
 	errorMessage = "";

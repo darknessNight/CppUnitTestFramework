@@ -2,32 +2,32 @@
 
 using namespace darknessNight::CppUnitTestFramework;
 
-darknessNight::CppUnitTestFramework::TestReport::TestReport() :testResult(false) {}
+TestReport::TestReport() :testResult(false) {}
 
-TestResult& darknessNight::CppUnitTestFramework::TestReport::getResult() {
+TestResult& TestReport::getResult() {
 	return testResult;
 }
 
-std::string darknessNight::CppUnitTestFramework::TestReport::getTestName() {
+std::string TestReport::getTestName() {
 	return testName;
 }
 
-std::string darknessNight::CppUnitTestFramework::TestReport::getFile() {
+std::string TestReport::getFile() {
 	return testFile;
 }
 
-std::string darknessNight::CppUnitTestFramework::TestReport::getFullName() {
+std::string TestReport::getFullName() {
 	return testName + "(" + testSuite + ")";
 }
 
-unsigned darknessNight::CppUnitTestFramework::TestReport::getLine() {
+unsigned TestReport::getLine() {
 	return testLine;
 }
 
-std::string darknessNight::CppUnitTestFramework::TestReport::getSuiteName() {
+std::string TestReport::getSuiteName() {
 	return testSuite;
 }
 
-TestCategory darknessNight::CppUnitTestFramework::TestReport::getCategory() {
+TestCategory TestReport::getCategory() {
 	return testCategory;
 }

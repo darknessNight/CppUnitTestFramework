@@ -21,5 +21,5 @@ void darknessNight::CppUnitTestFramework::AssertExceptionCatcher::throwThrowFail
 {
 	std::string assertMessage = ("Exception not throwed.");
 	std::string result = helper.getAddOwnMessageIfExists(userMessage, assertMessage);
-	BasicAssert::Fail(result);
+	Fail(result);
 }

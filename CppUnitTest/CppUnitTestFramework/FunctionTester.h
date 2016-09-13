@@ -1,9 +1,7 @@
 #pragma once
 #include <functional>
-#include "Exceptions.h"
 #include "TestResult.h"
 #include "ConfigurableTest.h"
-#include "AssertExceptions.h"
 
 namespace darknessNight {
 	namespace CppUnitTestFramework {
@@ -12,16 +10,17 @@ namespace darknessNight {
 			typedef std::function<void()> TestMethod;
 		private:
 			TestMethod testMethod;
-
 		public:
 			FunctionTester(TestMethod test);
 			virtual TestResult runTest();
 		protected:
+			TestResult runTestWithoutDuration();
 			void throwExceptionIfTestIsNullptr(TestMethod test);
+			void FunctionTester::setTestDuration(std::chrono::steady_clock::time_point start, TestResult& testResult);
 			TestResult tryRunTest();
 			void runSetUpMethod();
 			void runTearDownMethod();
-			TestResult runTestMethod();
+			TestResult runTestMethod() const;
 		};
 	}
 }

@@ -21,7 +21,7 @@ namespace ExampleProject {
 			ARG_TEST_METHOD(ArgTest, "FirstArg", "Second", 3);
 			ARG_TEST_METHOD(ArgTest, "F", "S", 3);
 			ARG_TEST_METHOD(ArgTest, "F", "Se", 3);
-			void ArgTest(std::string first, std::string second, unsigned result) {
+			void ArgTest(string first, string second, unsigned result) {
 				Assert::AreEqual<unsigned>(first.size() + second.size(), result);
 			}
 		};

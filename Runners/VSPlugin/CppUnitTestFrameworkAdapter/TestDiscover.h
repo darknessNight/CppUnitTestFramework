@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include <msclr\marshal_cppstd.h>
 #include <TestsRunner/TestsDiscover.h>
+#include "ConvertTools.h"
 #include "MessageLogger.h"
 using namespace System;
 using namespace System::Collections::Generic;
@@ -69,7 +69,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 
 		void readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestsDiscover &discover) {
 			logger->sendInfo("Has: " + path);
-			discover.findInFile(msclr::interop::marshal_as<std::string>(path));
+			discover.findInFile(ConvertTools::CliStringToCppString(path));
 		}
 
 		void saveTestsAsTestCases(darknessNight::TestsRunner::TestsDiscover &discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ cases) {

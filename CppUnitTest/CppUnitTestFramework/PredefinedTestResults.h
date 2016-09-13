@@ -44,7 +44,7 @@ namespace darknessNight {
 		public:
 			IgnoredTestResult(std::string ignoredCause) :TestResult(false) {
 				errorCause = "Ignored";
-				TestResult::errorMessage = ignoredCause;
+				errorMessage = ignoredCause;
 			}
 		};
 	}

@@ -41,7 +41,7 @@ namespace darknessNight {
 			static int defaulSameComparer(const void* expected, const void* result) {
 				long long adr1 = (long long)expected;
 				long long adr2 = (long long)result;
-				return BasicAssert::defaulComparer(adr1, adr2);
+				return defaulComparer(adr1, adr2);
 			}
 
 			template<typename T> static void throwNotEqualFailureMessage(const T &expected, const T &result, std::string &message) {

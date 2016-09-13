@@ -12,15 +12,15 @@ namespace darknessNight {
 			std::string errorMessage;
 			std::string errorCause;
 			TimeDuration time= TimeDuration::zero();
+			friend class FunctionTester;
 		public:
-			TestResult(bool result);
-			TestResult(const char* message);
-			TestResult(std::string message);
+			explicit TestResult(bool result);
+			explicit TestResult(const char* message);
+			explicit TestResult(std::string message);
 			std::string getFullMessage();
 			std::string getErrorMessage();
 			std::string getCause();
 			TimeDuration getDurationTime();
-			void setDurationTime(TimeDuration time);
 			bool isSuccess();
 			bool isFailure();
 		};

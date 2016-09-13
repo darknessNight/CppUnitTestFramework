@@ -18,7 +18,7 @@ namespace darknessNight {
 			}
 
 		protected:
-			void registerTestCase(std::string &suiteName, darknessNight::CppUnitTestFramework::TestCasePtr &testCase) {
+			void registerTestCase(std::string &suiteName, TestCasePtr &testCase) {
 				getTestContainer().registerTestCase(suiteName, testCase);
 			}
 

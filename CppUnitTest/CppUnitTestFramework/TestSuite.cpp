@@ -3,30 +3,30 @@
 
 using namespace darknessNight::CppUnitTestFramework;
 
-std::string darknessNight::CppUnitTestFramework::TestSuite::getName() {
+std::string TestSuite::getName() {
 	setSuiteNameIfNotSetted();
 	return suiteName;
 }
 
-darknessNight::CppUnitTestFramework::TestSuite::TestSuite() {}
+TestSuite::TestSuite() {}
 
-darknessNight::CppUnitTestFramework::TestSuite::TestSuite(std::string name) { suiteName = name; }
+TestSuite::TestSuite(std::string name) { suiteName = name; }
 
-void darknessNight::CppUnitTestFramework::TestSuite::addTestCase(TestCasePtr testCase) {
+void TestSuite::addTestCase(TestCasePtr testCase) {
 	testArray.push_back(testCase);
 	testMap[testCase->getName()] = testCase;
 }
 
-void darknessNight::CppUnitTestFramework::TestSuite::setCategory(TestCategory cat) {
+void TestSuite::setCategory(TestCategory cat) {
 	testCategory = cat;
 }
 
-const TestCategory & darknessNight::CppUnitTestFramework::TestSuite::getCategory()
+const TestCategory & TestSuite::getCategory()
 {
 	return testCategory;
 }
 
-TestSuite::TestReportArray darknessNight::CppUnitTestFramework::TestSuite::runTestsAndGetReports() {
+TestSuite::TestReportArray TestSuite::runTestsAndGetReports() {
 	TestReportArray returnTab;
 	for(auto test = testArray.begin(); test!=testArray.end();test++) {
 		TestReport report = prepareAndRunTest(*test);
@@ -35,50 +35,50 @@ TestSuite::TestReportArray darknessNight::CppUnitTestFramework::TestSuite::runTe
 	return returnTab;
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestSuite::runTestAndGetReport(std::string name) {
+TestReport TestSuite::runTestAndGetReport(std::string name) {
 	TestCasePtr test = findTestFromName(name);
 	return prepareAndRunTest(test);
 }
 
-TestCasePtr darknessNight::CppUnitTestFramework::TestSuite::getTestCase(std::string name){
+TestCasePtr TestSuite::getTestCase(std::string name){
 	auto test= findTestFromName(name);
 	prepareTestCase(test);
 	return test;
 }
 
-std::vector<TestCasePtr> darknessNight::CppUnitTestFramework::TestSuite::getTestCases() {
+std::vector<TestCasePtr> TestSuite::getTestCases() {
 	for (auto test : testArray)
 		prepareTestCase(test);
 	return testArray;
 }
 
-std::vector<std::string> darknessNight::CppUnitTestFramework::TestSuite::getTestCaseList() {
+std::vector<std::string> TestSuite::getTestCaseList() {
 	std::vector<std::string> array;
 	for(auto el=testMap.begin();el!=testMap.end();el++)
 		array.push_back(el->first);
 	return array;
 }
 
-TestCasePtr darknessNight::CppUnitTestFramework::TestSuite::findTestFromName(std::string name) {
+TestCasePtr TestSuite::findTestFromName(std::string name) {
 	TestCasePtr test = testMap[name];
 	if (test == nullptr)
 		throw NotFoundException("Not found TestCase in TestSuite");
 	return test;
 }
 
-TestReport darknessNight::CppUnitTestFramework::TestSuite::prepareAndRunTest(TestCasePtr test) {
+TestReport TestSuite::prepareAndRunTest(TestCasePtr test) {
 	prepareTestCase(test);
 	return test->runTestAndGetReport();
 }
 
-void darknessNight::CppUnitTestFramework::TestSuite::prepareTestCase(TestCasePtr test) {
+void TestSuite::prepareTestCase(TestCasePtr test) {
 	test->setSetUpMethod(setUpMethod);
 	test->setTearDownMethod(tearDownMethod);
 	test->setCategory(testCategory);
 	test->setSuite(getName());
 }
 
-void darknessNight::CppUnitTestFramework::TestSuite::setSuiteNameIfNotSetted()
+void TestSuite::setSuiteNameIfNotSetted()
 {
 	if (suiteName.size() <= 0) {
 		suiteName = typeid(*this).name();

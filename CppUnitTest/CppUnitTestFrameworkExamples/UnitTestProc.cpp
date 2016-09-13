@@ -21,11 +21,11 @@ namespace Test {
 		TEST_FUNCTION_DECLARE(NonDefinedTest);
 
 
-		void ArgFunc(int number, std::string message);
+		void ArgFunc(int number, string message);
 		ARG_TEST_FUNCTION_IN_SUITE(ArgFunc, "TestPackageWithCategory", 3, "");
 		ARG_TEST_FUNCTION_IN_SUITE(ArgFunc, "TestPackageWithCategory", 2, "TestFall");
 		ARG_TEST_FUNCTION_IN_SUITE(ArgFunc, "TestPackage", 1, "Elo");
-		void ArgFunc(int number, std::string message) {
+		void ArgFunc(int number, string message) {
 			Assert::AreEqual(2, number, message);
 		}
 
