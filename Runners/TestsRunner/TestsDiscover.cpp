@@ -59,7 +59,6 @@ void darknessNight::TestsRunner::TestsDiscover::deleteDotsAtBeginExt(std::string
 }
 
 void darknessNight::TestsRunner::TestsDiscover::findInFile(std::string path) {
-	
 	getTestsIfLibraryIsCorrect(path);
 }
 

@@ -72,11 +72,15 @@ public:
 	TEST_METHOD(RunTest_HasPathAndFullTestName_CheckReturnReport) {
 		prepareFakesForTestsDiscover();
 		TestExecutor executor;
-		auto report = executor.runTests("Dll.dll", {"FullNamedTest(TestSuite)", "TrashName1", "TrashName2", "Second(TestSuite)"});
+		auto reports = executor.runTests("Dll.dll", {"FullNamedTest(TestSuite)", "TrashName1", "TrashName2", "Second(TestSuite)"});
 
+		assertHasFakeTestResults(reports);
+	}
+
+	void assertHasFakeTestResults(std::vector<darknessNight::CppUnitTestFramework::TestReport> &report) {
 		auto firstName = report[0].getTestName();
 		auto secondName = report[1].getTestName();
-		Assert::IsTrue("FullNamedTest"==firstName || "FullNamedTest"==secondName);
+		Assert::IsTrue("FullNamedTest" == firstName || "FullNamedTest" == secondName);
 		Assert::IsTrue("Second" == firstName || "Second" == secondName);
 	}
 
@@ -100,6 +104,14 @@ public:
 			container->registerTestCase("TestSuite", std::make_shared<TestCaseIgnored>("Second", "Ignored"));
 			return container;
 		};
+	}
+
+	TEST_METHOD(RunTestFromFile_HasCorrectPath_CheckReturnReports) {
+		prepareFakesForTestsDiscover();
+		TestExecutor executor;
+		auto dir = Directory::Current();
+		auto reports = executor.runTestsFromFile("Dll.dll");
+		assertHasFakeTestResults(reports);
 	}
 			};
 		}

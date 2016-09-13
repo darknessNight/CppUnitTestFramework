@@ -24,6 +24,13 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::
 	return filterAndRunTests(tests, names);
 }
 
+std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTestsFromFile(std::string path) {
+	std::vector<TestReport> reports;
+	for (auto test : getAllTestsInFile(path))
+		reports.push_back(runTest(test));
+	return reports;
+}
+
 std::vector<TestCasePtr> darknessNight::TestsRunner::TestExecutor::getAllTestsInFile(std::string& path) {
 	TestsDiscover discover;
 	discover.findInFile(path);
