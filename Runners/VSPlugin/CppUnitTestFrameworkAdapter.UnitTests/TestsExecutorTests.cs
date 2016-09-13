@@ -40,8 +40,8 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
             List<TestResult> results=new List<TestResult>();
             var framework = prepareFakeFrameworkToGetSendedResults(results);
             TestsExecutor executor=new TestsExecutor();
-            executor.RunTests(new[]{"Path"},null,framework);
-
+            executor.RunTests(new[]{ IntegrationsPaths.getExampleTestPath()},null,framework);
+            Assert.IsTrue(results.Count>0);
         }
     }
 }

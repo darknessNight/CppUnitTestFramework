@@ -1,10 +1,6 @@
 ﻿using NUnit.Framework;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
@@ -33,9 +29,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
 
         private static IMessageLogger prepareFakeLoggerForGetMessages(List<string> messages) {
             var fakeLogger = Substitute.For<IMessageLogger>();
-            fakeLogger.SendMessage(Arg.Any<TestMessageLevel>(), Arg.Do<string>((arg) => {
-                messages.Add(arg);
-            }));
+            fakeLogger.SendMessage(Arg.Any<TestMessageLevel>(), Arg.Do<string>(messages.Add));
             return fakeLogger;
         }
 
@@ -52,12 +46,12 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         [Test]
         public void TestTryReadLibrary_HasCorrectLibrary_CheckSendTestCase() {
             List<TestCase> loadedCases = new List<TestCase>();
-            ITestCaseDiscoverySink container = prepareFakeContainerForGetLoadedCases(loadedCases);
-            actDiscoverExistingTests(container);
+            ITestCaseDiscoverySink container = PrepareFakeContainerForGetLoadedCases(loadedCases);
+            ActDiscoverExistingTests(container);
             AssertSendCorrectCases(loadedCases);
         }
 
-        private static void actDiscoverExistingTests(ITestCaseDiscoverySink container) {
+        private static void ActDiscoverExistingTests(ITestCaseDiscoverySink container) {
             string[] dllPaths = IntegrationsPaths.getExampleTestsAssemblyPath();
             var fakeLogger = Substitute.For<IMessageLogger>();
             TestDiscover discover = new TestDiscover();
@@ -86,9 +80,9 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
             Assert.GreaterOrEqual(loadedCases.Count, 1);
         }
 
-        private static ITestCaseDiscoverySink prepareFakeContainerForGetLoadedCases(List<TestCase> loadedCases) {
+        private static ITestCaseDiscoverySink PrepareFakeContainerForGetLoadedCases(List<TestCase> loadedCases) {
             var container = Substitute.For<ITestCaseDiscoverySink>();
-            container.SendTestCase(Arg.Do<TestCase>((arg) => { loadedCases.Add(arg); }));
+            container.SendTestCase(Arg.Do<TestCase>(loadedCases.Add));
             return container;
         }
     }

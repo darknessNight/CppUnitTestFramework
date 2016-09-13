@@ -58,12 +58,12 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		void runTestAndSendTestResultsGroup(KeyValuePair<System::String ^, List<ObjectModel::TestCase ^> ^> &group, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
 			std::vector<std::string> testNames = getArrayWithTestNames(group.Value);
 			auto results = executor->runTests(ConvertTools::CliStringToCppString(group.Key), testNames);
-			sendTestResultsToFramework(results, group, frameworkHandle);
+			sendTestResultsToFramework(results, group.Key, frameworkHandle);
 		}
 
-		void sendTestResultsToFramework(std::vector<darknessNight::CppUnitTestFramework::TestReport> &results, KeyValuePair<System::String ^, List<ObjectModel::TestCase ^> ^> &group, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
+		void sendTestResultsToFramework(std::vector<darknessNight::CppUnitTestFramework::TestReport> &results, System::String^ path, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
 			for (auto result : results) {
-				auto testResult = TestReportConverter::getVSResultFromReport(result, group.Key);
+				auto testResult = TestReportConverter::getVSResultFromReport(result, path);
 				frameworkHandle->RecordResult(testResult);
 			}
 		}
@@ -78,7 +78,12 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		}
 
 		virtual void RunTests(IEnumerable<String ^> ^sources, IRunContext ^runContext, IFrameworkHandle ^frameworkHandle) {
-			throw gcnew System::NotImplementedException();			
+			for each(auto path in sources) {
+				auto results=executor->runTestsFromFile(ConvertTools::CliStringToCppString(path));
+				if (results.size() == 0)
+					throw gcnew System::NullReferenceException();
+				sendTestResultsToFramework(results, path, frameworkHandle);
+			}
 		}
 
 		virtual void Cancel(){
