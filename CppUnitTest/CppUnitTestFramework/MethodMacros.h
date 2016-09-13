@@ -1,4 +1,5 @@
 #pragma once
+
 #pragma region Test method
 #define TEST_METHOD(METHOD_NAME) \
 ::darknessNight::CppUnitTestFramework::TestFuncRegister METHOD_NAME##MethodRegister \

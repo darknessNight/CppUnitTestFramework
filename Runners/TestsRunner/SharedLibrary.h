@@ -15,6 +15,7 @@ namespace darknessNight {
 			template <typename T> static T* ImportFunction(std::string libraryPath, std::string functionName);
 			template <typename T> T* importFunction(std::string libraryPath, std::string functionName);
 			static void freeLibrary(std::string name);
+			static void freeAllLibraries();
 		protected:
 			virtual void* getFunction(std::string &libraryPath, std::string &functionName);
 			void* getFunctionFromModule(void* module, std::string &functionName);

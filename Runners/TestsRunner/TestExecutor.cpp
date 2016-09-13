@@ -1,5 +1,9 @@
 #include "TestExecutor.h"
 
+darknessNight::TestsRunner::TestExecutor::~TestExecutor() {
+	DIContainer::Get<DynamicLibrary>()->freeAllLibraries();
+}
+
 void darknessNight::TestsRunner::TestExecutor::stop() {
 	running = false;
 }

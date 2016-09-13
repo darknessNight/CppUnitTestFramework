@@ -8,15 +8,19 @@ std::shared_ptr<DynamicLibrary> DynamicLibrary::instance = std::make_shared<Dyna
 
 DynamicLibrary::~DynamicLibrary()
 {
-	for (auto module : modules) {
-		FreeLibrary((HMODULE)module.second);
-	}
+	freeAllLibraries();
 }
 
 void DynamicLibrary::freeLibrary(std::string name) {
 	if (instance->moduleExists(name)) {
 		auto module = (HMODULE)instance->modules[name];
 		FreeLibrary(module);
+	}
+}
+
+void DynamicLibrary::freeAllLibraries() {
+	for (auto module : instance->modules) {
+		FreeLibrary((HMODULE)module.second);
 	}
 }
 
@@ -35,6 +39,10 @@ darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary() {
 }
 
 void darknessNight::SharedLibrary::DynamicLibrary::freeLibrary(std::string name) {
+}
+
+
+void DynamicLibrary::freeAllLibraries() {
 }
 
 void* darknessNight::SharedLibrary::DynamicLibrary::getFunctionSystemFunc(void* module, std::string&functionName) {

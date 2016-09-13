@@ -7,6 +7,9 @@ ObjectModel::TestCase ^ darknessNight::CppUnitTest::VSAdapter::TestReportConvert
 	testCase->CodeFilePath = ConvertTools::CppStringToCliString(report.getFile());
 	testCase->DisplayName = ConvertTools::CppStringToCliString(report.getTestName());
 	testCase->LineNumber = report.getLine();
+	testCase->Id = Guid();
+	testCase->Traits->Add(gcnew ObjectModel::Trait("Category", ConvertTools::CppStringToCliString(report.getCategory().getFullName())));
+	testCase->SetPropertyValue(ObjectModel::TestResultProperties::Outcome, TestOutcome::Passed);
 	return testCase;
 }
 
@@ -25,6 +28,7 @@ void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultProper
 	setResultOutcome(report, testResult);
 	setResultDuration(testResult, report);
 	setResultMessage(testResult, report);
+	testResult->ComputerName = Environment::MachineName;
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultMessage(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report) {

@@ -12,6 +12,7 @@ namespace darknessNight {
 		private:
 			bool running = false;
 		public:
+			~TestExecutor();
 			void stop();
 			TestReport runTest(TestCasePtr testCase);
 			TestReport runTest(TestSuitePtr testSuite, std::string testName);

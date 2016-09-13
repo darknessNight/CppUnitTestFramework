@@ -52,7 +52,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         }
 
         private static void ActDiscoverExistingTests(ITestCaseDiscoverySink container) {
-            string[] dllPaths = IntegrationsPaths.getExampleTestsAssemblyPath();
+            string[] dllPaths = new [] { IntegrationsPaths.getExampleTestPath()};
             var fakeLogger = Substitute.For<IMessageLogger>();
             TestDiscover discover = new TestDiscover();
             discover.DiscoverTests(dllPaths, null, fakeLogger, container);
@@ -71,7 +71,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         private static bool checkHasCaseWithName(List<TestCase> loadedCases, string caseName) {
             bool found = false;
             foreach (var test in loadedCases)
-                if (test.FullyQualifiedName.Contains(caseName))
+                if (test.FullyQualifiedName.Contains(caseName) && test.CodeFilePath.Length>0 && test.LineNumber>0)
                     found = true;
             return found;
         }
