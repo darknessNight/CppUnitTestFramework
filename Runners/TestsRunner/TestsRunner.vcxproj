@@ -139,6 +139,7 @@
     <ClCompile Include="Filesystem\SystemDirIteratorLinux.cpp" />
     <ClCompile Include="Filesystem\SystemDirIteratorWindows.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
+    <ClCompile Include="TestExecutor.cpp" />
     <ClCompile Include="TestsDiscover.cpp" />
   </ItemGroup>
   <ItemGroup>

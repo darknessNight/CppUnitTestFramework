@@ -6,6 +6,14 @@ using namespace darknessNight::CppUnitTestFramework;
 namespace darknessNight {
 	namespace TestsRunner {
 		namespace Tests {
+			class FakeTestResult :public TestResult {
+			public:
+				FakeTestResult(int time):TestResult(true) {
+					this->time = std::chrono::duration_cast<TestResult::TimeDuration>
+						(std::chrono::milliseconds(time));
+				}
+			};
+
 			class FakeTestReport :public TestReport {
 			public:
 				FakeTestReport(std::string name) {
@@ -14,8 +22,7 @@ namespace darknessNight {
 
 				FakeTestReport(std::string name, int time) {
 					this->testName = name;
-					this->testResult.setDurationTime(std::chrono::duration_cast<TestResult::TimeDuration>
-						(std::chrono::milliseconds(time)));
+					this->testResult = FakeTestResult(time);
 				}
 
 				FakeTestReport(std::string name, TestCategory cat) {

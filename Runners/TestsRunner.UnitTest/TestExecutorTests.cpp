@@ -62,11 +62,6 @@ public:
 			testSuite.addTestCase(test);
 	}
 
-	TEST_METHOD(RunTests_HasTestSuite_CheckHasDurationTime) {
-		auto reports = actRunTestsTestSuite();
-		Assert::IsTrue(reports[0].getResult().getDurationTime().count()>0);
-	}
-
 	TEST_METHOD(RunTest_HasTestSuiteAndTestCaseName_CheckReturnReport) {
 		TestSuite testSuite=prepareTestSuite();
 		TestExecutor executor;

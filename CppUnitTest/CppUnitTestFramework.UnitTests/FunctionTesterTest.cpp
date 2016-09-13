@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TestHelperFuncAndClassess.h"
+#include <thread>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace darknessNight {
@@ -156,6 +157,14 @@ private:
 		std::unique_ptr<FakeFunctionTester> fake = std::make_unique<FakeFunctionTester>();
 		fake->collapseTearDown = true;
 		return fake;
+	}
+
+
+public:
+	TEST_METHOD(RuntTest_HasFunctionWork1s_CheckHasCorrectDuration) {
+		FunctionTester functionTester = []() {std::this_thread::sleep_for(std::chrono::seconds(1)); };
+		TestResult runResult = functionTester.runTest();
+		Assert::IsTrue(std::chrono::duration_cast<std::chrono::milliseconds>(runResult.getDurationTime()).count() >= 1000);
 	}
 			};
 		}

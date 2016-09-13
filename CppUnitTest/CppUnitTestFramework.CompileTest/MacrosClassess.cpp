@@ -21,12 +21,12 @@ public:
 
 void SetUp() {
 	if (collapseSetup)
-		throw exception("SetUp not catched exception");
+		throw std::exception("SetUp not catched exception");
 }
 
  void TearDown(){
  if (collapseTearDown)
-	 throw exception("TearDown not catched exception");
+	 throw std::exception("TearDown not catched exception");
 }
 
  void TestFunctionTest2(int, int)

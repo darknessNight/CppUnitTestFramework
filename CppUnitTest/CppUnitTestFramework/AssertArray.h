@@ -4,6 +4,8 @@
 #include <map>
 #include "EqualAssert.h"
 
+using namespace std;
+
 namespace darknessNight {
 	namespace CppUnitTestFramework {
 		class AssertArray :protected virtual BasicAssert {

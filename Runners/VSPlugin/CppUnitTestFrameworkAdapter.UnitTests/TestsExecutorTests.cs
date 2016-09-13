@@ -1,11 +1,6 @@
 ﻿using NUnit.Framework;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestPlatform;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 
@@ -15,12 +10,38 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         [Test]
         public void TestRunTestFromTestCase_HasSampleTestCase_CheckRunTest() {
             List<TestResult> results = new List<TestResult>();
-            TestCase testCase = new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", TestDiscover.executorUri, IntegrationsPaths.getExampleTestPath());
-            TestsExecutor executor=new TestsExecutor();
+            actAndPrepareRunTestsFromTestCase(results);
+            Assert.AreEqual(TestOutcome.Skipped, results[0].Outcome);
+        }
+
+        private static void actAndPrepareRunTestsFromTestCase(List<TestResult> results) {
+            TestCase testCase = prepareSampleIgnoredTest();
+            IFrameworkHandle framework = prepareFakeFrameworkToGetSendedResults(results);
+            actRunTestsFromTestCaseArray(testCase, framework);
+        }
+
+        private static TestCase prepareSampleIgnoredTest() {
+            return new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", TestDiscover.executorUri, IntegrationsPaths.getExampleTestPath());
+        }
+
+        private static IFrameworkHandle prepareFakeFrameworkToGetSendedResults(List<TestResult> results) {
             var framework = Substitute.For<IFrameworkHandle>();
             framework.RecordResult(Arg.Do<TestResult>((arg) => { results.Add(arg); }));
-            executor.RunTests(new TestCase[] { testCase }, null,framework);
-            Assert.AreEqual(TestOutcome.Skipped, results[0].Outcome);
+            return framework;
+        }
+
+        private static void actRunTestsFromTestCaseArray(TestCase testCase, IFrameworkHandle framework){
+            TestsExecutor executor = new TestsExecutor();
+            executor.RunTests(new[]{testCase}, null, framework);
+        }
+
+        [Test]
+        public void TestRunTestFromSources_hasCorrectLibPath_CheckRunTest(){
+            List<TestResult> results=new List<TestResult>();
+            var framework = prepareFakeFrameworkToGetSendedResults(results);
+            TestsExecutor executor=new TestsExecutor();
+            executor.RunTests(new[]{"Path"},null,framework);
+
         }
     }
 }

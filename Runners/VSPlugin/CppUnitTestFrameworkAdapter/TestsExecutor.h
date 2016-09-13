@@ -6,9 +6,9 @@
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace Microsoft::VisualStudio::TestPlatform;
-using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel;
-using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter;
-using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel::Logging;
+using namespace ObjectModel;
+using namespace ObjectModel::Adapter;
+using namespace ObjectModel::Logging;
 
 namespace darknessNight::CppUnitTest::VSAdapter {
 	[ExtensionUri(gcnew String("executor://darknessNight_CppUnitTestExecutor/v1"))]
@@ -27,7 +27,12 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			runTestsFromTestCases(tests, frameworkHandle);
 		}
 
-		void runTestsFromTestCases(System::Collections::Generic::IEnumerable<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ tests, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
+		void prepareConf(ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
+			logger = gcnew MessageLogger(frameworkHandle);
+			m_cancelled = false;
+		}
+
+		void runTestsFromTestCases(IEnumerable<ObjectModel::TestCase ^> ^ tests, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
 			Dictionary<String^, List<ObjectModel::TestCase^>^>^ groupsList = groupTestsBySource(tests);
 			for each(auto group in groupsList) {
 				if (m_cancelled)
@@ -36,45 +41,44 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			}
 		}
 
-		void prepareConf(Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
-			logger = gcnew MessageLogger(frameworkHandle);
-			m_cancelled = false;
+		Dictionary<String^, List<ObjectModel::TestCase^>^>^ groupTestsBySource(IEnumerable<ObjectModel::TestCase ^> ^ tests) {
+			Dictionary<String^, List<ObjectModel::TestCase^>^>^ groupsList = gcnew Dictionary<String^, List<ObjectModel::TestCase^>^>();
+			for each(auto test in tests) {
+				setNewKeyIfNotExists(test->Source, groupsList);
+				groupsList[test->Source]->Add(test);
+			}
+			return groupsList;
 		}
 
-		void runTestAndSendTestResultsGroup(System::Collections::Generic::KeyValuePair<System::String ^, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^> &group, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
-			std::vector<std::string> testNames = getArrayWithTestNames(group);
+		void setNewKeyIfNotExists(System::String^ key, Dictionary<String^, List<ObjectModel::TestCase^>^>^ &groupsList) {
+			if (!groupsList->ContainsKey(key))
+				groupsList->Add(key, gcnew List<ObjectModel::TestCase^>);
+		}
+
+		void runTestAndSendTestResultsGroup(KeyValuePair<System::String ^, List<ObjectModel::TestCase ^> ^> &group, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
+			std::vector<std::string> testNames = getArrayWithTestNames(group.Value);
 			auto results = executor->runTests(ConvertTools::CliStringToCppString(group.Key), testNames);
 			sendTestResultsToFramework(results, group, frameworkHandle);
 		}
 
-		void sendTestResultsToFramework(std::vector<darknessNight::CppUnitTestFramework::TestReport> &results, System::Collections::Generic::KeyValuePair<System::String ^, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^> &group, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
+		void sendTestResultsToFramework(std::vector<darknessNight::CppUnitTestFramework::TestReport> &results, KeyValuePair<System::String ^, List<ObjectModel::TestCase ^> ^> &group, ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
 			for (auto result : results) {
 				auto testResult = TestReportConverter::getVSResultFromReport(result, group.Key);
 				frameworkHandle->RecordResult(testResult);
 			}
 		}
 
-		std::vector<std::string> getArrayWithTestNames(System::Collections::Generic::KeyValuePair<System::String ^, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^> &group) {
+		std::vector<std::string> getArrayWithTestNames(List<ObjectModel::TestCase ^>^ group) {
 			std::vector<std::string> testNames;
-			testNames.reserve(group.Value->Count);
-			for each(auto test in group.Value) {
+			testNames.reserve(group->Count);
+			for each(auto test in group) {
 				testNames.push_back(ConvertTools::CliStringToCppString(test->FullyQualifiedName));
 			}
 			return testNames;
 		}
 
-		Dictionary<String^, List<ObjectModel::TestCase^>^>^ groupTestsBySource(IEnumerable<ObjectModel::TestCase ^> ^ tests) {
-			Dictionary<String^, List<ObjectModel::TestCase^>^>^ groupsList=gcnew Dictionary<String^, List<ObjectModel::TestCase^>^>();
-			for each(auto test in tests) {
-				if (!groupsList->ContainsKey(test->Source))
-					groupsList->Add(test->Source, gcnew List<ObjectModel::TestCase^>);
-				groupsList[test->Source]->Add(test);
-			}
-			return groupsList;
-		}
-
 		virtual void RunTests(IEnumerable<String ^> ^sources, IRunContext ^runContext, IFrameworkHandle ^frameworkHandle) {
-			
+			throw gcnew System::NotImplementedException();			
 		}
 
 		virtual void Cancel(){
