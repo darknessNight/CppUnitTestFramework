@@ -7,11 +7,13 @@ namespace darknessNight {
 		class TestResult {
 		public:
 			typedef std::chrono::microseconds TimeDuration;
+			typedef std::chrono::high_resolution_clock::time_point TimePoint;
 		protected:
 			bool isTestSuccess;
 			std::string errorMessage;
 			std::string errorCause;
-			TimeDuration time= TimeDuration::zero();
+			TimePoint startTime;
+			TimePoint endTime;
 			friend class FunctionTester;
 		public:
 			explicit TestResult(bool result);
@@ -20,6 +22,8 @@ namespace darknessNight {
 			std::string getFullMessage();
 			std::string getErrorMessage();
 			std::string getCause();
+			TimePoint getStartTime();
+			TimePoint getEndTime();
 			TimeDuration getDurationTime();
 			bool isSuccess();
 			bool isFailure();

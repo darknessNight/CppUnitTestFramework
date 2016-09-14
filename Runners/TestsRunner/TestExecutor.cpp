@@ -9,6 +9,10 @@ void darknessNight::TestsRunner::TestExecutor::stop() {
 	running = false;
 }
 
+void darknessNight::TestsRunner::TestExecutor::safeClear() {
+	dynamicLibrary->freeAllLibraries();
+}
+
 std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::vector<TestCasePtr> testCases) {
 	running = true;
 	std::vector<TestReport> reports;

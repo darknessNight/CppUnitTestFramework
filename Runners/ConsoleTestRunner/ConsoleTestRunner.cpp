@@ -19,19 +19,22 @@ int main() {
 	auto dynamicLibraries = std::make_shared<DynamicLibrary>();
 	TestSuite::TestReportArray testReports;
 
-	{
-		std::cout << "Hello everybody\n";
-		TestsDiscover discover(dirPtr,dynamicLibraries);
-		std::cout << "Start discover tests\n";
-		discover.findAll({ "../" }, { ".dll", ".so" });
-		std::cout << "I founded it!";
-		auto result = discover.getTestsList();
-		TestExecutor executor(dirPtr, dynamicLibraries);
-		std::cout << "Start running tests\n";
-		testReports = executor.runTests(result);
-	}
-
-	dynamicLibraries->freeAllLibraries();
+#ifdef _DEBUG
+	std::string dir = "../Debug";
+#else
+	std::string dir = "../Release";
+#endif
+	std::cout << "Hello everybody\n";
+	TestsDiscover discover(dirPtr, dynamicLibraries);
+	std::cout << "Start discover tests\n";
+	discover.findAll({ dir }, { ".dll", ".so" });
+	std::cout << "I founded it!";
+	auto result = discover.getTestsList();
+	TestExecutor executor(dirPtr, dynamicLibraries);
+	std::cout << "Start running tests\n";
+	testReports = executor.runTests(result);
+	discover.safeClear();
+	
 
 	int passing = 0, falling = 0;
 	for (auto testReport : testReports) {

@@ -18,6 +18,10 @@ void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::prepareConf(ObjectMod
 
 void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::showEndMessage() {
 	logger->sendInfo("CppUnitTestAdapter: runned tests: " + runnedTests.ToString());
+#ifdef _DEBUG
+	logger->sendInfo("Free all loaded libraries");
+#endif
+	executor->safeClear();
 	delete executor;
 }
 

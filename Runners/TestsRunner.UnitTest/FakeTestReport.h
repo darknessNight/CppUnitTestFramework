@@ -9,7 +9,8 @@ namespace darknessNight {
 			class FakeTestResult :public TestResult {
 			public:
 				FakeTestResult(int time):TestResult(true) {
-					this->time = std::chrono::duration_cast<TestResult::TimeDuration>
+					this->startTime = TestResult::TimePoint::min();
+					this->endTime = TestResult::TimePoint::min()+ std::chrono::duration_cast<TestResult::TimeDuration>
 						(std::chrono::milliseconds(time));
 				}
 			};

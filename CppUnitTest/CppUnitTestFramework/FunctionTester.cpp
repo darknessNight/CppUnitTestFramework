@@ -17,7 +17,8 @@ void FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
 
 void FunctionTester::setTestDuration(std::chrono::steady_clock::time_point start, TestResult& testResult) {
 	auto end = std::chrono::high_resolution_clock::now();
-	testResult.time = std::chrono::duration_cast<TestResult::TimeDuration>(end - start);
+	testResult.startTime = start;
+	testResult.endTime = end;
 }
 
 TestResult FunctionTester::runTest() {

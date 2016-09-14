@@ -28,9 +28,6 @@
     <ClCompile Include="TestContainer.cpp">
       <Filter>Sources\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="TestRegisterer.cpp">
-      <Filter>Sources\Tests</Filter>
-    </ClCompile>
     <ClCompile Include="TestReport.cpp">
       <Filter>Sources\Tests</Filter>
     </ClCompile>

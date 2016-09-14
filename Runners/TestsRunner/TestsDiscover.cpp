@@ -1,5 +1,6 @@
 #include "TestsDiscover.h"
 #include "ManagedLibraryChecker.h"
+#include <iostream>
 
 darknessNight::TestsRunner::TestsDiscover::TestsDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs) {
 	dynamicLibrary = dynLibs;
@@ -25,6 +26,7 @@ void darknessNight::TestsRunner::TestsDiscover::searchLibraries(std::vector<std:
 
 void darknessNight::TestsRunner::TestsDiscover::searchLibrariesInDir(std::shared_ptr<Directory>& directory, std::string & pattern) {
 	for (auto dir : directory->searchElements(pattern)) {
+		std::cout << "\n;Lib: " << dir.getPath();
 		getTestsIfLibraryIsCorrect(dir.getPath());
 	}
 }
@@ -90,4 +92,9 @@ std::vector<TestCasePtr> darknessNight::TestsRunner::TestsDiscover::getTestsList
 			tests.push_back(test);
 	}
 	return tests;
+}
+
+void darknessNight::TestsRunner::TestsDiscover::safeClear() {
+	suites.clear();
+	dynamicLibrary->freeAllLibraries();
 }

@@ -16,6 +16,7 @@ namespace darknessNight {
 		public:
 			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>);
 			void stop();
+			void safeClear();
 			TestReport runTest(TestCasePtr testCase);
 			TestReport runTest(TestSuitePtr testSuite, std::string testName);
 			std::vector<TestReport> runTests(std::vector<TestCasePtr> testCases);

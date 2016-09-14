@@ -25,8 +25,16 @@ std::string darknessNight::CppUnitTestFramework::TestResult::getCause() {
 	return errorCause;
 }
 
+darknessNight::CppUnitTestFramework::TestResult::TimePoint darknessNight::CppUnitTestFramework::TestResult::getStartTime() {
+	return startTime;
+}
+
+darknessNight::CppUnitTestFramework::TestResult::TimePoint darknessNight::CppUnitTestFramework::TestResult::getEndTime() {
+	return endTime;
+}
+
 darknessNight::CppUnitTestFramework::TestResult::TimeDuration darknessNight::CppUnitTestFramework::TestResult::getDurationTime() {
-	return time;
+	return std::chrono::duration_cast<TimeDuration>(endTime-startTime);
 }
 
 bool darknessNight::CppUnitTestFramework::TestResult::isSuccess() {

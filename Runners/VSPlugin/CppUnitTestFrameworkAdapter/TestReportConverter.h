@@ -15,6 +15,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 	private:
 		static ObjectModel::TestResult^ getVSResult(darknessNight::CppUnitTestFramework::TestReport & report, System::String ^ source);
 		static void setResultProperties(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
+		static void setMachineName(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
 		static void setResultMessage(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
 		static void setResultDuration(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
 		static void setResultOutcome(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);

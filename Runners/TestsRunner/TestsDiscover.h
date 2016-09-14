@@ -23,6 +23,7 @@ namespace darknessNight {
 			virtual std::vector<std::string> getSuitesNames();
 			virtual std::vector<TestSuitePtr> getSuites();
 			virtual std::vector<TestCasePtr> getTestsList();
+			virtual void safeClear();
 		protected:
 			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);
 			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern);

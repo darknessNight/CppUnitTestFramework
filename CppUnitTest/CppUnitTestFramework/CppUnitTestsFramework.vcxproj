@@ -185,7 +185,6 @@
     <ClCompile Include="TestCase.cpp" />
     <ClCompile Include="TestCategory.cpp" />
     <ClCompile Include="TestContainer.cpp" />
-    <ClCompile Include="TestRegisterer.cpp" />
     <ClCompile Include="TestReport.cpp" />
     <ClCompile Include="TestResult.cpp" />
     <ClCompile Include="TestSuite.cpp" />

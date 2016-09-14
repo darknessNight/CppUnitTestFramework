@@ -3,7 +3,8 @@
 #include "TestsExecutor.h"
 
 ObjectModel::TestCase ^ darknessNight::CppUnitTest::VSAdapter::TestReportConverter::getVSTestCaseFromReport(TestReport & report, System::String ^ source) {
-	auto testCase = gcnew ObjectModel::TestCase(ConvertTools::CppStringToCliString(report.getFullName()), TestsExecutor::myUri, source);
+	auto fullName = report.getSuiteName() + "::" + report.getTestName();
+	auto testCase = gcnew ObjectModel::TestCase(ConvertTools::CppStringToCliString(fullName), TestsExecutor::myUri, source);
 	testCase->CodeFilePath = ConvertTools::CppStringToCliString(report.getFile());
 	testCase->DisplayName = ConvertTools::CppStringToCliString(report.getTestName());
 	testCase->LineNumber = report.getLine();
@@ -28,6 +29,10 @@ void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultProper
 	setResultOutcome(report, testResult);
 	setResultDuration(testResult, report);
 	setResultMessage(testResult, report);
+	setMachineName(testResult);
+}
+
+void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setMachineName(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult) {
 	testResult->ComputerName = Environment::MachineName;
 }
 
@@ -36,7 +41,10 @@ void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultMessag
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultDuration(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report) {
-	testResult->Duration = System::TimeSpan::FromMilliseconds(std::chrono::duration_cast<std::chrono::milliseconds>(report.getResult().getDurationTime()).count());
+	auto time = std::chrono::duration_cast<std::chrono::microseconds>(report.getResult().getDurationTime()).count()/1000.0*System::TimeSpan::TicksPerMillisecond;
+	testResult->Duration = System::TimeSpan::FromTicks(time <= 0 ? 1 : time);
+	testResult->StartTime = ConvertTools::ChronoTimePointToDateTimeOffset(report.getResult().getStartTime());
+	testResult->EndTime = ConvertTools::ChronoTimePointToDateTimeOffset(report.getResult().getEndTime());
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestReportConverter::setResultOutcome(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult) {

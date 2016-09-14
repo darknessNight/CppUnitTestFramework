@@ -30,7 +30,7 @@ void FUNC_NAME()
 #pragma region parameterized functions 
 #define ARG_TEST_FUNCTION_2(FUNCTION_NAME, SUITE, ITER, ...) \
 static ::darknessNight::CppUnitTestFramework::TestFuncRegister FUNCTION_NAME##FuncRegister##ITER\
-= ::darknessNight::CppUnitTestFramework::TestFuncRegister([&]() {FUNCTION_NAME(__VA_ARGS__); }, #FUNCTION_NAME " (" #__VA_ARGS__ ")", SUITE, __FILE__, __LINE__);
+= ::darknessNight::CppUnitTestFramework::TestFuncRegister([&]() {FUNCTION_NAME(__VA_ARGS__); }, #FUNCTION_NAME "(" #__VA_ARGS__ ")", SUITE, __FILE__, __LINE__);
 
 #define ARG_TEST_FUNCTION_1(FUNCTION_NAME, SUITE, ITER, ...) ARG_TEST_FUNCTION_2(FUNCTION_NAME, SUITE, ITER, __VA_ARGS__)
 #define ARG_TEST_FUNCTION(FUNCTION_NAME, ...) ARG_TEST_FUNCTION_1(FUNCTION_NAME, "", __COUNTER__, __VA_ARGS__)

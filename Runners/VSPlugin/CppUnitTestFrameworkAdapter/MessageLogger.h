@@ -20,7 +20,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			SendMessage(TestMessageLevel::Informational, message);
 		}
 
-		void sendErro(String^ message) {
+		void sendError(String^ message) {
 			SendMessage(TestMessageLevel::Error, message);
 		}
 

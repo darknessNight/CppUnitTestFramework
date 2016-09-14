@@ -33,19 +33,31 @@ List<ObjectModel::TestCase^>^ darknessNight::CppUnitTest::VSAdapter::TestDiscove
 	return cases;
 }
 
+void del(void*){}
+
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::searchTestsInFile(System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
-	darknessNight::TestsRunner::TestsDiscover discover(std::make_shared<Directory>("."),std::make_shared<DynamicLibrary>());
+	darknessNight::TestsRunner::TestsDiscover discover(std::make_shared<Directory>("."),std::shared_ptr<DynamicLibrary>(new DynamicLibrary(),&del));
 	readTestsFromFile(path, discover);
 	saveTestsAsTestCases(discover, path, discoverySink, cases);
+#ifdef _DEBUG
+	logger->sendInfo("Free all loaded libraries");
+#endif
+	discover.safeClear();
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestsDiscover & discover) {
 	logger->sendInfo("Has: " + path);
 	discover.findInFile(ConvertTools::CliStringToCppString(path));
+#ifdef _DEBUG
+	logger->sendInfo("Ended: " + path);
+#endif
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::saveTestsAsTestCases(darknessNight::TestsRunner::TestsDiscover & discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
 	for (auto test : discover.getTestsList()) {
+#ifdef _DEBUG
+		logger->sendInfo("Test added: " + gcnew String(test->getReportWithoutResult().getFullName().c_str()));
+#endif
 		saveAndSendTestCase(test, path, discoverySink, cases);
 		countOfTests++;
 	}
