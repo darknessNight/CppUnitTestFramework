@@ -16,8 +16,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleTestRunner", "Consol
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFramework", "..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj", "{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DependencyContainer", "..\IoC\DependencyContainer\DependencyContainer.vcxproj", "{FEF716C0-7695-4813-84FB-5DC252A9C8AF}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFrameworkExamples", "..\CppUnitTest\CppUnitTestFrameworkExamples\CppUnitTestFrameworkExamples.vcxproj", "{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}"
 EndProject
 Global
@@ -66,14 +64,6 @@ Global
 		{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}.Release|x64.Build.0 = Release|x64
 		{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}.Release|x86.ActiveCfg = Release|Win32
 		{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}.Release|x86.Build.0 = Release|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Debug|x64.ActiveCfg = Debug|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Debug|x64.Build.0 = Debug|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Debug|x86.ActiveCfg = Debug|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Debug|x86.Build.0 = Debug|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Release|x64.ActiveCfg = Release|x64
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Release|x64.Build.0 = Release|x64
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Release|x86.ActiveCfg = Release|Win32
-		{FEF716C0-7695-4813-84FB-5DC252A9C8AF}.Release|x86.Build.0 = Release|Win32
 		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}.Debug|x64.ActiveCfg = Debug|Win32
 		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}.Debug|x64.Build.0 = Debug|Win32
 		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}.Debug|x86.ActiveCfg = Debug|Win32

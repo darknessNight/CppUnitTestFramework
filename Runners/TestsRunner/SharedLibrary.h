@@ -8,14 +8,15 @@ namespace darknessNight {
 
 		class DynamicLibrary {
 		private:
-			static std::shared_ptr<DynamicLibrary> instance;
+			static std::unique_ptr<DynamicLibrary> instance;
 			std::map<std::string, void*> modules;
 		public:
-			~DynamicLibrary();
+			virtual ~DynamicLibrary();
 			template <typename T> static T* ImportFunction(std::string libraryPath, std::string functionName);
 			template <typename T> T* importFunction(std::string libraryPath, std::string functionName);
-			static void freeLibrary(std::string name);
-			static void freeAllLibraries();
+			static void FreeLibrary(std::string name);
+			void freeLibrary(std::string name);
+			void freeAllLibraries();
 		protected:
 			virtual void* getFunction(std::string &libraryPath, std::string &functionName);
 			void* getFunctionFromModule(void* module, std::string &functionName);

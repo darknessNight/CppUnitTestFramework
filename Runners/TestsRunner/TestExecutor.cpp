@@ -1,7 +1,8 @@
 #include "TestExecutor.h"
 
-darknessNight::TestsRunner::TestExecutor::~TestExecutor() {
-	DIContainer::Get<DynamicLibrary>()->freeAllLibraries();
+darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs) {
+	dynamicLibrary = dynLibs;
+	directory = dir;
 }
 
 void darknessNight::TestsRunner::TestExecutor::stop() {
@@ -36,7 +37,7 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTestsFromFi
 }
 
 std::vector<TestCasePtr> darknessNight::TestsRunner::TestExecutor::getAllTestsInFile(std::string& path) {
-	TestsDiscover discover;
+	TestsDiscover discover(directory, dynamicLibrary);
 	discover.findInFile(path);
 	return discover.getTestsList();
 }

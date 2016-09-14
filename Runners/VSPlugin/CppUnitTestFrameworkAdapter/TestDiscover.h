@@ -23,7 +23,6 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		static String^ executorUriString = gcnew String("executor://darknessNight_CppUnitTestExecutor/v1");
 		static Uri^ executorUri = gcnew Uri(executorUriString);
 	public:
-		TestDiscover();
 		virtual void DiscoverTests(IEnumerable<String ^> ^sources, IDiscoveryContext ^discoveryContext,
 								   IMessageLogger ^messLogger, ITestCaseDiscoverySink ^discoverySink);
 		List<ObjectModel::TestCase^>^ getTests(IEnumerable<String ^> ^sources, IDiscoveryContext ^discoveryContext,

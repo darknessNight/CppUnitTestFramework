@@ -12,9 +12,16 @@ namespace darknessNight {
 	namespace TestsRunner {
 		namespace UnitTest {
 			TEST_CLASS(TestExecutorTests) {
+				std::shared_ptr<FakeDir> fakeDir;
+				std::shared_ptr<FakeDynamicLibrary> fakeDynamicLibrary;
+
+				TEST_METHOD_INITIALIZE(SetUp) {
+					fakeDir = std::make_shared<FakeDir>();
+					fakeDynamicLibrary = std::make_shared<FakeDynamicLibrary>();
+				}
 public:
 	TEST_METHOD(RunTest_HasTest_CheckRunTest) {
-		TestExecutor testExecutor;
+		TestExecutor testExecutor(fakeDir,fakeDynamicLibrary);
 		TestCasePtr testCase = TestCasePtr(new TestCaseIgnored("Test", "IgnoreResult"));
 		TestResult result = testExecutor.runTest(testCase).getResult();
 		Assert::AreEqual<std::string>("Ignored", result.getCause());
@@ -27,7 +34,7 @@ public:
 	}
 
 	std::vector<darknessNight::CppUnitTestFramework::TestReport> actRunTestsFromTestCasesList() {
-		TestExecutor testExecutor;
+		TestExecutor testExecutor(fakeDir,fakeDynamicLibrary);
 		TestCasePtr testCase = TestCasePtr(new TestCaseIgnored("Test", "IgnoreResult"));
 		return testExecutor.runTests({ testCase, testCase });
 	}
@@ -44,7 +51,7 @@ public:
 		AssertRunAllTests(reports);
 	}
 	std::vector<darknessNight::CppUnitTestFramework::TestReport> actRunTestsTestSuite() {
-		TestExecutor testExecutor;
+		TestExecutor testExecutor(fakeDir,fakeDynamicLibrary);
 		TestSuite testSuite=prepareTestSuite();
 		return testExecutor.runTests(TestSuitePtr(&testSuite, [](void*) {}));
 	}
@@ -64,16 +71,15 @@ public:
 
 	TEST_METHOD(RunTest_HasTestSuiteAndTestCaseName_CheckReturnReport) {
 		TestSuite testSuite=prepareTestSuite();
-		TestExecutor executor;
+		TestExecutor executor(fakeDir,fakeDynamicLibrary);
 		auto report=executor.runTest(TestSuitePtr(&testSuite, [](void*) {}), "Test");
 		Assert::AreEqual<std::string>("Test", report.getTestName());
 	}
 
 	TEST_METHOD(RunTest_HasPathAndFullTestName_CheckReturnReport) {
 		prepareFakesForTestsDiscover();
-		TestExecutor executor;
+		TestExecutor executor(fakeDir,fakeDynamicLibrary);
 		auto reports = executor.runTests("Dll.dll", {"FullNamedTest(TestSuite)", "TrashName1", "TrashName2", "Second(TestSuite)"});
-
 		assertHasFakeTestResults(reports);
 	}
 
@@ -85,19 +91,7 @@ public:
 	}
 
 	void prepareFakesForTestsDiscover() {
-		prepareFakeLibrary();
-		registerToDIContainerDirectory();
-	}
-	void registerToDIContainerDirectory() {
-		DIContainer::Register<Directory>(std::make_shared<Directory>("."));
-	}
-	void prepareFakeLibrary() {
-		auto fakeLibrary = std::make_shared<FakeDynamicLibrary>();
-		setTestCointanerFakeFunc(fakeLibrary);
-		DIContainer::Register<DynamicLibrary>(fakeLibrary);
-	}
-	void setTestCointanerFakeFunc(std::shared_ptr<darknessNight::TestsRunner::UnitTest::FakeDynamicLibrary> &fakeLibrary) {
-		fakeLibrary->dllFunc = []() {
+		fakeDynamicLibrary->dllFunc = []() {
 			TestContainer* container = new TestContainer();
 			container->addTestSuite(std::make_shared<TestSuiteCreator>("TestSuite"));
 			container->registerTestCase("TestSuite", std::make_shared<TestCaseIgnored>("FullNamedTest", "Ignored"));
@@ -108,7 +102,7 @@ public:
 
 	TEST_METHOD(RunTestFromFile_HasCorrectPath_CheckReturnReports) {
 		prepareFakesForTestsDiscover();
-		TestExecutor executor;
+		TestExecutor executor(fakeDir,fakeDynamicLibrary);
 		auto dir = Directory::Current();
 		auto reports = executor.runTestsFromFile("Dll.dll");
 		assertHasFakeTestResults(reports);

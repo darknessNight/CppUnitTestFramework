@@ -11,8 +11,10 @@ namespace darknessNight {
 		class TestExecutor {
 		private:
 			bool running = false;
+			std::shared_ptr<DynamicLibrary> dynamicLibrary;
+			std::shared_ptr<Directory> directory;
 		public:
-			~TestExecutor();
+			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>);
 			void stop();
 			TestReport runTest(TestCasePtr testCase);
 			TestReport runTest(TestSuitePtr testSuite, std::string testName);

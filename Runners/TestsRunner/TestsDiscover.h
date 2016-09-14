@@ -1,13 +1,10 @@
 #pragma once
 #include <vector>
-#include <string>
 #include <CppUnitTestFramework/TestContainer.h>
-#include <DependencyContainer/DependencyContainer.h>
 #include "Filesystem/Directory.h"
 #include "SharedLibrary.h"
 
 using namespace darknessNight::CppUnitTestFramework;
-using namespace darknessNight::DependencyContainer;
 using namespace darknessNight::Filesystem;
 using namespace darknessNight::SharedLibrary;
 
@@ -16,9 +13,11 @@ namespace darknessNight {
 		class TestsDiscover {
 			std::vector<TestSuitePtr> suites;
 			const std::string dllFuncName = "getTestsFromDynamicTestsLibrary";
-			std::shared_ptr<DynamicLibrary> dynamicLibrary = DIContainer::Get<DynamicLibrary>();
-			std::shared_ptr<Directory> directory = DIContainer::Get<Directory>();
+			std::shared_ptr<DynamicLibrary> dynamicLibrary;
+			std::shared_ptr<Directory> directory;
 		public:
+			TestsDiscover(std::shared_ptr<Directory>,std::shared_ptr<DynamicLibrary>);
+			virtual ~TestsDiscover();
 			virtual void findAll(std::vector<std::string> paths, std::vector<std::string> extensions);
 			virtual void findInFile(std::string path);
 			virtual std::vector<std::string> getSuitesNames();

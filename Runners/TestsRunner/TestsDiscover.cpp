@@ -1,6 +1,15 @@
 #include "TestsDiscover.h"
 #include "ManagedLibraryChecker.h"
 
+darknessNight::TestsRunner::TestsDiscover::TestsDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs) {
+	dynamicLibrary = dynLibs;
+	directory = dir;
+}
+
+darknessNight::TestsRunner::TestsDiscover::~TestsDiscover() {
+	suites.clear();
+}
+
 void darknessNight::TestsRunner::TestsDiscover::findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
 	std::string pattern = prepareSearchPattern(extensions);
 	searchLibraries(paths, pattern);
@@ -36,7 +45,7 @@ void darknessNight::TestsRunner::TestsDiscover::tryGetTests(std::string & path) 
 	auto func = dynamicLibrary->importFunction<TestContainer*()>(path, dllFuncName);
 	TestContainer* container = func();
 	for (auto suite : container->getAllTestSuites())
-		suites.push_back(suite);
+		suites.push_back(suite);		
 }
 
 std::string darknessNight::TestsRunner::TestsDiscover::prepareSearchPattern(std::vector<std::string>& extensions) {

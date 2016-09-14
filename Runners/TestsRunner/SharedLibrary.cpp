@@ -1,27 +1,32 @@
 #include "SharedLibrary.h"
 
 using namespace darknessNight::SharedLibrary;
-std::shared_ptr<DynamicLibrary> DynamicLibrary::instance = std::make_shared<DynamicLibrary>();
+std::unique_ptr<DynamicLibrary> DynamicLibrary::instance = std::unique_ptr<DynamicLibrary>(new DynamicLibrary());
 
 #ifdef _WIN32
 #include <Windows.h>
 
-DynamicLibrary::~DynamicLibrary()
-{
+DynamicLibrary::~DynamicLibrary() {
 	freeAllLibraries();
 }
 
+void DynamicLibrary::FreeLibrary(std::string name) {
+	instance->freeLibrary(name);
+}
+
 void DynamicLibrary::freeLibrary(std::string name) {
-	if (instance->moduleExists(name)) {
-		auto module = (HMODULE)instance->modules[name];
-		FreeLibrary(module);
+	auto module = modules.find(name);
+	if (module != modules.end()) {
+		::FreeLibrary((HMODULE)module->second);
+		module = modules.erase(module);
 	}
 }
 
 void DynamicLibrary::freeAllLibraries() {
-	for (auto module : instance->modules) {
-		FreeLibrary((HMODULE)module.second);
+	for (auto module : modules) {
+		::FreeLibrary((HMODULE)module.second);
 	}
+	modules.clear();
 }
 
 void* DynamicLibrary::getFunctionSystemFunc(void* module, std::string&functionName) {

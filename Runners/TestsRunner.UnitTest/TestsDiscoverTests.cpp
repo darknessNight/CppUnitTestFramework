@@ -16,13 +16,11 @@ namespace darknessNight {
 
 				TEST_METHOD_INITIALIZE(SetUp) {
 					fakeDir = std::make_shared<FakeDir>();
-					DIContainer::Register<Directory>(fakeDir);
 					fakeDynamicLibrary = std::make_shared<FakeDynamicLibrary>();
-					DIContainer::Register<DynamicLibrary>(fakeDynamicLibrary);
 				}
 
 				TEST_METHOD(FindAll_HasFakesDirectoryAndDllShared_CheckHasCorrectImportedTestCount) {
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					Assert::AreEqual(2U, discover.getSuitesNames().size());
 				}
@@ -32,7 +30,7 @@ namespace darknessNight {
 				}
 
 				TEST_METHOD(FindAll_HasFakesDirectoryAndDllShared_CheckImportTestsFromDlls) {
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					Assert::IsTrue(fakeDynamicLibrary->usedDll);
 					Assert::IsTrue(fakeDynamicLibrary->usedSo);
@@ -40,20 +38,20 @@ namespace darknessNight {
 
 				TEST_METHOD(FindAll_HasFakeThrowedLoadLibraryException_CheckNoCollapse) {
 					fakeDynamicLibrary->throwLibraryException = true;
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					Assert::AreEqual<unsigned>(0, discover.getSuitesNames().size());
 				}
 
 				TEST_METHOD(FindAll_HasFakeThrowedFunctionLoadException_CheckNoCollapse) {
 					fakeDynamicLibrary->throwFuncException = true;
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					Assert::AreEqual<unsigned>(0, discover.getSuitesNames().size());
 				}
 
 				TEST_METHOD(FindAll_HasFakes_CheckLoadSuites) {
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					assertCorrectLoadSuites(discover);
 				}
@@ -65,7 +63,7 @@ namespace darknessNight {
 
 				TEST_METHOD(GetTestsList_HasFakes_CheckReturnAllTestCases) {
 					prepareFakes();
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					assertGetCorrectTestsCount(discover);
 				}
@@ -94,7 +92,7 @@ namespace darknessNight {
 
 				TEST_METHOD(GetTestsList_HasFakes_CheckIsCorrectCase) {
 					prepareFakes();
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);
 					assertGetCorrectTest(discover);
 				}
@@ -105,7 +103,7 @@ namespace darknessNight {
 				}
 
 				TEST_METHOD(FindInFile_HasFake_CheckIsCorrectLoadedSuite) {
-					TestsDiscover discover;
+					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					discover.findInFile("Dll.dll");
 					Assert::AreEqual<unsigned>(1, discover.getSuitesNames().size());
 				}

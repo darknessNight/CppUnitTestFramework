@@ -20,9 +20,8 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		MessageLogger^ logger = nullptr;
 		bool m_cancelled;
 		darknessNight::TestsRunner::TestExecutor* executor;
-	public:
 
-		// Inherited via ITestExecutor
+	public:
 		virtual void RunTests(IEnumerable<ObjectModel::TestCase ^> ^tests, IRunContext ^runContext, IFrameworkHandle ^frameworkHandle);
 		virtual void RunTests(IEnumerable<String ^> ^sources, IRunContext ^runContext, IFrameworkHandle ^frameworkHandle);
 		virtual void Cancel();

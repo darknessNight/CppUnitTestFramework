@@ -8,7 +8,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
     [TestFixture]
     public class TestsExecutorTests {
         [Test]
-        public void TestRunTestFromTestCase_HasSampleTestCase_CheckRunTest() {
+        public void TestRunTestFromTestCase_HasSampleTestCase_CheckRunTest(){
             List<TestResult> results = new List<TestResult>();
             actAndPrepareRunTestsFromTestCase(results);
             Assert.AreEqual(TestOutcome.Skipped, results[0].Outcome);

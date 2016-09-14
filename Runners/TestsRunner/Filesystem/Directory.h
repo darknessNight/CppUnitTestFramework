@@ -7,6 +7,7 @@ namespace darknessNight {
 		protected:
 			Directory() {}
 		public:
+			~Directory() {}
 			typedef DirOneLevelIterator iterator;
 			typedef DirRecursiveIterator recursiveIterator;
 			typedef DirSearchIterator searchIterator;

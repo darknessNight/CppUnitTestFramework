@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../CppUnitTest;../../IoC;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../CppUnitTest;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../CppUnitTest;../../IoC;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../CppUnitTest;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,9 +157,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj">
       <Project>{9d1e68a5-dcbd-4874-9adc-9c15d9191f42}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\IoC\DependencyContainer\DependencyContainer.vcxproj">
-      <Project>{fef716c0-7695-4813-84fb-5dc252a9c8af}</Project>
     </ProjectReference>
     <ProjectReference Include="..\TestsRunner\TestsRunner.vcxproj">
       <Project>{b74ee55c-4cd9-4b2e-9b9a-54c7a3d7eb76}</Project>

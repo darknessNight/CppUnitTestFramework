@@ -5,40 +5,41 @@
 #include <iostream>
 #include "../TestsRunner/TestsDiscover.h"
 #include "../TestsRunner/TestExecutor.h"
-
-using namespace darknessNight::TestsRunner;
-using namespace darknessNight::DependencyContainer;
-using namespace darknessNight::Filesystem;
-using namespace darknessNight::SharedLibrary;
-
 #include "ConsoleTestRunner.h"
 
+using namespace darknessNight::TestsRunner;
+using namespace darknessNight::Filesystem;
+using namespace darknessNight::SharedLibrary;
 using namespace std;
 
 
 
 int main() {
 	std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
-	DIContainer::Register<Directory>(dirPtr);
-	DIContainer::Register<DynamicLibrary, DynamicLibrary>();
+	auto dynamicLibraries = std::make_shared<DynamicLibrary>();
+	TestSuite::TestReportArray testReports;
 
-	std::cout << "Hello everybody\n";
-	TestsDiscover discover;
-	std::cout << "Start discover tests\n";
-	discover.findAll({ "../" }, { ".dll", ".so" });
-	std::cout<<"I founded it!";
-	auto result = discover.getTestsList();
-	TestExecutor executor;
-	std::cout << "Start running tests\n";
-	auto testReports=executor.runTests(result);
+	{
+		std::cout << "Hello everybody\n";
+		TestsDiscover discover(dirPtr,dynamicLibraries);
+		std::cout << "Start discover tests\n";
+		discover.findAll({ "../" }, { ".dll", ".so" });
+		std::cout << "I founded it!";
+		auto result = discover.getTestsList();
+		TestExecutor executor(dirPtr, dynamicLibraries);
+		std::cout << "Start running tests\n";
+		testReports = executor.runTests(result);
+	}
+
+	dynamicLibraries->freeAllLibraries();
 
 	int passing = 0, falling = 0;
 	for (auto testReport : testReports) {
 		std::cout << "[" << (testReport.getResult().isSuccess() ? "Success" : "Failure") << "] Cause: <"
-			<< testReport.getResult().getCause() << "> Name: <" << testReport.getFullName()<<">";
+			<< testReport.getResult().getCause() << "> Name: <" << testReport.getFullName() << ">";
 		if (testReport.getResult().isFailure())
 			std::cout << "Error: <" << testReport.getResult().getErrorMessage() << ">";
-		std::cout <<" Duration: <" << std::chrono::duration_cast<std::chrono::milliseconds>(testReport.getResult().getDurationTime()).count() << "ms>\n";	
+		std::cout << " Duration: <" << std::chrono::duration_cast<std::chrono::milliseconds>(testReport.getResult().getDurationTime()).count() << "ms>\n";
 		if (testReport.getResult().isSuccess())
 			passing++;
 		else falling++;

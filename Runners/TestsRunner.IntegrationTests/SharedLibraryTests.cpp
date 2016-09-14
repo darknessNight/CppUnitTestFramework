@@ -20,7 +20,7 @@ public:
 	TEST_METHOD(Import_HasCorrectNames_CheckReturnFunc) {
 		try {
 			auto result = DynamicLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "getTestsFromDynamicTestsLibrary");
-			DynamicLibrary::freeLibrary("TestsRunner.IntegrationTests.dll");
+			DynamicLibrary::FreeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::IsTrue(result != nullptr);
 		}
 		catch (Exception ex) {
@@ -33,7 +33,7 @@ public:
 	TEST_METHOD(Import_HasCorrectLibraryNameAndIncorrectFuncName_CheckThrow) {
 		try {
 			DynamicLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "NoExistsFunc");
-			DynamicLibrary::freeLibrary("TestsRunner.IntegrationTests.dll");
+			DynamicLibrary::FreeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::Fail();
 		}
 		catch (FunctionLoadException ex) {
@@ -53,7 +53,7 @@ public:
 
 	TEST_METHOD(FreeLibrary_HasIncorrectLibraryName_CheckNoThrow) {
 		try {
-			DynamicLibrary::freeLibrary("NoExistsLibrary.dll");
+			DynamicLibrary::FreeLibrary("NoExistsLibrary.dll");
 		}
 		catch (...) {
 			Assert::Fail();
