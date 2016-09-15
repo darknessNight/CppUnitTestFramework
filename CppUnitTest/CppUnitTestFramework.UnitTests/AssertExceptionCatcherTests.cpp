@@ -9,7 +9,7 @@ namespace darknessNight {
 			TEST_CLASS(AssertExceptionCatcherTests) {
 public:
 	TEST_METHOD(Throws_ThrowException_CheckCatchException) {
-		auto testMethod = []() {throw std::exception("Elo"); };
+		auto testMethod = []() {throw std::runtime_error("Elo"); };
 		try {
 			AssertExceptionCatcher::Throws<std::exception>(testMethod);
 		}
@@ -22,7 +22,7 @@ public:
 	}
 
 	TEST_METHOD(Throws_ThrowException_CheckReturnException) {
-		auto testMethod = []() {throw std::exception("Elo"); };
+		auto testMethod = []() {throw std::runtime_error("Elo"); };
 		try {
 			std::exception ex = AssertExceptionCatcher::Throws<std::exception>(testMethod);
 			StringAssert::AreEqual("Elo", ex.what());
@@ -97,7 +97,7 @@ public:
 	}
 
 	TEST_METHOD(DoesNotThrow_DoesThrowException_CheckThrowAndHasMessage) {
-		auto testMethod = []() {throw std::exception(); };
+		auto testMethod = []() {throw std::runtime_error(""); };
 		try {
 			AssertExceptionCatcher::DoesNotThrow(testMethod, "TestMessage");
 			Assert::Fail();

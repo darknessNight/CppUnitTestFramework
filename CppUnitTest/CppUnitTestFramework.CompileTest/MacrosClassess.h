@@ -39,12 +39,12 @@ public:
 
 	SETUP_METHOD(SetUp) {
 		if (collapseSetup)
-			throw std::exception();
+			throw std::runtime_error("");
 	}
 
 	TEARDOWN_METHOD(TearDown) {
 		if (collapseTearDown)
-			throw std::exception();
+			throw std::runtime_error("");
 	}
 };
 
