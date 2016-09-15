@@ -40,6 +40,8 @@ void* DynamicLibrary::loadModuleSystemFunc(std::string&libraryPath) {
 #ifdef __linux
 #include <dlfcn.h>
 
+using namespace std;
+
 darknessNight::SharedLibrary::DynamicLibrary::~DynamicLibrary() {
 }
 

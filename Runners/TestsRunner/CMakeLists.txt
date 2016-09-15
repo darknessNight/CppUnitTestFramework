@@ -5,4 +5,4 @@ file(GLOB SOURCES_FILESYSTEM ./Filesystem/*.cpp)
 
 include_directories("../../CppUnitTest")
 add_library(${PROJECT_NAME} ${SOURCES} ${SOURCES_FILESYSTEM})
-target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
+target_link_libraries (${PROJECT_NAME} CppUnitTestFramework ${CMAKE_DL_LIBS})
