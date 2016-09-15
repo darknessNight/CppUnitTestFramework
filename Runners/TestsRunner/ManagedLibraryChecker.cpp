@@ -2,10 +2,14 @@
 
 bool ManagedLibraryChecker::isManagedLib(std::string path) {
 #ifdef _WIN32
+#if UNICODE
 	std::wstring wPath;
-	for(char c : path)
+	for (char c : path)
 		wPath += c;
 	return IsManaged(const_cast<wchar_t*>(wPath.c_str())) == TRUE;
+#else
+	return IsManaged(const_cast<char*>(path.c_str())) == TRUE;
+#endif
 #else
 		return false;
 #endif

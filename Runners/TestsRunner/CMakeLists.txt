@@ -1,14 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 project (TestsRunner)
 file(GLOB SOURCES ./*.cpp)
+file(GLOB SOURCES_FILESYSTEM ./Filesystem/*.cpp)
 
 include_directories("../../CppUnitTest")
+add_library(${PROJECT_NAME} ${SOURCES} ${SOURCES_FILESYSTEM})
 target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
-add_library(${PROJECT_NAME} ${SOURCES})
-
-# Install library
-#install(TARGETS ${PROJECT_NAME} DESTINATION lib/${PROJECT_NAME})
-
-# Install library headers
-#file(GLOB HEADERS include/*.h)
-#install(FILES ${HEADERS} DESTINATION include/${PROJECT_NAME})
