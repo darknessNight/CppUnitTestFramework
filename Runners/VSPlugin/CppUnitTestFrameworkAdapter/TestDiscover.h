@@ -32,6 +32,7 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		void prepareToFindTests(Microsoft::VisualStudio::TestPlatform::ObjectModel::Logging::IMessageLogger ^ messLogger);
 		List<ObjectModel::TestCase^>^ findAllTests(IEnumerable<System::String ^> ^ sources, ITestCaseDiscoverySink ^discoverySink);
 		void searchTestsInFile(System::String ^ &path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ cases);
+		void freeLoadedLibraries(darknessNight::TestsRunner::TestsDiscover &discover);
 		void readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestsDiscover &discover);
 		void saveTestsAsTestCases(darknessNight::TestsRunner::TestsDiscover &discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ cases);
 		void saveAndSendTestCase(darknessNight::CppUnitTestFramework::TestCasePtr &test, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^> ^ cases);

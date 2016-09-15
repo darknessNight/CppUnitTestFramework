@@ -13,11 +13,16 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 		static ObjectModel::TestCase^ getVSTestCaseFromReport(TestReport& report, System::String^ source);
 		static ObjectModel::TestResult^ getVSResultFromReport(TestReport& report, System::String^ source);
 	private:
+		static ObjectModel::TestCase^ setTestCaseAdditionalData(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^ testCase, darknessNight::CppUnitTestFramework::TestReport & report);
+		static ObjectModel::TestCase^ getVSTestCaseWithBasicData(darknessNight::CppUnitTestFramework::TestReport & report, System::String ^ source);
+		static ObjectModel::TestCase^ setTestCategory(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^ testCase, darknessNight::CppUnitTestFramework::TestReport & report);
+		static ObjectModel::TestCase^ setTestVisibleName(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^ testCase, darknessNight::CppUnitTestFramework::TestReport & report);
+		static ObjectModel::TestCase^ setTestPos(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase ^ testCase, darknessNight::CppUnitTestFramework::TestReport & report);
 		static ObjectModel::TestResult^ getVSResult(darknessNight::CppUnitTestFramework::TestReport & report, System::String ^ source);
-		static void setResultProperties(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
-		static void setMachineName(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
-		static void setResultMessage(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
-		static void setResultDuration(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
-		static void setResultOutcome(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
+		static ObjectModel::TestResult^ setResultProperties(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
+		static ObjectModel::TestResult^ setMachineName(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
+		static ObjectModel::TestResult^ setResultMessage(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
+		static ObjectModel::TestResult^ setResultDuration(Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult, darknessNight::CppUnitTestFramework::TestReport & report);
+		static ObjectModel::TestResult^ setResultOutcome(darknessNight::CppUnitTestFramework::TestReport & report, Microsoft::VisualStudio::TestPlatform::ObjectModel::TestResult ^ testResult);
 	};
 }

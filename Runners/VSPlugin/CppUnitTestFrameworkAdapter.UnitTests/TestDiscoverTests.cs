@@ -24,7 +24,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
 
         private static void assertTestReadAllSources(List<string> usedPath) {
 #if DEBUG
-            var listOfCorrectMessages = new string[]{ "----CppUnitTestAdapter:Started----", "Has: ../1.dll", "Ended: ../1.dll", "Free all loaded libraries", "Has: ../2.dll", "Ended: ../2.dll", "Free all loaded libraries", "Tests found: 0", "----CppUnitTestAdapter:Ended----" };
+            var listOfCorrectMessages = new string[]{ "----CppUnitTestAdapter:Started----", "Has: ../1.dll", "Free all loaded libraries", "Has: ../2.dll", "Free all loaded libraries", "Tests found: 0", "----CppUnitTestAdapter:Ended----" };
 #else
             var listOfCorrectMessages = new string[] { "Tests found: 0", "Has: ../1.dll", "Has: ../2.dll", "----CppUnitTestAdapter:Ended----", "----CppUnitTestAdapter:Started----" };
 #endif

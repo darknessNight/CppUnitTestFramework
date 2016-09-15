@@ -18,5 +18,10 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 			return System::DateTimeOffset::FromUnixTimeMilliseconds(
 				std::chrono::duration_cast<std::chrono::milliseconds>(time.time_since_epoch()).count());
 		}
+
+		static System::TimeSpan ChronoDurationToTimeSpan(std::chrono::nanoseconds duration) {
+			auto time = std::chrono::duration_cast<std::chrono::microseconds>(duration).count() / 1000.0*System::TimeSpan::TicksPerMillisecond;
+			return System::TimeSpan::FromTicks(time);
+		}
 	};
 }

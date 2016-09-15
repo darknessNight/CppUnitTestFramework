@@ -15,26 +15,27 @@ using namespace std;
 
 
 int main() {
-	std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
-	auto dynamicLibraries = std::make_shared<DynamicLibrary>();
 	TestSuite::TestReportArray testReports;
+	{
+		std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
+		auto dynamicLibraries = std::make_shared<DynamicLibrary>();
 
 #ifdef _DEBUG
-	std::string dir = "../Debug";
+		std::string dir = "../Debug";
 #else
-	std::string dir = "../Release";
+		std::string dir = "../Release";
 #endif
-	std::cout << "Hello everybody\n";
-	TestsDiscover discover(dirPtr, dynamicLibraries);
-	std::cout << "Start discover tests\n";
-	discover.findAll({ dir }, { ".dll", ".so" });
-	std::cout << "I founded it!";
-	auto result = discover.getTestsList();
-	TestExecutor executor(dirPtr, dynamicLibraries);
-	std::cout << "Start running tests\n";
-	testReports = executor.runTests(result);
-	discover.safeClear();
-	
+		std::cout << "Hello everybody\n";
+		TestsDiscover discover(dirPtr, dynamicLibraries);
+		std::cout << "Start discover tests\n";
+		discover.findAll({ dir }, { ".dll", ".so" });
+		std::cout << "I founded it!";
+		auto result = discover.getTestsList();
+		TestExecutor executor(dirPtr, dynamicLibraries);
+		std::cout << "Start running tests\n";
+		testReports = executor.runTests(result);
+	}
+
 
 	int passing = 0, falling = 0;
 	for (auto testReport : testReports) {
@@ -54,7 +55,7 @@ int main() {
 	std::cout << "\n\n\n";
 	std::system("PAUSE");
 #endif
-	if (falling)
+	if (falling > 0)
 		return 1;
 	return 0;
 }

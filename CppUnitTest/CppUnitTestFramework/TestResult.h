@@ -6,7 +6,7 @@ namespace darknessNight {
 	namespace CppUnitTestFramework {
 		class TestResult {
 		public:
-			typedef std::chrono::microseconds TimeDuration;
+			typedef std::chrono::nanoseconds TimeDuration;
 			typedef std::chrono::high_resolution_clock::time_point TimePoint;
 		protected:
 			bool isTestSuccess;

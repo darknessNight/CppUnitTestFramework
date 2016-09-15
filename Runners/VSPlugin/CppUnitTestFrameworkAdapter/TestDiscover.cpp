@@ -39,6 +39,10 @@ void darknessNight::CppUnitTest::VSAdapter::TestDiscover::searchTestsInFile(Syst
 	darknessNight::TestsRunner::TestsDiscover discover(std::make_shared<Directory>("."),std::shared_ptr<DynamicLibrary>(new DynamicLibrary(),&del));
 	readTestsFromFile(path, discover);
 	saveTestsAsTestCases(discover, path, discoverySink, cases);
+	freeLoadedLibraries(discover);
+}
+
+void darknessNight::CppUnitTest::VSAdapter::TestDiscover::freeLoadedLibraries(darknessNight::TestsRunner::TestsDiscover &discover) {
 #ifdef _DEBUG
 	logger->sendInfo("Free all loaded libraries");
 #endif
@@ -48,9 +52,6 @@ void darknessNight::CppUnitTest::VSAdapter::TestDiscover::searchTestsInFile(Syst
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestsDiscover & discover) {
 	logger->sendInfo("Has: " + path);
 	discover.findInFile(ConvertTools::CliStringToCppString(path));
-#ifdef _DEBUG
-	logger->sendInfo("Ended: " + path);
-#endif
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::saveTestsAsTestCases(darknessNight::TestsRunner::TestsDiscover & discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {

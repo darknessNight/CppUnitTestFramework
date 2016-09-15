@@ -1,14 +1,25 @@
 #include "TestCategory.h"
 using namespace darknessNight::CppUnitTestFramework;
 
-TestCategory TestCategory::emptyCategory;
-
 TestCategory::TestCategory() {
 	name = "";
 }
 
+TestCategory::TestCategory(const TestCategory & other) {
+	this->name = other.name;
+	if(other.subCategory!=nullptr)
+		this->subCategory = std::unique_ptr<TestCategory>(new TestCategory(*other.subCategory));
+}
+
 TestCategory::TestCategory(std::string suiteName) {
 	splitCategoryStringIfNeeded(suiteName);
+}
+
+TestCategory& TestCategory::operator=(const TestCategory& other) {
+	TestCategory newObj(other);
+	this->name = other.name;
+	this->subCategory.swap(newObj.subCategory);
+	return *this;
 }
 
 std::string TestCategory::getFullName() const {
@@ -42,14 +53,15 @@ void TestCategory::saveSimpleCategoryString(std::string & suiteName)
 void TestCategory::saveMultiLevelCategoryString(std::string & suiteName, int splitPos)
 {
 	name = suiteName.substr(0, splitPos);
-	subCategory = std::shared_ptr<TestCategory>(new TestCategory(suiteName.substr(splitPos + 1)));
+	subCategory.reset(new TestCategory(suiteName.substr(splitPos + 1)));
 }
 
 const TestCategory & TestCategory::getSubCategory() const {
+	static TestCategory empty("");
 	if (subCategory != nullptr)
 		return *subCategory;
 	else
-		return emptyCategory;
+		return empty;
 }
 
 std::string TestCategory::getName() const {

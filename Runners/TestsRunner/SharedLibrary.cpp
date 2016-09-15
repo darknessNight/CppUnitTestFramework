@@ -94,6 +94,6 @@ void* DynamicLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
 }
 
 void * DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
-	void* module = instance->getModuleAndLoadIfNeeded(libraryPath);
+	void* module = getModuleAndLoadIfNeeded(libraryPath);
 	return getFunctionFromModule(module, functionName);
 }
