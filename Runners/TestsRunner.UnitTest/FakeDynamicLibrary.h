@@ -2,6 +2,7 @@
 #include "../TestsRunner/Filesystem/Directory.h"
 #include "../TestsRunner/SharedLibrary.h"
 #include <CppUnitTestFramework/TestContainer.h>
+#include <CppUnitTestFramework/Version.h>
 
 using namespace darknessNight::Filesystem;
 using namespace darknessNight::SharedLibrary;
@@ -55,6 +56,7 @@ namespace darknessNight {
 				bool usedSo = false;
 				bool throwLibraryException = false;
 				bool throwFuncException = false;
+				bool incorrectLibVer = false;
 				TestContainer*(*dllFunc)() = &FakeDynamicLibrary::getTestSuites;
 			protected:
 				virtual void* getFunction(std::string &module, std::string &func) override {
@@ -72,9 +74,15 @@ namespace darknessNight {
 				void * returnFuncIfNameIsCorrect(std::string & func) {
 					if (func == "getTestsFromDynamicTestsLibrary")
 						return dllFunc;
-					else {
+					else if (func == "getTestLibVersion")
+						return returnLibVerFunc();
+					else
 						throw FunctionLoadException("");
-					}
+				}
+				void * returnLibVerFunc() {
+					if (incorrectLibVer)
+						return (const char*(*)())([]()->const char* {return ""; });
+					return (const char*(*)())([]()->const char* {return CPPUNITTEST_LIBRARY_VERSION; });
 				}
 				void checkHasCorrectLibrary(std::string & module) {
 					if (module == "Dll.dll")

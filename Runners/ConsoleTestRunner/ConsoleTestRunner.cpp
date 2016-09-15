@@ -21,7 +21,7 @@ int main() {
 		auto dynamicLibraries = std::make_shared<DynamicLibrary>();
 
 #ifdef _DEBUG
-		std::string dir = "../Debug";
+		std::string dir = "./";
 #else
 		std::string dir = "../Release";
 #endif

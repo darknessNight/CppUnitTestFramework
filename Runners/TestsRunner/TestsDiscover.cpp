@@ -33,7 +33,7 @@ void darknessNight::TestsRunner::TestsDiscover::searchLibrariesInDir(std::shared
 
 void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::string path) {
 	try {
-		if(!ManagedLibraryChecker::isManagedLib(path))
+		if(isCorrectLibrary(path))
 			tryGetTests(path);
 	}
 	catch (LibraryLoadException) {
@@ -41,6 +41,17 @@ void darknessNight::TestsRunner::TestsDiscover::getTestsIfLibraryIsCorrect(std::
 	catch (FunctionLoadException) {
 		dynamicLibrary->freeLibrary(path);
 	}
+}
+
+bool darknessNight::TestsRunner::TestsDiscover::isCorrectLibrary(std::string path) {
+	return !ManagedLibraryChecker::isManagedLib(path) && isCorrectLibVersion(path);
+}
+
+bool darknessNight::TestsRunner::TestsDiscover::isCorrectLibVersion(std::string path) {
+	auto func = dynamicLibrary->importFunction<const char*()>(path, dllVersionFuncName);
+	std::string dllLibVersion = func();
+	std::string programLibVersion = CPPUNITTEST_LIBRARY_VERSION;
+	return dllLibVersion == programLibVersion;
 }
 
 void darknessNight::TestsRunner::TestsDiscover::tryGetTests(std::string & path) {

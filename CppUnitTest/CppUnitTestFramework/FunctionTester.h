@@ -14,7 +14,7 @@ namespace darknessNight {
 			FunctionTester(TestMethod test);
 			virtual TestResult runTest();
 		protected:
-			inline void setTestDuration(std::chrono::steady_clock::time_point start, TestResult& testResult);
+			void setTestDuration(std::chrono::high_resolution_clock::time_point start, TestResult& testResult);
 			TestResult runTestWithoutDuration();
 			void throwExceptionIfTestIsNullptr(TestMethod test);
 			TestResult tryRunTest();

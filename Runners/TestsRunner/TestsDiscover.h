@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <CppUnitTestFramework/TestContainer.h>
+#include <CppUnitTestFramework/Version.h>
 #include "Filesystem/Directory.h"
 #include "SharedLibrary.h"
 
@@ -12,6 +13,7 @@ namespace darknessNight {
 	namespace TestsRunner {
 		class TestsDiscover {
 			std::vector<TestSuitePtr> suites;
+			const std::string dllVersionFuncName = "getTestLibVersion";
 			const std::string dllFuncName = "getTestsFromDynamicTestsLibrary";
 			std::shared_ptr<DynamicLibrary> dynamicLibrary;
 			std::shared_ptr<Directory> directory;
@@ -27,6 +29,8 @@ namespace darknessNight {
 		protected:
 			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);
 			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern);
+			bool isCorrectLibrary(std::string path);
+			bool isCorrectLibVersion(std::string path);
 			void getTestsIfLibraryIsCorrect(std::string path);
 			void tryGetTests(std::string & path);
 			std::string prepareSearchPattern(std::vector<std::string> &extensions);

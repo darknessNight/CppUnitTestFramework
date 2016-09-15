@@ -50,6 +50,13 @@ namespace darknessNight {
 					Assert::AreEqual<unsigned>(0, discover.getSuitesNames().size());
 				}
 
+				TEST_METHOD(FindAll_HasFakeReturnIncorrectLibVersion_CheckNoCollapse) {
+					fakeDynamicLibrary->incorrectLibVer = true;
+					TestsDiscover discover(fakeDir, fakeDynamicLibrary);
+					actDiscoverFindAll(discover);
+					Assert::AreEqual<unsigned>(0, discover.getSuitesNames().size());
+				}
+
 				TEST_METHOD(FindAll_HasFakes_CheckLoadSuites) {
 					TestsDiscover discover(fakeDir,fakeDynamicLibrary);
 					actDiscoverFindAll(discover);

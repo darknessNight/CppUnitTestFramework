@@ -177,6 +177,9 @@
     <ClInclude Include="HelperFuncs.h">
       <Filter>Headers\Registers</Filter>
     </ClInclude>
+    <ClInclude Include="Version.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -205,5 +208,10 @@
     <Filter Include="Headers\Registers">
       <UniqueIdentifier>{536d9c0b-8b90-467a-90f6-ba27be098e6d}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Version.h.template">
+      <Filter>Headers</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ void FunctionTester::throwExceptionIfTestIsNullptr(TestMethod test) {
 			throw NullPointerException(std::string("Argument cannot be nullptr in ") + __FILE__ " " + std::to_string(__LINE__));
 }
 
-void FunctionTester::setTestDuration(std::chrono::steady_clock::time_point start, TestResult& testResult) {
+void FunctionTester::setTestDuration(std::chrono::high_resolution_clock::time_point start, TestResult& testResult) {
 	auto end = std::chrono::high_resolution_clock::now();
 	testResult.startTime = start;
 	testResult.endTime = end;
