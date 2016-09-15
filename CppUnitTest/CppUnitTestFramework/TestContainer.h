@@ -17,6 +17,7 @@ namespace darknessNight {
 			void registerTestCase(std::string testSuite, TestCasePtr testCase);
 			void registerSetUp(std::string testSuite, std::function<void()> setUp);
 			void registerTearDown(std::string testSuite, std::function<void()> tearDown);
+			void clear();
 		private:
 			void checkTestSuiteName(std::string &testSuite);
 			void throwExceptionIfNotExistsSuite(std::string & testSuite);

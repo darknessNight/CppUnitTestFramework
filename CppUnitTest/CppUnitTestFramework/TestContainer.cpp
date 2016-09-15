@@ -3,8 +3,7 @@
 using namespace darknessNight::CppUnitTestFramework;
 
 TestContainer::TestContainer() {
-	unnamedSuite = std::shared_ptr<TestSuiteCreator>(new TestSuiteCreator("Unnamed"));
-	addTestSuite(unnamedSuite);
+	clear();
 }
 
 void TestContainer::addTestSuite(std::shared_ptr<TestSuiteCreator> creator) {
@@ -50,6 +49,12 @@ void TestContainer::registerSetUp(std::string testSuite, std::function<void()> s
 void TestContainer::registerTearDown(std::string testSuite, std::function<void()> tearDown) {
 	checkTestSuiteName(testSuite);
 	mapArray[testSuite]->registerTearDown(tearDown);
+}
+
+void TestContainer::clear() {
+	mapArray.clear();
+	unnamedSuite = std::make_shared<TestSuiteCreator>("Unnamed");
+	addTestSuite(unnamedSuite);
 }
 
 void TestContainer::checkTestSuiteName(std::string & testSuite)

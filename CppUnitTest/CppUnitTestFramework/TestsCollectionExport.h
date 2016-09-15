@@ -14,9 +14,15 @@ namespace darknessNight {
 				return suiteContainer;
 			}
 
+			static void clear() {
+				getTestContainer().clear();
+			}
+
 			static void discoverTest() {
 				throw exception();
 			}
+
+
 
 		private:
 			static void createContainerIfNeeded() {

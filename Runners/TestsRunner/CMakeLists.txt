@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project (TestsRunner)
 file(GLOB SOURCES ./*.cpp)
 
-include_directories("../../")
+include_directories("../../CppUnitTest")
 target_link_libraries (${PROJECT_NAME} CppUnitTestFramework)
 add_library(${PROJECT_NAME} ${SOURCES})
 
