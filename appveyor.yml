@@ -2,9 +2,9 @@ version: 0.0.{build}
 environment:
   matrix:
   - solution_name: Runners/Runners.sln
-  - solution_name: IoC/IoC.sln
   - solution_name: CppUnitTest/CppUnitTest.sln
+  - solution_name: Runners/VSPlugin/VSPlugin.sln
 build:
   verbosity: normal
 build_script:
-  - msbuild %solution_name%
+  - cmd: msbuild %solution_name%
