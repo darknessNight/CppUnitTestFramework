@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleMessageLogger.cpp" />
     <ClCompile Include="Filesystem\Directory.cpp" />
     <ClCompile Include="Filesystem\DirOneLevelIterator.cpp" />
     <ClCompile Include="Filesystem\DirRecursiveIterator.cpp" />
@@ -141,9 +142,10 @@
     <ClCompile Include="ManagedLibraryChecker.cpp" />
     <ClCompile Include="SharedLibrary.cpp" />
     <ClCompile Include="TestExecutor.cpp" />
-    <ClCompile Include="TestsDiscover.cpp" />
+    <ClCompile Include="TestDiscover.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleMessageLogger.h" />
     <ClInclude Include="Exceptions.h" />
     <ClInclude Include="Filesystem\Directory.h" />
     <ClInclude Include="Filesystem\DirOneLevelIterator.h" />
@@ -155,11 +157,12 @@
     <ClInclude Include="Filesystem\SystemDirIteratorLinux.h" />
     <ClInclude Include="Filesystem\SystemDirIteratorWindows.h" />
     <ClInclude Include="ManagedLibraryChecker.h" />
+    <ClInclude Include="MessageLogger.h" />
     <ClInclude Include="SharedLibrary.h" />
     <ClInclude Include="TestExecutor.h" />
     <ClInclude Include="TestReportCategoryContainer.h" />
     <ClInclude Include="TestReportContainer.h" />
-    <ClInclude Include="TestsDiscover.h" />
+    <ClInclude Include="TestDiscover.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj">

@@ -12,6 +12,22 @@ namespace darknessNight {
 	namespace TestsRunner {
 		namespace UnitTest {
 
+			class FakeLogger :public MessageLogger {
+				std::vector<std::string> messages;
+			public:
+				virtual void sendMessage(std::string message) override{
+					messages.push_back(message);
+				}
+				virtual void sendError(std::string message) override{
+					messages.push_back(message);
+				}
+				virtual void sendWarning(std::string message) override{
+					messages.push_back(message);
+				}
+				std::vector<std::string> getMessages() {
+					return messages;
+				}
+			};
 
 			class FakeEntry :public Entry {
 			public:

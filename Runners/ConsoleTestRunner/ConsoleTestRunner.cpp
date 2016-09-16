@@ -3,9 +3,10 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include "../TestsRunner/TestsDiscover.h"
+#include "../TestsRunner/TestDiscover.h"
 #include "../TestsRunner/TestExecutor.h"
 #include "ConsoleTestRunner.h"
+#include "../TestsRunner/ConsoleMessageLogger.h"
 
 using namespace darknessNight::TestsRunner;
 using namespace darknessNight::Filesystem;
@@ -19,6 +20,7 @@ int main() {
 	{
 		std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
 		auto dynamicLibraries = std::make_shared<DynamicLibrary>();
+		ConsoleMessageLogger logger;
 
 #ifdef _DEBUG
 		std::string dir = "./";
@@ -26,12 +28,12 @@ int main() {
 		std::string dir = "../Release";
 #endif
 		std::cout << "Hello everybody\n";
-		TestsDiscover discover(dirPtr, dynamicLibraries);
+		TestDiscover discover(dirPtr, dynamicLibraries, logger);
 		std::cout << "Start discover tests\n";
 		discover.findAll({ dir }, { ".dll", ".so" });
 		std::cout << "I founded it!";
 		auto result = discover.getTestsList();
-		TestExecutor executor(dirPtr, dynamicLibraries);
+		TestExecutor executor(dirPtr, dynamicLibraries,logger);
 		std::cout << "Start running tests\n";
 		testReports = executor.runTests(result);
 	}

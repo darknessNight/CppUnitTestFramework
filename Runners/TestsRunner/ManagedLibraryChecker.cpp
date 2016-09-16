@@ -1,5 +1,7 @@
 #include "ManagedLibraryChecker.h"
 
+using namespace darknessNight::TestsRunner;
+
 bool ManagedLibraryChecker::isManagedLib(std::string path) {
 #ifdef _WIN32
 #if UNICODE

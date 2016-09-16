@@ -35,9 +35,6 @@
     <ClCompile Include="Filesystem\DirSearchIterator.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="TestsDiscover.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Filesystem\SystemDirIteratorLinux.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
@@ -48,6 +45,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ManagedLibraryChecker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleMessageLogger.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestDiscover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,9 +79,6 @@
     <ClInclude Include="Filesystem\DirSearchIterator.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="TestsDiscover.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Filesystem\SystemDirIterator.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
@@ -98,6 +98,15 @@
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
     <ClInclude Include="ManagedLibraryChecker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleMessageLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDiscover.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

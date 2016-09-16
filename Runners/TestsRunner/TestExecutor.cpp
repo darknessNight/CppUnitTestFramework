@@ -1,8 +1,9 @@
 #include "TestExecutor.h"
 
-darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs) {
+darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, MessageLogger& messageLogger) {
 	dynamicLibrary = dynLibs;
 	directory = dir;
+	logger = &messageLogger;
 }
 
 void darknessNight::TestsRunner::TestExecutor::stop() {
@@ -41,7 +42,7 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTestsFromFi
 }
 
 std::vector<TestCasePtr> darknessNight::TestsRunner::TestExecutor::getAllTestsInFile(std::string& path) {
-	TestsDiscover discover(directory, dynamicLibrary);
+	TestDiscover discover(directory, dynamicLibrary, *logger);
 	discover.findInFile(path);
 	return discover.getTestsList();
 }

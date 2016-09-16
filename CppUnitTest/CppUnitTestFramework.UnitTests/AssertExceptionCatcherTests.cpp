@@ -97,18 +97,18 @@ public:
 	}
 
 	TEST_METHOD(DoesNotThrow_DoesThrowException_CheckThrowAndHasMessage) {
-		auto testMethod = []() {throw std::runtime_error(""); };
+		auto testMethod = []() {throw /**/ std::exception(); };
 		try {
 			AssertExceptionCatcher::DoesNotThrow(testMethod, "TestMessage");
-			Assert::Fail();
+			Assert::Fail(L"Not throw");
 		}
 		catch (AssertFailException ex) {
-			StringAssert::Constains("TestMessage", ex.getMessage());
-			StringAssert::Constains("Catched unexpected exception", ex.getMessage());
-			StringAssert::Constains("<" + std::string(typeid(std::exception).name()) + ">", ex.getMessage());
+			StringAssert::Constains("TestMessage", ex.getMessage(), L"Message1");
+			StringAssert::Constains("Catched unexpected exception", ex.getMessage(), L"Message2");
+			StringAssert::Constains("<" + std::string(typeid(std::exception).name()) + ">", ex.getMessage(), L"Message3");
 		}
 		catch (std::exception) {
-			Assert::Fail();
+			Assert::Fail(L"Throw uncorrect");
 		}
 	}
 

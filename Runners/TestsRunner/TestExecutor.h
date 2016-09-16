@@ -2,7 +2,8 @@
 #include <CppUnitTestFramework/TestCase.h>
 #include <CppUnitTestFramework/TestSuite.h>
 #include <vector>
-#include "TestsDiscover.h"
+#include "TestDiscover.h"
+#include "MessageLogger.h"
 
 using namespace darknessNight::CppUnitTestFramework;
 
@@ -13,8 +14,9 @@ namespace darknessNight {
 			bool running = false;
 			std::shared_ptr<DynamicLibrary> dynamicLibrary;
 			std::shared_ptr<Directory> directory;
+			MessageLogger* logger;
 		public:
-			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>);
+			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>, MessageLogger&);
 			void stop();
 			void safeClear();
 			TestReport runTest(TestCasePtr testCase);
