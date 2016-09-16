@@ -15,9 +15,10 @@ namespace darknessNight {
 			std::vector<TestSuitePtr> suites;
 			const std::string dllVersionFuncName = "getTestLibVersion";
 			const std::string dllFuncName = "getTestsFromDynamicTestsLibrary";
-			std::shared_ptr<DynamicLibrary> dynamicLibrary;
-			std::shared_ptr<Directory> directory;
-			MessageLogger* logger;
+			std::shared_ptr<DynamicLibrary> dynamicLibrary = nullptr;
+			std::shared_ptr<Directory> directory = nullptr;
+			MessageLogger* logger=nullptr;
+			int loadedTests = 0;
 		public:
 			TestDiscover(std::shared_ptr<Directory>,std::shared_ptr<DynamicLibrary>, MessageLogger&);
 			virtual ~TestDiscover();
@@ -28,8 +29,12 @@ namespace darknessNight {
 			virtual std::vector<TestCasePtr> getTestsList();
 			virtual void safeClear();
 		protected:
+			void logStartWork();
+			void logEndWork();
 			void searchLibraries(std::vector<std::string> &paths, std::string &pattern);
 			void searchLibrariesInDir(std::shared_ptr<Directory> &directory, std::string & pattern);
+			void logLibraryNotSupported(std::string path);
+			void logLibraryLoaded(std::string path);
 			bool isCorrectLibrary(std::string path);
 			bool isCorrectLibVersion(std::string path);
 			void getTestsIfLibraryIsCorrect(std::string path);

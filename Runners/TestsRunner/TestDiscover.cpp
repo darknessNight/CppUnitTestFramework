@@ -3,6 +3,8 @@
 #include "ManagedLibraryChecker.h"
 
 darknessNight::TestsRunner::TestDiscover::TestDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, MessageLogger& messageLogger) {
+	if (dir == nullptr || dynLibs == nullptr || &messageLogger == nullptr)
+		throw std::runtime_error("Null pointer in constructor: " __FILE__);
 	dynamicLibrary = dynLibs;
 	directory = dir;
 	logger = &messageLogger;
@@ -13,8 +15,20 @@ darknessNight::TestsRunner::TestDiscover::~TestDiscover() {
 }
 
 void darknessNight::TestsRunner::TestDiscover::findAll(std::vector<std::string> paths, std::vector<std::string> extensions) {
+	logStartWork();
 	auto pattern = prepareSearchPattern(extensions);
 	searchLibraries(paths, pattern);
+	logEndWork();
+}
+
+void darknessNight::TestsRunner::TestDiscover::logStartWork() {
+	logger->sendMessage("DiscoverStarted");
+	loadedTests = 0;
+}
+
+void darknessNight::TestsRunner::TestDiscover::logEndWork() {
+	logger->sendMessage("DiscoverEnded");
+	logger->sendMessage("Loaded tests: " + std::to_string(loadedTests));
 }
 
 void darknessNight::TestsRunner::TestDiscover::searchLibraries(std::vector<std::string>& paths, std::string & pattern) {
@@ -33,14 +47,28 @@ void darknessNight::TestsRunner::TestDiscover::searchLibrariesInDir(std::shared_
 
 void darknessNight::TestsRunner::TestDiscover::getTestsIfLibraryIsCorrect(std::string path) {
 	try {
-		if(isCorrectLibrary(path))
+		if (isCorrectLibrary(path)) {
 			tryGetTests(path);
+			logLibraryLoaded(path);
+		}else {
+			logLibraryNotSupported(path);
+		}
 	}
 	catch (LibraryLoadException) {
+		logLibraryNotSupported(path);
 	}
 	catch (FunctionLoadException) {
+		logLibraryNotSupported(path);
 		dynamicLibrary->freeLibrary(path);
 	}
+}
+
+void darknessNight::TestsRunner::TestDiscover::logLibraryNotSupported(std::string path) {
+	logger->sendMessage("Has: <" + path + "> Library not supported");
+}
+
+void darknessNight::TestsRunner::TestDiscover::logLibraryLoaded(std::string path) {
+	logger->sendMessage("Has: <" + path + "> Library loaded");
 }
 
 bool darknessNight::TestsRunner::TestDiscover::isCorrectLibrary(std::string path) {
@@ -57,8 +85,10 @@ bool darknessNight::TestsRunner::TestDiscover::isCorrectLibVersion(std::string p
 void darknessNight::TestsRunner::TestDiscover::tryGetTests(std::string & path) {
 	auto func = dynamicLibrary->importFunction<TestContainer*()>(path, dllFuncName);
 	TestContainer* container = func();
-	for (auto suite : container->getAllTestSuites())
-		suites.push_back(suite);		
+	for (auto suite : container->getAllTestSuites()) {
+		loadedTests += suite->getTestCases().size();
+		suites.push_back(suite);
+	}
 }
 
 std::string darknessNight::TestsRunner::TestDiscover::prepareSearchPattern(std::vector<std::string>& extensions) {
@@ -81,7 +111,9 @@ void darknessNight::TestsRunner::TestDiscover::deleteDotsAtBeginExt(std::string 
 }
 
 void darknessNight::TestsRunner::TestDiscover::findInFile(std::string path) {
+	logStartWork();
 	getTestsIfLibraryIsCorrect(path);
+	logEndWork();
 }
 
 std::vector<std::string> darknessNight::TestsRunner::TestDiscover::getSuitesNames() {

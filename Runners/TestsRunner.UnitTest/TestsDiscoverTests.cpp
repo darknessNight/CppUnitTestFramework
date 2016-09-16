@@ -18,6 +18,7 @@ namespace darknessNight {
 				TEST_METHOD_INITIALIZE(SetUp) {
 					fakeDir = std::make_shared<FakeDir>();
 					fakeDynamicLibrary = std::make_shared<FakeDynamicLibrary>();
+					fakeLogger = std::make_shared<FakeLogger>();
 				}
 
 				std::shared_ptr<TestDiscover> getTestObj() {
@@ -28,6 +29,23 @@ namespace darknessNight {
 					auto discover=getTestObj();
 					actDiscoverFindAll(*discover);
 					Assert::AreEqual(2U, discover->getSuitesNames().size());
+				}
+
+				TEST_METHOD(FindAll_HasFakesDirectoryAndDllShared_CheckSendLogs) {
+					prepareFakeDynamicLibraryToReturnTestCase();
+					auto discover = getTestObj();
+					actDiscoverFindAll(*discover);
+					auto messages=fakeLogger->getMessages();
+					int i = 0;
+					assertStandardLogs(messages, i);
+				}
+
+				void assertStandardLogs(std::vector<std::string> &messages, int &i) {
+					Assert::AreEqual<std::string>("M:DiscoverStarted", messages[i++]);
+					Assert::AreEqual<std::string>("M:Has: <Dll.dll> Library loaded", messages[i++]);
+					Assert::AreEqual<std::string>("M:Has: <Second.so> Library loaded", messages[i++]);
+					Assert::AreEqual<std::string>("M:DiscoverEnded", messages[i++]);
+					Assert::AreEqual<std::string>("M:Loaded tests: 2", messages[i++]);
 				}
 
 				void actDiscoverFindAll(darknessNight::TestsRunner::TestDiscover &discover) {

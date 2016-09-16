@@ -15,14 +15,14 @@ namespace darknessNight {
 			class FakeLogger :public MessageLogger {
 				std::vector<std::string> messages;
 			public:
-				virtual void sendMessage(std::string message) override{
-					messages.push_back(message);
+				virtual void sendMessage(std::string message) override {
+					messages.push_back("M:" + message);
 				}
-				virtual void sendError(std::string message) override{
-					messages.push_back(message);
+				virtual void sendError(std::string message) override {
+					messages.push_back("E:" + message);
 				}
-				virtual void sendWarning(std::string message) override{
-					messages.push_back(message);
+				virtual void sendWarning(std::string message) override {
+					messages.push_back("W:" + message);
 				}
 				std::vector<std::string> getMessages() {
 					return messages;
@@ -60,7 +60,7 @@ namespace darknessNight {
 					return std::vector<Entry>();
 				}
 				virtual std::vector<Entry> searchElements(std::string pattern) override {
-					if ((int)pattern.find("\\.(dll|so)")>=0)
+					if ((int)pattern.find("\\.(dll|so)") >= 0)
 						return retEntries;
 					else return std::vector<Entry>();
 				}

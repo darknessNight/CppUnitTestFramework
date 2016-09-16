@@ -1,6 +1,8 @@
 #include "TestExecutor.h"
 
 darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, MessageLogger& messageLogger) {
+	if (dir == nullptr || dynLibs == nullptr || &messageLogger == nullptr)
+		throw std::runtime_error("Null pointer in constructor: " __FILE__);
 	dynamicLibrary = dynLibs;
 	directory = dir;
 	logger = &messageLogger;

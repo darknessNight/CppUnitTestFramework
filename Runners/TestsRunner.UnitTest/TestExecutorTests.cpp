@@ -20,6 +20,7 @@ namespace darknessNight {
 				TEST_METHOD_INITIALIZE(SetUp) {
 					fakeDir = std::make_shared<FakeDir>();
 					fakeDynamicLibrary = std::make_shared<FakeDynamicLibrary>();
+					fakeLogger = std::make_shared<FakeLogger>();
 				}
 
 				std::shared_ptr<TestExecutor> getTestObj() {

@@ -47,10 +47,10 @@
     <ClCompile Include="ManagedLibraryChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConsoleMessageLogger.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestDiscover.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleMessageLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
