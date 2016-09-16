@@ -42,8 +42,8 @@ namespace darknessNight {
 
 				void assertStandardLogs(std::vector<std::string> &messages, int &i) {
 					Assert::AreEqual<std::string>("M:DiscoverStarted", messages[i++]);
-					Assert::AreEqual<std::string>("M:Has: <Dll.dll> Library loaded", messages[i++]);
-					Assert::AreEqual<std::string>("M:Has: <Second.so> Library loaded", messages[i++]);
+					Assert::AreEqual<std::string>("M:Has: <Dll.dll> module loaded", messages[i++]);
+					Assert::AreEqual<std::string>("M:Has: <Second.so> module loaded", messages[i++]);
 					Assert::AreEqual<std::string>("M:DiscoverEnded", messages[i++]);
 					Assert::AreEqual<std::string>("M:Loaded tests: 2", messages[i++]);
 				}

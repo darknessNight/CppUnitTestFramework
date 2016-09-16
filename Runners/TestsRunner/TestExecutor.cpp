@@ -17,6 +17,7 @@ void darknessNight::TestsRunner::TestExecutor::safeClear() {
 }
 
 std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::vector<TestCasePtr> testCases) {
+	logger->sendMessage("Run tests from testcases");
 	running = true;
 	std::vector<TestReport> reports;
 	for(auto test : testCases) {
@@ -27,16 +28,29 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::
 	return reports;
 }
 
+TestReport darknessNight::TestsRunner::TestExecutor::runTest(TestCasePtr testCase) {
+#ifdef _DEBUG
+	logger->sendMessage("Runned test: " + testCase->getName());
+#endif
+	return testCase->runTestAndGetReport();
+}
+
 std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(TestSuitePtr testSuite) {
 	return runTests(testSuite->getTestCases());
 }
 
 std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::string path, std::vector<std::string> names) {
+	logRunTestInPath(path);
 	auto tests = getAllTestsInFile(path);
 	return filterAndRunTests(tests, names);
 }
 
+void darknessNight::TestsRunner::TestExecutor::logRunTestInPath(std::string path) {
+	logger->sendMessage("Run tests in module: " + path);
+}
+
 std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTestsFromFile(std::string path) {
+	logRunTestInPath(path);
 	std::vector<TestReport> reports;
 	for (auto test : getAllTestsInFile(path))
 		reports.push_back(runTest(test));
@@ -80,10 +94,6 @@ bool darknessNight::TestsRunner::TestExecutor::isTestHasPassFullname(TestCasePtr
 
 void darknessNight::TestsRunner::TestExecutor::runTestAndSaveReport(std::vector<TestReport>& reports, TestCasePtr& test) {
 	reports.push_back(test->runTestAndGetReport());
-}
-
-TestReport darknessNight::TestsRunner::TestExecutor::runTest(TestCasePtr testCase) {
-	return testCase->runTestAndGetReport();
 }
 
 TestReport darknessNight::TestsRunner::TestExecutor::runTest(TestSuitePtr testSuite, std::string testName) {

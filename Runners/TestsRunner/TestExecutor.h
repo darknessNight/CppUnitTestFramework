@@ -26,6 +26,7 @@ namespace darknessNight {
 			std::vector<TestReport> runTests(std::string path, std::vector<std::string> names);
 			std::vector<TestReport> runTestsFromFile(std::string path);
 		protected:
+			void logRunTestInPath(std::string path);
 			std::vector<TestCasePtr> getAllTestsInFile(std::string& path);
 			std::vector<TestReport> filterAndRunTests(std::vector<TestCasePtr> tests, std::vector<std::string>& names);
 			void runTestWithNameHasInFilter(std::vector<std::string>& names, TestCasePtr& test, std::vector<TestReport>& reports);

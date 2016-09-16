@@ -64,11 +64,11 @@ void darknessNight::TestsRunner::TestDiscover::getTestsIfLibraryIsCorrect(std::s
 }
 
 void darknessNight::TestsRunner::TestDiscover::logLibraryNotSupported(std::string path) {
-	logger->sendMessage("Has: <" + path + "> Library not supported");
+	logger->sendMessage("Has: <" + path + "> module not supported");
 }
 
 void darknessNight::TestsRunner::TestDiscover::logLibraryLoaded(std::string path) {
-	logger->sendMessage("Has: <" + path + "> Library loaded");
+	logger->sendMessage("Has: <" + path + "> module loaded");
 }
 
 bool darknessNight::TestsRunner::TestDiscover::isCorrectLibrary(std::string path) {

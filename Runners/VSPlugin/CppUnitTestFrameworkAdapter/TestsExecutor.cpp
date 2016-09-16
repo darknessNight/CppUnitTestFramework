@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TestsExecutor.h"
 #include "TestReportConverter.h"
+#include "../../TestsRunner/ConsoleMessageLogger.h"
 
 void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::RunTests(IEnumerable<ObjectModel::TestCase^>^ tests, IRunContext ^ runContext, IFrameworkHandle ^ frameworkHandle) {
 	prepareConf(frameworkHandle);
@@ -9,7 +10,8 @@ void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::RunTests(IEnumerable<
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::prepareConf(ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
-	executor = new darknessNight::TestsRunner::TestExecutor(std::make_shared<Directory>("."), std::make_shared<DynamicLibrary>());
+	darknessNight::TestsRunner::ConsoleMessageLogger log;
+	executor = new darknessNight::TestsRunner::TestExecutor(std::make_shared<Directory>("."), std::make_shared<DynamicLibrary>(),log);
 	logger = gcnew MessageLogger(frameworkHandle);
 	m_cancelled = false;
 	runnedTests = 0;

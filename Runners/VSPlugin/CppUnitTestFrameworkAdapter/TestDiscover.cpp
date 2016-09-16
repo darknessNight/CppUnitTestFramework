@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TestDiscover.h"
+#include <TestsRunner/ConsoleMessageLogger.h>
 using namespace darknessNight::Filesystem;
 using namespace darknessNight::SharedLibrary;
 
@@ -36,25 +37,26 @@ List<ObjectModel::TestCase^>^ darknessNight::CppUnitTest::VSAdapter::TestDiscove
 void del(void*){}
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::searchTestsInFile(System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
-	darknessNight::TestsRunner::TestsDiscover discover(std::make_shared<Directory>("."),std::shared_ptr<DynamicLibrary>(new DynamicLibrary(),&del));
+	darknessNight::TestsRunner::ConsoleMessageLogger log;
+	darknessNight::TestsRunner::TestDiscover discover(std::make_shared<Directory>("."),std::shared_ptr<DynamicLibrary>(new DynamicLibrary(),&del),log);
 	readTestsFromFile(path, discover);
 	saveTestsAsTestCases(discover, path, discoverySink, cases);
 	freeLoadedLibraries(discover);
 }
 
-void darknessNight::CppUnitTest::VSAdapter::TestDiscover::freeLoadedLibraries(darknessNight::TestsRunner::TestsDiscover &discover) {
+void darknessNight::CppUnitTest::VSAdapter::TestDiscover::freeLoadedLibraries(darknessNight::TestsRunner::TestDiscover &discover) {
 #ifdef _DEBUG
 	logger->sendInfo("Free all loaded libraries");
 #endif
 	discover.safeClear();
 }
 
-void darknessNight::CppUnitTest::VSAdapter::TestDiscover::readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestsDiscover & discover) {
+void darknessNight::CppUnitTest::VSAdapter::TestDiscover::readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestDiscover & discover) {
 	logger->sendInfo("Has: " + path);
 	discover.findInFile(ConvertTools::CliStringToCppString(path));
 }
 
-void darknessNight::CppUnitTest::VSAdapter::TestDiscover::saveTestsAsTestCases(darknessNight::TestsRunner::TestsDiscover & discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
+void darknessNight::CppUnitTest::VSAdapter::TestDiscover::saveTestsAsTestCases(darknessNight::TestsRunner::TestDiscover & discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
 	for (auto test : discover.getTestsList()) {
 #ifdef _DEBUG
 		logger->sendInfo("Test added: " + gcnew String(test->getReportWithoutResult().getFullName().c_str()));

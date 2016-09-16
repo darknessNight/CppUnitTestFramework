@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 
-#define  CPPUNITTEST_LIB_VERSION_NUMBER "0.3.1.28"
+#define  CPPUNITTEST_LIB_VERSION_NUMBER "0.3.1.30"
 #ifdef _DEBUG
 #define CPPUNITTEST_LIB_CONF_LITERAL "_D";
 #else
 #define CPPUNITTEST_LIB_CONF_LITERAL "_S";
 #endif
-#define COMPILE_COUNT 1027UL
+#define COMPILE_COUNT 1029UL
 
 #if defined(__x86_64__) || defined(_M_X64)
 #define LIB_ARCH "x64"
