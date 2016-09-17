@@ -1,10 +1,13 @@
 #pragma once
 #include <string>
 #ifdef _WIN32
+#pragma warning( push )
+#pragma warning( disable : 4091)
 #include <windows.h>
 #include <tchar.h>
 #include <winnt.h>
 #include <cor.h>
+#pragma warning( pop ) 
 #endif
 namespace darknessNight {
 	namespace TestsRunner {

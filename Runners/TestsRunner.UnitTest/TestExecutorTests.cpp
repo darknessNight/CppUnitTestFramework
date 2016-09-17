@@ -24,7 +24,7 @@ namespace darknessNight {
 				}
 
 				std::shared_ptr<TestExecutor> getTestObj() {
-					return std::make_shared<TestExecutor>(fakeDir, fakeDynamicLibrary, *fakeLogger);
+					return std::make_shared<TestExecutor>(fakeDir, fakeDynamicLibrary, fakeLogger);
 				}
 			public:
 				TEST_METHOD(RunTest_HasTest_CheckRunTest) {

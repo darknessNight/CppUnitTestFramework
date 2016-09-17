@@ -12,9 +12,8 @@ namespace darknessNight {
 		class TestExecutor {
 		private:
 			bool running = false;
-			std::shared_ptr<DynamicLibrary> dynamicLibrary;
-			std::shared_ptr<Directory> directory;
 			std::shared_ptr<MessageLogger> logger;
+			TestDiscover discover;
 		public:
 			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>, std::shared_ptr<MessageLogger>);
 			~TestExecutor();

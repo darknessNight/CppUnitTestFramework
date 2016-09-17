@@ -22,7 +22,7 @@ namespace darknessNight {
 				}
 
 				std::shared_ptr<TestDiscover> getTestObj() {
-					return std::make_shared<TestDiscover>(fakeDir, fakeDynamicLibrary, *fakeLogger);
+					return std::make_shared<TestDiscover>(fakeDir, fakeDynamicLibrary, fakeLogger);
 				}
 
 				TEST_METHOD(FindAll_HasFakesDirectoryAndDllShared_CheckHasCorrectImportedTestCount) {

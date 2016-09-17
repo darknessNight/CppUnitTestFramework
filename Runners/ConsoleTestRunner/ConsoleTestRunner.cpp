@@ -20,10 +20,10 @@ int main() {
 	{
 		std::shared_ptr<Directory> dirPtr = std::make_shared<Directory>(".");
 		auto dynamicLibraries = std::make_shared<DynamicLibrary>();
-		ConsoleMessageLogger logger;
+		auto logger = std::make_shared<ConsoleMessageLogger>();
 
 #ifdef _DEBUG
-		std::string dir = "./";
+		std::string dir = "../Debug";
 #else
 		std::string dir = "../Release";
 #endif
