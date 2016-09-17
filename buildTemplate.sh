@@ -1,5 +1,6 @@
 #!/bin/bash
 if [ $# -ge 1 ]; then
+if [ -e $1 ];then
 	TEXT=`cat "$1"`
 	OUT_TEXT="$TEXT"
 	OUTS=`echo "$TEXT" | grep -oE "\{.*:[0-9]+\}"`
@@ -17,4 +18,5 @@ if [ $# -ge 1 ]; then
 	echo "$TEXT" > "$1"
 	OUT_FILE="$1"
 	echo "$OUT_TEXT" > "${OUT_FILE/.template/}"
+fi
 fi

@@ -14,9 +14,10 @@ namespace darknessNight {
 			bool running = false;
 			std::shared_ptr<DynamicLibrary> dynamicLibrary;
 			std::shared_ptr<Directory> directory;
-			MessageLogger* logger;
+			std::shared_ptr<MessageLogger> logger;
 		public:
-			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>, MessageLogger&);
+			TestExecutor(std::shared_ptr<Directory>, std::shared_ptr<DynamicLibrary>, std::shared_ptr<MessageLogger>);
+			~TestExecutor();
 			void stop();
 			void safeClear();
 			TestReport runTest(TestCasePtr testCase);

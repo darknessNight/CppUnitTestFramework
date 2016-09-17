@@ -10,7 +10,7 @@ namespace darknessNight {
 			__declspec(dllexport)
 #endif
 				const char* getTestLibVersion() {
-				return CPPUNITTEST_LIBRARY_VERSION
+				return CPPUNITTEST_LIBRARY_VERSION;
 			}
 #ifdef _WIN32
 			__declspec(dllexport)

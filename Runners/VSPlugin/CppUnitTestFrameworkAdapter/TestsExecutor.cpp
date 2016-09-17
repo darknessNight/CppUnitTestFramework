@@ -10,20 +10,16 @@ void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::RunTests(IEnumerable<
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::prepareConf(ObjectModel::Adapter::IFrameworkHandle ^ frameworkHandle) {
-	darknessNight::TestsRunner::ConsoleMessageLogger log;
-	executor = new darknessNight::TestsRunner::TestExecutor(std::make_shared<Directory>("."), std::make_shared<DynamicLibrary>(),log);
 	logger = gcnew MessageLogger(frameworkHandle);
+	auto cppLogger = std::make_shared<CppMessageLogger>(gcroot<MessageLogger^>(logger));
+	executor = new darknessNight::TestsRunner::TestExecutor(std::make_shared<Directory>("."), std::make_shared<DynamicLibrary>(),cppLogger);
 	m_cancelled = false;
 	runnedTests = 0;
-	logger->sendInfo("----Start running test:CppUnitTestAdapter----");
+	logger->sendInfo("Start running test:CppUnitTestAdapter");
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestsExecutor::showEndMessage() {
 	logger->sendInfo("CppUnitTestAdapter: runned tests: " + runnedTests.ToString());
-#ifdef _DEBUG
-	logger->sendInfo("Free all loaded libraries");
-#endif
-	executor->safeClear();
 	delete executor;
 }
 

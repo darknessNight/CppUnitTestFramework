@@ -1,11 +1,16 @@
 #include "TestExecutor.h"
 
-darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, MessageLogger& messageLogger) {
+
+darknessNight::TestsRunner::TestExecutor::TestExecutor(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, std::shared_ptr<MessageLogger> messageLogger) {
 	if (dir == nullptr || dynLibs == nullptr || &messageLogger == nullptr)
 		throw std::runtime_error("Null pointer in constructor: " __FILE__);
 	dynamicLibrary = dynLibs;
 	directory = dir;
-	logger = &messageLogger;
+	logger = messageLogger;
+}
+
+darknessNight::TestsRunner::TestExecutor::~TestExecutor() {
+	safeClear();
 }
 
 void darknessNight::TestsRunner::TestExecutor::stop() {
@@ -29,7 +34,7 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTests(std::
 }
 
 TestReport darknessNight::TestsRunner::TestExecutor::runTest(TestCasePtr testCase) {
-#ifdef _DEBUG
+#ifdef ADDITIONAL_LOGS
 	logger->sendMessage("Runned test: " + testCase->getName());
 #endif
 	return testCase->runTestAndGetReport();
@@ -58,7 +63,7 @@ std::vector<TestReport> darknessNight::TestsRunner::TestExecutor::runTestsFromFi
 }
 
 std::vector<TestCasePtr> darknessNight::TestsRunner::TestExecutor::getAllTestsInFile(std::string& path) {
-	TestDiscover discover(directory, dynamicLibrary, *logger);
+	TestDiscover discover(directory, dynamicLibrary, logger);
 	discover.findInFile(path);
 	return discover.getTestsList();
 }

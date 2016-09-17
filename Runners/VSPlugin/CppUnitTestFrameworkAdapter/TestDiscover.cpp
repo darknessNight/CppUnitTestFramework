@@ -34,32 +34,32 @@ List<ObjectModel::TestCase^>^ darknessNight::CppUnitTest::VSAdapter::TestDiscove
 	return cases;
 }
 
-void del(void*){}
-
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::searchTestsInFile(System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
-	darknessNight::TestsRunner::ConsoleMessageLogger log;
-	darknessNight::TestsRunner::TestDiscover discover(std::make_shared<Directory>("."),std::shared_ptr<DynamicLibrary>(new DynamicLibrary(),&del),log);
+	auto discover=getNativeDiscover();
 	readTestsFromFile(path, discover);
 	saveTestsAsTestCases(discover, path, discoverySink, cases);
 	freeLoadedLibraries(discover);
 }
 
+darknessNight::TestsRunner::TestDiscover darknessNight::CppUnitTest::VSAdapter::TestDiscover::getNativeDiscover() {
+	auto log = std::make_shared<CppMessageLogger>(gcroot<MessageLogger^>(logger));
+	auto library = std::make_shared<DynamicLibrary>();
+	auto directory = std::make_shared<Directory>(".");
+	return darknessNight::TestsRunner::TestDiscover(directory, library, log);
+}
+
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::freeLoadedLibraries(darknessNight::TestsRunner::TestDiscover &discover) {
-#ifdef _DEBUG
-	logger->sendInfo("Free all loaded libraries");
-#endif
 	discover.safeClear();
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::readTestsFromFile(System::String ^& path, darknessNight::TestsRunner::TestDiscover & discover) {
-	logger->sendInfo("Has: " + path);
 	discover.findInFile(ConvertTools::CliStringToCppString(path));
 }
 
 void darknessNight::CppUnitTest::VSAdapter::TestDiscover::saveTestsAsTestCases(darknessNight::TestsRunner::TestDiscover & discover, System::String ^& path, Microsoft::VisualStudio::TestPlatform::ObjectModel::Adapter::ITestCaseDiscoverySink ^ discoverySink, System::Collections::Generic::List<Microsoft::VisualStudio::TestPlatform::ObjectModel::TestCase^>^ cases) {
 	for (auto test : discover.getTestsList()) {
-#ifdef _DEBUG
-		logger->sendInfo("Test added: " + gcnew String(test->getReportWithoutResult().getFullName().c_str()));
+#ifdef ADDITIONAL_LOGS
+		logger->sendMessage("Found test: " + testCase->getName());
 #endif
 		saveAndSendTestCase(test, path, discoverySink, cases);
 		countOfTests++;

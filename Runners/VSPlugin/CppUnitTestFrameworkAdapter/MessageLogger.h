@@ -1,9 +1,12 @@
 #pragma once
+#include <vcclr.h>
+#include <TestsRunner/MessageLogger.h>
+#include "ConvertTools.h"
 using namespace System;
 using namespace Microsoft::VisualStudio::TestPlatform::ObjectModel::Logging;
 
 namespace darknessNight::CppUnitTest::VSAdapter {
-	public ref class MessageLogger :public IMessageLogger {
+	private ref class MessageLogger :public IMessageLogger {
 	private:
 		IMessageLogger^ myLogger = nullptr;
 	public:
@@ -26,6 +29,27 @@ namespace darknessNight::CppUnitTest::VSAdapter {
 
 		void sendWarning(String^ message) {
 			SendMessage(TestMessageLevel::Warning, message);
+		}
+	};
+
+	class CppMessageLogger:public darknessNight::TestsRunner::MessageLogger {
+	private:
+		gcroot<VSAdapter::MessageLogger^> logger;
+	public:
+		CppMessageLogger(gcroot<VSAdapter::MessageLogger^> messageLogger) {
+			logger = messageLogger;
+		}
+
+		void sendMessage(std::string message) {
+			logger->sendInfo(ConvertTools::CppStringToCliString(message));
+		}
+
+		void sendError(std::string message) {
+			logger->sendError(ConvertTools::CppStringToCliString(message));
+		}
+
+		void sendWarning(std::string message) {
+			logger->sendError(ConvertTools::CppStringToCliString(message));
 		}
 	};
 }

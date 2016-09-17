@@ -22,13 +22,14 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
             discover.DiscoverTests(new string[] { "../1.dll", "../2.dll" }, null, fakeLogger, container);
         }
 
-        private static void assertTestReadAllSources(List<string> usedPath) {
-#if DEBUG
-            var listOfCorrectMessages = new string[]{ "----CppUnitTestAdapter:Started----", "Has: ../1.dll", "Free all loaded libraries", "Has: ../2.dll", "Free all loaded libraries", "Tests found: 0", "----CppUnitTestAdapter:Ended----" };
-#else
-            var listOfCorrectMessages = new string[] { "Tests found: 0", "Has: ../1.dll", "Has: ../2.dll", "----CppUnitTestAdapter:Ended----", "----CppUnitTestAdapter:Started----" };
-#endif
-            CollectionAssert.AreEquivalent(listOfCorrectMessages, usedPath);
+        private static void assertTestReadAllSources(List<string> usedPath){
+            var listOfCorrectMessages = new string[]{
+                                            "----CppUnitTestAdapter:Started----", "DiscoverStarted",
+                                            "Has: <../1.dll> module not supported", "DiscoverEnded", "Loaded tests: 0",
+                                            "DiscoverStarted", "Has: <../2.dll> module not supported", "DiscoverEnded",
+                                            "Loaded tests: 0", "Tests found: 0", "----CppUnitTestAdapter:Ended----"
+                                        };
+            CollectionAssert.AreEqual(listOfCorrectMessages, usedPath);
         }
 
         private static IMessageLogger prepareFakeLoggerForGetMessages(List<string> messages) {

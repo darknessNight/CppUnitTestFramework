@@ -17,10 +17,10 @@ namespace darknessNight {
 			const std::string dllFuncName = "getTestsFromDynamicTestsLibrary";
 			std::shared_ptr<DynamicLibrary> dynamicLibrary = nullptr;
 			std::shared_ptr<Directory> directory = nullptr;
-			MessageLogger* logger=nullptr;
+			std::shared_ptr<MessageLogger> logger=nullptr;
 			int loadedTests = 0;
 		public:
-			TestDiscover(std::shared_ptr<Directory>,std::shared_ptr<DynamicLibrary>, MessageLogger&);
+			TestDiscover(std::shared_ptr<Directory>,std::shared_ptr<DynamicLibrary>, std::shared_ptr<MessageLogger>);
 			virtual ~TestDiscover();
 			virtual void findAll(std::vector<std::string> paths, std::vector<std::string> extensions);
 			virtual void findInFile(std::string path);

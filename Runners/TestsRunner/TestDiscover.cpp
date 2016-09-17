@@ -2,12 +2,12 @@
 #include <CppUnitTestFramework/Version.h>
 #include "ManagedLibraryChecker.h"
 
-darknessNight::TestsRunner::TestDiscover::TestDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, MessageLogger& messageLogger) {
-	if (dir == nullptr || dynLibs == nullptr || &messageLogger == nullptr)
+darknessNight::TestsRunner::TestDiscover::TestDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, std::shared_ptr<MessageLogger> messageLogger) {
+	if (dir == nullptr || dynLibs == nullptr || messageLogger == nullptr)
 		throw std::runtime_error("Null pointer in constructor: " __FILE__);
 	dynamicLibrary = dynLibs;
 	directory = dir;
-	logger = &messageLogger;
+	logger = messageLogger;
 }
 
 darknessNight::TestsRunner::TestDiscover::~TestDiscover() {

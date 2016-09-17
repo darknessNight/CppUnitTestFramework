@@ -3,6 +3,7 @@
 #ifdef _linux
 #define abstract
 #endif
+//#define ADDITIONAL_LOGS
 
 namespace darknessNight {
 	namespace TestsRunner {
