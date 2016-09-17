@@ -19,18 +19,14 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			Assert::AreEqual<std::string>("Test2", reports[1].getTestName());
 		}
 
-		TEST_METHOD(GetReportsSortByTime_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
-			TestReportContainer container;
-			container.addReports({ FakeTestReport("Test1",20),FakeTestReport("Test2",10) });
-			auto reports = container.getReportsSortByTime();
-			Assert::AreEqual<std::string>("Test2", reports[0].getTestName());
-			Assert::AreEqual<std::string>("Test1", reports[1].getTestName());
-		}
-
 		TEST_METHOD(GetReportsGroupByCategory_HasTwoRaports_CheckReturnRaportsInCorrectOrder) {
 			TestReportContainer container;
 			container.addReports({ FakeTestReport("Test1",TestCategory("Cat1.SubCat")),FakeTestReport("Test2",TestCategory("Cat2")) });
 			auto reports = container.getReportsGroupByCategory();
+			assertReturnResultGroupByCategory(reports);
+		}
+
+		void assertReturnResultGroupByCategory(darknessNight::TestsRunner::CategoryContainer &reports) {
 			Assert::AreEqual<std::string>("Test2", reports["Cat2"][0].getTestName());
 			Assert::AreEqual<std::string>("Test1", reports["Cat1"]["SubCat"][0].getTestName());
 		}
@@ -39,7 +35,11 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			TestReportContainer container;
 			container.addReports({ FakeTestReport("Test1",SuccessTestResult()),FakeTestReport("Test2",TestResult(false)),
 			FakeTestReport("Test3", IgnoredTestResult("Ignored"))});
-			auto reports = container.getReportsGroupBySuite();
+			auto reports = container.getReportsGroupByResult();
+			assertReturnResultGroupByResult(reports);
+		}
+
+		void assertReturnResultGroupByResult(std::map<std::string, std::vector<darknessNight::CppUnitTestFramework::TestReport>> &reports) {
 			Assert::AreEqual<std::string>("Test2", reports["Failed"][0].getTestName());
 			Assert::AreEqual<std::string>("Test1", reports["Success"][0].getTestName());
 			Assert::AreEqual<std::string>("Test3", reports["Ignored"][0].getTestName());
@@ -50,6 +50,9 @@ namespace darknessNight {namespace TestsRunner {namespace Tests{
 			container.addReports({ FakeTestReport("Test1",1),FakeTestReport("Test2",11),
 								 FakeTestReport("Test3", 101), FakeTestReport("Test4",250) });
 			auto reports = container.getReportsGroupByDuration({10,100,250});
+			assertReturnResultGroupByDuration(reports);
+		}
+		void assertReturnResultGroupByDuration(std::map<std::string, std::vector<darknessNight::CppUnitTestFramework::TestReport>> &reports) {
 			Assert::AreEqual<std::string>("Test1", reports["<10"][0].getTestName());
 			Assert::AreEqual<std::string>("Test2", reports["<100"][0].getTestName());
 			Assert::AreEqual<std::string>("Test3", reports["<250"][0].getTestName());

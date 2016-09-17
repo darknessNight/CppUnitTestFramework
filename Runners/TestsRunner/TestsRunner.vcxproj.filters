@@ -53,6 +53,12 @@
     <ClCompile Include="ConsoleMessageLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestReportInfoExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestReportContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SharedLibrary.h">
@@ -107,6 +113,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestDiscover.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestReportInfoExtractor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

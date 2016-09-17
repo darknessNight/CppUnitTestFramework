@@ -143,6 +143,8 @@
     <ClCompile Include="SharedLibrary.cpp" />
     <ClCompile Include="TestExecutor.cpp" />
     <ClCompile Include="TestDiscover.cpp" />
+    <ClCompile Include="TestReportContainer.cpp" />
+    <ClCompile Include="TestReportInfoExtractor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleMessageLogger.h" />
@@ -163,6 +165,7 @@
     <ClInclude Include="TestReportCategoryContainer.h" />
     <ClInclude Include="TestReportContainer.h" />
     <ClInclude Include="TestDiscover.h" />
+    <ClInclude Include="TestReportInfoExtractor.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj">
