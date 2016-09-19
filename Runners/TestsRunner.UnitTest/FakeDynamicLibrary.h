@@ -1,6 +1,6 @@
 #pragma once
 #include "../TestsRunner/Filesystem/Directory.h"
-#include "../TestsRunner/SharedLibrary.h"
+#include "../TestsRunner/SharedLibrary/SharedLibrary.h"
 #include <CppUnitTestFramework/TestContainer.h>
 #include <CppUnitTestFramework/Version.h>
 

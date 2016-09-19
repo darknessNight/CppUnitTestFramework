@@ -1,6 +1,6 @@
 #include "TestDiscover.h"
 #include <CppUnitTestFramework/Version.h>
-#include "ManagedLibraryChecker.h"
+#include "SharedLibrary/ManagedLibraryChecker.h"
 
 darknessNight::TestsRunner::TestDiscover::TestDiscover(std::shared_ptr<Directory> dir, std::shared_ptr<DynamicLibrary> dynLibs, std::shared_ptr<MessageLogger> messageLogger) {
 	if (dir == nullptr || dynLibs == nullptr || messageLogger == nullptr)

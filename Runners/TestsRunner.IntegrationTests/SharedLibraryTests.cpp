@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "../TestsRunner/SharedLibrary.h"
+#include "../TestsRunner/SharedLibrary/SharedLibrary.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -19,8 +19,9 @@ public:
 
 	TEST_METHOD(Import_HasCorrectNames_CheckReturnFunc) {
 		try {
-			auto result = DynamicLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "getTestsFromDynamicTestsLibrary");
-			DynamicLibrary::FreeLibrary("TestsRunner.IntegrationTests.dll");
+			DynamicLibrary lib;
+			auto result = lib.importFunction<void*()>("TestsRunner.IntegrationTests.dll", "getTestsFromDynamicTestsLibrary");
+			lib.freeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::IsTrue(result != nullptr);
 		}
 		catch (Exception ex) {
@@ -32,8 +33,9 @@ public:
 
 	TEST_METHOD(Import_HasCorrectLibraryNameAndIncorrectFuncName_CheckThrow) {
 		try {
-			DynamicLibrary::ImportFunction<void*()>("TestsRunner.IntegrationTests.dll", "NoExistsFunc");
-			DynamicLibrary::FreeLibrary("TestsRunner.IntegrationTests.dll");
+			DynamicLibrary lib;
+			lib.importFunction<void*()>("TestsRunner.IntegrationTests.dll", "NoExistsFunc");
+			lib.freeLibrary("TestsRunner.IntegrationTests.dll");
 			Assert::Fail();
 		}
 		catch (FunctionLoadException ex) {
@@ -43,7 +45,8 @@ public:
 
 	TEST_METHOD(Import_HasIncorrectLibraryName_CheckThrow) {
 		try {
-			DynamicLibrary::ImportFunction<void*()>("NoExistsLibrary.dll", "NoExistsFunc");
+			DynamicLibrary lib;
+			lib.importFunction<void*()>("NoExistsLibrary.dll", "NoExistsFunc");
 			Assert::Fail();
 		}
 		catch (LibraryLoadException ex) {
@@ -53,7 +56,8 @@ public:
 
 	TEST_METHOD(FreeLibrary_HasIncorrectLibraryName_CheckNoThrow) {
 		try {
-			DynamicLibrary::FreeLibrary("NoExistsLibrary.dll");
+			DynamicLibrary lib;
+			lib.freeLibrary("NoExistsLibrary.dll");
 		}
 		catch (...) {
 			Assert::Fail();

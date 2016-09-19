@@ -2,7 +2,7 @@
 #include <vector>
 #include <CppUnitTestFramework/TestContainer.h>
 #include "Filesystem/Directory.h"
-#include "SharedLibrary.h"
+#include "SharedLibrary/SharedLibrary.h"
 #include "MessageLogger.h"
 
 using namespace darknessNight::CppUnitTestFramework;

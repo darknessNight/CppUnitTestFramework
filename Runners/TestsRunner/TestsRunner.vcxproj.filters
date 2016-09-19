@@ -15,11 +15,14 @@
     <Filter Include="Header Files\Filesystem">
       <UniqueIdentifier>{dd556539-fd4c-421d-940d-290f8858e2b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SharedLibrary">
+      <UniqueIdentifier>{c7a8c448-c20a-46f6-b3bf-85910986d868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SharedLibrary">
+      <UniqueIdentifier>{2976d12c-5f27-422b-87ab-f8e06577b55c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SharedLibrary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Filesystem\Directory.cpp">
       <Filter>Source Files\Filesystem</Filter>
     </ClCompile>
@@ -44,9 +47,6 @@
     <ClCompile Include="TestExecutor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ManagedLibraryChecker.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TestDiscover.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,14 +59,14 @@
     <ClCompile Include="TestReportContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SharedLibrary\ManagedLibraryChecker.cpp">
+      <Filter>Source Files\SharedLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedLibrary\SharedLibrary.cpp">
+      <Filter>Source Files\SharedLibrary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SharedLibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Exceptions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Filesystem\Directory.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
@@ -103,9 +103,6 @@
     <ClInclude Include="Filesystem\SystemDirIteratorWindows.h">
       <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="ManagedLibraryChecker.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MessageLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -116,6 +113,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestReportInfoExtractor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedLibrary\SharedLibrary.h">
+      <Filter>Header Files\SharedLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedLibrary\ManagedLibraryChecker.h">
+      <Filter>Header Files\SharedLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedLibrary\Exceptions.h">
+      <Filter>Header Files\SharedLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

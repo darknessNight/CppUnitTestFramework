@@ -1,17 +1,12 @@
 #include "SharedLibrary.h"
 
 using namespace darknessNight::SharedLibrary;
-std::unique_ptr<DynamicLibrary> DynamicLibrary::instance = std::unique_ptr<DynamicLibrary>(new DynamicLibrary());
 
 #ifdef _WIN32
 #include <Windows.h>
 
 DynamicLibrary::~DynamicLibrary() {
 	freeAllLibraries();
-}
-
-void DynamicLibrary::FreeLibrary(std::string name) {
-	instance->freeLibrary(name);
 }
 
 void DynamicLibrary::freeLibrary(std::string name) {

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using NSubstitute;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
@@ -23,7 +24,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         }
 
         private static TestCase prepareSampleIgnoredTest() {
-            return new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", TestDiscover.executorUri, IntegrationsPaths.getExampleTestPath());
+            return new TestCase("IgnoredMethod(ExampleProject::Tests::ClassTests)", new Uri("executor://exe"), IntegrationsPaths.getExampleTestPath());
         }
 
         private static IFrameworkHandle prepareFakeFrameworkToGetSendedResults(List<TestResult> results) {
@@ -33,7 +34,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         }
 
         private static void actRunTestsFromTestCaseArray(TestCase testCase, IFrameworkHandle framework){
-            TestsExecutor executor = new TestsExecutor();
+            TestExecutor executor = new TestExecutor();
             executor.RunTests(new[]{testCase}, null, framework);
         }
 
@@ -41,7 +42,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
         public void RunTestFromSources_hasCorrectLibPath_CheckRunTest(){
             List<TestResult> results=new List<TestResult>();
             var framework = prepareFakeFrameworkToGetSendedResults(results);
-            TestsExecutor executor=new TestsExecutor();
+            TestExecutor executor=new TestExecutor();
             executor.RunTests(new[]{ IntegrationsPaths.getExampleTestPath()},null,framework);
             Assert.IsTrue(results.Count>0);
         }
@@ -51,7 +52,7 @@ namespace darknessNight.CppUnitTest.VSAdapter.UnitTests {
             List<string> logs = new List<string>();
             var framework = Substitute.For<IFrameworkHandle>();
             framework.SendMessage(Arg.Any<TestMessageLevel>(), Arg.Do<string>(logs.Add));
-            TestsExecutor executor = new TestsExecutor();
+            TestExecutor executor = new TestExecutor();
             executor.RunTests(new[] { IntegrationsPaths.getExampleTestPath() }, null, framework);
             AssertCreateLogs(logs);
         }
