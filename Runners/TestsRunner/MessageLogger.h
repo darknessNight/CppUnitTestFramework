@@ -1,13 +1,10 @@
 ﻿#pragma once
 #include <string>
-#ifdef _linux
-#define abstract
-#endif
 //#define ADDITIONAL_LOGS
 
 namespace darknessNight {
 	namespace TestsRunner {
-		class MessageLogger abstract {
+		class MessageLogger {
 		public:
 			virtual void sendMessage(std::string) = 0;
 			virtual void sendError(std::string) = 0;
