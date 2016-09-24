@@ -17,6 +17,8 @@ namespace darknessNight { namespace TextParser {
 		void setMaxUnnamedArgs(int count);
 		std::vector<std::string> getUnnamedValues();
 	protected:
+		Argument& setUnnamedArgIfCan(std::string argName);
+		Argument& getStardardArgument(std::string& argName, int usedPrefix);
 		bool setUnnamedArg(std::string argName);
 		Argument& getUnnamedArgument();
 		Argument& getArgument(std::string argName) override;

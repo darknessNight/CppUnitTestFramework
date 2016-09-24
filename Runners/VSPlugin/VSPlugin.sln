@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
@@ -17,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CppUnitTestAdapterVSIX", "C
 		{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42} = {9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestsRunner", "..\TestsRunner\TestsRunner.vcxproj", "{B74EE55C-4CD9-4B2E-9B9A-54C7A3D7EB76}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestsRunner", "..\TestRunnerLibrary\TestsRunner\TestsRunner.vcxproj", "{B74EE55C-4CD9-4B2E-9B9A-54C7A3D7EB76}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppUnitTestFramework", "..\..\CppUnitTest\CppUnitTestFramework\CppUnitTestsFramework.vcxproj", "{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}"
 EndProject
@@ -26,6 +25,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CppUnitTestFrameworkAdapter.UnitTests", "CppUnitTestFrameworkAdapter.UnitTests\CppUnitTestFrameworkAdapter.UnitTests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF} = {0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}
+		{B74EE55C-4CD9-4B2E-9B9A-54C7A3D7EB76} = {B74EE55C-4CD9-4B2E-9B9A-54C7A3D7EB76}
+		{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42} = {9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}
 	EndProjectSection
 EndProject
 Global

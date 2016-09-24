@@ -12,7 +12,7 @@ using namespace ObjectModel::Logging;
 
 namespace darknessNight::CppUnitTest::VSAdapter {
 	[ExtensionUri(gcnew String("executor://darknessNight_CppUnitTestExecutor/v1"))]
-	public ref class TestsExecutor : public ITestExecutor {
+	public ref class TestExecutor : public ITestExecutor {
 	public:
 		static Uri^ myUri = gcnew Uri(gcnew String("executor://darknessNight_CppUnitTestExecutor/v1"));
 	private:

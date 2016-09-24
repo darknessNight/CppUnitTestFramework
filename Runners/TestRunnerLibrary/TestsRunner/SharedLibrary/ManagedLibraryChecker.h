@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
-#ifdef _WIN32
+
+#ifdef _MSCV
 #pragma warning( push )
 #pragma warning( disable : 4091)
 #include <windows.h>
 #include <tchar.h>
 #include <winnt.h>
-#include <cor.h>
 #pragma warning( pop ) 
 #endif
 namespace darknessNight {
@@ -14,7 +14,7 @@ namespace darknessNight {
 		class ManagedLibraryChecker {
 		public:
 			static bool isManagedLib(std::string path);
-#ifdef _WIN32
+#ifdef _MSCV
 		private:
 			static DWORD GetActualAddressFromRVA(IMAGE_SECTION_HEADER* pSectionHeader, IMAGE_NT_HEADERS* pNTHeaders, DWORD dwRVA);
 			static BOOL IsManaged(LPTSTR lpszImageName);

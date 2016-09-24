@@ -19,7 +19,7 @@ ObjectModel::TestCase ^ TestReportConverter::setTestCaseAdditionalData(ObjectMod
 
 ObjectModel::TestCase ^ TestReportConverter::getVSTestCaseWithBasicData(darknessNight::CppUnitTestFramework::TestReport & report, System::String ^ source) {
 	auto fullName = report.getSuiteName() + "::" + report.getTestName();
-	auto testCase = gcnew ObjectModel::TestCase(ConvertTools::CppStringToCliString(fullName), TestsExecutor::myUri, source);
+	auto testCase = gcnew ObjectModel::TestCase(ConvertTools::CppStringToCliString(fullName), TestExecutor::myUri, source);
 	testCase->SetPropertyValue(ObjectModel::TestResultProperties::Outcome, TestOutcome::None);
 	return testCase;
 }

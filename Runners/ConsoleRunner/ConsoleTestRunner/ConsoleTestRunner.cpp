@@ -3,10 +3,10 @@
 
 #include "stdafx.h"
 #include <iostream>
-#include "../TestsRunner/TestDiscover.h"
-#include "../TestsRunner/TestExecutor.h"
+#include <TestsRunner/TestDiscover.h>
+#include <TestsRunner/TestExecutor.h>
 #include "ConsoleTestRunner.h"
-#include "../TestsRunner/ConsoleMessageLogger.h"
+#include <TestsRunner/ConsoleMessageLogger.h>
 
 using namespace darknessNight::TestsRunner;
 using namespace darknessNight::Filesystem;

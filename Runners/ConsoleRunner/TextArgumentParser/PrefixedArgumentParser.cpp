@@ -29,17 +29,25 @@ std::vector<std::string> darknessNight::TextParser::PrefixedArgumentParser::getU
 	return unnamedArgs;
 }
 
+darknessNight::TextParser::Argument& darknessNight::TextParser::PrefixedArgumentParser::setUnnamedArgIfCan(std::string argName) {
+	if(setUnnamedArg(argName))
+		return getUnnamedArgument();
+	else
+		return getEmptyArgument();
+}
+
 darknessNight::TextParser::Argument& darknessNight::TextParser::PrefixedArgumentParser::getArgument(std::string argName) {
 	auto usedPrefix = StringTools::beginWith(argName, argsPrefixes);
 	if(usedPrefix >= 0) {
-		argName = StringTools::trimStringAtBegin(argName, argsPrefixes[usedPrefix]);
-		return ArgumentParser::getArgument(argName);
+		return getStardardArgument(argName, usedPrefix);
 	} else {
-		if(setUnnamedArg(argName))
-			return getUnnamedArgument();
-		else
-			return getEmptyArgument();
+		return setUnnamedArgIfCan(argName);
 	}
+}
+
+darknessNight::TextParser::Argument& darknessNight::TextParser::PrefixedArgumentParser::getStardardArgument(std::string& argName, int usedPrefix) {
+	argName = StringTools::trimStringAtBegin(argName, argsPrefixes[usedPrefix]);
+	return ArgumentParser::getArgument(argName);
 }
 
 void darknessNight::TextParser::PrefixedArgumentParser::checkHasAllRequiredArgs() {

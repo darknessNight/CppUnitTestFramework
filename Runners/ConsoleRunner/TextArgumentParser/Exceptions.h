@@ -14,7 +14,7 @@ namespace darknessNight { namespace TextParser {
 			message = mess;
 		}
 
-		char const* what() const override {
+		char const* what() const noexcept(true) override {
 			return message.c_str();
 		}
 	};
@@ -29,7 +29,7 @@ namespace darknessNight { namespace TextParser {
 			message = "Detected unexpected argument: \"" + argName + "\"";
 		}
 
-		const char* what() {
+		const char* what() const noexcept(true) override{
 			return message.c_str();
 		}
 

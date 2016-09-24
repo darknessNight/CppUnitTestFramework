@@ -11,7 +11,7 @@ namespace darknessNight {
 				message = mess;
 			}
 
-			const char* what() const override {
+			const char* what() const noexcept(true) override{
 				return message.c_str();
 			}
 

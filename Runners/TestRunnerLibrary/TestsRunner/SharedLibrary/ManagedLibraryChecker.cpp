@@ -1,9 +1,16 @@
 #include "ManagedLibraryChecker.h"
+#ifdef _MSCV
+#include <cor.h>
+#endif
+#ifndef min
+#define min(a,b) ((a)<(b)?(a):(b))
+#define max(a,b) ((a)>(b)?(a):(b))
+#endif
 
 using namespace darknessNight::TestsRunner;
 
 bool ManagedLibraryChecker::isManagedLib(std::string path) {
-#ifdef _WIN32
+#ifdef _MSCV
 #if UNICODE
 	std::wstring wPath;
 	for (char c : path)
@@ -17,7 +24,7 @@ bool ManagedLibraryChecker::isManagedLib(std::string path) {
 #endif
 }
 
-#ifdef _WIN32
+#ifdef _MSCV
 
 DWORD ManagedLibraryChecker::GetActualAddressFromRVA(IMAGE_SECTION_HEADER* pSectionHeader, IMAGE_NT_HEADERS* pNTHeaders, DWORD dwRVA) {
 	DWORD dwRet = 0;
