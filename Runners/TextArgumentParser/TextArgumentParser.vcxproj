@@ -134,10 +134,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Argument.h" />
+    <ClInclude Include="ArgumentInfo.h" />
     <ClInclude Include="ArgumentParser.h" />
+    <ClInclude Include="ArgumentRegister.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="PrefixedArgumentParser.h" />
+    <ClInclude Include="StringTools.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArgumentParser.cpp" />
+    <ClCompile Include="ArgumentRegister.cpp" />
+    <ClCompile Include="PrefixedArgumentParser.cpp" />
+    <ClCompile Include="StringTools.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

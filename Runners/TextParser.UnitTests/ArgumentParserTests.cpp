@@ -2,6 +2,7 @@
 #include <functional>
 #include "CppUnitTest.h"
 #include "../TextArgumentParser/ArgumentParser.h"
+#include "../TextArgumentParser/PrefixedArgumentParser.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -19,17 +20,17 @@ namespace Microsoft { namespace VisualStudio { namespace CppUnitTestFramework {
 
 namespace darknessNight { namespace TextParser { namespace UnitTests {
 	TEST_CLASS(ArgumentParserTests) {
-		const char* sampleParamName = "StartParam";
-		const char* notUsedParamName = "ClearParam";
-		const char* unexpectedParamName = "UnexpectedParam";
+		const std::string sampleParamName = "StartParam";
+		const std::string notUsedParamName = "ClearParam";
+		const std::string unexpectedParamName = "UnexpectedParam";
 	public:
 		TEST_METHOD(Parse_HasOneNameOnlyExpectedParam_CheckCorrectDetectArg) {
-			auto parser = prepareParserWithSampleNameOnlyArg();
+			auto parser = prepareParserWithNameOnlyArg();
 			parser.parse({sampleParamName});
 			assertDetectArgument(parser);
 		}
 
-		darknessNight::TextParser::ArgumentParser prepareParserWithSampleNameOnlyArg() {
+		darknessNight::TextParser::ArgumentParser prepareParserWithNameOnlyArg() {
 			ArgumentParser parser;
 			parser.registerArgument(sampleParamName).asNameOnly();
 			return parser;
@@ -50,7 +51,7 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 		}
 
 		ArgumentParser prepareParserForCheckNotChangedOtherArg() {
-			auto parser = prepareParserWithSampleNameOnlyArg();
+			auto parser = prepareParserWithNameOnlyArg();
 			parser.registerArgument(notUsedParamName).asNameOnly();
 			return parser;
 		}
@@ -123,7 +124,7 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 		}
 
 		TEST_METHOD(Parse_HasNameOnlyUnexpectedArg_CheckNoThrow) {
-			auto parser = prepareParserWithSampleNameOnlyArg();
+			auto parser = prepareParserWithNameOnlyArg();
 			assertNotThrow([&]() {
 				               parser.parse({unexpectedParamName});
 			               });
@@ -224,7 +225,7 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 		TEST_METHOD(Parse_SettedRequiredArgAndHasThisArg_CheckNoThrow) {
 			ArgumentParser parser;
 			parser.registerArgument(sampleParamName).asNameOnly().isRequired(true);
-			parser.registerArgument(sampleParamName + std::string("2")).asNameOnly().isRequired(false);
+			parser.registerArgument(sampleParamName + "2").asNameOnly().isRequired(false);
 			assertNotThrow([&]() {
 				               parser.parse({sampleParamName});
 			               });
@@ -233,18 +234,51 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 		TEST_METHOD(Parse_SettedRequiredArgAndHasNotThisArg_CheckThrow) {
 			ArgumentParser parser;
 			parser.registerArgument(sampleParamName).asNameOnly().isRequired(true);
-			parser.registerArgument(sampleParamName + std::string("2")).asNameOnly().isRequired(true);
+			parser.registerArgument(sampleParamName + "2").asNameOnly().isRequired(true);
 			assertThrow<IncompleteArgsCollectionException>([&]() {
-				               parser.parse({sampleParamName + std::string("2")});
+				               parser.parse({sampleParamName + "2"});
 			               });
 		}
 
-		TEST_METHOD(Parse_SettedDefaultValArgAndNoUseVal_CheckHasDefValue) {
+		TEST_METHOD(Parse_SettedDefaultValArgAndHasOtherArg_CheckHasDefValue) {
 			ArgumentParser parser;
 			parser.registerArgument(sampleParamName).asNameOnly().withDefaultValue("DefVal");
 			parser.parse({ unexpectedParamName });
 			Assert::IsFalse(parser.getArgumentInfo(sampleParamName).isUsed());
 			Assert::AreEqual<std::string>("DefVal", parser.getArgumentInfo(sampleParamName).getValue<std::string>());
+		}
+
+		TEST_METHOD(Parser_SettedArgPrefixHasPrefixedArg_CheckDetected) {
+			PrefixedArgumentParser parser(prepareParserWithNameOnlyArg(),{"-","--"});
+			parser.parse({ "-" + sampleParamName });
+			assertDetectArgument(parser);
+		}
+
+		TEST_METHOD(Parser_SettedArgPrefixAndHasNoPrefixArg_CheckNoDetect){
+			PrefixedArgumentParser parser(prepareParserWithNameOnlyArg(), { "-","--" });
+			parser.parse({ sampleParamName });
+			Assert::IsFalse(parser.getArgumentInfo(sampleParamName).isUsed());
+		}
+
+		TEST_METHOD(Parser_SettedOneUnnamedArgValueAndHasUnnamedArgValue_CheckDetect) {
+			PrefixedArgumentParser parser({ "-","--" });
+			parser.setRequiredUnnamedValues(1);
+			parser.parse({ sampleParamName });
+			Assert::AreEqual<unsigned>(1,parser.getUnnamedValues().size());
+			Assert::AreEqual<std::string>(sampleParamName, parser.getUnnamedValues()[0]);
+		}
+
+		TEST_METHOD(Parser_SettedOneUnnamedArgAndThrowOnUnexpectedAndHasOneUnnamedArgs_CheckNoThrow) {
+			PrefixedArgumentParser parser({ "-","--" });
+			parser.setThrowOnUnexpectedArg(true);
+			parser.setMaxUnnamedArgs(1);
+			assertNotThrow([&]() {parser.parse({sampleParamName}); });
+		}
+
+		TEST_METHOD(Parser_SettedTwoRequiredUnnamedArgValueAndHasOne_CheckThrow) {
+			PrefixedArgumentParser parser({ "-","--" });
+			parser.setRequiredUnnamedValues(2);
+			assertThrow<IncompleteArgsCollectionException>([&]() {parser.parse({ sampleParamName }); });
 		}
 	};
 }}}

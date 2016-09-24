@@ -30,14 +30,14 @@ void darknessNight::TextParser::ArgumentParser::parseArg() {
 
 std::array<std::string, 2> darknessNight::TextParser::ArgumentParser::getSplittedArg(std::string arg) {
 	auto stringArray = StringTools::splitOnFirst(arg, valueDelimiter);
-	for(auto i = 0; i < stringArray.size(); i++)
+	for(unsigned i = 0; i < stringArray.size(); i++)
 		stringArray[i] = StringTools::trimWhitespace(stringArray[i]);
 	return stringArray;
 }
 
 void darknessNight::TextParser::ArgumentParser::setArgumentValuesIfCorrect(std::array<std::string, 2> stringArray, Argument& argument) {
 	if(argument.isCorrect()) {
-		emptyArgumentAndSetAsUsed(argument);
+		clearArgumentAndSetAsUsed(argument);
 		setArgumentValueFromIterator(stringArray[valueIndex], argument);
 	} else
 		doUncorrectArgAction(stringArray[nameIndex]);
@@ -49,7 +49,7 @@ void darknessNight::TextParser::ArgumentParser::doUncorrectArgAction(std::string
 		throw UnexpectedArgumentException(argName);
 }
 
-void darknessNight::TextParser::ArgumentParser::emptyArgumentAndSetAsUsed(Argument& argument) {
+void darknessNight::TextParser::ArgumentParser::clearArgumentAndSetAsUsed(Argument& argument) {
 	argument.clearInfo();
 	argument.used = true;
 }
@@ -101,7 +101,7 @@ std::vector<std::string> darknessNight::TextParser::ArgumentParser::getSplittedA
 }
 
 std::vector<std::string> darknessNight::TextParser::ArgumentParser::cleanArrayValues(std::vector<std::string> arrayValues) {
-	for(auto i = 0; i < arrayValues.size(); i++)
+	for(unsigned i = 0; i < arrayValues.size(); i++)
 		arrayValues[i] = StringTools::trimWhitespace(arrayValues[i]);
 	return arrayValues;
 }
@@ -117,23 +117,41 @@ darknessNight::TextParser::ArgumentRegister& darknessNight::TextParser::Argument
 }
 
 darknessNight::TextParser::ArgumentInfo& darknessNight::TextParser::ArgumentParser::getArgumentInfo(std::string argName) noexcept(true) {
-	return getArgument(argName);
+	return ArgumentParser::getArgument(argName);
 }
 
 darknessNight::TextParser::Argument& darknessNight::TextParser::ArgumentParser::getArgument(std::string argName) {
 	auto elementIter = argumentList.find(argName);
 	if (elementIter != argumentList.end()) {
-		elementIter->second->setDefaultValueIfNeeded();
-		return *elementIter->second;
-	}
-	else
+		return prepareAndReturnArgument(*elementIter->second);
+	} else
 		return getEmptyArgument();
 }
 
-void darknessNight::TextParser::ArgumentParser::setThrowOnUnexpectedArg(bool throws) {
+darknessNight::TextParser::Argument& darknessNight::TextParser::ArgumentParser::prepareAndReturnArgument(Argument& arg) {
+	arg.setDefaultValueIfNeeded();
+	return arg;
+}
+
+void darknessNight::TextParser::ArgumentParser::setThrowOnUnexpectedArg(bool throws) noexcept(true) {
 	throwExceptionOnUnexpected = throws;
 }
 
-void darknessNight::TextParser::ArgumentParser::setLoggerFunc(std::function<void(std::string)> loggerFunc) {
+void darknessNight::TextParser::ArgumentParser::setLoggerFunc(std::function<void(std::string)> loggerFunc) noexcept(true) {
 	logger = loggerFunc;
+}
+
+std::map<std::string, std::shared_ptr<const darknessNight::TextParser::ArgumentInfo>> darknessNight::TextParser::ArgumentParser::getArgumentList() noexcept(true) {
+	std::map<std::string, std::shared_ptr<const ArgumentInfo>> ret;
+	for(auto el : argumentList)
+		ret.insert_or_assign(el.first, el.second);
+	return ret;
+}
+
+darknessNight::TextParser::ArgumentParser& darknessNight::TextParser::ArgumentParser::operator=(const ArgumentParser& other) noexcept(true) {
+	logger = other.logger;
+	for (auto el : other.argumentList)
+		argumentList.insert_or_assign(el.first, std::make_shared<Argument>(*el.second));
+	throwExceptionOnUnexpected = other.throwExceptionOnUnexpected;
+	return *this;
 }
