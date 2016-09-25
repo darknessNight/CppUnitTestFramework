@@ -53,7 +53,7 @@ std::vector<Entry> Directory::searchElements(std::string pattern) {
 
 Directory::Directory(std::string path):Entry(path) {
 	if(!isDir())
-		throw FilesystemException("Path is not directory");
+		throw FilesystemException("Path <"+path+"> is not directory");
 }
 
 Directory Directory::Current() {

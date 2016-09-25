@@ -16,8 +16,8 @@ namespace darknessNight {
 			void freeAllLibraries();
 		protected:
 			virtual void* getFunction(std::string &libraryPath, std::string &functionName);
-			void* getFunctionFromModule(void* module, std::string &functionName);
-			void throwIfNotLoadedFunction(void * func, std::string & functionName);
+			void* getFunctionFromModule(void* module, std::string &functionName, std::string & libraryPath);
+			void throwIfNotLoadedFunction(void * func, std::string & functionName, std::string & libraryPath);
 			void* getModuleAndLoadIfNeeded(std::string &libraryPath);
 			bool moduleExists(std::string & libraryPath);
 			void* loadModule(std::string &libraryPath);

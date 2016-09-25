@@ -34,6 +34,7 @@ namespace darknessNight { namespace TextParser {
 		void doUncorrectArgAction(std::string argName) noexcept(false);
 
 		virtual void parseArg() noexcept(false);
+		void safeIncrementIterator();
 		std::vector<std::string>::iterator incrementIterator();
 		virtual Argument& getArgument(std::string argName);
 		void setArgumentValuesIfCorrect(std::array<std::string, 2> stringArray, Argument& argument);

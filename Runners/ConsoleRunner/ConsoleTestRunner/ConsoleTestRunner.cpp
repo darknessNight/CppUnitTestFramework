@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "TestRunnerApplication.h"
+#include <ConsoleTestRunnerLibrary/TestRunnerApplication.h>
 
 int main(int argc, const char* argv[]) {
 	darknessNight::ConsoleTestRunner::TestRunnerApplication app;

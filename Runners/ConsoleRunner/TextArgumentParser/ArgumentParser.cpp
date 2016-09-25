@@ -1,16 +1,20 @@
 ﻿#include "ArgumentParser.h"
 
+void darknessNight::TextParser::ArgumentParser::safeIncrementIterator() {
+	if(iterator!=iteratorEnd)
+		iterator++;
+}
+
 std::vector<std::string>::iterator darknessNight::TextParser::ArgumentParser::incrementIterator() {
-	iterator++;
-	if(iterator < iteratorEnd && isAssignOperator(*iterator)) {
-		iterator++;
-		iterator++;
+	safeIncrementIterator();
+	if(iterator != iteratorEnd && isAssignOperator(*iterator)) {
+		safeIncrementIterator(); safeIncrementIterator();
 	}
 	return iterator;
 }
 
 void darknessNight::TextParser::ArgumentParser::parse(std::vector<std::string> argsList) {
-	for(iterator = argsList.begin() , iteratorEnd = argsList.end(); iterator < iteratorEnd; incrementIterator()) {
+	for(iterator = argsList.begin() , iteratorEnd = argsList.end(); iterator != iteratorEnd; incrementIterator()) {
 		parseArg();
 	}
 	checkHasAllRequiredArgs();
@@ -81,11 +85,11 @@ std::string darknessNight::TextParser::ArgumentParser::getArgValueFromIterator(s
 }
 
 std::string darknessNight::TextParser::ArgumentParser::getNextCorrectValue() {
-	iterator++;
-	if(iterator >= iteratorEnd)
+	safeIncrementIterator();
+	if(iterator == iteratorEnd)
 		return "";
 	if(isAssignOperator(*iterator))
-		iterator++;
+		safeIncrementIterator();
 	return *iterator;
 }
 
@@ -122,7 +126,7 @@ darknessNight::TextParser::ArgumentInfo& darknessNight::TextParser::ArgumentPars
 
 darknessNight::TextParser::Argument& darknessNight::TextParser::ArgumentParser::getArgument(std::string argName) {
 	auto elementIter = argumentList.find(argName);
-	if (elementIter != argumentList.end()) {
+	if(elementIter != argumentList.end()) {
 		return prepareAndReturnArgument(*elementIter->second);
 	} else
 		return getEmptyArgument();
@@ -150,7 +154,7 @@ std::map<std::string, std::shared_ptr<const darknessNight::TextParser::ArgumentI
 
 darknessNight::TextParser::ArgumentParser& darknessNight::TextParser::ArgumentParser::operator=(const ArgumentParser& other) noexcept(true) {
 	logger = other.logger;
-	for (auto el : other.argumentList)
+	for(auto el : other.argumentList)
 		argumentList.insert_or_assign(el.first, std::make_shared<Argument>(*el.second));
 	throwExceptionOnUnexpected = other.throwExceptionOnUnexpected;
 	return *this;

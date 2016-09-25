@@ -42,7 +42,7 @@ namespace darknessNight {
 
 		class IgnoredTestResult :public TestResult {
 		public:
-			IgnoredTestResult(std::string ignoredCause) :TestResult(false) {
+			IgnoredTestResult(std::string ignoredCause) :TestResult(true) {
 				errorCause = "Ignored";
 				errorMessage = ignoredCause;
 			}

@@ -20,7 +20,7 @@ void darknessNight::Filesystem::Entry::getInfoOrThrowIfNotExists(std::string &pa
 void darknessNight::Filesystem::Entry::getInfoStruct(struct stat &fileInfo, std::string & path) {
 	memset(&fileInfo, 0, sizeof(fileInfo));
 	if (stat(path.c_str(), &fileInfo) != 0)
-		throw FilesystemException("Path is not exists");
+		throw FilesystemException("Path <"+path+"> is not exists");
 }
 
 std::string darknessNight::Filesystem::Entry::getPath() const {

@@ -2,7 +2,7 @@
 #include <iostream>
 
 void darknessNight::TestsRunner::ConsoleMessageLogger::sendMessage(std::string message) {
-	std::cout << "Info: " << message << "\n";
+	std::clog << "Info: " << message << "\n";
 }
 
 void darknessNight::TestsRunner::ConsoleMessageLogger::sendError(std::string message) {
@@ -10,5 +10,5 @@ void darknessNight::TestsRunner::ConsoleMessageLogger::sendError(std::string mes
 }
 
 void darknessNight::TestsRunner::ConsoleMessageLogger::sendWarning(std::string message) {
-	std::cout << "Warning: " << message << "\n";
+	std::clog << "Warning: " << message << "\n";
 }

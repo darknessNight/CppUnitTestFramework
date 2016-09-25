@@ -56,9 +56,9 @@ void* darknessNight::SharedLibrary::DynamicLibrary::loadModuleSystemFunc(std::st
 }
 #endif
 
-void * DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName) {
+void * DynamicLibrary::getFunctionFromModule(void * module, std::string & functionName, std::string &libraryPath) {
 	auto func = getFunctionSystemFunc(module, functionName);
-	throwIfNotLoadedFunction(func, functionName);
+	throwIfNotLoadedFunction(func, functionName,libraryPath);
 	return func;
 }
 
@@ -73,9 +73,9 @@ bool DynamicLibrary::moduleExists(std::string & libraryPath) {
 	return modules.find(libraryPath) != modules.end();
 }
 
-void DynamicLibrary::throwIfNotLoadedFunction(void * func, std::string & functionName) {
+void DynamicLibrary::throwIfNotLoadedFunction(void * func, std::string & functionName, std::string &libraryPath) {
 	if (func == nullptr)
-		throw FunctionLoadException("Not found function: " + functionName);
+		throw FunctionLoadException("Not found function: " + functionName+ " in library: "+libraryPath);
 }
 
 void DynamicLibrary::throwIfNotLoadedLibrary(void* module, std::string & libraryPath) {
@@ -92,5 +92,5 @@ void* DynamicLibrary::getModuleAndLoadIfNeeded(std::string &libraryPath) {
 
 void * DynamicLibrary::getFunction(std::string & libraryPath, std::string & functionName) {
 	void* module = getModuleAndLoadIfNeeded(libraryPath);
-	return getFunctionFromModule(module, functionName);
+	return getFunctionFromModule(module, functionName, libraryPath);
 }
