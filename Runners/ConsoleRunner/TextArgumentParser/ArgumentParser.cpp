@@ -1,6 +1,6 @@
 ﻿#include "ArgumentParser.h"
 
-std::initializer_list<std::string>::iterator darknessNight::TextParser::ArgumentParser::incrementIterator() {
+std::vector<std::string>::iterator darknessNight::TextParser::ArgumentParser::incrementIterator() {
 	iterator++;
 	if(iterator < iteratorEnd && isAssignOperator(*iterator)) {
 		iterator++;
@@ -9,7 +9,7 @@ std::initializer_list<std::string>::iterator darknessNight::TextParser::Argument
 	return iterator;
 }
 
-void darknessNight::TextParser::ArgumentParser::parse(std::initializer_list<std::string> argsList) {
+void darknessNight::TextParser::ArgumentParser::parse(std::vector<std::string> argsList) {
 	for(iterator = argsList.begin() , iteratorEnd = argsList.end(); iterator < iteratorEnd; incrementIterator()) {
 		parseArg();
 	}

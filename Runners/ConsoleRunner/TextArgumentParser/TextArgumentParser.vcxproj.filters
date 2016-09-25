@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="ArgumentParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -53,5 +50,8 @@
     <ClCompile Include="PrefixedArgumentParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

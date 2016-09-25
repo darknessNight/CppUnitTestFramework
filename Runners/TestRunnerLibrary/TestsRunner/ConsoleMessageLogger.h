@@ -10,5 +10,12 @@ namespace darknessNight {
 			virtual void sendError(std::string) override;
 			virtual void sendWarning(std::string) override;
 		};
+
+		class QuietMessageLogger :public MessageLogger {
+		public:
+			virtual void sendMessage(std::string) override{}
+			virtual void sendError(std::string) override{}
+			virtual void sendWarning(std::string) override{}
+		};
 	}
 }

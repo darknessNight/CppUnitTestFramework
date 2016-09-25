@@ -16,14 +16,14 @@ namespace darknessNight { namespace TextParser {
 				valueIndex = 1;
 
 		std::map<std::string, std::shared_ptr<Argument>> argumentList;
-		std::initializer_list<std::string>::iterator iterator;
-		std::initializer_list<std::string>::iterator iteratorEnd;
+		std::vector<std::string>::iterator iterator;
+		std::vector<std::string>::iterator iteratorEnd;
 		bool throwExceptionOnUnexpected=false;
 		std::function<void(std::string)> logger=[](std::string){};
 	public:
 		ArgumentRegister& registerArgument(std::string argName) noexcept(true);
 		ArgumentInfo& getArgumentInfo(std::string argName) noexcept(true);
-		void parse(std::initializer_list<std::string> argsList)noexcept(false);
+		void parse(std::vector<std::string> argsList)noexcept(false);
 		std::map<std::string, std::shared_ptr<const ArgumentInfo>> getArgumentList() noexcept(true);
 		ArgumentParser& operator=(const ArgumentParser& other) noexcept(true);
 
@@ -34,7 +34,7 @@ namespace darknessNight { namespace TextParser {
 		void doUncorrectArgAction(std::string argName) noexcept(false);
 
 		virtual void parseArg() noexcept(false);
-		std::initializer_list<std::string>::iterator incrementIterator();
+		std::vector<std::string>::iterator incrementIterator();
 		virtual Argument& getArgument(std::string argName);
 		void setArgumentValuesIfCorrect(std::array<std::string, 2> stringArray, Argument& argument);
 		static Argument& getEmptyArgument();

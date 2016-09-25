@@ -13,7 +13,7 @@ namespace darknessNight { namespace TextParser {
 		PrefixedArgumentParser(std::initializer_list<std::string> prefixes);
 		PrefixedArgumentParser(const ArgumentParser&, std::initializer_list<std::string> prefixes);
 		void setArgPrefix(std::initializer_list<std::string> prefixes);
-		void setRequiredUnnamedValues(int count);
+		void setRequiredUnnamedArgs(int count);
 		void setMaxUnnamedArgs(int count);
 		std::vector<std::string> getUnnamedValues();
 	protected:

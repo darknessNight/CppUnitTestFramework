@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConsoleTestRunner", "ConsoleTestRunner\ConsoleTestRunner.vcxproj", "{45A3D9F8-885B-4564-BF62-7B65C6F4C9E6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0F0A2E59-7962-4E32-B0BC-955CAE7A30CF} = {0F0A2E59-7962-4E32-B0BC-955CAE7A30CF}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextArgumentParser", "TextArgumentParser\TextArgumentParser.vcxproj", "{34D2E3C8-2D76-4A9E-8B8B-79AF51A11731}"
 EndProject

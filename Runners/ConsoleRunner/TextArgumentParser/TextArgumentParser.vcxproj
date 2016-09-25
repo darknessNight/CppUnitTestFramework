@@ -131,9 +131,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Argument.h" />
     <ClInclude Include="ArgumentInfo.h" />
     <ClInclude Include="ArgumentParser.h" />
@@ -147,6 +144,9 @@
     <ClCompile Include="ArgumentRegister.cpp" />
     <ClCompile Include="PrefixedArgumentParser.cpp" />
     <ClCompile Include="StringTools.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -88,7 +88,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,7 +102,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,7 +118,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,7 +136,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../;../../../CppUnitTest;../../TestRunnerLibrary</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TestRunnerApplication.h" />
     <ClInclude Include="ConsoleTestRunner.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -161,6 +162,12 @@
     <ProjectReference Include="..\..\TestRunnerLibrary\TestsRunner\TestsRunner.vcxproj">
       <Project>{b74ee55c-4cd9-4b2e-9b9a-54c7a3d7eb76}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\TextArgumentParser\TextArgumentParser.vcxproj">
+      <Project>{34d2e3c8-2d76-4a9e-8b8b-79af51a11731}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

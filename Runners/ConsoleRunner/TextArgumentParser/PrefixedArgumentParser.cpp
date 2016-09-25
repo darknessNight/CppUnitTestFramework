@@ -13,7 +13,7 @@ void darknessNight::TextParser::PrefixedArgumentParser::setArgPrefix(std::initia
 	argsPrefixes = prefixes;
 }
 
-void darknessNight::TextParser::PrefixedArgumentParser::setRequiredUnnamedValues(int count) {
+void darknessNight::TextParser::PrefixedArgumentParser::setRequiredUnnamedArgs(int count) {
 	minUnnamedArgs = count;
 	if(maxUnnamedArgs < minUnnamedArgs)
 		maxUnnamedArgs = minUnnamedArgs;

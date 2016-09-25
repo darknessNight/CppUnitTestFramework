@@ -15,7 +15,7 @@ std::string darknessNight::TestsRunner::TestReportInfoExtract::getDurationGroupI
 	return getGroupIndexString(overGroup, group);
 }
 
-bool darknessNight::TestsRunner::TestReportInfoExtract::findDurationGroup(int & group, long long & time, std::initializer_list<int>& groupsList) {
+bool darknessNight::TestsRunner::TestReportInfoExtract::findDurationGroup(int group, long long time, std::initializer_list<int>& groupsList) {
 	for (auto it = groupsList.begin(); it != groupsList.end(); it++) {
 		group = *it;
 		if (time < group) {
@@ -25,7 +25,7 @@ bool darknessNight::TestsRunner::TestReportInfoExtract::findDurationGroup(int & 
 	return false;
 }
 
-std::string darknessNight::TestsRunner::TestReportInfoExtract::getGroupIndexString(bool overGroup, int & group) {
+std::string darknessNight::TestsRunner::TestReportInfoExtract::getGroupIndexString(bool overGroup, int group) {
 	if (overGroup)
 		return "<" + std::to_string(group);
 	else

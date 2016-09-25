@@ -262,7 +262,7 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 
 		TEST_METHOD(Parser_SettedOneUnnamedArgValueAndHasUnnamedArgValue_CheckDetect) {
 			PrefixedArgumentParser parser({ "-","--" });
-			parser.setRequiredUnnamedValues(1);
+			parser.setRequiredUnnamedArgs(1);
 			parser.parse({ sampleParamName });
 			Assert::AreEqual<unsigned>(1,parser.getUnnamedValues().size());
 			Assert::AreEqual<std::string>(sampleParamName, parser.getUnnamedValues()[0]);
@@ -277,7 +277,7 @@ namespace darknessNight { namespace TextParser { namespace UnitTests {
 
 		TEST_METHOD(Parser_SettedTwoRequiredUnnamedArgValueAndHasOne_CheckThrow) {
 			PrefixedArgumentParser parser({ "-","--" });
-			parser.setRequiredUnnamedValues(2);
+			parser.setRequiredUnnamedArgs(2);
 			assertThrow<IncompleteArgsCollectionException>([&]() {parser.parse({ sampleParamName }); });
 		}
 	};
