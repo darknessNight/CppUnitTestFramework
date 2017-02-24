@@ -1,0 +1,40 @@
+sudo: required
+dist: trusty
+
+language: cpp
+
+compiler:
+
+
+before_script:
+  - mkdir build
+  - cd build
+  - cmake ..
+install:
+  - if [ "$CXX" == "clang++" ]; then export CXXFLAGS="-std=c++14 -stdlib=libstdc++"; fi
+  - if [ "$CXX" == "g++" ]; then export CXXFLAGS="-std=c++1y"; fi
+
+script: make
+
+addons:
+  apt:
+    sources:
+    # add PPAs with more up-to-date toolchains
+    - ubuntu-toolchain-r-test
+    - llvm-toolchain-precise-3.8
+    packages:
+    # install toolchains
+    - gcc-5
+    - g++-5
+    - clang-3.8
+
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      env: COMPILER=g++-5

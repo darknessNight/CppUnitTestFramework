@@ -1,0 +1,13 @@
+version: 0.0.{build}
+environment:
+  matrix:
+  - solution_name: Runners/Runners.sln
+  - solution_name: CppUnitTest/CppUnitTest.sln
+  - solution_name: Runners/VSPlugin/VSPlugin.sln
+build:
+  verbosity: normal
+build_script:
+  - cmd: >-
+    nuget restore %solution_name%
+    msbuild %solution_name%
+test: off

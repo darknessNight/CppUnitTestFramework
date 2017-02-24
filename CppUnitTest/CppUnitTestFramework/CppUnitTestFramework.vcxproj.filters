@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Framework.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertExceptions.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFuncRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestContainer.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestsCollectionExport.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRegisterContainerAccess.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurableTest.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="FunctionTester.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCase.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseFunc.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCategory.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestReport.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestResult.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuite.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClassRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="SetUpRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TearDownRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestRegisters.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="PredefinedTestResults.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteCreator.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSuiteInstanceCreator.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestClassWithCategoryRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="Exceptions.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="FuncMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="MethodMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="SuiteMacros.h">
+      <Filter>Headers\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="HelperFuncs.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCaseIgnored.h">
+      <Filter>Headers\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="TestIgnoredRegister.h">
+      <Filter>Headers\Registers</Filter>
+    </ClInclude>
+    <ClInclude Include="Assert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="ToStringConverter.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="ToStringConverterImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="EqualAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="GreaterLessAssert.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertBoolean.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertExceptionCatcher.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertString.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertExceptionCatcherImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicAssertImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertHelper.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertArray.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="AssertArrayImplem.h">
+      <Filter>Headers\Asserts</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicLibraryExports.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{292845e3-656f-425c-833e-92c399d30e6b}</UniqueIdentifier>
+      <Extensions>*.h;*.hpp</Extensions>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{cb755c66-a4d2-4629-a721-e15f62fbfea8}</UniqueIdentifier>
+      <Extensions>*.cpp</Extensions>
+    </Filter>
+    <Filter Include="Headers\Asserts">
+      <UniqueIdentifier>{6cf6e294-d27b-4bf7-9016-1cdc1c03a864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Registers">
+      <UniqueIdentifier>{ab26a707-54da-4d05-a387-a563feb2ca1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Tests">
+      <UniqueIdentifier>{b1f7c979-0be8-4831-bc13-f758d1e1ea6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Macros">
+      <UniqueIdentifier>{b5569a57-c63c-4f29-923c-6d214ca63af6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TestRegisterer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionTester.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCase.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestResult.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestReport.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="HelperFuncs.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuite.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestSuiteCreator.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestCategory.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AssertExceptionCatcher.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestContainer.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ToStringConverter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="AssertHelper.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicAssert.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

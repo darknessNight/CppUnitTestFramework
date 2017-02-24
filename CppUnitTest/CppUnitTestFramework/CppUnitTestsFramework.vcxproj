@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9D1E68A5-DCBD-4874-9ADC-9C15D9191F42}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CppUnitTestsFramework</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>CppUnitTestFramework</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)..\..\buildTemplate.sh "$(ProjectDir)Version.h.template"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)..\..\buildTemplate.sh "$(ProjectDir)Version.h.template"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)..\..\buildTemplate.sh "$(ProjectDir)Version.h.template"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)..\..\buildTemplate.sh "$(ProjectDir)Version.h.template"</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Assert.h" />
+    <ClInclude Include="AssertArray.h" />
+    <ClInclude Include="AssertArrayImplem.h" />
+    <ClInclude Include="AssertBoolean.h" />
+    <ClInclude Include="AssertExceptionCatcher.h" />
+    <ClInclude Include="AssertExceptionCatcherImplem.h" />
+    <ClInclude Include="AssertExceptions.h" />
+    <ClInclude Include="AssertHelper.h" />
+    <ClInclude Include="AssertString.h" />
+    <ClInclude Include="BasicAssert.h" />
+    <ClInclude Include="BasicAssertImplem.h" />
+    <ClInclude Include="ConfigurableTest.h" />
+    <ClInclude Include="ConfMacros.h" />
+    <ClInclude Include="DynamicLibraryExports.h">
+      <FileType>CppHeader</FileType>
+    </ClInclude>
+    <ClInclude Include="EqualAssert.h" />
+    <ClInclude Include="Exceptions.h" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="FuncMacros.h" />
+    <ClInclude Include="FunctionTester.h" />
+    <ClInclude Include="GreaterLessAssert.h" />
+    <ClInclude Include="HelperFuncs.h" />
+    <ClInclude Include="MethodMacros.h" />
+    <ClInclude Include="PredefinedTestResults.h" />
+    <ClInclude Include="SetUpRegister.h" />
+    <ClInclude Include="SuiteMacros.h" />
+    <ClInclude Include="TearDownRegister.h" />
+    <ClInclude Include="TestCaseIgnored.h" />
+    <ClInclude Include="TestClassWithCategoryRegister.h" />
+    <ClInclude Include="TestIgnoredRegister.h" />
+    <ClInclude Include="TestRegisterContainerAccess.h" />
+    <ClInclude Include="TestClassRegister.h" />
+    <ClInclude Include="TestFuncRegister.h" />
+    <ClInclude Include="TestsCollectionExport.h" />
+    <ClInclude Include="TestRegisters.h" />
+    <ClInclude Include="TestContainer.h" />
+    <ClInclude Include="TestSuiteCreator.h" />
+    <ClInclude Include="TestCase.h" />
+    <ClInclude Include="TestCaseFunc.h" />
+    <ClInclude Include="TestCategory.h" />
+    <ClInclude Include="TestReport.h" />
+    <ClInclude Include="TestResult.h" />
+    <ClInclude Include="TestSuite.h" />
+    <ClInclude Include="TestSuiteInstanceCreator.h" />
+    <ClInclude Include="ToStringConverter.h" />
+    <ClInclude Include="ToStringConverterImplem.h" />
+    <ClInclude Include="Version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssertExceptionCatcher.cpp" />
+    <ClCompile Include="AssertHelper.cpp" />
+    <ClCompile Include="BasicAssert.cpp" />
+    <ClCompile Include="FunctionTester.cpp" />
+    <ClCompile Include="HelperFuncs.cpp" />
+    <ClCompile Include="TestCase.cpp" />
+    <ClCompile Include="TestCategory.cpp" />
+    <ClCompile Include="TestContainer.cpp" />
+    <ClCompile Include="TestReport.cpp" />
+    <ClCompile Include="TestResult.cpp" />
+    <ClCompile Include="TestSuite.cpp" />
+    <ClCompile Include="TestSuiteCreator.cpp" />
+    <ClCompile Include="ToStringConverter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Version.h.template" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
